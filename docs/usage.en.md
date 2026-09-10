@@ -4,7 +4,7 @@
 **Landing:** [../README.md](../README.md)
 
 Write the claim first: [hypothesis.en.md](hypothesis.en.md).  
-This page is the command path. `mlbot --help` for subcommands. Scope: [`../PUBLIC_SCOPE.md`](../PUBLIC_SCOPE.md).
+This page is the command path. `mlbot --help` for subcommands.
 
 ---
 

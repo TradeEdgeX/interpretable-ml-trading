@@ -1,7 +1,4 @@
-# config/strategies — 本抽取副本
-
-**最后更新:** 2026-09-10  
-**范围：** [`../../PUBLIC_SCOPE.md`](../../PUBLIC_SCOPE.md)
+# config/strategies
 
 | 目录 | 角色 | 状态 |
 |---|---|---|

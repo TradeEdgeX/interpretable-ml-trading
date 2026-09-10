@@ -1,11 +1,6 @@
-# 系统架构（开源抽取）
+# 系统架构
 
-**状态:** 抽取中  
-**最后更新:** 2026-09-10
-
-> 本页描述**研究核**，不是私有现网运维图。  
-> 范围：[`../PUBLIC_SCOPE.md`](../PUBLIC_SCOPE.md)。  
-> 计划：[`decisions/2026-09-10_opensource_nautilus_extract_CN.md`](decisions/2026-09-10_opensource_nautilus_extract_CN.md)。
+> 研究核：FeatureStore → YAML 合同 → 事件回测 / court。不是下单说明书。
 
 ---
 
@@ -66,7 +61,6 @@ FeatureStore 只提供测量。规则写在 `config/strategies/<family>/archetyp
 
 | 区域 | 路径 |
 |---|---|
-| 范围 | [`../PUBLIC_SCOPE.md`](../PUBLIC_SCOPE.md) |
 | 学习路径 | [README.md](README.md) |
 | 验证假设 / 教训 | [hypothesis.md](hypothesis.md) · [lessons.md](lessons.md) |
 | 哲学 / 数学 / 使用 | [philosophy.md](philosophy.md) · [math.md](math.md) · [usage.md](usage.md) |

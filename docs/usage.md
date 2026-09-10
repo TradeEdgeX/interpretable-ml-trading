@@ -4,7 +4,7 @@
 **入口:** [../README_CN.md](../README_CN.md)
 
 先写假设，再跑命令：[hypothesis.md](hypothesis.md)。  
-`mlbot --help` 看子命令。范围：[`../PUBLIC_SCOPE.md`](../PUBLIC_SCOPE.md)。
+`mlbot --help` 看子命令。
 
 ---
 
