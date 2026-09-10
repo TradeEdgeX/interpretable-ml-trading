@@ -55,6 +55,16 @@ class TestDataCommands:
 
 
 class TestResearchCommands:
+    def test_research_harness_ma_cross_runs(self):
+        result = CliRunner().invoke(cli, ["research", "harness", "ma_cross"])
+        assert result.exit_code == 0
+        assert "event_backtest" in result.output
+
+    def test_features_list_search_runs(self):
+        result = CliRunner().invoke(cli, ["features", "list", "--search", "ema_50"])
+        assert result.exit_code == 0
+        assert "ema" in result.output.lower()
+
     def test_research_help(self):
         result = CliRunner().invoke(cli, ["research", "--help"])
         assert result.exit_code == 0

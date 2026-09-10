@@ -236,7 +236,7 @@ def resolve_default_pipeline_config(
     strategy_slug: Optional[str],
     explicit_config: Optional[Path],
 ) -> Tuple[Path, List[str]]:
-    """Resolve pipeline YAML path for ``mlbot pipeline`` when ``--config`` is omitted.
+    """Resolve pipeline YAML path when ``--config`` is omitted.
 
     Order (per ADR §3.2): ``research/calibrate_roll.default.yaml`` →
     ``research/research_roll.features_on.yaml`` → ``research/pipeline.yaml``;

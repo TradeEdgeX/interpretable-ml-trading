@@ -22,13 +22,13 @@ items:
       zh: |
         **不要。** 不是「规则不会过拟合所以偷懒」，是过拟合的通道不一样，本仓库已经用另一套闸门在挡。
 
-        TimeSeriesSplit 解决的是：模型在训练窗里调了几千个参数，会不会只记住那段路径。Qlib / `mlbot train` 的树、线性因子都要它——先用过去折拟合，再看后面折还在不在。
+        TimeSeriesSplit 解决的是：模型在训练窗里调了几千个参数，会不会只记住那段路径。Qlib 一类的树 / 线性因子训练要它——先用过去折拟合，再看后面折还在不在。公开仓没有 `mlbot train`。
 
         规则实验没有这步拟合。假设写死，三段各跑一遍，看的是**换一种市场结构还成不成**，不是「系数有没有记住训练集」。
       en: |
         **No.** This is not "rules cannot overfit, so skip CV." The overfitting channel is different, and this repo already gates it another way.
 
-        TimeSeriesSplit asks whether a model with thousands of fitted parameters memorized one path. Qlib and `mlbot train` need that: fit on earlier folds, score later folds.
+        TimeSeriesSplit asks whether a model with thousands of fitted parameters memorized one path. Qlib-style tree / linear training needs that: fit on earlier folds, score later folds. This extract has no `mlbot train`.
 
         A rule experiment does not fit. The hypothesis is frozen. Each of the three segments is a separate run. The question is **whether the rule still works when market structure changes**, not whether coefficients remembered the training set.
   - id: rule-overfit
@@ -274,7 +274,7 @@ items:
       zh: |
         **触发条件是「拟合 + 同一套 y + 时间切」，不是「树」或「forward_rr」这两个词。**
 
-        本仓库里树走 `mlbot train`：左边拟合、右边打同一套 label 的分。所以树和这条训练切是绑在一起的。规则走扫描 → 冻死 yaml → 事件回测，没有这道切。
+        公开仓没有树训练入口。若在私有仓拟合树：左边拟合、右边打同一套 label 的分，才和这条训练切绑在一起。规则走扫描 → 冻死 yaml → 事件回测，没有这道切。
 
         三件套分工：
 
@@ -290,7 +290,7 @@ items:
       en: |
         **The trigger is fit + the same `y` + a time cut. Not the words "tree" or "forward_rr."**
 
-        In this repo, trees go through `mlbot train`: fit on the left, score the same label on the right. That is why trees are tied to the train cut. Rules go scan → frozen yaml → event backtest. No such cut.
+        This extract has no tree-training command. A private fit-on-the-left / score-on-the-right tree loop is tied to that cut. Rules go scan → frozen yaml → event backtest. No such cut.
 
         | Tool | Why you need it | What `forward_rr` over 10 bars changes |
         |---|---|---|

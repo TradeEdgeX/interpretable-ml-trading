@@ -51,9 +51,10 @@ mlbot feature-store build \
 
 ## 3. 研究闭环
 
+人说「测一下」之后，AI 才许跑这些。命令和指令怎么接上，见 [ARCHITECTURE.md](ARCHITECTURE.md)。
+
 ```bash
-PYTHONPATH=src:scripts python scripts/rd_loop.py \
-  --hypothesis-yaml config/experiments/<dir>/rd_loop_*.yaml
+mlbot research run <id>
 
 PYTHONPATH=src python -m scripts.event_backtest --variant-grid \
   config/experiments/<dir>/*_grid.yaml

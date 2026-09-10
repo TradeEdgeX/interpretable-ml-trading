@@ -6,11 +6,8 @@
 
 关联：
 
-- 自然语言研发：[`2026-08-23_nl_cursor_rd_loop_CN.md`](2026-08-23_nl_cursor_rd_loop_CN.md)
-- 工具矩阵（假设由人定）：[`../strategy/RD_tool_matrix_CN.md`](../strategy/RD_tool_matrix_CN.md)
 - Promote：[`../../config/experiments/LAYER_PROMOTION_CRITERIA.md`](../../config/experiments/LAYER_PROMOTION_CRITERIA.md)
-- 树搜索 playbook（旁路）：[`../architecture/strategies/FEATURE_SEARCH_PLAYBOOK_CN.md`](../architecture/strategies/FEATURE_SEARCH_PLAYBOOK_CN.md)
-- 现网：[`../CURRENT.md`](../CURRENT.md)（不是 ML 交易机器人）
+- 循环：[`../hypothesis.md`](../hypothesis.md) · [`../ARCHITECTURE.md`](../ARCHITECTURE.md)
 
 ---
 

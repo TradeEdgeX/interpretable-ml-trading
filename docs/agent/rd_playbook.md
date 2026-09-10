@@ -106,4 +106,4 @@ mlbot research index --trusted --query stop-loss
 
 ---
 
-Home: [README.md](../../README.md) · prev [Usage](../usage.md) · next [Architecture](../ARCHITECTURE.md) · [Lessons](../lessons.md)
+Home: [README.md](../../README.md) · prev [Usage](../usage.md) · next [Architecture](../ARCHITECTURE.md) · [EN](../ARCHITECTURE.en.md) · [Lessons](../lessons.md)

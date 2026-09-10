@@ -142,9 +142,7 @@ def detect_layer_for_strategy(
     Returns the most recently modified matching layer name, or ``None``
     if nothing matches.
 
-    This is the shared implementation used by both the CLI
-    (``mlbot gate apply-archetype``) and standalone scripts
-    (e.g. ``backtest_execution_layer.py``).
+    Shared lookup used when resolving a FeatureStore layer by strategy name.
     """
     fs_root = Path(features_store_root)
     if not fs_root.exists():

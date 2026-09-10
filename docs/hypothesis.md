@@ -112,10 +112,6 @@ mlbot research index --trusted --query <english-slug>
 
 ```bash
 mlbot research init 20260910_<slug> --strategy ma_cross
-# Phase 1（可选）
-PYTHONPATH=src:scripts python scripts/rd_loop.py \
-  --hypothesis-yaml config/experiments/20260910_<slug>/rd_loop_*.yaml
-# Phase 3
 mlbot research run 20260910_<slug>
 mlbot research close 20260910_<slug>
 mlbot research close 20260910_<slug> --declare reject   # 人写 verdict

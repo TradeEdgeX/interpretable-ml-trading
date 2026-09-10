@@ -38,8 +38,7 @@ def load_funding_rate_series(
     """Return funding_rate series indexed by UTC timestamps, or None if missing.
 
     For ``margin_mode="coin_m"`` this prefers the *real* dapi (COIN-M) funding
-    series — downloaded via ``mlbot data download-funding-rate --margin-kind cm``
-    into the same directory under the dapi exec symbol name (e.g. BTCUSD_PERP).
+    series — COIN-M funding parquet under the dapi symbol name (e.g. BTCUSD_PERP).
     dapi funding is a genuinely different series from fapi (see
     docs/design/fapi_dapi_glossary_CN.md — "通常更低"); if it hasn't been
     downloaded yet we fall back to the USDT-M series as a documented
@@ -64,12 +63,9 @@ def load_funding_rate_series(
                 return native
             logger.warning(
                 "no native dapi funding parquet for %s (%s) — falling back to "
-                "fapi %s funding as a proxy (dapi funding is usually lower; "
-                "run `mlbot data download-funding-rate --margin-kind cm "
-                "--symbols %s` to close this gap)",
+                "fapi %s funding as a proxy (public court is usd_m)",
                 sym,
                 dapi_sym,
-                sym,
                 sym,
             )
 

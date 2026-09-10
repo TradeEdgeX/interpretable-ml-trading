@@ -46,9 +46,10 @@ Universe YAML: `config/download/crypto_4h_token_universe_groups.yaml` (`mlbot da
 
 ## 3. Research loop
 
+Only after someone says “measure this.” How instructions map onto commands: [ARCHITECTURE.en.md](ARCHITECTURE.en.md).
+
 ```bash
-PYTHONPATH=src:scripts python scripts/rd_loop.py \
-  --hypothesis-yaml config/experiments/<dir>/rd_loop_*.yaml
+mlbot research run <id>
 
 PYTHONPATH=src python -m scripts.event_backtest \
   --strategy ma_cross \

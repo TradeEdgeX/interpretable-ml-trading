@@ -1,7 +1,7 @@
 """
 T5α orderbook wall features — join depth snapshots to bars (merge_asof backward).
 
-Primary history: Vision ``bookDepth`` daily parquet (``download-book-depth``).
+Primary history: Vision ``bookDepth`` daily parquet (not downloaded by this extract).
 Optional live/incremental: REST poll (``download-depth-snapshots``).
 
 WS-only columns (``wall_persist_sec``, ``wall_cancel_rate_5m``, ``wall_eaten_ratio_1h``)
@@ -40,7 +40,7 @@ def _load_depth_snapshots(symbol: str, depth_dir: str | None) -> pd.DataFrame:
         roots = ", ".join(str(p) for p in _resolve_depth_dirs(depth_dir))
         raise FileNotFoundError(
             f"No wall parquet for {sym} under [{roots}]. "
-            f"Run: mlbot data download-book-depth --symbols {sym} --start-date YYYY-MM-DD"
+            f"Missing book-depth parquet for {sym}. This extract has no download-book-depth command."
         )
     parts: list[pd.DataFrame] = []
     for p in paths:

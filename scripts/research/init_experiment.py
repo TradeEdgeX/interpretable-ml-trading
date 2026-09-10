@@ -41,9 +41,8 @@ def init_experiment(
     date = datetime.now(timezone.utc).strftime("%Y%m%d")
 
     copies = {
-        "README.md": f"README.md",
+        "README.md": "README.md",
         "DECISION.md": "DECISION.md",
-        "rd_loop_phase1.yaml": f"rd_loop_{topic}_phase1.yaml",
         "promote_baseline.yaml": "promote_baseline.yaml",
     }
     for src_name, dst_name in copies.items():
@@ -89,7 +88,6 @@ def main(argv: list[str] | None = None) -> int:
         print(f"ERROR: {e}", file=sys.stderr)
         return 3
     print(f"created {out}")
-    print(f"  rd_loop: {out / f'rd_loop_{args.topic}_phase1.yaml'}")
     return 0
 
 

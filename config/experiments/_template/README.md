@@ -1,21 +1,12 @@
 # {{TOPIC}}
 
-## Phase checklist
+## Checklist
 
-| Phase | 命令 | 产物 |
-|-------|------|------|
-| 0 | FeatureStore backfill | layer parquet |
-| 1 | `rd_loop` phase1 yaml | `quick_scan/` |
-| 2 | 人读 scan → `DECISION.md` | 阈值 |
-| 3 | `event_backtest --variant-grid`（kill switch OFF） | 分段 KPI |
-| 4 | `mlbot research close` + 人 `--declare` | `verdict` |
-
-## Phase 1
-
-```bash
-PYTHONPATH=src:scripts python scripts/rd_loop.py \
-  --hypothesis-yaml config/experiments/{{TOPIC}}/rd_loop_{{TOPIC}}_phase1.yaml
-```
+| 步 | 命令 | 产物 |
+|---|---|---|
+| 0 | `mlbot feature-store build`（缺列才补） | 特征库 |
+| 1 | `mlbot research run {{TOPIC}}` | 三段五项 KPI |
+| 2 | `mlbot research close {{TOPIC}}` + 人 `--declare` | `verdict` |
 
 标定 segment: **{{SEGMENT}}**
 

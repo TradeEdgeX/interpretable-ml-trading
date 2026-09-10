@@ -9,7 +9,6 @@ from typing import List
 from src.research.harness_registry import (
     event_backtest_reject_reason,
     list_specs,
-    required_harness,
     spec_for,
 )
 
@@ -37,9 +36,8 @@ def main(argv: List[str] | None = None) -> int:
     spec = spec_for(args.family)
     if not spec:
         print(f"unknown family: {args.family}", file=sys.stderr)
-        print(
-            f"(no required harness; known: {required_harness('srb')})", file=sys.stderr
-        )
+        known = ", ".join(s.family for s in list_specs()) or "(none)"
+        print(f"(no required harness; known: {known})", file=sys.stderr)
         return 3
 
     print(f"family:   {spec.family}")

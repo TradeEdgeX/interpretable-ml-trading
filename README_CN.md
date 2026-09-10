@@ -103,6 +103,8 @@ pip install -e .[dev]
 
 拉数据和建特征库的命令在 [docs/usage.md](docs/usage.md)。平时仍是跟 AI 说「测一下」，不用自己敲。
 
+人和 AI、指令、命令怎么接成一条尺子，见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。
+
 ---
 
 想自己翻后文：[docs/README.md](docs/README.md)

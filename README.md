@@ -103,6 +103,8 @@ pip install -e .[dev]
 
 Download and FeatureStore commands: [docs/usage.en.md](docs/usage.en.md). Day to day you still say “measure this.”
 
+How the person, the instructions, and the commands share one ruler: [docs/ARCHITECTURE.en.md](docs/ARCHITECTURE.en.md).
+
 ---
 
 The rest of the docs: [docs/README.md](docs/README.md)

@@ -15,7 +15,7 @@ Related:
 
 **No.** This is not "rules cannot overfit, so skip CV." The overfitting channel is different, and this repo already gates it another way.
 
-TimeSeriesSplit asks whether a model with thousands of fitted parameters memorized one path. Qlib and `mlbot train` need that: fit on earlier folds, score later folds.
+TimeSeriesSplit asks whether a model with thousands of fitted parameters memorized one path. Qlib-style tree / linear training needs that: fit on earlier folds, score later folds. This extract has no `mlbot train`.
 
 A rule experiment does not fit. The hypothesis is frozen. Each of the three segments is a separate run. The question is **whether the rule still works when market structure changes**, not whether coefficients remembered the training set.
 
@@ -130,7 +130,7 @@ Rules do not fit-then-score the same `y`, so Phase 1–3 need neither. Re-search
 
 **The trigger is fit + the same `y` + a time cut. Not the words "tree" or "forward_rr."**
 
-In this repo, trees go through `mlbot train`: fit on the left, score the same label on the right. That is why trees are tied to the train cut. Rules go scan → frozen yaml → event backtest. No such cut.
+This extract has no tree-training command. A private fit-on-the-left / score-on-the-right tree loop is tied to that cut. Rules go scan → frozen yaml → event backtest. No such cut.
 
 | Tool | Why you need it | What `forward_rr` over 10 bars changes |
 |---|---|---|

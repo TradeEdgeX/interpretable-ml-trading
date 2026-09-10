@@ -12,6 +12,6 @@
 | [哲学](philosophy.md) · [EN](philosophy.en.md) | 为什么这样验 |
 | [数学](math.md) · [EN](math.en.md) | 时钟和 KPI |
 | [Court](agent/rd_playbook.md) | 谁写数字、谁宣判 |
-| [架构](ARCHITECTURE.md) | YAML 怎么接到回测 |
+| [架构](ARCHITECTURE.md) · [EN](ARCHITECTURE.en.md) | 人说话 → 指令 → 命令 → 读报告；YAML 怎么接到回测 |
 
 问答：[agent/rd_qa.yaml](agent/rd_qa.yaml)。结案尺子：[LAYER_PROMOTION_CRITERIA.md](../config/experiments/LAYER_PROMOTION_CRITERIA.md)。

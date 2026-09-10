@@ -5,7 +5,7 @@ and harnesses have moved. This module only writes *format*:
 
 - ``verdict`` stays empty (never inferred into a declared verdict)
 - ``strategy`` / ``harness`` / ``segments`` / ``kill_switch`` come from
-  rd_loop yaml, grid yaml, the directory name, and the harness registry
+  grid yaml, the directory name, and the harness registry
 
 A human or agent still fills ``verdict`` + ``tags`` + ``kpi`` at close.
 """

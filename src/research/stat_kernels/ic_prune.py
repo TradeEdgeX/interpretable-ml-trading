@@ -525,7 +525,7 @@ def _writeback_model_features_yaml(
     doc = {
         "description": (
             "Holdout IC-pruned model input columns. "
-            "Regenerate via mlbot research ic-prune (writeback_mode=columns)."
+            "Holdout IC-pruned model input columns (writeback_mode=columns)."
         ),
         "provenance": {
             "holdout_start": holdout_start,
