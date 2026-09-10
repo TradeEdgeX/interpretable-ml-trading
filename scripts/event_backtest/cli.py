@@ -488,22 +488,11 @@ def main():
         else "  手续费:  关闭"
     )
     if args.margin_mode == "coin_m":
-        from scripts.event_backtest.coin_margin_config import (
-            resolve_contract_multipliers,
+        raise SystemExit(
+            "coin_m is not in this public court. Use --margin-mode usd_m. "
+            "Inverse-contract math: src.research.inverse_contract_pnl"
         )
-
-        mults = resolve_contract_multipliers(
-            symbols, margin_mode="coin_m", cli_override=args.contract_multiplier
-        )
-        if args.contract_multiplier is not None:
-            print(
-                f"  保证金:  COIN-M (反向, CLI mult={args.contract_multiplier:.0f} USD/contract)"
-            )
-        else:
-            mult_str = ", ".join(f"{k}={v:.0f}" for k, v in sorted(mults.items()))
-            print(f"  保证金:  COIN-M (反向, per-symbol mult: {mult_str})")
-    else:
-        print("  保证金:  USD-M (线性)")
+    print("  保证金:  USD-M (线性)")
     # --data-path none → 显式使用实盘数据做验证
     if args.data_path and args.data_path.lower() == "none":
         args.data_path = None
@@ -530,14 +519,7 @@ def main():
         else:
             logger.warning("resume state not found: %s", _rp)
 
-    from scripts.event_backtest.coin_margin_config import load_backtest_config
-
-    _bt_cfg = load_backtest_config()
-    apply_funding = args.apply_funding
-    if apply_funding is None:
-        apply_funding = bool(
-            (_bt_cfg.get("event_backtest") or {}).get("apply_funding", False)
-        )
+    apply_funding = bool(args.apply_funding)
 
     print(f"  入场成交: {args.entry_fill}")
     bt = EventBacktester(

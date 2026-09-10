@@ -145,26 +145,6 @@ def test_is_direction_rule_enabled():
     assert is_direction_rule_enabled({"enabled": False}) is False
 
 
-def test_compute_direction_series_from_rules_single_position_band():
-    from scripts.direction_strict_validation import compute_direction_series_from_rules
-
-    df = pd.DataFrame({"macro_tp_vwap_1200_position": [0.0, 0.02, -0.02, 0.2]})
-    rules = [
-        {
-            "method": "single_position_band",
-            "feature": "macro_tp_vwap_1200_position",
-            "inner_abs": 0.01,
-            "outer_abs": 0.1,
-            "id": "b",
-        }
-    ]
-    s = compute_direction_series_from_rules(df, rules)
-    assert s.iloc[0] == 0.0
-    assert s.iloc[1] == 1.0
-    assert s.iloc[2] == -1.0
-    assert s.iloc[3] == 0.0
-
-
 def test_parse_signal_match_position_band_rule():
     r = {
         "method": "signal_match_position_band",
@@ -254,21 +234,3 @@ def test_signal_match_position_band_series_macd_fallback():
     )
     assert s.iloc[0] == 1.0
     assert s.iloc[1] == -1.0
-
-
-def test_compute_direction_series_skips_disabled_then_applies_next():
-    from scripts.direction_strict_validation import compute_direction_series_from_rules
-
-    df = pd.DataFrame({"a": [1.0, 1.0], "b": [1.0, 1.0], "c": [-2.0, 3.0]})
-    rules = [
-        {
-            "method": "dual_position_agree_deadband",
-            "features": ["a", "b"],
-            "epsilon": 0.01,
-            "enabled": False,
-        },
-        {"method": "feature_sign", "feature": "c", "transform": "sign"},
-    ]
-    s = compute_direction_series_from_rules(df, rules)
-    assert s.iloc[0] == -1.0
-    assert s.iloc[1] == 1.0

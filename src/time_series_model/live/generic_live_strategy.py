@@ -41,11 +41,6 @@ from src.time_series_model.live.execution_profile_apply import (
 )
 from src.time_series_model.live.fer_diagnostics import record_fer_entry_eval
 from src.time_series_model.live.adverse_tree_gate_veto import AdverseTreeGateVeto
-from src.time_series_model.live.srb_regime import (
-    pick_srb_true_sr_level,
-    resolve_srb_opposite_sr_level,
-    should_reject_srb_wide_entry,
-)
 from src.time_series_model.live.direction_rule_ops import (
     dual_position_agree_deadband_scalar,
     is_direction_rule_enabled,
@@ -1564,72 +1559,6 @@ class GenericLiveStrategy:
             logger.debug(f"⚙️  Execution params: {exec_params}")
 
         action = "LONG" if direction == 1 else "SHORT"
-        _srb_true_sr: Optional[float] = None
-        _srb_opposite_sr: Optional[float] = None
-
-        if str(self.strategy_name).lower() == "srb":
-            funnel["srb_regime_bucket"] = features.get("srb_regime_bucket")
-            funnel["srb_regime_adx14"] = features.get("srb_regime_adx14")
-            funnel["srb_regime_er20"] = features.get("srb_regime_er20")
-            funnel["srb_sr_support"] = features.get("srb_sr_support")
-            funnel["srb_sr_resistance"] = features.get("srb_sr_resistance")
-            funnel["wide_sr_upper_px"] = features.get("wide_sr_upper_px")
-            funnel["wide_sr_lower_px"] = features.get("wide_sr_lower_px")
-
-            _raw_ex = (self.archetype.execution.raw or {}) if self.archetype else {}
-            _wg = _raw_ex.get("sr_wide_entry_guard") or {}
-            if _wg.get("enabled"):
-                _mn = float(_wg.get("min_distance_atr", 0) or 0)
-                _cl = float(features.get("close") or 0)
-                _at = float(features.get("atr") or 0)
-                if should_reject_srb_wide_entry(
-                    action,
-                    _cl,
-                    _at,
-                    features.get("wide_sr_lower_px"),
-                    features.get("wide_sr_upper_px"),
-                    _mn,
-                ):
-                    funnel["reject_srb_wide_sr_too_close"] = True
-                    self._last_funnel = funnel
-                    record_fer_entry_eval(
-                        strategy=self.strategy_name,
-                        symbol=symbol,
-                        signal_ts=_sig_ts,
-                        outcome="srb_wide_sr_guard",
-                        funnel=funnel,
-                        features=features,
-                    )
-                    return []
-
-            _tsl_cfg = _raw_ex.get("true_sr_level") or {}
-            _fb_atr = float(_tsl_cfg.get("wide_fallback_atr", 0) or 0)
-            _prefer = _tsl_cfg.get("prefer")
-            _srb_true_sr = pick_srb_true_sr_level(
-                action,
-                float(features.get("close") or 0),
-                float(features.get("atr") or 0),
-                narrow_support=features.get("srb_sr_support"),
-                narrow_resistance=features.get("srb_sr_resistance"),
-                wide_lower_px=features.get("wide_sr_lower_px"),
-                wide_upper_px=features.get("wide_sr_upper_px"),
-                fallback_atr=_fb_atr,
-                prefer=_prefer,
-            )
-            # SRB 结构化 SL 锚点：LONG 用对面 support，SHORT 用对面 resistance
-            # opposite_sr_source: L1（默认）| L3（wide_sr）
-            _ssl_cfg = (
-                (_raw_ex.get("stop_loss") or {}).get("structural_sl") or {}
-            ) or (_raw_ex.get("structural_sl") or {})
-            _opp_src = str(_ssl_cfg.get("opposite_sr_source") or "L1")
-            _srb_opposite_sr = resolve_srb_opposite_sr_level(
-                action,
-                narrow_support=features.get("srb_sr_support"),
-                narrow_resistance=features.get("srb_sr_resistance"),
-                wide_lower_px=features.get("wide_sr_lower_px"),
-                wide_upper_px=features.get("wide_sr_upper_px"),
-                source=_opp_src,
-            )
 
         # ── 6. 构建 TradeIntent ──
         # 仓位倍数仅来自 execution（含 regime_execution 补丁）；evidence_score 不写进 size_multiplier
@@ -1647,16 +1576,6 @@ class GenericLiveStrategy:
                 "strategy_specific": {
                     "direction_rule": rule_id,
                     "gate_weight": gate_weight,
-                    **(
-                        {"srb_true_sr_level": float(_srb_true_sr)}
-                        if _srb_true_sr is not None
-                        else {}
-                    ),
-                    **(
-                        {"srb_opposite_sr_level": float(_srb_opposite_sr)}
-                        if _srb_opposite_sr is not None
-                        else {}
-                    ),
                 },
                 "add_position": (
                     (self.archetype.execution.raw or {}).get("add_position") or {}

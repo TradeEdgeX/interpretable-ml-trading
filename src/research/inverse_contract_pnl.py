@@ -1,7 +1,12 @@
-"""COIN-M inverse contract PnL helpers (Binance dapi formula)."""
+"""Inverse-perp (coin-margined) PnL arithmetic.
+
+Not wired into the public court. The court sizes and marks USD-M linear
+contracts. Call this helper only when you explicitly need reverse-contract math.
+"""
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Literal
 
 Side = Literal["LONG", "SHORT", "BUY", "SELL"]
@@ -19,7 +24,7 @@ def coin_m_gross_pnl_collateral(
     side: str,
     contract_multiplier: float = 100.0,
 ) -> float:
-    """Gross PnL in margin collateral (BTC/SOL/…) on COIN-M inverse perp."""
+    """Gross PnL in margin collateral on an inverse perpetual."""
     if contracts <= 0 or entry_price <= 0 or exit_price <= 0:
         return 0.0
     m = float(contract_multiplier)
@@ -36,7 +41,6 @@ def coin_m_gross_pnl_usd(
     side: str,
     contract_multiplier: float = 100.0,
 ) -> float:
-    """Mark collateral PnL to USD at *exit_price*."""
     coin = coin_m_gross_pnl_collateral(
         contracts=contracts,
         entry_price=entry_price,
@@ -54,7 +58,6 @@ def coin_m_fee_collateral(
     fee_rate: float,
     contract_multiplier: float = 100.0,
 ) -> float:
-    """Inverse perp fee in collateral: contracts × mult × fee_rate / fill_price."""
     if contracts <= 0 or fill_price <= 0 or fee_rate <= 0:
         return 0.0
     return (
@@ -72,7 +75,6 @@ def coin_m_contracts_from_risk_coin(
     stop_pct: float,
     contract_multiplier: float = 100.0,
 ) -> float:
-    """Size contracts so ~1R loss in collateral at a stop_pct adverse move."""
     if risk_coin <= 0 or entry_price <= 0 or stop_pct <= 1e-9:
         return 0.0
     return (
@@ -80,6 +82,22 @@ def coin_m_contracts_from_risk_coin(
         * float(entry_price)
         / (float(contract_multiplier) * float(stop_pct))
     )
+
+
+@dataclass
+class CoinMarginState:
+    """Collateral-denominated wallet. Optional helper — not used by the court."""
+
+    wallet_coin: float
+    contract_multiplier: float = 100.0
+
+    def equity_usdt(self, mark_price: float) -> float:
+        if mark_price <= 0:
+            return 0.0
+        return float(self.wallet_coin) * float(mark_price)
+
+    def apply_realized(self, pnl_collateral: float) -> None:
+        self.wallet_coin = float(self.wallet_coin) + float(pnl_collateral or 0.0)
 
 
 def linear_gross_pnl_usd(
@@ -103,14 +121,10 @@ def grid_gross_pnl_pct(
     side: str,
     margin_mode: str = "usd_m",
 ) -> float:
-    """Grid trade gross return as a fraction (fee excluded).
+    """Gross return as a fraction (fee excluded).
 
-    usd_m (linear): return per unit USD notional = (exit-entry)/entry (long).
-    coin_m (inverse): coin-denominated return per unit coin notional.
-      long  PnL_coin = mult*(1/entry - 1/exit), notional_coin = mult/entry
-        → return = entry*(1/entry - 1/exit) = (exit-entry)/exit
-      short → (entry-exit)/exit
-    Same ~O(1e-2) scale as linear so fees / r_equiv stay meaningful.
+    usd_m (linear): (exit-entry)/entry for a long.
+    coin_m (inverse): (exit-entry)/exit for a long.
     """
     if entry <= 0 or exit_px <= 0:
         return 0.0
@@ -128,7 +142,7 @@ def contracts_from_linear_qty(
     entry_price: float,
     contract_multiplier: float = 100.0,
 ) -> float:
-    """Match USD notional: contracts × mult ≈ qty × entry."""
+    """Match USD notional: contracts × multiplier ≈ qty × entry."""
     if entry_price <= 0:
         return 0.0
     return qty_base * entry_price / float(contract_multiplier)
@@ -140,7 +154,7 @@ def coin_m_pnl_r_from_trade_row(
     risk_usd: float,
     contract_multiplier: float = 100.0,
 ) -> float:
-    """Recompute pnl_r as if COIN-M with same linear qty / risk budget."""
+    """Recompute pnl_r as if inverse with the same linear qty / risk budget."""
     qty = float(row.get("qty_base") or 0.0)
     entry = float(row.get("entry_price") or 0.0)
     exit_p = float(row.get("exit_price") or 0.0)

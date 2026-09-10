@@ -6,7 +6,7 @@ from typing import Any, Dict, Mapping, Optional
 
 import pandas as pd
 
-from scripts.coin_margin_pnl import is_long_side
+from src.research.inverse_contract_pnl import is_long_side
 
 
 def funding_payment_collateral(

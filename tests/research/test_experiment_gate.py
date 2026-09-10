@@ -12,8 +12,8 @@ from src.research.experiment_gate import evaluate_court
 
 def test_wrong_harness_is_court_fail() -> None:
     meta = ExperimentMeta(
-        strategy="rolling_trend",
-        harness="event_backtest",
+        strategy="ma_cross",
+        harness="phase1_scan_only",
         segments=("bear_2022", "bull_2023_2024", "recent_range_to_bear"),
         kill_switch=False,
     )

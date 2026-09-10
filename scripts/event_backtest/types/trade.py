@@ -6,23 +6,9 @@ from typing import Any, Dict, Mapping
 
 
 def srb_closed_trade_fields(pos: Mapping[str, Any]) -> Dict[str, Any]:
-    """Copy SRB true-SR audit fields from an open position dict onto ClosedTrade kwargs."""
-
-    def _f(key: str) -> float:
-        try:
-            v = float(pos.get(key, 0.0) or 0.0)
-            return v if v == v else 0.0
-        except (TypeError, ValueError):
-            return 0.0
-
-    return {
-        "srb_true_sr_level": _f("_srb_true_sr_level"),
-        "srb_true_sr_source": str(pos.get("_srb_true_sr_source") or ""),
-        "srb_l1_support": _f("_srb_l1_support"),
-        "srb_l1_resistance": _f("_srb_l1_resistance"),
-        "srb_l3_lower": _f("_srb_l3_lower"),
-        "srb_l3_upper": _f("_srb_l3_upper"),
-    }
+    """Unused leftover fields on ClosedTrade; public court does not fill them."""
+    del pos
+    return {}
 
 
 @dataclass

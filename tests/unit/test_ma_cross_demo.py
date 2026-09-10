@@ -38,9 +38,14 @@ def test_ma_cross_prefilter_leaves_deadzone() -> None:
     assert feats == {"ema_1200_position"}
 
 
-def test_ma_cross_not_in_prod_constitution() -> None:
-    text = (_ROOT / "config/constitution/constitution.yaml").read_text(encoding="utf-8")
-    assert "ma_cross" not in text
+def test_ma_cross_constitution_is_research_only() -> None:
+    raw = yaml.safe_load(
+        (_ROOT / "config/constitution/constitution.yaml").read_text(encoding="utf-8")
+    )
+    assert raw["resource_allocation"]["enabled_archetypes"] == ["ma_cross"]
+    assert raw["kill_switch"]["enabled"] is False
+    meta = yaml.safe_load((_PACK / "meta.yaml").read_text(encoding="utf-8"))
+    assert meta["strategy"].get("live_enabled") is False
 
 
 def test_ma_cross_requests_cross_feature() -> None:

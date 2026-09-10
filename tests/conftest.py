@@ -85,17 +85,6 @@ def _disable_exposure_consensus_by_default(
     monkeypatch.setenv("MLBOT_EXPOSURE_CONSENSUS_ENABLED", "0")
 
 
-@pytest.fixture(autouse=True)
-def _reset_shared_exposure_trackers() -> None:
-    from order_management.exchange_exposure_consensus import (
-        reset_shared_exposure_trackers,
-    )
-
-    reset_shared_exposure_trackers()
-    yield
-    reset_shared_exposure_trackers()
-
-
 @pytest.fixture
 def sample_data():
     """创建样本数据用于测试"""
@@ -142,12 +131,3 @@ def feature_loader():
     )
 
 
-@pytest.fixture
-def strategy_config():
-    """加载策略配置 fixture"""
-    from src.time_series_model.strategy_config import StrategyConfigLoader
-
-    # sr_reversal 已被删除；默认使用 long-only 策略配置
-    strategy_dir = PROJECT_ROOT / "config" / "strategies" / "sr_reversal_long"
-    config_loader = StrategyConfigLoader(strategy_dir)
-    return config_loader.load()

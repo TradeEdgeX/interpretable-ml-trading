@@ -18,7 +18,6 @@ from src.time_series_model.core.constitution.add_position_rules import (
 )
 from src.time_series_model.core.trade_intent import TradeIntent
 from src.time_series_model.live.position_execution_sync import load_execution_raw
-from src.time_series_model.live.srb_regime import resolve_srb_add_path
 
 logger = logging.getLogger(__name__)
 
@@ -135,15 +134,6 @@ def attempt_float_ladder_adds(
             if str(pos.get("archetype", "")).strip().lower() != arch_lc:
                 continue
             if not _position_symbol_matches(pos, symbol):
-                continue
-            if (
-                resolve_srb_add_path(
-                    features,
-                    meta.get("srb_add_position_policy"),
-                    default_path="float_ladder",
-                )
-                != "float_ladder"
-            ):
                 continue
 
             min_gap_m = float(

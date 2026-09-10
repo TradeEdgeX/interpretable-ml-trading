@@ -9,15 +9,15 @@ import numpy as np
 import pandas as pd
 
 from scripts.account_ledger import AccountLedger
-from scripts.coin_margin_pnl import (
+from scripts.event_backtest._bootstrap import logger
+from src.research.inverse_contract_pnl import (
+    CoinMarginState,
     coin_m_contracts_from_risk_coin,
     coin_m_fee_collateral,
     coin_m_gross_pnl_collateral,
     coin_m_gross_pnl_usd,
     is_long_side,
 )
-from scripts.event_backtest._bootstrap import logger
-from scripts.event_backtest.coin_margin_state import CoinMarginState
 from scripts.event_backtest.spot.budget import (
     _allocate_spot_accum_leg,
     _record_spot_symbol_deploy_leg,
@@ -28,7 +28,7 @@ from scripts.event_backtest.spot.budget import (
     _utc_calendar_day_str,
 )
 from scripts.event_backtest.types.stats import resolve_add_position_size_multiplier
-from scripts.event_backtest.types.trade import ClosedTrade, srb_closed_trade_fields
+from scripts.event_backtest.types.trade import ClosedTrade
 from src.time_series_model.core.constitution.add_position_rules import (
     add_regime_gate_allows as _shared_add_regime_gate_allows,
     apply_latest_add_stop_ratchet,
@@ -67,11 +67,6 @@ from src.time_series_model.live.spot_cycle_machine import (
     maybe_spot_cycle_close,
     sync_wind_down_buy_block as _spot_wind_down_block,
 )
-from src.time_series_model.live.srb_regime import (
-    should_reject_srb_add_by_shape,
-    srb_add_position_allowed,
-)
-
 if TYPE_CHECKING:
     from scripts.event_backtest.simulator.om_bridge import OMBridge
     from src.time_series_model.core.constitution.runtime_state import (
@@ -1155,7 +1150,6 @@ class PositionSimulator:
                     effective_stop_pct=leg.get("effective_stop_pct", 0.0),
                     sizing_stop_source=leg.get("sizing_stop_source", ""),
                     is_add_position=leg.get("_is_add_position", False),
-                    **srb_closed_trade_fields(leg),
                 )
                 closed.append(trade_p)
                 self.closed_trades.append(trade_p)
@@ -1433,7 +1427,6 @@ class PositionSimulator:
                             atr_stop_pct=pos.get("atr_stop_pct", 0.0),
                             effective_stop_pct=pos.get("effective_stop_pct", 0.0),
                             sizing_stop_source=pos.get("sizing_stop_source", ""),
-                            **srb_closed_trade_fields(pos),
                         )
                         closed.append(trade_p)
                         self.closed_trades.append(trade_p)
@@ -1527,7 +1520,6 @@ class PositionSimulator:
                     effective_stop_pct=pos.get("effective_stop_pct", 0.0),
                     sizing_stop_source=pos.get("sizing_stop_source", ""),
                     breakeven_locked_at_exit=bool(pos.get("breakeven_locked", False)),
-                    **srb_closed_trade_fields(pos),
                 )
                 closed.append(trade)
                 self.closed_trades.append(trade)
@@ -1632,7 +1624,6 @@ class PositionSimulator:
                     effective_stop_pct=pos.get("effective_stop_pct", 0.0),
                     sizing_stop_source=pos.get("sizing_stop_source", ""),
                     breakeven_locked_at_exit=bool(meta.get("breakeven_locked", False)),
-                    **srb_closed_trade_fields(pos),
                 )
                 closed.append(trade)
                 self.closed_trades.append(trade)
@@ -1698,7 +1689,6 @@ class PositionSimulator:
                 effective_stop_pct=pos.get("effective_stop_pct", 0.0),
                 sizing_stop_source=pos.get("sizing_stop_source", ""),
                 breakeven_locked_at_exit=bool(pos.get("breakeven_locked", False)),
-                **srb_closed_trade_fields(pos),
             )
             closed.append(trade)
             self.closed_trades.append(trade)
@@ -1771,7 +1761,6 @@ class PositionSimulator:
                 effective_stop_pct=pos.get("effective_stop_pct", 0.0),
                 sizing_stop_source=pos.get("sizing_stop_source", ""),
                 breakeven_locked_at_exit=bool(pos.get("breakeven_locked", False)),
-                **srb_closed_trade_fields(pos),
             )
             closed.append(trade)
             self.closed_trades.append(trade)
@@ -1849,13 +1838,6 @@ class PositionSimulator:
             self.last_add_reject_reason = "scale_out_block_adds"
             return None
 
-        _pol = getattr(self, "_srb_add_policy", None)
-        if archetype == "srb" and _pol:
-            _ok, _why = srb_add_position_allowed(features or {}, _pol)
-            if not _ok:
-                self.last_add_reject_reason = _why
-                return None
-
         # 2. 计算 current_r (用于 validate_add_position)
         entry_price = parent_pos["entry_price"]
         risk = (
@@ -1875,87 +1857,6 @@ class PositionSimulator:
             if risk > 0
             else 0.0
         )
-
-        # 2a-Phase-D: 加仓事后形态门（srb_add_position_policy.post_hoc_shape_gate）。
-        # 仅 SRB：若 post_hoc_shape_gate 下任一子项 enabled，追加形态确认。
-        if archetype == "srb" and _pol:
-            _gate_cfg = _pol.get("post_hoc_shape_gate") or {}
-            if any(
-                bool((_gate_cfg.get(_k) or {}).get("enabled", False))
-                for _k in (
-                    "retrace_guard",
-                    "recent_momentum",
-                    "trend_r2_gate",
-                    "wide_sr_expansion",
-                    "trend_health_gate",
-                )
-            ):
-                # 计算母仓 MFE R（用 initial_risk_distance 归一化，与退出逻辑对齐）
-                _hwm = parent_pos.get("high_water_mark")
-                _lwm = parent_pos.get("low_water_mark")
-                if is_long and _hwm is not None:
-                    _mfe_r = (float(_hwm) - entry_price) / risk if risk > 0 else 0.0
-                elif (not is_long) and _lwm is not None:
-                    _mfe_r = (entry_price - float(_lwm)) / risk if risk > 0 else 0.0
-                else:
-                    _mfe_r = max(0.0, current_r)
-                # recent_net_move_atr：近 N primary close 净变化 / ATR（与 mother 方向同向为正）
-                _shape_feat = dict(features or {})
-                _shape_feat["mfe_r"] = _mfe_r
-                _shape_feat["current_r"] = current_r
-                if "recent_net_move_atr" not in _shape_feat:
-                    _rn = (_gate_cfg.get("recent_momentum") or {}).get(
-                        "lookback_bars", 6
-                    ) or 6
-                    try:
-                        _rn = int(_rn)
-                    except (TypeError, ValueError):
-                        _rn = 6
-                    _buf = getattr(self, "_primary_close_buffer", None) or []
-                    _atr_now = float(
-                        features.get("atr") or parent_pos.get("atr_at_entry") or 0.0
-                    )
-                    if len(_buf) >= 2 and _atr_now > 0:
-                        _tail = _buf[-max(2, min(_rn + 1, len(_buf))) :]
-                        _net = _tail[-1] - _tail[0]
-                        # 保留带符号：正 = 上涨，负 = 下跌；gate 内部按 side 判方向。
-                        _shape_feat["recent_net_move_atr"] = _net / _atr_now
-                # bars_since_mother_entry（E4）：用 entry_bar 的 timestamp 与 parent.entry_time
-                # 的差，按 bar_minutes 转成 primary bar 数。缺失时兜底 0。
-                try:
-                    _parent_et = parent_pos.get("entry_time")
-                    _now_ts = entry_bar.name if hasattr(entry_bar, "name") else None
-                    _bm = int(
-                        parent_pos.get("bar_minutes")
-                        or self._primary_bar_minutes
-                        or 240
-                    )
-                    if _parent_et is not None and _now_ts is not None and _bm > 0:
-                        _pt = pd.Timestamp(_parent_et)
-                        _nt = pd.Timestamp(_now_ts)
-                        if _pt.tzinfo is None:
-                            _pt = _pt.tz_localize("UTC")
-                        if _nt.tzinfo is None:
-                            _nt = _nt.tz_localize("UTC")
-                        _delta_min = (_nt - _pt).total_seconds() / 60.0
-                        _shape_feat["bars_since_mother_entry"] = max(
-                            0.0, _delta_min / float(_bm)
-                        )
-                except Exception:
-                    pass
-                # wide_sr_dist_atr：从 features 直接读（已存在）
-                _mother_ctx = {
-                    "side": parent_pos.get("side"),
-                    "entry_wide_sr_dist_atr": parent_pos.get(
-                        "_srb_entry_wide_sr_dist_atr"
-                    ),
-                }
-                _rej, _why = should_reject_srb_add_by_shape(
-                    _shape_feat, _mother_ctx, _gate_cfg
-                )
-                if _rej:
-                    self.last_add_reject_reason = _why
-                    return None
 
         # 2b. 找出同 symbol + 同 direction 的活跃仓位
         same_sym_dir = [

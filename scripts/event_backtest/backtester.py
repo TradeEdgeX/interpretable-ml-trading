@@ -40,7 +40,6 @@ from scripts.event_backtest.reporting.audit import (
     _trade_audit_row_from_fill,
 )
 from scripts.event_backtest.results import BacktestResult
-from scripts.event_backtest.coin_margin_state import CoinMarginState
 from scripts.event_backtest.ks_period_policy import (
     effective_risk_per_slot,
     hard_period_limits_for_evaluate,
@@ -92,8 +91,6 @@ from src.time_series_model.core.constitution.safety_runtime import (
 )
 from src.time_series_model.core.constitution.violation import ConstitutionViolation
 from src.time_series_model.core.trade_intent import TradeIntent
-from src.time_series_model.live.event_backtest_srb_hooks import SrbEventBacktestHooks
-from src.time_series_model.live.srb_regime import resolve_srb_add_path
 from src.time_series_model.live.generic_live_strategy import GenericLiveStrategy
 from src.time_series_model.live.spot_cycle_machine import (
     SpotCycleBook,
@@ -175,6 +172,11 @@ class EventBacktester:
         )
         self.fee_rate = fee_rate  # 单边手续费率
         self.margin_mode = str(margin_mode or "usd_m").lower()
+        if self.margin_mode == "coin_m":
+            raise ValueError(
+                "coin_m is not in this public court. Use usd_m. "
+                "Inverse-contract math lives in src.research.inverse_contract_pnl."
+            )
         self._contract_multiplier_override = (
             float(contract_multiplier) if contract_multiplier is not None else None
         )
@@ -295,15 +297,9 @@ class EventBacktester:
             self._feature_computers[tf] = fc
 
     def _contract_multiplier_for(self, symbol: str) -> float:
-        from scripts.event_backtest.coin_margin_config import (
-            resolve_contract_multiplier,
-        )
-
-        return resolve_contract_multiplier(
-            symbol,
-            margin_mode=self.margin_mode,
-            cli_override=self._contract_multiplier_override,
-        )
+        if self._contract_multiplier_override is not None:
+            return float(self._contract_multiplier_override)
+        return 100.0
 
     def _load_research_data(
         self, sym: str, start_date: str, end_date: str
@@ -1064,16 +1060,6 @@ class EventBacktester:
             simulators=_plist_sims,
         )
 
-        _srb_hooks = SrbEventBacktestHooks.try_from_strategies(
-            self.strategy_names, self._strats
-        )
-        if _srb_hooks is not None:
-            _srb_hooks.attach_to_simulators(self._simulators)
-        else:
-            for _sim in self._simulators.values():
-                _sim._srb_add_policy = None
-                _sim._srb_wide_entry_guard = None
-
         # 可选: 加载跨月续跑状态
         if resume_state:
             resume_symbols = resume_state.get("symbols", {}) or {}
@@ -1298,40 +1284,7 @@ class EventBacktester:
             _sim_acc._risk_per_slot_usdt = _risk_usdt_per_unit
             _sim_acc._account_ledger = _shared_account_ledger
 
-        if self.margin_mode == "coin_m":
-            n_sym = max(1, len(sym_data))
-            _last_collateral_marks: Dict[str, float] = {}
-            # 用真实时间线首个事件价格锚定 wallet —— 保证 t0 equity == initial_cash。
-            # 不能用 bars_1min_test.iloc[0]（含 warmup/更早数据，价格口径错误）。
-            _first_event_close: Dict[str, float] = {}
-            for _ts, _sym, _tf_rows in timeline_events:
-                if _sym in _first_event_close:
-                    continue
-                for _row in _tf_rows.values():
-                    try:
-                        _c = float(_row.get("close", 0.0))
-                    except (TypeError, ValueError):
-                        _c = 0.0
-                    if _c > 0.0:
-                        _first_event_close[_sym] = _c
-                        break
-            for sym in sym_data:
-                p0 = float(_first_event_close.get(sym, 0.0) or 0.0)
-                if p0 <= 0.0:
-                    logger.warning(
-                        "coin_m: no positive first-event close for %s; "
-                        "wallet anchor fallback to 1.0",
-                        sym,
-                    )
-                    p0 = 1.0
-                _last_collateral_marks[sym] = p0
-                wallet = (float(_initial_cash) / float(n_sym)) / p0
-                self._simulators[sym]._coin_margin_state = CoinMarginState(
-                    wallet_coin=wallet,
-                    contract_multiplier=self._contract_multiplier_for(sym),
-                )
-        else:
-            _last_collateral_marks = {}
+        _last_collateral_marks: Dict[str, float] = {}
 
         def _trade_realized_usdt(ct: ClosedTrade) -> float:
             rv = float(getattr(ct, "pnl_usd_realized", 0.0) or 0.0)
@@ -1830,16 +1783,6 @@ class EventBacktester:
                             lookup_peer_feature=_lookup_peer_feat,
                         )
 
-            if _srb_hooks is not None:
-                _srb_hooks.inject_regime_features(
-                    sym=sym,
-                    ts=ts,
-                    sym_bundle=sym_data[sym],
-                    tf_srb=self._tf_map.get("srb"),
-                    features_by_tf=features_by_tf,
-                    primary_features=primary_features,
-                )
-
             try:
                 _pat = float(primary_features.get("atr") or 0)
                 if _pat > 0:
@@ -1887,10 +1830,6 @@ class EventBacktester:
                         _miss,
                         sym,
                     )
-
-            SrbEventBacktestHooks.sync_wide_sr_levels_on_simulator(
-                simulator, primary_features
-            )
 
             # Phase D: 维护近 N primary close 的滚动缓存用于 recent_net_move_atr
             try:
@@ -2224,19 +2163,6 @@ class EventBacktester:
                                     funnel["reject_reentry_cooldown"] += 1
                                     continue
 
-                    if (
-                        _srb_hooks is not None
-                        and _srb_hooks.reject_new_entry_wide_sr_guard(
-                            arch_lc=_arch_lc,
-                            is_new_entry=_is_new_entry,
-                            simulator=simulator,
-                            entry_feats=entry_feats,
-                            intent=intent,
-                            funnel=funnel,
-                        )
-                    ):
-                        continue
-
                     # 2026-06-10: PCM 已将重复信号转为 add_position=True。
                     # 此时跳过 open_position()，直接走 try_add_position()。
                     # Spot DCA 例外：constitution 里 SRB allow_add 会把全局
@@ -2251,14 +2177,10 @@ class EventBacktester:
                         and not is_spot_accum_archetype(_win_lc)
                     ):
                         _ladder_meta = _strats_float_ladder_meta.get(_win_lc) or {}
-                        _add_path = resolve_srb_add_path(
-                            entry_feats,
-                            _ladder_meta.get("srb_add_position_policy"),
-                            default_path=(
-                                "float_ladder"
-                                if _win_lc in _strats_float_ladder_meta
-                                else "signal_add"
-                            ),
+                        _add_path = (
+                            "float_ladder"
+                            if _win_lc in _strats_float_ladder_meta
+                            else "signal_add"
                         )
                         # Ladder archetypes normally skip PCM re-signal; allow it when
                         # online regime asks for signal_add (add_path_by_bucket).
@@ -2286,15 +2208,6 @@ class EventBacktester:
                     opened = simulator.open_position(
                         intent, entry_bar, entry_feats, bar_minutes=winning_bm
                     )
-                    if _srb_hooks is not None:
-                        _srb_hooks.annotate_mother_on_open(
-                            opened=opened,
-                            arch_lc=_arch_lc,
-                            is_new_entry=_is_new_entry,
-                            simulator=simulator,
-                            entry_feats=entry_feats,
-                            entry_bar=entry_bar,
-                        )
                     if opened is not None and _entry_limit is not None and _ts_date:
                         _op = simulator._positions.get(opened) or {}
                         _scale_in_evt = int(_op.get("_accumulate_deploys", 0) or 0) > 0
@@ -2370,14 +2283,10 @@ class EventBacktester:
                             _win_lc = str(winning_arch or "").strip().lower()
                             added = None
                             _ladder_meta = _strats_float_ladder_meta.get(_win_lc) or {}
-                            _add_path = resolve_srb_add_path(
-                                entry_feats,
-                                _ladder_meta.get("srb_add_position_policy"),
-                                default_path=(
-                                    "float_ladder"
-                                    if _win_lc in _strats_float_ladder_meta
-                                    else "signal_add"
-                                ),
+                            _add_path = (
+                                "float_ladder"
+                                if _win_lc in _strats_float_ladder_meta
+                                else "signal_add"
                             )
                             _tried_signal_add = _add_path == "signal_add"
                             if _tried_signal_add:
@@ -2663,15 +2572,6 @@ class EventBacktester:
                         if bool(pos.get("_is_add_position", False)):
                             continue
                         if str(pos.get("archetype", "")).strip().lower() != arch_lc:
-                            continue
-                        if (
-                            resolve_srb_add_path(
-                                pf,
-                                meta.get("srb_add_position_policy"),
-                                default_path="float_ladder",
-                            )
-                            != "float_ladder"
-                        ):
                             continue
                         min_gap_m = float(
                             (meta.get("execution_constraints") or {}).get(

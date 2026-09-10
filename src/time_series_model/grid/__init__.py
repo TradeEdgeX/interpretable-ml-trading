@@ -1,1 +1,1 @@
-"""Coin-m wallet helpers used by event_backtest accounting."""
+"""Grid helpers left in the extract. The public court does not construct them."""

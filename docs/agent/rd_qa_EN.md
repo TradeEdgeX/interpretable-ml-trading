@@ -5,9 +5,11 @@ How rule experiments fight overfitting, why TimeSeriesSplit / Qlib CV is not the
 Lab: `/rd/qa` · source: `docs/agent/rd_qa.yaml`
 
 Related:
+- `README_CN.md`
+- `docs/hypothesis.md`
+- `docs/lessons.md`
 - `docs/agent/rd_playbook.md`
 - `config/experiments/LAYER_PROMOTION_CRITERIA.md`
-- `docs/strategy/methodology_R_and_D_flow_CN.md`
 
 ## Do rule experiments need causal TimeSeriesSplit, or Qlib-style CV?
 

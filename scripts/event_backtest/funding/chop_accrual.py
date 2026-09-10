@@ -6,7 +6,7 @@ from typing import Optional
 
 import pandas as pd
 
-from scripts.coin_margin_pnl import is_long_side
+from src.research.inverse_contract_pnl import is_long_side
 
 
 def aggregated_funding_rate_decimal(

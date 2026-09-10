@@ -5,9 +5,11 @@
 Lab: `/rd/qa` · source: `docs/agent/rd_qa.yaml`
 
 Related:
+- `README_CN.md`
+- `docs/hypothesis.md`
+- `docs/lessons.md`
 - `docs/agent/rd_playbook.md`
 - `config/experiments/LAYER_PROMOTION_CRITERIA.md`
-- `docs/strategy/methodology_R_and_D_flow_CN.md`
 
 ## 规则实验要做因果 TimeSeriesSplit，或 Qlib 那种 CV 吗？
 

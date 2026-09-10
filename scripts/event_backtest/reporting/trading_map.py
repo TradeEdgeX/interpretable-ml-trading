@@ -49,12 +49,9 @@ _COLOR_LOSS_HEX = "#ef5350"
 def _compute_sr_overlay_series(
     ohlc: pd.DataFrame, *, l1_lookback: int = 20
 ) -> pd.DataFrame:
-    """L1 swing + L3 wide_sr — shared with CMS (``srb_sr_overlay_series``)."""
-    from src.time_series_model.live.srb_sr_overlay_series import (
-        compute_sr_overlay_series,
-    )
-
-    return compute_sr_overlay_series(ohlc, l1_lookback=l1_lookback)
+    """Public court has no SR overlay series."""
+    del l1_lookback
+    return pd.DataFrame(index=getattr(ohlc, "index", None))
 
 
 def _srb_trade_list_html(trades: Sequence[ClosedTrade], symbol: str) -> str:
