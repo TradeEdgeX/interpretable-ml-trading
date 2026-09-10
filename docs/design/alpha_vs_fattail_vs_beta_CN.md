@@ -4,14 +4,7 @@
 > 引出「抓 alpha vs 搭肥尾便车」的定位问题。本文给出四分类框架、诊断判据、
 > 当前策略分类，以及「加更多信息」的边界。
 >
-> 关联：`.cursor/rules/strategy-classification-alpha-fattail-beta.mdc`（每次设计策略必分类）。  
-> 因子/beta/alpha 口语口径与 SRB≠CTA：`docs/decisions/2026-08-17_factor_beta_alpha_srb_cta_CN.md`（§8 = 2026-08-17 晚复核：冻收割≠总排名；SRB+肥尾优于 TPC+肥尾；A 股探测器两问）。  
-> 结案：`docs/decisions/2026-07-14_strategy_classification_CN.md`  
-> 同账户/熔断/主力选型：`docs/decisions/2026-07-14_tpc_srb_single_account_and_killswitch_CN.md`  
-> B/C 跨层资金倾斜：`docs/design/bc_layer_capital_tilt_budget_rules_CN.md`  
-> 加仓档：`config/experiments/20260714_tpc_srb_add_tiers/`（**熔断污染，待复核**）  
-> 池 1/3：`config/experiments/20260714_pool_clean_ksoff/`（关熔断重测中）  
-> **2026-07-23 投入优先级：** [`2026-07-23_crypto_strategy_priorities_CN.md`](2026-07-23_crypto_strategy_priorities_CN.md)（Rolling U P0 · 横截面 500 复盘 P1 · SRC/SRF 下线）
+> 短指针：`.cursor/rules/strategy-classification-alpha-fattail-beta.mdc`。
 
 ## 四种定位
 
