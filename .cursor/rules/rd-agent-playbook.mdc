@@ -1,0 +1,13 @@
+---
+description: Hypothesis court — follow docs, do not rewrite the claim
+alwaysApply: true
+---
+
+# R&D playbook (pointer)
+
+- Loop: [`docs/hypothesis.md`](../../docs/hypothesis.md)
+- Who writes fields: [`docs/agent/rd_playbook.md`](../../docs/agent/rd_playbook.md)
+- Lessons: [`docs/lessons.md`](../../docs/lessons.md)
+- Map: [`README_CN.md`](../../README_CN.md) · [`docs/README.md`](../../docs/README.md)
+
+Do not duplicate those pages here. Do not start a backtest unless asked to measure this sentence. Never type `verdict:`. Public dummy: `ma_cross`.

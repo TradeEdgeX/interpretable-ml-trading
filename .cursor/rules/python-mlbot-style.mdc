@@ -1,0 +1,13 @@
+---
+description: Project Python style — no legacy paths, bindings-first, keep files small
+alwaysApply: true
+---
+
+# ml_trading_bot coding preferences
+
+- **Repo facts:** dependencies from **`requirements.txt`**; library code under **`src/`**; runnable tooling under **`scripts/`**; automated tests under **`tests/`** (shared fixtures in **`tests/conftest.py`**). Python **3.12** in documented dev/Docker setups.
+- **No legacy / compatibility branches** unless explicitly requested. Prefer one clear code path; delete dead template-specific loops and `extract_*_from_prod`-style shims after migrating to bindings/config-driven behavior.
+- **Extensibility via config**, not Python defaults for strategy tuning: parquet/tune writeback uses **`infer_writeback_bindings_from_prefilter`** from locked archetypes; optional **`writeback_bindings`** override + per-rule **`tune_param`** / **`skip_parquet_tune`**.
+- **Avoid over-DRY**: do not merge unrelated branches “for reuse” if it obscures behavior; a bit of duplication is acceptable when it keeps call paths obvious.
+- **File length**: split large scripts/modules when they mix concerns; keep tuning/pipeline steps in focused modules.
+- **Abstraction**: prefer small, named helpers and clear data flow over nested special cases in one giant function.

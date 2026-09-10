@@ -1,0 +1,17 @@
+---
+description: event_backtest uses config/market_segment.yaml three segments
+globs: config/market_segment*.yaml,config/experiments/**/*
+alwaysApply: false
+---
+
+# Market segments
+
+Canonical: `config/market_segment.yaml` · [`docs/lessons.md#segments`](../../docs/lessons.md#segments)
+
+| id | start | end |
+|---|---|---|
+| `bear_2022` | 2022-01-01 | 2023-11-01 |
+| `bull_2023_2024` | 2023-06-01 | 2025-01-01 |
+| `recent_range_to_bear` | 2025-01-01 | 2026-05-31 |
+
+`recent_6m_oos` cannot promote alone. Do not mix `market_segment_crypto.yaml` dates into this exam.

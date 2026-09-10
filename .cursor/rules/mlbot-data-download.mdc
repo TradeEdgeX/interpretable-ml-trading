@@ -1,0 +1,26 @@
+---
+description: Crypto OHLC/tick data via mlbot data — never hand-roll Binance REST
+alwaysApply: true
+---
+
+# Crypto data download (`mlbot data`)
+
+Canonical: [`docs/usage.md`](../../docs/usage.md) · [`docs/lessons.md#features`](../../docs/lessons.md#features) · `mlbot data --help`
+
+## Rule
+
+1. Use `mlbot data download` / `convert` / `pipeline`, plus funding / open-interest subcommands.
+2. Do not hand-roll `requests` to `fapi.binance.com/fapi/v1/klines` into `data/parquet_data`.
+3. This extract runs locally. `--docker` is accepted and ignored.
+
+```bash
+mlbot data download --symbols BTCUSDT \
+  --start-year 2026 --start-month 6 --end-year 2026 --end-month 6
+mlbot data convert --symbols BTCUSDT
+# or
+mlbot data pipeline --symbols BTCUSDT
+```
+
+ZIP default: `data/agg_data/`. Parquet default: `data/parquet_data/`.
+
+After new months, rebuild or incrementally backfill FeatureStore. Download alone is not enough for `event_backtest`.

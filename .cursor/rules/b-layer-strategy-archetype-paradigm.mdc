@@ -1,0 +1,11 @@
+---
+description: Strategy YAML layers
+globs: config/strategies/**/*
+alwaysApply: false
+---
+
+# YAML layers
+
+Canonical: [`docs/ARCHITECTURE.md`](../../docs/ARCHITECTURE.md) · `config/strategies/STRATEGY_AUTHORING_GUIDE.md` · example `config/strategies/ma_cross/`
+
+regime / prefilter / direction / gate / entry_filters / execution. Signals are FeatureStore columns. See [`docs/lessons.md#features`](../../docs/lessons.md#features).

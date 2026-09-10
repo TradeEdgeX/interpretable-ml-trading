@@ -1,0 +1,10 @@
+---
+description: Backtests must not use future data (closed-bar)
+alwaysApply: true
+---
+
+# Closed bar
+
+Canonical: [`docs/lessons.md#closed-bar`](../../docs/lessons.md#closed-bar) · [`docs/math.md`](../../docs/math.md)
+
+Never decide at bar open with the same-index completed FeatureStore row. Labels may look ahead; entry features may not.

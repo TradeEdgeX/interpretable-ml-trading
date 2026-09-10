@@ -1,0 +1,13 @@
+# Alternate direction — NOT the default pack.
+# Default remains sign(ema_1200_position). Use this only in an experiment
+# variant after FeatureStore backfill of ema_50_200_cross_f.
+description: Public demo — side is the EMA50/EMA200 cross event (+1 gold / -1 death)
+direction_rules:
+  - id: ma_cross_ema50_200_side
+    feature: ema_50_200_cross_side
+    transform: sign
+validation:
+  require_nonzero: true
+  allowed_values:
+    - -1
+    - 1

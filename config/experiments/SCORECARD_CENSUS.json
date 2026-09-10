@@ -1,0 +1,86 @@
+{
+  "count": 2,
+  "buckets": {
+    "empty": 1,
+    "phase3_complete": 1
+  },
+  "by_record_class": {
+    "open": {
+      "empty": 1,
+      "phase3_complete": 1
+    }
+  },
+  "filled_slots": {
+    "ic": 0,
+    "icir": 0,
+    "auc": 0,
+    "lift_pp": 0,
+    "cagr": 1,
+    "calmar": 1,
+    "win_rate": 1,
+    "maxdd": 1,
+    "sharpe": 1
+  },
+  "empty_legacy": [],
+  "numbered_not_trusted": [
+    "20260910_ma50_ma200_cross"
+  ],
+  "rows": [
+    {
+      "id": "20260910_funding_fade",
+      "record_class": "open",
+      "strategy": "ma_cross",
+      "harness": "event_backtest",
+      "verdict": null,
+      "verdict_source": "missing",
+      "bucket": "empty",
+      "can_close": false,
+      "phase1": {
+        "ic": null,
+        "icir": null,
+        "auc": null,
+        "lift_pp": null
+      },
+      "phase3": {
+        "cagr": null,
+        "calmar": null,
+        "win_rate": null,
+        "maxdd": null,
+        "sharpe": null
+      },
+      "sources": []
+    },
+    {
+      "id": "20260910_ma50_ma200_cross",
+      "record_class": "open",
+      "strategy": "ma_cross",
+      "harness": "event_backtest",
+      "verdict": null,
+      "verdict_source": "missing",
+      "bucket": "phase3_complete",
+      "can_close": true,
+      "phase1": {
+        "ic": null,
+        "icir": null,
+        "auc": null,
+        "lift_pp": null
+      },
+      "phase3": {
+        "cagr": 0.036684265440023234,
+        "calmar": 1.5100064319113835,
+        "win_rate": 0.3829787234042553,
+        "maxdd": -0.024294112041355922,
+        "sharpe": 0.15218009105175445
+      },
+      "sources": [
+        "capital_report.json",
+        "event_trades_ma_cross.csv",
+        "capital_report.json",
+        "event_trades_ma_cross.csv",
+        "capital_report.json",
+        "event_trades_ma_cross.csv"
+      ]
+    }
+  ],
+  "generated_at": "2026-09-10T04:48:08Z"
+}

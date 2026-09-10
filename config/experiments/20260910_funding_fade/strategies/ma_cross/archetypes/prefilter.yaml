@@ -1,0 +1,10 @@
+# Only trade when 50-bar funding z-score is extreme.
+rules:
+  - any_of:
+      - feature: funding_rate_zscore_50
+        operator: ">="
+        value: 1.5
+      - feature: funding_rate_zscore_50
+        operator: "<="
+        value: -1.5
+    rationale: "funding z-score extreme; fade the crowded side"

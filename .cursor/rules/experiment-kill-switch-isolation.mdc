@@ -1,0 +1,10 @@
+---
+description: Kill switch off when ranking edge
+alwaysApply: true
+---
+
+# Kill-switch isolation
+
+Canonical: [`docs/lessons.md#kill-switch`](../../docs/lessons.md#kill-switch) · `config/experiments/LAYER_PROMOTION_CRITERIA.md`
+
+Phase 3 / variant rank: `kill_switch: false`. A separate kill-switch-on run is only for account protection, not edge.

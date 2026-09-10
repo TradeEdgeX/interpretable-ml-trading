@@ -1,0 +1,16 @@
+# Always-on book: this demo has no regime detector.
+allowed_regimes:
+  always:
+    description: Public MA demo — no regime gate
+    match: any
+    rules:
+      - feature: atr
+        operator: ">"
+        value: 0
+
+allowed_sides:
+  - long
+  - short
+reject_neutral: false
+side_mask:
+  enabled: false

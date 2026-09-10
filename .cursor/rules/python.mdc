@@ -1,0 +1,81 @@
+---
+description: Python style for ml_trading_bot — PEP 8, typing, imports; matches requirements.txt + src/scripts layout.
+globs: **/*.py
+---
+# Python (ml_trading_bot)
+
+Project-specific defaults on top of **PEP 8**. Tooling (Black/Ruff/isort) is **not** pinned in `requirements.txt`; follow PEP 8 and existing file style unless the team adds formatters.
+
+## 1. Layout & formatting
+
+- **Indentation:** 4 spaces, no tabs.
+- **Line length:** aim ~88 characters where reasonable; match surrounding modules if they differ.
+- **Blank lines:** two between top-level defs/classes; one between methods; use blank lines to separate logical blocks inside functions.
+
+## 2. Imports
+
+- Order: **stdlib → third-party → local** (`src/` packages such as `cli`, `config`, …).
+- Prefer **absolute** imports consistent with the repo (see tests importing `from cli.main import …`).
+- Avoid `import os, sys` on one line.
+
+## 3. Naming (PEP 8)
+
+- Modules/packages: `snake_case`. Classes: `CapWords`. Functions/methods/variables: `snake_case`. Constants: `UPPER_SNAKE`.
+
+## 4. Docstrings & comments
+
+- Use docstrings for **public** APIs where behavior isn’t obvious.
+- Plain triple-quoted summaries are fine; reStructuredText only where the project already uses it.
+- Comments explain **why**, not what the next line literally does.
+
+## 5. Type hints
+
+- Prefer annotations on **new** functions and non-trivial APIs.
+- Use `typing` / modern builtins (`list[str]`, `dict[str, Any]`) consistent with the file’s Python version (**3.12** in this repo’s documented environments).
+
+## 6. Environment & dependencies
+
+- **Dependencies:** root **`requirements.txt`** + a **virtualenv**. Do not commit `venv/`.
+- **Not used at repo root:** `pyproject.toml` / Poetry / Pipenv for this project—don’t assume them when suggesting commands.
+
+Typical workflow:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate   # or OS-equivalent
+pip install -r requirements.txt
+```
+
+## 7. Repository shape
+
+- **`src/`:** primary Python packages and modules.
+- **`scripts/`:** runnable pipelines and tools (often large); keep concerns split per **python-mlbot-style** rule.
+- **`config/`:** YAML and strategy definitions; prefer extending config over hard-coded strategy tuning in Python.
+
+## 8. Testing (see pytest rule)
+
+- **`pytest`** for automated tests under **`tests/`**.
+- Example import style (library lives under `src/` on `PYTHONPATH`), matching files like `tests/unit/test_cli.py`:
+
+```python
+import pytest
+
+from cli.main import get_project_root
+
+
+def test_project_root_exists() -> None:
+    root = get_project_root()
+    assert root.exists()
+```
+
+- Coverage targets are **not** fixed here; focus on correctness of critical logic and regressions.
+
+## 9. Patterns
+
+- **Context managers** for files and resources.
+- **f-strings** for formatting; keep expressions inside them simple.
+- **`enum.Enum`** for grouped symbolic constants when it aids clarity.
+- **No mutable default arguments** (`def f(x: list[int] | None = None)` then set inside).
+- **Never bare `except:`** — catch specific exceptions; avoid swallowing `KeyboardInterrupt` / `SystemExit`.
+
+## 10. 所有ai都不要自己推送代码，除非我明确命令

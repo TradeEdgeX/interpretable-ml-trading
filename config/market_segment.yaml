@@ -1,0 +1,25 @@
+segments:
+- id: bear_2022
+  label: Bear
+  start_date: '2022-01-01'
+  end_date: '2023-11-01'
+  purpose: 熊市基线
+  trend_pool_active_regime: bear
+- id: bull_2023_2024
+  label: Bull
+  start_date: '2023-06-01'
+  end_date: '2025-01-01'
+  purpose: 牛市主段（含 ETF rally）
+  trend_pool_active_regime: bull
+- id: recent_range_to_bear
+  label: Bear
+  start_date: '2025-01-01'
+  end_date: '2026-05-31'
+  purpose: High-range chop / pullback into bear (2025–2026-05)
+  trend_pool_active_regime: range
+- id: recent_6m_oos
+  label: Recent6m
+  start_date: '2025-12-01'
+  end_date: '2026-05-31'
+  purpose: Very recent 6-month OOS (2025-12 to 2026-05) — primary current-regime evaluation
+  trend_pool_active_regime: range

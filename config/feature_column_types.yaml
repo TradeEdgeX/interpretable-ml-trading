@@ -1,0 +1,42 @@
+# Feature Column Types Configuration
+# 
+# This file defines the data types for feature output columns.
+# Types can be: "numeric", "categorical", "boolean"
+#
+# Categorical columns will be label-encoded before training.
+# Numeric columns will be treated as continuous features.
+
+column_types:
+  # DTW (Dynamic Time Warping) 形态匹配特征 - 最佳匹配模式名称
+  # 
+  # 含义：
+  # - DTW 用于匹配价格形态模式（如锤子线、头肩顶/底、双顶/底等）
+  # - best_match 表示当前K线之前 N 根K线的价格序列，与哪个预定义模板最相似
+  # - wXX 后缀表示窗口大小（window size），即用于匹配的K线数量
+  #   例如：w15 = 使用最近15根K线，w20 = 使用最近20根K线，w60 = 使用最近60根K线
+  #
+  # 值类型：字符串（分类特征）
+  # - 可能的值：模板名称字符串，如 "hammer"（锤子线）、"head_shoulder_bottom"（头肩底）、
+  #   "double_bottom"（双底）、"bullish_engulfing"（看涨吞没）、"none"（无匹配）等
+  # - 不同的窗口大小（w15/w20/w30等）用于捕捉不同时间尺度的形态模式
+  #   - 小窗口（w15/w20/w25）：捕捉短期反转形态（1-5根K线内完成）
+  #   - 中窗口（w30/w35/w40）：捕捉中期突破形态（20-50根K线完成）
+  #   - 大窗口（w45/w50/w60）：捕捉长期趋势形态（40-60根K线完成）
+  dtw_best_match: categorical
+  dtw_best_match_w15: categorical  # 15根K线窗口：捕捉短期反转形态
+  dtw_best_match_w20: categorical  # 20根K线窗口：捕捉短期反转形态
+  dtw_best_match_w25: categorical  # 25根K线窗口：捕捉短期反转形态
+  dtw_best_match_w30: categorical  # 30根K线窗口：捕捉中期突破形态
+  dtw_best_match_w35: categorical  # 35根K线窗口：捕捉中期形态
+  dtw_best_match_w40: categorical  # 40根K线窗口：捕捉中期突破形态
+  dtw_best_match_w45: categorical  # 45根K线窗口：捕捉中继形态
+  dtw_best_match_w50: categorical  # 50根K线窗口：捕捉长期趋势形态
+  dtw_best_match_w60: categorical  # 60根K线窗口：捕捉长期突破形态
+  
+  # Asset symbol (categorical)
+  _symbol: categorical
+  symbol: categorical
+  
+  # By default, all other columns are numeric
+  # If a column is not listed here, it will be treated as numeric
+

@@ -1,0 +1,90 @@
+# ================================================================
+# Unnormalized / scale-dependent output columns
+# ================================================================
+# These outputs must be excluded from cross-asset scans, entry-filter
+# feature selection, and model inputs unless they are normalized first.
+#
+# Why:
+#   Raw price/flow/energy columns vary heavily by symbol and time scale.
+#   Using them as comparable thresholds can leak asset identity
+#   (for example: low-price coins appear more "volatile").
+#
+# Used by:
+#   - optimize_entry_filter_snotio.py --scan
+#   - optimize_entry_filter_plateau.py
+#   - analyze_archetype_feature_stratification.py
+#   - export_lightgbm_rules_to_readme.py
+#   - feature audit / config contract tests
+#
+# Maintenance:
+#   When a feature output is marked price_unit / log1p_robust_rolling
+#   and is not cross-asset normalized, register it here.
+
+raw_scale_columns:
+  # Raw prices, same scale as close.
+  price_unit:
+    - fp_poc
+    - fp_hvn
+    - fp_lvn
+    - fp_vah
+    - fp_val
+    - fp_max_imbalance_price
+    - fp_exhaustion_price
+    - wpt_price_trend
+    - wpt_price_fluctuation
+    - wpt_price_reconstructed
+    - box_hi_60
+    - box_lo_60
+    - box_hi_120
+    - box_lo_120
+    - box_hi_240
+    - box_lo_240
+    - box_hi_480
+    - box_lo_480
+    - box_hi_1200
+    - box_lo_1200
+
+  # Raw money flow / delta, same scale as volume.
+  raw_flow:
+    - fp_delta_poc
+    - wpt_cvd_fluctuation
+
+  # Raw wavelet/spectral energy, often around 1e18.
+  raw_energy:
+    - wpt_vper_low
+    - wpt_vper_mid
+    - wpt_vper_high
+    - wpt_vper
+
+  # Ratios that are effectively constant and not useful for selection.
+  near_degenerate:
+    - wpt_price_energy_low_ratio
+    - wpt_price_energy_mid_ratio
+    - wpt_price_energy_high_ratio
+
+  # Raw orderflow / CVD columns, not cross-asset comparable.
+  raw_orderflow:
+    - buy_qty
+    - sell_qty
+    - trade_count
+    - cvd
+    - cvd_change_1
+    - cvd_change_5
+    - cvd_change_20
+    - cvd_roll20
+    - cvd_roll60
+    - cvd_roll288
+
+  # Raw indicators in price scale.
+  raw_indicator:
+    - macd
+    - macd_signal
+    - macd_histogram
+
+  # Raw open interest.
+  raw_oi:
+    - oi_usd
+
+  # Model outputs, not input features.
+  model_output:
+    - pred

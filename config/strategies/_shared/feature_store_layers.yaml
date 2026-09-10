@@ -1,0 +1,6 @@
+# Resolved AUTO layer ids for config/strategies/_shared (regenerate after manifest/deps change).
+#
+#   python -c "from src.feature_store.tree_full_layer import resolve_tree_full_layer; print(resolve_tree_full_layer())"
+
+tree_full_120T: features_tree_full_120T_958f665062
+tree_core_120T: features_tree_core_120T_c005db49f7

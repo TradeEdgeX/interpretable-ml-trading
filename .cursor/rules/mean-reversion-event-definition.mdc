@@ -1,0 +1,9 @@
+---
+description: Mean-reversion scans use cross-and-return, not a level
+globs: docs/design/mean_reversion_event_definition_CN.md
+alwaysApply: false
+---
+
+# Mean-reversion events
+
+Canonical: [`docs/lessons.md#mean-reversion`](../../docs/lessons.md#mean-reversion) · [`docs/design/mean_reversion_event_definition_CN.md`](../../docs/design/mean_reversion_event_definition_CN.md)

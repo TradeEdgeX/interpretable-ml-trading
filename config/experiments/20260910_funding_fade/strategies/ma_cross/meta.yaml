@@ -1,0 +1,20 @@
+strategy:
+  name: ma_cross-120T
+  description: >-
+    Public funding-fade experiment pack.
+    Side = fade funding_rate_zscore_50; exit when z-score returns through 0.
+    Not a live sleeve and not a promote candidate.
+  owner: public_demo
+  archetype: MovingAverageCross
+  timeframe: 120T
+  live_enabled: false
+  research_retained: true
+  symbol_include:
+    - BTCUSDT
+    - ETHUSDT
+    - BNBUSDT
+    - SOLUSDT
+  feature_store_layer: features_funding_fade_120T
+  evidence:
+    role: public-demo
+    paradigm: .cursor/rules/b-layer-strategy-archetype-paradigm.mdc

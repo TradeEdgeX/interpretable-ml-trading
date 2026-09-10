@@ -1,0 +1,55 @@
+[flake8]
+# 选择要忽略的错误码。
+# E501: 行太长
+# W503: 在二元运算符前换行
+# W291: 尾随空格
+# W293: 空行包含空格
+# F401: 导入但未使用
+# F541: f-string 缺少占位符
+# F841: 赋值但未使用的变量
+# E226: 算术运算符周围缺少空格
+# E402: 模块导入不在顶部
+# E401: 一行多个导入
+# E203: 冒号前有空格（Black 格式化后常见）
+# E722: 裸 except
+# E231: 逗号后缺少空格（在字符串内容中不应检查）
+# F405: star import 可能未定义的变量（alpha101 等库中常见，无法自动修复）
+# E741: 模糊变量名（如 'l', 'O', 'I'，在某些上下文中是合理的，如 alpha101 函数参数）
+# E731: lambda 赋值（在某些情况下是合理的，black 不会自动转换）
+# E202: 花括号前空格（在 f-string 中，black 不会修复字符串内容）
+# W504: 二元运算符后换行（与 W503 相反，black 可能不会自动修复）
+# F811: 重复定义（某些情况下是合理的，如 alpha101 中的重复函数定义）
+# F403: star import 警告（alpha101 等库中使用 star import 是合理的）
+# F824: global 声明未使用（某些情况下 global 声明是为了文档目的）
+# E712: 与 False 比较（某些情况下 == False 是合理的）
+#
+# F821（未定义名称）**不要**再加回 ignore：2026-08-04 发现
+# scripts/event_backtest/simulator/position.py 调用 srb_add_position_allowed /
+# should_reject_srb_add_by_shape 但从未 import，使 srb_add_position_policy 成为
+# 一启用就崩的死代码，正因 F821 被全局忽略而长期无人发现。src/ 与 scripts/ 当前
+# F821 存量为 0，保持为 0。
+ignore = E302,W292,E305,W391,E306, E501, W503, W291, W293, F401, F541, F841, E226, E402, E401, E203, E722, E201, E225, E231, F405, E741, E731, E202, W504, F811, F403, F824, E712
+max-line-length = 200
+
+# F821 存量债务（2026-08-04 打开该检查时既有）。新增文件不得进入此列表；
+# 修一个就从列表里删一个。scripts/event_backtest/ 与 src/order_management/ 已清零，
+# 不要再加进来。
+per-file-ignores =
+    scripts/backtest_execution_layer.py:F821
+    scripts/compare_optimized_vs_baseline.py:F821
+    scripts/experiment_gate_plateau_optimization.py:F821
+    scripts/monitoring/run_monitor_manifest.py:F821
+    scripts/multileg_validate_config.py:F821
+    src/data_tools/processors.py:F821
+    src/time_series_model/live/metrics_exporter.py:F821
+    src/time_series_model/pipeline/dimensionality/report_generator.py:F821
+    src/time_series_model/strategies/models/lightgbm_model.py:F821
+    tests/business_console/conftest.py:F821
+    tests/integration/test_auto_detect_integration.py:F821
+    tests/integration/test_feature_dependency_resolution.py:F821
+    tests/integration/test_feature_indicator_visualization.py:F821
+    tests/integration/test_optimization_integration.py:F821
+    tests/integration/test_rolling_train.py:F821
+    tests/integration/test_rsi_inf_full_pipeline.py:F821
+    tests/integration/test_rsi_inf_trace.py:F821
+    tests/integration/test_sr_strength_max_dependencies.py:F821

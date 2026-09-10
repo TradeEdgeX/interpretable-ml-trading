@@ -1,0 +1,56 @@
+#!/bin/bash
+#
+# Pre-commit hook to run make format and make lint before committing
+# This ensures code is properly formatted and passes linting checks
+#
+
+# Redirect output to stderr
+exec 1>&2
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+echo -e "${YELLOW}🔍 Running pre-commit checks...${NC}"
+
+# Get the project root directory (where Makefile is located)
+PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+cd "$PROJECT_ROOT" || exit 1
+
+# Check if Makefile exists
+if [ ! -f "Makefile" ]; then
+    echo -e "${RED}❌ Error: Makefile not found in project root${NC}"
+    exit 1
+fi
+
+# Run make format
+echo -e "${YELLOW}📝 Running make format...${NC}"
+if ! make format; then
+    echo -e "${RED}❌ Error: make format failed${NC}"
+    echo -e "${YELLOW}💡 Please fix formatting issues and try again${NC}"
+    exit 1
+fi
+echo -e "${GREEN}✅ Formatting check passed${NC}"
+
+# Check if there are any changes after formatting
+if ! git diff --quiet; then
+    echo -e "${YELLOW}⚠️  Code was reformatted. Please review and stage the changes:${NC}"
+    git diff --stat
+    echo -e "${YELLOW}💡 Run 'git add -u' to stage the formatting changes, then commit again${NC}"
+    exit 1
+fi
+
+# Run make lint
+echo -e "${YELLOW}🔍 Running make lint...${NC}"
+if ! make lint; then
+    echo -e "${RED}❌ Error: make lint failed${NC}"
+    echo -e "${YELLOW}💡 Please fix linting errors and try again${NC}"
+    exit 1
+fi
+echo -e "${GREEN}✅ Linting check passed${NC}"
+
+echo -e "${GREEN}✅ All pre-commit checks passed!${NC}"
+exit 0
+

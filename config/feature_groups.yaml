@@ -1,0 +1,85 @@
+# Feature groups for `mlbot diagnose feature-group-search`
+#
+# - Each group is a list of `requested_features` *nodes* (not raw output columns).
+# - Nodes must exist in `config/feature_dependencies.yaml`.
+# - Use this file to customize search space per strategy family without editing code.
+#
+# Notes:
+# - Some nodes output multiple columns (e.g. *_scene_semantic_scores_f). If you need to
+#   exclude a single column inside a node, you'll typically create a separate "selector"
+#   node in `feature_dependencies.yaml` (or split the semantic node) and reference that node here.
+#
+groups:
+  # Cheap, non-tick groups
+  kline_core:
+    - macd_atr_f
+    - rsi_f
+    - sma_200_f
+    - atr_f
+    - trend_r2_20_f
+    - bb_width_f
+    - wick_ratios_f
+
+  sr_structure_min:
+    - poc_hal_features_close_f
+    - sqs_hal_high_f
+    - sqs_hal_low_f
+    - sr_strength_max_close_f
+
+  volume_profile:
+    - volume_profile_volatility_features_f
+
+  volume_profile_scene:
+    - volume_profile_scene_semantic_scores_f
+
+  wpt_energy:
+    - wpt_volume_energy_f
+
+  wpt_scene:
+    - wpt_scene_semantic_scores_f
+
+  liquidity_void:
+    - liquidity_void_f
+
+  liquidity_void_scene:
+    - liquidity_void_scene_semantic_scores_f
+
+  compression:
+    - compression_score_f
+    - compression_energy_f
+
+  wick_scene:
+    - wick_scene_semantic_scores_f
+
+  # Tick-heavy groups
+  footprint_basic:
+    - footprint_basic_f
+
+  fp_scene:
+    - fp_imbalance_scene_semantic_scores_f
+
+  vpin_block:
+    - vpin_features_f
+
+  vpin_scene:
+    - vpin_scene_semantic_scores_f
+
+  vpin_semantic:
+    - vpin_semantic_scores_f
+
+  trade_cluster_semantic:
+    - trade_cluster_semantic_scores_f
+
+  trade_cluster_scene:
+    - trade_cluster_scene_semantic_scores_f
+
+  # DTW 形态特征组
+  dtw_reversal:
+    - dtw_features_reversal_f
+
+  dtw_trend:
+    - dtw_features_trend_f
+
+  # DTW 语义化场景（新增）
+  dtw_scene:
+    - dtw_scene_semantic_scores_f

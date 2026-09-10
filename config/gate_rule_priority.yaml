@@ -1,0 +1,65 @@
+version: 1
+name: "gate_rule_priority"
+
+# Gate规则优先级定义
+# 优先级从高到低：1 > 2 > 3 > 4
+
+# 优先级1：结构存在类（最重要）
+priority_1_structure:
+  - path_efficiency
+  - path_length
+  - dir_consistency
+  - price_dir_consistency
+
+# 优先级2：稳定性veto
+priority_2_stability:
+  - jump_risk
+  - atr_slope
+  - volatility
+
+# 优先级3：极端veto
+priority_3_extreme:
+  - deviation_z
+  - cvd
+  - cvd_change
+
+# 优先级4：其他规则
+priority_4_other:
+  - volume
+  - bb_width
+  - adx
+  - quality
+  - score
+
+# 按Archetype的规则优先级（可以覆盖全局优先级）
+archetype_priorities:
+  TrendContinuationTC:
+    - path_efficiency
+    - path_length
+    - jump_risk
+    - dir_consistency
+    - cvd
+    - volume
+    - bb_width
+  
+  TrendExpansionTE:
+    - path_efficiency
+    - jump_risk
+    - volume
+    - cvd
+    - bb_width
+  
+  FailureReversionFR:
+    - path_efficiency
+    - jump_risk
+    - cvd
+    - volume
+    - bb_width
+  
+  ExhaustionTurnET:
+    - path_efficiency
+    - path_length
+    - jump_risk
+    - cvd
+    - volume
+    - bb_width

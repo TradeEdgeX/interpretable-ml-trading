@@ -1,0 +1,23 @@
+name: Court tests
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+
+jobs:
+  court:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Research + closed-bar contracts
+        env:
+          PYTHONPATH: src
+        run: make test-court

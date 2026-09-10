@@ -1,0 +1,84 @@
+version: 1
+description: "4H 方向类系统：HighCap / Alt / Meme 分组 Token 列表（来自 docs/architecture/4H_TOKEN_UNIVERSE_GROUPS.md）"
+
+# Symbol format policy:
+# - base token list is exchange-agnostic
+# - symbols_usdt is for Binance/OKX style USDT-quoted perpetuals
+
+quote: "USDT"
+
+universe_sets:
+  starter_a:
+    groups:
+      highcap:
+        - BTC
+        - BNB
+        - ETH
+        - SOL
+        - XRP
+        - HYPE
+        # - ADA
+        # - BCH
+        # - LINK
+        # - AVAX
+        # - DOT
+        # - LTC
+        # - TON
+        # - SUI
+        # - ATOM
+        # - UNI
+
+      # alt:
+      #   - XMR
+      #   - AVAX
+      #   - DOT
+      #   - LTC
+      #   - TON
+      #   - ATOM
+      #   - ETC
+      #   - FIL
+      #   - XLM
+      #   - XTZ
+      #   - HYPE
+      #   - NEAR
+      #   - APT
+      #   - SUI
+      #   - SEI
+      #   - INJ
+      #   - ARB
+      #   - OP
+      #   - UNI
+      #   - AAVE
+      #   - MKR
+      #   - COMP
+      #   - FTM
+      #   - MANA
+      #   - SAND
+      #   - RUNE
+      #   - STX
+      #   - ICP
+      #   - DYDX
+      #   - GMX
+      #   - LDO
+      #   - CRV
+      #   - SNX
+      #   - IMX
+      #   - GALA
+      #   - ENA
+      #   - TIA
+      #   - JUP
+      #   - JTO
+      #   - PYTH
+      #   - ZK
+      #   - STRK
+
+      meme:
+        - DOGE
+        - WIF
+        - BOME
+        - BRETT
+        - POPCAT
+        - MEW
+        - PONKE
+        - TURBO
+        - NEIRO

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-10T04:48:08Z",
+  "experiments_root": "config/experiments",
+  "summary": {
+    "count": 2,
+    "by_verdict": {
+      "None": 2
+    },
+    "by_source": {
+      "missing": 2
+    },
+    "by_record_class": {
+      "open": 2
+    },
+    "invalid_count": 0
+  },
+  "invalid": [],
+  "rows": [
+    {
+      "id": "20260910_funding_fade",
+      "date": "2026-09-10",
+      "topic": "funding_fade",
+      "dir": "config/experiments/20260910_funding_fade",
+      "decision_path": "config/experiments/20260910_funding_fade/DECISION.md",
+      "verdict": null,
+      "verdict_source": "missing",
+      "strategy": "ma_cross",
+      "harness": "event_backtest",
+      "segments": [
+        "bear_2022",
+        "bull_2023_2024",
+        "recent_range_to_bear"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "funding",
+        "fade",
+        "zscore"
+      ],
+      "issues": [],
+      "record_class": "open",
+      "gate_status": "artifacts_missing",
+      "suggested_verdict": "needs-more",
+      "gate_reasons": [
+        "no capital_report.json / result.json"
+      ],
+      "evidence_stale": false,
+      "feature_store_layer": null,
+      "stale_reasons": []
+    },
+    {
+      "id": "20260910_ma50_ma200_cross",
+      "date": "2026-09-10",
+      "topic": "ma50_ma200_cross",
+      "dir": "config/experiments/20260910_ma50_ma200_cross",
+      "decision_path": "config/experiments/20260910_ma50_ma200_cross/DECISION.md",
+      "verdict": null,
+      "verdict_source": "missing",
+      "strategy": "ma_cross",
+      "harness": "event_backtest",
+      "segments": [
+        "bear_2022",
+        "bull_2023_2024",
+        "recent_range_to_bear"
+      ],
+      "kill_switch": false,
+      "kpi": {
+        "cagr": 0.036684265440023234,
+        "maxdd": -0.024294112041355922,
+        "win_rate": 0.3829787234042553,
+        "sharpe": 0.15218009105175445,
+        "calmar": 1.5100064319113835
+      },
+      "supersedes": [],
+      "tags": [
+        "ma-cross",
+        "ema-cross",
+        "golden-cross"
+      ],
+      "issues": [],
+      "record_class": "open",
+      "gate_status": "court_ok",
+      "suggested_verdict": null,
+      "gate_reasons": [],
+      "evidence_stale": false,
+      "feature_store_layer": null,
+      "stale_reasons": []
+    }
+  ],
+  "gate_summary": {
+    "count": 2,
+    "by_gate_status": {
+      "artifacts_missing": 1,
+      "court_ok": 1
+    }
+  }
+}

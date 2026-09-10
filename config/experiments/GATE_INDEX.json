@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-10T04:48:08Z",
+  "owner": "program",
+  "summary": {
+    "count": 2,
+    "by_gate_status": {
+      "artifacts_missing": 1,
+      "court_ok": 1
+    }
+  },
+  "rows": [
+    {
+      "experiment_id": "20260910_funding_fade",
+      "gate_status": "artifacts_missing",
+      "suggested_verdict": "needs-more",
+      "reasons": [
+        "no capital_report.json / result.json"
+      ],
+      "kpi_files": [],
+      "kpi": {},
+      "evidence_stale": false,
+      "feature_store_layer": null,
+      "stale_reasons": []
+    },
+    {
+      "experiment_id": "20260910_ma50_ma200_cross",
+      "gate_status": "court_ok",
+      "suggested_verdict": null,
+      "reasons": [],
+      "kpi_files": [
+        "results/ma_cross/experiments/20260910_ma50_ma200_cross/ema50_200_cross/bear_2022/capital_report.json",
+        "results/ma_cross/experiments/20260910_ma50_ma200_cross/ema50_200_cross/bear_2022/event_trades_ma_cross.csv",
+        "results/ma_cross/experiments/20260910_ma50_ma200_cross/ema50_200_cross/bull_2023_2024/capital_report.json",
+        "results/ma_cross/experiments/20260910_ma50_ma200_cross/ema50_200_cross/bull_2023_2024/event_trades_ma_cross.csv",
+        "results/ma_cross/experiments/20260910_ma50_ma200_cross/ema50_200_cross/recent_range_to_bear/capital_report.json",
+        "results/ma_cross/experiments/20260910_ma50_ma200_cross/ema50_200_cross/recent_range_to_bear/event_trades_ma_cross.csv"
+      ],
+      "kpi": {
+        "cagr": 0.036684265440023234,
+        "maxdd": -0.024294112041355922,
+        "win_rate": 0.3829787234042553,
+        "sharpe": 0.15218009105175445,
+        "calmar": 1.5100064319113835
+      },
+      "evidence_stale": false,
+      "feature_store_layer": null,
+      "stale_reasons": []
+    }
+  ]
+}

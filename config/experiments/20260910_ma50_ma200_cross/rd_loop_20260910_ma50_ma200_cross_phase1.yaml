@@ -1,0 +1,28 @@
+# Experiment scaffold — copied by `mlbot research init`
+# Replace 20260910_ma50_ma200_cross, ma_cross, 20260910, recent_6m_oos placeholders.
+
+topic: 20260910_ma50_ma200_cross
+strategy: ma_cross
+output_dir: results/rd_loop/20260910_ma50_ma200_cross
+
+# Phase 0: prepare-only or Tier-0 parquet path
+features_parquet: &parquet results/monitoring/tier0/ma_cross_20260910/features_labeled.parquet
+
+quick_layer_scans:
+  - mode: condition-set
+    features_parquet: *parquet
+    label: success_no_rr_extreme
+    layer: regime
+    out: quick_scan/phase1_condition_set.md
+
+monitor_bundle:
+  strategy: ma_cross
+  layer: regime
+  parquet: *parquet
+  out_dir: monitor_bundle
+  mode: draft
+
+# variant_grid: variants/20260910_ma50_ma200_cross_grid.yaml
+# decision_doc:
+#   topic: 20260910_ma50_ma200_cross
+#   out: decision_doc_skeleton.md

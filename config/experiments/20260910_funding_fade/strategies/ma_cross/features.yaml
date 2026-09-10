@@ -1,0 +1,6 @@
+name: funding_fade
+description: Public demo — fade extreme Binance funding z-score.
+feature_pipeline:
+  requested_features:
+    - atr_f
+    - funding_rate_features_f

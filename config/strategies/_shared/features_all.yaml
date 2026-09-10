@@ -1,0 +1,330 @@
+name: tree_core
+description:
+  Union of requested_features from bpc/tpc/me/srb for shared FeatureStore
+  builds.
+feature_pipeline:
+  requested_features:
+    - abc_macro_regime_score_f
+    - acceleration_3_f
+    - ad_line_f
+    - adosc_f
+    - adx200_f
+    - adx50_f
+    - adx_f
+    - adxr_f
+    - alpha101_ts_core_f
+    - aroon_f
+    - atr_14_f
+    - atr_21_f
+    - atr_7_f
+    - atr_f
+    - atr_percentile_f
+    - atr_ratio_f
+    - bars_since_extreme_f
+    - bb_width_f
+    - bb_width_normalized_pct_f
+    - bb_width_ratio_f
+    - bbands_f
+    - box_structure_f
+    - bpc_compression_state_f
+    - bpc_dir_consistency_multi_f
+    - bpc_dir_flip_count_f
+    - bpc_impulse_return_atr_f
+    - bpc_phase_transition_f
+    - bpc_pullback_delta_absorption_f
+    - bpc_pullback_depth_pct_f
+    - bpc_pullback_duration_f
+    - bpc_pullback_speed_f
+    - bpc_soft_phase_f
+    - bpc_volume_compression_pct_f
+    - bpt_macro_box_direction_f
+    - cci_14_f
+    - cmo_14_f
+    - compression_duration_f
+    - compression_energy_f
+    - compression_energy_x_ofi_short_f
+    - compression_energy_x_ofi_short_rank_f
+    - compression_score_f
+    - compression_to_breakout_prob_f
+    - cvd_basic_f
+    - cvd_change_5_normalized_pct_f
+    - cvd_change_5_pct_f
+    - cvd_change_features_f
+    - cvd_divergence_v2_f
+    - cvd_slope_5_f
+    - dist_to_nearest_sr_f
+    - dist_to_zz_high_atr_f
+    - dist_to_zz_high_f
+    - dist_to_zz_low_atr_f
+    - dist_to_zz_low_f
+    - dl_sequence_features_f
+    - dtw_features_breakout_f
+    - dtw_features_compression_f
+    - dtw_features_f
+    - dtw_features_reversal_f
+    - dtw_features_trend_f
+    - dtw_scene_semantic_scores_f
+    - dual_compression_f
+    - dual_exhaustion_f
+    - dual_ignition_f
+    - dmi_dir_200_f
+    - ema_100_f
+    - ema_10_f
+    - ema_1200_position_f
+    - ema_1200_slope_f
+    - ema_1200_value_f
+    - ema_200_position_f
+    - ema_200_value_f
+    - ema_20_f
+    - ema_50_f
+    - ema_5_f
+    - evt_features_f
+    - evt_x_trend_r2_f
+    - evt_x_trend_r2_rank_f
+    - exhaustion_at_liquidity_void_f
+    - extended_volatility_features_f
+    - fer_failure_signals_f
+    - footprint_basic_f
+    - fp_imbalance_exhaustion_f
+    - fp_imbalance_scene_semantic_scores_f
+    - funding_oi_crowding_f
+    - funding_rate_features_f
+    - funding_scene_semantic_scores_f
+    - garch_features_f
+    - hilbert_advanced_f
+    - hilbert_phase_f
+    - hurst_cvd_f
+    - hurst_price_f
+    - hurst_volume_f
+    - hurst_x_trend_r2_f
+    - hurst_x_trend_r2_rank_f
+    - jump_risk_pct_f
+    - kama_10_f
+    - kama_20_f
+    - kama_30_f
+    - liquidity_void_f
+    - liquidity_void_scene_semantic_scores_f
+    - liquidity_void_x_vpin_f
+    - liquidity_void_x_vpin_rank_f
+    - liquidity_void_x_wpt_risk_f
+    - liquidity_void_x_wpt_risk_rank_f
+    - macd_atr_f
+    - macdext_atr_norm_f
+    - macdext_f
+    - macdfix_atr_norm_f
+    - macdfix_f
+    - macro_tp_vwap_1200_position_f
+    - market_cap_normalized_orderflow_f
+    - me_accel_5k_split_f
+    - me_context_f
+    - me_failure_f
+    - me_gate_f
+    - me_soft_phase_f
+    - me_vwap_structure_bypass_f
+    - minus_di_f
+    - minus_di_200_f
+    - mom_10_f
+    - mom_14_f
+    - mom_5_f
+    - natr_14_f
+    - obv_f
+    - ofci_f
+    - ofci_pct_f
+    - ofi_short_f
+    - oi_features_f
+    - oi_scene_semantic_scores_f
+    - ood_score_f
+    - order_flow_all_features_f
+    - path_curvature_f
+    - path_efficiency_pct_f
+    - path_efficiency_slope_5_f
+    - path_length_pct_f
+    - plus_di_f
+    - plus_di_200_f
+    - poc_hal_features_close_f
+    - poc_hal_features_f
+    - ppo_f
+    - price_dir_consistency_pct_f
+    - price_dir_consistency_slope_5_f
+    - price_momentum_divergence_f
+    - price_range_symmetry_f
+    - range_ratio_5bar_f
+    - recent_compression_decay_f
+    - regime_state_f
+    - roc_10_f
+    - roc_20_f
+    - roc_5_f
+    - rsi_14_f
+    - rsi_21_f
+    - rsi_7_f
+    - rsi_f
+    - sar_ext_f
+    - sar_f
+    - session_features_f
+    - shd_f
+    - shd_pct_f
+    - slope_consistency_score_f
+    - sma_100_f
+    - sma_10_f
+    - sma_200_f
+    - sma_200_position_f
+    - sma_200_slope_f
+    - sma_200_value_f
+    - sma_20_f
+    - sma_50_f
+    - sma_5_f
+    - sma_slope_x_price_pos_f
+    - sma_slope_x_price_pos_rank_f
+    - spectrum_cvd_features_f
+    - spectrum_features_compression_breakout_f
+    - spectrum_features_f
+    - spectrum_features_sr_breakout_f
+    - spectrum_features_sr_reversal_f
+    - spectrum_features_trend_following_f
+    - spectrum_price_features_f
+    - spectrum_volume_features_f
+    - sqs_hal_high_f
+    - sqs_hal_high_pct_f
+    - sqs_hal_low_f
+    - sqs_hal_low_pct_f
+    - sr_strength_combined_f
+    - sr_strength_max_close_f
+    - sr_strength_max_f
+    - srb_l3_breakout_window_f
+    - srb_sr_success_breakout_f
+    - stoch_f
+    - stochf_f
+    - stochrsi_f
+    - tbr_imbalance_semantic_scores_f
+    - tbr_ma_5_f
+    - tbr_spike_f
+    - tema_10_f
+    - tema_20_f
+    - tema_30_f
+    - terminal_risk_score_f
+    - tpc_soft_phase_f
+    - trade_cluster_avg_run_ratio_features_f
+    - trade_cluster_base_aligned_features_f
+    - trade_cluster_block_features_f
+    - trade_cluster_buy_sell_avg_ratio_features_f
+    - trade_cluster_buy_sell_max_ratio_features_f
+    - trade_cluster_buy_sell_ratio_features_f
+    - trade_cluster_derived_features_f
+    - trade_cluster_entropy_features_f
+    - trade_cluster_entropy_ma_change_features_f
+    - trade_cluster_entropy_zscore_features_f
+    - trade_cluster_imbalance_ratio_ma_features_f
+    - trade_cluster_imbalance_zscore_features_f
+    - trade_cluster_max_buy_run_ma_features_f
+    - trade_cluster_max_buy_run_zscore_features_f
+    - trade_cluster_max_run_ratio_features_f
+    - trade_cluster_max_sell_run_zscore_features_f
+    - trade_cluster_net_runs_counts_features_f
+    - trade_cluster_net_runs_ma_features_f
+    - trade_cluster_net_runs_ratio_features_f
+    - trade_cluster_net_runs_zscore_features_f
+    - trade_cluster_ratio_features_f
+    - trade_cluster_run_length_features_f
+    - trade_cluster_scene_semantic_scores_f
+    - trade_cluster_semantic_scores_f
+    - trade_cluster_total_runs_ma_features_f
+    - trange_f
+    - trend_confidence_f
+    - trend_r2_20_f
+    - trend_r2_50_f
+    - trend_volatility_alignment_f
+    - trix_15_f
+    - ultosc_f
+    - unified_volume_profile_f
+    - vol_atr_features_f
+    - vol_lag_features_f
+    - vol_ma_features_f
+    - vol_mom_features_f
+    - vol_range_features_f
+    - vol_raw_features_f
+    - vol_regime_features_f
+    - vol_trend_features_f
+    - volatility_cone_position_f
+    - volatility_regime_f
+    - volatility_reversal_score_f
+    - volume_anomaly_f
+    - volume_participation_score_f
+    - volume_profile_scene_semantic_scores_f
+    - volume_profile_volatility_features_f
+    - volume_profile_vpvr_f
+    - volume_ratio_f
+    - volume_ratio_pct_f
+    - vpin_base_aligned_features_f
+    - vpin_block_features_f
+    - vpin_change_features_f
+    - vpin_derived_features_f
+    - vpin_features_f
+    - vpin_ma_max_features_f
+    - vpin_momentum_features_f
+    - vpin_quantile_features_f
+    - vpin_scene_semantic_scores_f
+    - vpin_semantic_scores_f
+    - vpin_signed_imbalance_x_trade_cluster_imbalance_f
+    - vpin_signed_imbalance_x_trade_cluster_imbalance_signed_rank_f
+    - vpin_signed_zscore_features_f
+    - vpin_spike_features_f
+    - vpin_volatility_features_f
+    - vpin_x_compression_f
+    - vpin_x_compression_rank_f
+    - vpin_x_trade_cluster_entropy_f
+    - vpin_x_trade_cluster_entropy_rank_f
+    - vpin_x_trade_cluster_max_buy_run_f
+    - vpin_x_trade_cluster_max_buy_run_rank_f
+    - vpin_x_wick_lower_f
+    - vpin_x_wick_lower_rank_f
+    - vpin_x_wick_upper_f
+    - vpin_x_wick_upper_rank_f
+    - vpin_zscore_features_f
+    - vpin_zscore_x_trade_cluster_max_buy_run_f
+    - vpin_zscore_x_trade_cluster_max_buy_run_rank_f
+    - vwap_position_f
+    - weekly_ema_200_position_f
+    - weekly_macro_cycle_exit_f
+    - wick_ratios_f
+    - wick_scene_semantic_scores_f
+    - wide_sr_swing_f
+    - willr_14_f
+    - wma_10_f
+    - wma_20_f
+    - wma_50_f
+    - wpt_cvd_fluctuation_f
+    - wpt_price_fluctuation_f
+    - wpt_price_reconstructed_f
+    - wpt_scene_semantic_scores_f
+    - wpt_volatility_features_f
+    - wpt_volume_energy_f
+    - zigzag_high_low_f
+  ensure_signal_column:
+    name: signal
+    default_value: 0
+notes:
+  "This configuration includes ALL features from feature_dependencies.yaml with
+  all dependencies resolved.
+
+
+  Usage:
+
+  1. Use this as input to factor-eval to evaluate all factors
+
+  2. Review the evaluation results and use the generated features_pool_b.yaml
+
+  3. Use feature-group-search to find optimal feature combinations
+
+
+  Total features in feature_dependencies.yaml: 290
+
+  Total requested features (with dependencies): 289
+
+
+  Note: This is self-contained - all dependencies are automatically resolved and included.
+
+  When using this file with factor-eval, it will work independently without needing
+  features.yaml.
+
+
+  Generated by: scripts/generate_all_features_yaml.py"

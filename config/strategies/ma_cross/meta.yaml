@@ -1,0 +1,23 @@
+strategy:
+  name: ma_cross-120T
+  description: >-
+    Public textbook moving-average demo (B-layer shape only).
+    Side = sign(ema_1200_position); enter when |position| >= 0.02;
+    ATR trailing stop. Not a live sleeve and not a promote candidate.
+  owner: public_demo
+  archetype: MovingAverageCross
+  timeframe: 120T
+  live_enabled: false
+  research_retained: true
+  symbol_include:
+    - BTCUSDT
+    - ETHUSDT
+    - BNBUSDT
+    - SOLUSDT
+  # Reuses the existing 120T OHLC/EMA FeatureStore layer (shared nodes, not
+  # an SRB signal pack). Demo users who rebuild FS from this pack's
+  # features.yaml get the same ema_1200_position / atr columns.
+  feature_store_layer: features_srb_120T_186d0cf9ef
+  evidence:
+    role: public-demo
+    paradigm: .cursor/rules/b-layer-strategy-archetype-paradigm.mdc

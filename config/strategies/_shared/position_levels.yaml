@@ -1,0 +1,47 @@
+# Position-management levels for A-share / HK auxiliary held positions.
+#
+# LOCKED 2026-07-08 from config/experiments/20260707_auxiliary_exit_signals/DECISION.md §7
+# (scripts/analyze_auxiliary_exit_policies.py, primary tier, 458/126 events).
+#
+# These are DETERMINISTIC position-management rulers derived arithmetically from the
+# entry (cost) price + current price + peak-since-entry. They make NO statistical
+# alpha claim, so — unlike the rejected exit_hint signals (§4) — they do NOT need a
+# Phase 2 promotion. They are advisory levels for the human to act on.
+#
+# Rationale (see DECISION.md §7.2):
+#   - deep -25% stop: near-zero mean cost (~0.6-1.5pp), keeps every winner's right
+#     tail intact, only cuts genuine collapses. "基本面没崩就不动，破位=认赔".
+#   - trailing after +20% (retrace 15% from peak): best risk-adjusted — std 33→25,
+#     win-rate up; sacrifices a little right tail to smooth equity / avoid give-back.
+#   - NO shallow stop (-8%) and NO breakeven stop: both hurt profit (§7.2, thrice
+#     falsified). Do not add them.
+
+# Catastrophic protective stop, as % from entry (always active).
+# Fallback when regime unknown or lane has no by_regime map (e.g. HK).
+catastrophic_stop_pct: -25.0
+
+# A-share: regime-adaptive hard line (20260728 cut_stop_sensitivity).
+# bear/chop: tighter cut; bull: keep wide line to preserve right tail.
+catastrophic_stop_by_regime:
+  bear: -15.0
+  bull: -25.0
+  chop: -15.0
+
+# Trailing take-profit: arm once unrealized peak reaches +trail_arm_pct, then the
+# effective stop rides up to peak * (1 - trail_retrace_pct/100).
+trail_arm_pct: 20.0
+trail_retrace_pct: 15.0
+
+# Optional partial take-profit: trim this fraction at +partial_tp_pct (rest runs).
+partial_tp_pct: 20.0
+partial_tp_fraction: 0.5
+
+# Suggested holding window (trading days) — informational, not enforced.
+# A-share locked pack is 40 trading days (20260805 exit + 2026-08-18 cycle sleeve retired).
+# HK plateaus around 30d (DECISION.md §7.1).
+target_hold_days:
+  ashare: [40, 40]
+  hk: [20, 30]
+
+# Don't actively time-cut before this (10d cuts too early — DECISION.md §1/§7.1).
+min_hold_days: 20

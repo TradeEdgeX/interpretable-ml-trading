@@ -1,0 +1,10 @@
+description: Public MA demo — side is the sign of EMA1200 position
+direction_rules:
+  - id: ma_cross_ema1200_side
+    feature: ema_1200_position
+    transform: sign
+validation:
+  require_nonzero: true
+  allowed_values:
+    - -1
+    - 1

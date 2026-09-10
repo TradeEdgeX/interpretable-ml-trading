@@ -1,0 +1,34 @@
+---
+description: Fix CI/test failures — run related tests locally before commit/push
+alwaysApply: true
+---
+
+# Fix tests → run them before push
+
+When fixing a failing CI or local test:
+
+1. **Reproduce** the failing test locally first (same node id / file).
+2. **Fix** the code or assertion.
+3. **Re-run** at least:
+   - the exact failing test, and
+   - sibling tests in the same file / nearby contract suite that assert the same config surface
+     (e.g. constitution `enabled_archetypes` → also run `test_bc_coin_constitution.py`,
+     CMS seed tests, `test_constitution_enabled_archetypes.py`).
+4. **Only then** commit and push. Do not push a “should fix CI” change without a green local run.
+
+## Anti-pattern
+
+- Edit assertion → commit → push → wait for CI to discover the next sibling failure.
+- Fix one constitution contract test and skip the U/coin / CMS registry twins.
+
+## Example (2026-07-14 SRB-only)
+
+After dropping TPC from `enabled_archetypes`, run before push:
+
+```bash
+PYTHONPATH=src python -m pytest \
+  tests/unit/test_bc_coin_constitution.py \
+  tests/business_console/test_account_summary.py::test_account_summary_seeds_registry_trend_strategies_without_local_trades \
+  tests/live_data_stream/test_constitution_enabled_archetypes.py \
+  -q
+```

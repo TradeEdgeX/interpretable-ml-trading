@@ -1,0 +1,14 @@
+experiment_id: 20260910_ma50_ma200_cross
+strategy: ma_cross
+strategies_root: config/experiments/20260910_ma50_ma200_cross/strategies
+symbols: [BTCUSDT]
+data_path: data/parquet_data
+constitution_yaml: config/constitution/constitution.yaml
+extra_argv:
+  - --feature-store-strict
+  - --fast
+segment_matrix:
+  segments: [bear_2022, bull_2023_2024, recent_range_to_bear]
+  variants:
+    - suffix: ema50_200_cross
+      output_dir: results/ma_cross/experiments/20260910_ma50_ma200_cross/ema50_200_cross

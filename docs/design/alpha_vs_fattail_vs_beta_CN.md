@@ -1,0 +1,105 @@
+# 策略定位框架：Alpha / Beta 增强 / 肥尾探测器 / 无用
+
+> 2026-07-14。缘起：TPC+SRB 组合回测发现「牛市 ΣR 几乎全来自少数叠仓右尾」，
+> 引出「抓 alpha vs 搭肥尾便车」的定位问题。本文给出四分类框架、诊断判据、
+> 当前策略分类，以及「加更多信息」的边界。
+>
+> 关联：`.cursor/rules/strategy-classification-alpha-fattail-beta.mdc`（每次设计策略必分类）。  
+> 因子/beta/alpha 口语口径与 SRB≠CTA：`docs/decisions/2026-08-17_factor_beta_alpha_srb_cta_CN.md`（§8 = 2026-08-17 晚复核：冻收割≠总排名；SRB+肥尾优于 TPC+肥尾；A 股探测器两问）。  
+> 结案：`docs/decisions/2026-07-14_strategy_classification_CN.md`  
+> 同账户/熔断/主力选型：`docs/decisions/2026-07-14_tpc_srb_single_account_and_killswitch_CN.md`  
+> B/C 跨层资金倾斜：`docs/design/bc_layer_capital_tilt_budget_rules_CN.md`  
+> 加仓档：`config/experiments/20260714_tpc_srb_add_tiers/`（**熔断污染，待复核**）  
+> 池 1/3：`config/experiments/20260714_pool_clean_ksoff/`（关熔断重测中）  
+> **2026-07-23 投入优先级：** [`2026-07-23_crypto_strategy_priorities_CN.md`](2026-07-23_crypto_strategy_priorities_CN.md)（Rolling U P0 · 横截面 500 复盘 P1 · SRC/SRF 下线）
+
+## 四种定位
+
+| 类型 | 钱从哪来 | 判据 | 该配什么 |
+|---|---|---|---|
+| **Alpha（信息/决策优势）** | 条件期望真的更好：选对进/出/不做 | 去掉每段 Top-3 赢家后**仍为正**；中位/胜率跨段稳健；相对「不交易」更好 | 可上杠杆、可独立成账户 |
+| **Beta 增强** | 市场本身在涨，你做的是**更好的择时/择区买入长持** | 去 beta 后 alpha≈0，但择时让 beta 拿得更稳/回撤更浅 | DCA、深熊吸筹、慢倾斜 |
+| **肥尾探测器 + 收割器** | 少数极端路径（大趋势右尾）；探测器命中率低但偶尔踩中起点，收割器（加仓/滚仓/长持/结构退出）把右尾榨出 | ΣR 由 Top-3 主导、去 top3 塌成负、中位为负、胜率<50%，但**总和为正且大** | 槽位/加仓/持仓期设计（不是简单 10x 名义） |
+| **无用** | 无 | 跨段 ΣΣR≈0 或负；去 top3 更差 | 退役 |
+
+**关键区分：**
+- **Alpha ≠ 把优势变成账户曲线**。弱 alpha 的策略，账户曲线可被「单槽 + 叠仓」主导成纯肥尾故事——规则没变，换个槽位规则钱就没了。
+- **探测器 vs 收割器是两个部件**：探测器=入场/regime（决定「踩没踩上」）；收割器=滚仓/加仓+槽位+结构退出（决定「踩上后吃多厚」）。**滚仓算法 = 收割器**，不是探测器。
+
+## 诊断判据（任何策略/组合都先跑这三条）
+
+1. **去 Top-3 检验**：每段 ΣR 减去前 3 大赢家后是否仍为正？→ 分离 alpha 与肥尾。
+2. **跨段一致性**：中位 R / 胜率 / 去top3-ΣR 在 bear/bull/recent 是否同号？→ 只有牛市漂亮 = beta/肥尾，不是 alpha。
+3. **机制敏感度**：同规则换「多槽/少槽」vs「加名义杠杆」，哪个对 ΣR/MaxDD 更敏感？→ 敏感于槽位 = 肥尾收割主导；敏感于筛选质量 = alpha 主导。
+
+## 当前证据（2026-07-14，5 币 canonical 三段，solo，1/3 池）
+
+| 策略 | ΣΣR | 去top3 特征 | recent 中位/胜率 | 定位 |
+|---|---|---|---|---|
+| **SRB** | +242 | bull +0.4 / recent **+12.4** | +0.39 / **63%** | **Alpha(recent 最干净) + 肥尾收割(bull)**；栈里最均衡。宇宙≠BTC-only：牛市肥尾常靠 SOL（`src_srf_btc_only_CN.md` §6） |
+| **TPC** | +226 | recent **+20.6**；bull −14 | −0.55 / 36% | **弱 Alpha(震荡) + 肥尾收割(bull)** |
+| **ME** | +27 | recent +8.6；bull/bear 负 | +1.12 / 58% | **弱 Alpha(仅 recent 窄窗)**；净贡献小 |
+| **BPC** | −1.9 | 全段去top3 负 | +0.48 / 73%(15 笔) | **基本无 edge**（仅 recent 窄窗；组合增量≈0，见 06-20 与本轮结论） |
+
+- **牛市段所有策略去 top3 都塌成负** → 牛市 P&L = 纯肥尾收割，不是 alpha。
+- **分布式 alpha 只在 recent(区间/震荡)冒出** → SRB > TPC > ME > BPC。
+
+### 其余策略：本轮通用 harness 无法定性（≠ 无用）
+
+| 策略 | 通用 event_backtest 口径 | 结论 |
+|---|---|---|
+| **spot_accum_simple** | 独立 spot 账户；8 笔，bear/bull medR>0、ΣΣR +8.9、DD≈0 | **Beta 增强**（深熊周线 EMA200 DCA + 倍数阶梯卖），非 alpha 探测；量少、右尾靠长持 |
+| **rolling_trend** | 注册进宪法后仍 **触发次数 0**（自带滚仓 U 独立引擎，信号路径未接入 PCM 通道） | **无法用本口径评**；需专用 harness，勿判「无用」 |
+
+> **2026-07-15 补记：** 即使用 B 的 `regime_only`/`event_backtest` 跑出「慢金叉袖套」数字，也**不能**据此宣称 Rolling 滚仓路径已最优或应改。Rolling 评估入口：`scripts/trend_rolling_simulate.py` / rolling 专用 pipeline（见 `docs/design/2026-07-15_where_you_are_stuck_B_vs_cross_vs_rolling_CN.md` §5.1）。
+
+| **mean_rev_box** | 同上，PCM 通道 0 触发 | 同上，需专用 harness |
+| **spectrum_box** | 同上，PCM 通道 0 触发 | 同上，需专用 harness |
+| **trend_scalp / chop_grid** | C 层 multileg / 网格，不在 event_backtest PCM 口径 | chop_grid 已有独立结案（`chop-grid-rd-closure`：dense 3L 持有，三段 ret 正、DD 浅 → **网格库存 alpha**）；trend_scalp 需专用 multileg harness |
+
+- **关键纪律**：通用 harness「0 笔」的根因是**信号未接入/未触发**（`触发次数: 0`），不是「无 edge」。要给这些策略定性必须走各自专用 harness，不能用 PCM solo 口径下的 0 笔误判为「无用」。
+
+### 槽位 1/3 vs 3/6（tpc,srb，本轮口径，佐证 B6 canonical 结论）
+
+| 段 | 1/3 ΣR / 去top3 | 3/6 ΣR / 去top3 |
+|---|---|---|
+| bear | +6.5 / −8.2 | +22 / +7.2 |
+| bull | −15 / −21 | −13 / −18 |
+| recent | **+46 / +20** | −17 / −24 |
+
+recent 决定性偏向 1/3；bear 偏 3/6 但被 recent 抵消。与 B6（1/3 +288R@17.3%DD **Pareto** 优于 3/6 +281R@25.6%DD）一致：**放宽槽位「多给机会」在 canonical 层面净亏**——多抓的肥尾抵不过熊市 DD。
+
+## 关于「加更多信息」（ETF 流入/链上等）
+
+- 量价/订单流/资金费是**拥挤**信息，难有持久独立 edge。外生数据（ETF 流、链上、稳定币增发、现货-合约 basis、期权 skew）**能带新信息**。
+- **但 ETF 流是日频、滞后** → 更适合做 **regime/慢倾斜/风险 sizing**，不适合 2h 级 entry alpha；且量价已滞后反映大部分。
+- 加信息改善的是**探测器命中率**，**解决不了收割器**（执行/仓位管理）。当前系统瓶颈更多在收割器（槽位抽签、加仓、持仓期）。
+
+## 肥尾探测器的用途 vs alpha 定位差异
+
+- **肥尾探测器/收割器**：负责「抓大趋势」。命中率天然低、中位为负，靠右尾赚钱。**定位 = 进攻性收益引擎**，风险由**槽位 + 加仓 + 持仓期 + DD 预算**控制，而不是靠高胜率。不该用「胜率/中位」评判，该用「总和 R / 尾部捕获 / MaxDD」评判。
+- **Alpha 策略**：负责「稳定、可预测、可加杠杆」的部分。用中位/胜率/去top3-ΣR 评判，跨段稳健才算数。
+- **Beta 增强**：负责「便宜地拿市场 beta」，靠择时/择区降低持有成本，不假装有 alpha。
+- **组合含义**：三者分工，不要用同一把尺子。
+
+### 两条硬纪律（反模式，永久有效）
+
+1. **把肥尾当 alpha 去优化胜率 / 中位 → 会砍右尾。**  
+   肥尾策略的钱在少数赢家；提高胜率通常等于砍掉那些赢家。应用「总 R / 尾部捕获 / MaxDD」评，不要用胜率当主 KPI。
+2. **把弱 alpha 当肥尾去拧 10x 名义 → 会放大回撤。**  
+   弱 alpha 的 edge 薄；名义杠杆放大的是波动与路径依赖，不是信息优势。弱 alpha 该配的是**更严筛选 / 独立小预算**，不是满仓 10x。
+
+### 牛市「测不到 alpha」≠「没有 alpha」
+
+牛市段去 top3 几乎全塌，是因为**肥尾收割盖过了分布式 edge**，不是证明 alpha 不存在。  
+但要精确（2026-07-14 实测，勿夸大）：**只有 recent(区间/震荡)段去top3 为正**；bear 与 bull 去top3 对 TPC/SRB **都是负**（bear 也是尾部驱动，不是分布式 alpha）。
+- 分布式 edge 只在 recent 冒出：**SRB 最干净**（中位+0.39/胜率63%/去top3 +12.4）；**TPC recent 去top3 +20.6 但中位仍−0.55/胜率36%** → 属「宽尾收割」多于纯 alpha。  
+- 结论：TPC/SRB = **弱 alpha(仅 recent) + 全段肥尾收割**；判它们要用「全段 ΣΣR / MaxDD」（TPC +226、SRB +242，都强正），**不是用胜率/中位**。  
+- **牛市更该加强收割器**（结构退出关 trailing、加仓档数/倍率、槽位在保本后放宽），而不是去「修胜率」。  
+- 当前 TPC/SRB 收割器已具备：`structural_exit: ema1200` + bull 关 trailing + `float_r_ladder` 加仓。  
+- **2026-07-14 收割器结案**（`config/experiments/20260714_tpc_srb_add_tiers/DECISION.md`）：  
+  - 真瓶颈是宪法 `max_add_times: 2`（只改 execution 多档无效）。  
+  - **牛熊双段最优 = `tiers_3`**（`[1.25,1.5,1.75]` @ R`[1,1.5,2]` + `max_add_times: 3`）：ΣΣR 37.5→74.3，熊+26、牛≈0、recent 仍强。  
+  - **本栈不要追 20 次加仓**：n20 flat/dense ΣΣR 负；深档 grow 塌槽；n8_shrink 只抬 recent 彩票、牛市仍差。  
+  - 与「别的系统加 20 次、DD≈20%」不可直接迁移——PCM 槽位 + grow 倍率会先把机会吃光。  
+- 槽位仍是另一瓶颈：`max_unprotected_symbols: 1`；B6 已证 1/3 Pareto 优于 3/6，**加仓档数 ≠ 放宽未保护槽**。

@@ -1,0 +1,10 @@
+# Detector: leave the EMA1200 dead zone (textbook, not locked).
+rules:
+  - any_of:
+      - feature: ema_1200_position
+        operator: ">="
+        value: 0.02
+      - feature: ema_1200_position
+        operator: "<="
+        value: -0.02
+    rationale: "price away from EMA1200 mid-line; avoid chop on the wire"

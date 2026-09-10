@@ -1,0 +1,10 @@
+# Enter only on the cross bar (same sentence as the README golden-cross example).
+rules:
+  - any_of:
+      - feature: ema_50_200_cross_side
+        operator: ">="
+        value: 1
+      - feature: ema_50_200_cross_side
+        operator: "<="
+        value: -1
+    rationale: "EMA50/EMA200 golden or death cross on this closed bar"

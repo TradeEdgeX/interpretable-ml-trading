@@ -1,0 +1,37 @@
+---
+description: All strategy features must come from FeatureStore; never local fallback in backtests
+alwaysApply: true
+---
+
+# FeatureStore-first
+
+Canonical: [`docs/lessons.md#features`](../../docs/lessons.md#features) · [`docs/usage.md`](../../docs/usage.md)
+
+## Rule
+
+- **All** strategy/backtest features are read from **FeatureStore** (`feature_store_strict=True`).
+- **Do not** add local `compute_*` fallbacks in backtest/diagnostic paths when a column is missing.
+- Missing column → **backfill/build FS**, then re-run.
+
+## When `features.yaml` gains a new `*_f`
+
+1. Register in `config/feature_dependencies.yaml` (if not already).
+2. **Incremental backfill** into the existing layer (do not rename layer unless intentional):
+
+```bash
+PYTHONPATH=src python scripts/build_feature_store_from_config.py \
+  --config config/strategies/<archetype> \
+  --symbols BTCUSDT,BNBUSDT,SOLUSDT \
+  --timeframe 120T \
+  --root feature_store \
+  --layer features_<archetype>_<TF>_<hash> \
+  --data-path data/parquet_data
+```
+
+- Builder detects missing output columns per month and runs **merge_mode** incremental (`+N features` only).
+- Close-only features are fast to backfill. Demo pack: `config/strategies/ma_cross`.
+
+## Anti-pattern
+
+- Removing a feature from `requested_features` to dodge strict read errors.
+- `_compute_*_column()` in backtest hot path when FS is configured.

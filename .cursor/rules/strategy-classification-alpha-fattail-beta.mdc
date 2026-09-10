@@ -1,0 +1,10 @@
+---
+description: Classify alpha / fat-tail / beta / dead before twisting knobs
+alwaysApply: true
+---
+
+# Classify first
+
+Canonical: [`docs/lessons.md#classify`](../../docs/lessons.md#classify) · [`docs/design/alpha_vs_fattail_vs_beta_CN.md`](../../docs/design/alpha_vs_fattail_vs_beta_CN.md)
+
+State the class in the conclusion. Do not use ex-Top-3 / win rate alone to kill a trend or fat-tail sleeve.

@@ -1,0 +1,10 @@
+description: Fade crowded funding — high z-score is short, low z-score is long
+direction_rules:
+  - id: funding_fade_negate_z
+    feature: funding_rate_zscore_50
+    transform: negate_sign
+validation:
+  require_nonzero: true
+  allowed_values:
+    - -1
+    - 1

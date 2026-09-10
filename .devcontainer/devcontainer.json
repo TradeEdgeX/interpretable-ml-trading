@@ -1,0 +1,34 @@
+{
+  "name": "ML Trading Dev Container",
+  "image": "hansenlovefiona017/ml_trading_bot_devcontainer:latest",
+  "runArgs": [
+    "--gpus",
+    "all",
+    "--shm-size=8gb"
+  ],
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/tmp/host-ssh,type=bind,consistency=cached"
+  ],
+  "remoteUser": "dev",
+  "containerEnv": {
+    "DEV_CONTAINER": "1",
+    "PYTHONUNBUFFERED": "1",
+    "PYTHONPATH": "/workspace/src"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "python3",
+        "python.testing.pytestEnabled": true,
+        "python.formatting.provider": "black"
+      }
+    }
+  },
+  "postCreateCommand": "sudo -H pip3 install -e . && if [ -d /tmp/host-ssh ] && [ ! -d $HOME/.ssh ]; then cp -r /tmp/host-ssh $HOME/.ssh && chmod 700 $HOME/.ssh && chmod 600 $HOME/.ssh/* 2>/dev/null || true; fi && mkdir -p $HOME/.ssh && if [ -n \"${SSH_AUTH_SOCK:-}\" ]; then printf 'Host *\\n    ForwardAgent yes\\n    IdentityAgent %s\\n    StrictHostKeyChecking no\\n' \"${SSH_AUTH_SOCK}\" > $HOME/.ssh/config; else printf 'Host *\\n    ForwardAgent yes\\n    StrictHostKeyChecking no\\n' > $HOME/.ssh/config; fi && chmod 600 $HOME/.ssh/config && mkdir -p $HOME/.config/fish && if ! grep -q 'fish_add_path ~/.local/bin' $HOME/.config/fish/config.fish 2>/dev/null; then echo 'fish_add_path ~/.local/bin' >> $HOME/.config/fish/config.fish; fi && if ! grep -q '\\.local/bin' $HOME/.bashrc 2>/dev/null; then echo 'export PATH=\"$HOME/.local/bin:$PATH\"' >> $HOME/.bashrc; fi"
+}

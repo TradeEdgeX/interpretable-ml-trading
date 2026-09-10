@@ -1,0 +1,98 @@
+version: 1
+description: |
+  日线横截面排序 universe（独立于 4H B/C 规则栈）。
+  含 crypto_4h_token_universe_groups.yaml 中已注释 token + 额外 watchlist。
+  Phase 0 build / Phase 1 IC 仅对本地有 parquet 的 symbol 生效；缺数据请：
+    mlbot data download --universe-config config/download/crypto_daily_universe.yaml --universe-set cross_section_a --start-year 2023 --start-month 1
+    mlbot data download-funding-rate / download-open-interest（同上 universe 参数）
+
+quote: USDT
+
+# Parquet coverage is auto-detected from data/parquet_data/*USDT_*.parquet at IC/build time.
+# After mlbot data download, re-run Phase 0 build (see experiment README).
+
+universe_sets:
+  cross_section_a:
+    groups:
+      # 4H starter_a highcap 活跃 + 注释 L1
+      highcap:
+        - BTC
+        - ETH
+        - BNB
+        - SOL
+        - XRP
+        - HYPE
+        # ADA retired 2026-07-10 (fundamentals / live stale bus)
+        - BCH
+        - LINK
+        - AVAX
+        - DOT
+        - LTC
+        - TON
+        - SUI
+        - ATOM
+        - UNI
+        - XMR
+        - NEAR
+        - APT
+        - SEI
+        - INJ
+        - ARB
+        - OP
+        - TRX
+        - TAO
+
+      # 4H alt 注释：DeFi / 衍生品
+      defi:
+        - AAVE
+        - MKR
+        - COMP
+        - CRV
+        - SNX
+        - LDO
+        - GMX
+        - DYDX
+        - JUP
+        - JTO
+        - RUNE
+
+      # 4H alt 注释：infra / L2 / 数据 / AI
+      infra:
+        - FIL
+        - ICP
+        - STX
+        - TIA
+        - PYTH
+        - ZK
+        - STRK
+        - AR
+        - RENDER
+        - FET
+        - WLD
+        - IMX
+
+      # 4H alt 注释：legacy / gaming / 旧叙事
+      legacy_alt:
+        - ETC
+        - XLM
+        - XTZ
+        - FTM
+        - MANA
+        - SAND
+        - GALA
+        - ENA
+
+      # 4H meme 活跃 + 高流动 meme 补充
+      meme:
+        - DOGE
+        - WIF
+        - BOME
+        - BRETT
+        - POPCAT
+        - MEW
+        - PONKE
+        - TURBO
+        - NEIRO
+        - SHIB
+        - PEPE
+        - BONK

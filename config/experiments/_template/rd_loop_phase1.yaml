@@ -1,0 +1,28 @@
+# Experiment scaffold — copied by `mlbot research init`
+# Replace {{TOPIC}}, {{STRATEGY}}, {{DATE}}, {{SEGMENT}} placeholders.
+
+topic: {{TOPIC}}
+strategy: {{STRATEGY}}
+output_dir: results/rd_loop/{{TOPIC}}
+
+# Phase 0: prepare-only or Tier-0 parquet path
+features_parquet: &parquet results/monitoring/tier0/{{STRATEGY}}_{{DATE}}/features_labeled.parquet
+
+quick_layer_scans:
+  - mode: condition-set
+    features_parquet: *parquet
+    label: success_no_rr_extreme
+    layer: regime
+    out: quick_scan/phase1_condition_set.md
+
+monitor_bundle:
+  strategy: {{STRATEGY}}
+  layer: regime
+  parquet: *parquet
+  out_dir: monitor_bundle
+  mode: draft
+
+# variant_grid: variants/{{TOPIC}}_grid.yaml
+# decision_doc:
+#   topic: {{TOPIC}}
+#   out: decision_doc_skeleton.md

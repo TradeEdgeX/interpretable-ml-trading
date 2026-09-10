@@ -1,0 +1,98 @@
+# =============================================================
+# .dockerignore — Docker 构建上下文排除
+# 构建命令: docker build -f docker/Dockerfile.live -t quant-engine .
+# 构建上下文: 仓库根目录
+# =============================================================
+
+# ---- 运行时数据（绝不打包进镜像） ----
+live/*/data/
+*.db
+data/
+results/
+models/
+feature_store/
+!src/feature_store/
+!src/feature_store/**
+src/feature_store/__pycache__/
+
+# ---- API 密钥 ----
+.env
+.env.*
+live/binance_mainnet.env
+live/binance_testnet.env
+live/server.env
+config/local/
+
+# ---- 大文件 / 模型产物 ----
+*.pkl
+*.h5
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.whl
+*.deb
+
+# ---- Git / CI ----
+.git/
+.github/
+.gitignore
+
+# ---- deploy/monitoring（Grafana 栈不进交易镜像；TG OnFailure / deploy silence 例外进镜像）----
+# Docker: 排除父目录后无法 ! 再包含子文件，必须分层 ignore + un-ignore。
+deploy/monitoring/*
+!deploy/monitoring/scripts/
+!deploy/monitoring/systemd/
+deploy/monitoring/scripts/*
+!deploy/monitoring/scripts/quant_telegram_notify.sh
+!deploy/monitoring/scripts/grafana_deploy_silence.sh
+deploy/monitoring/systemd/*
+!deploy/monitoring/systemd/quant-telegram-notify@.service
+
+# ---- 实验文档 + 文档 ----
+z实验_*/
+docs/
+reports/
+examples/
+
+# ---- Python 编译缓存 ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+# CMS SPA is built inside Dockerfile (frontend-build); never COPY host dist.
+src/mlbot_console/static/dist/
+
+# ---- 虚拟环境 ----
+venv/
+.venv/
+env/
+ENV/
+
+# ---- IDE / OS ----
+.vscode/
+.idea/
+.qoder/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ---- 测试 / Jupyter ----
+.pytest_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+*.ipynb
+
+# ---- Docker 文件本身 ----
+docker-compose*.yml
+Dockerfile
+.dockerignore
+
+# ---- 日志 ----
+*.log
+

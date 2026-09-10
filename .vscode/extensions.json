@@ -1,0 +1,12 @@
+{
+  // 推荐安装的扩展
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.black-formatter",
+    "editorconfig.editorconfig",
+    "redhat.vscode-yaml",
+    "yzhang.markdown-all-in-one"
+  ]
+}
+

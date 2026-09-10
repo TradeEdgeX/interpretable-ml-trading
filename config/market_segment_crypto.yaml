@@ -1,0 +1,45 @@
+# Crypto market segments — BTC-led regimes (daily cross-section)
+# Used by regime-split IC / event validation / CMS market_regime() alignment.
+#
+# FeatureStore currently covers ~2023-01 → 2026-03.
+# Labels follow BTC trend (not alt-specific); alts are evaluated inside each window.
+
+segments:
+  # ═══════════════════════════════════════════════════════════
+  # Bull / chop-up: ETF + post-halving advance (BTC 44k → 118k)
+  # ═══════════════════════════════════════════════════════════
+  - id: bull_etf_halving
+    label: Bull
+    regime: bull
+    start_date: "2024-01-01"
+    end_date: "2025-10-31"
+    purpose: |
+      BTC 44k→118k. ETF rally + 2024 halving + 2025 high-range grind.
+      LONG (flow/momentum) historically works on 7d/14d; SHORT vol tiers weak.
+
+  # ═══════════════════════════════════════════════════════════
+  # Bear / decline: post-ATH drawdown (BTC 110k → 65k, −40%)
+  # ═══════════════════════════════════════════════════════════
+  - id: bear_post_ath
+    label: Bear
+    regime: bear
+    start_date: "2025-11-01"
+    end_date: "2026-03-31"
+    purpose: |
+      BTC 110k→65k (−40%). SHORT vol_p90 strong on 7d/14d; LONG flow_heavy loses.
+
+  # ═══════════════════════════════════════════════════════════
+  # Full mixed window (do NOT promote on this alone — averages opposite regimes)
+  # ═══════════════════════════════════════════════════════════
+  - id: full_mixed
+    label: Mixed
+    regime: mixed
+    start_date: "2024-01-01"
+    end_date: "2026-03-31"
+    purpose: |
+      Mixed bull+bear. IC/event numbers here are contaminated by regime flip.
+      Use only as baseline; promote decisions must pass bull and/or bear alone.
+
+  # TODO: extend when FS has earlier history
+  # - bull_2023: 2023-01 → 2023-12 (16k→38k recovery)
+  # - bear_2022: 2022 FTX crash (needs older FS)

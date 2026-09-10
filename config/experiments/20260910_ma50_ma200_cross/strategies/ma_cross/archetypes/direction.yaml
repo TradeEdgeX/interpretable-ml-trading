@@ -1,0 +1,10 @@
+description: Public demo — side is the EMA50/EMA200 cross event (+1 gold / -1 death)
+direction_rules:
+  - id: ma_cross_ema50_200_side
+    feature: ema_50_200_cross_side
+    transform: sign
+validation:
+  require_nonzero: true
+  allowed_values:
+    - -1
+    - 1

@@ -1,0 +1,23 @@
+strategy:
+  name: ma_cross-120T
+  description: >-
+    Public golden-cross experiment pack.
+    Side = EMA50/EMA200 cross; exit when close breaks EMA50.
+    Not a live sleeve and not a promote candidate.
+  owner: public_demo
+  archetype: MovingAverageCross
+  timeframe: 120T
+  live_enabled: false
+  research_retained: true
+  symbol_include:
+    - BTCUSDT
+    - ETHUSDT
+    - BNBUSDT
+    - SOLUSDT
+  # Reuses the existing 120T OHLC/EMA FeatureStore layer (shared nodes, not
+  # an SRB signal pack). Demo users who rebuild FS from this pack's
+  # features.yaml get the same ema_1200_position / atr columns.
+  feature_store_layer: features_ma_cross_120T_8610a95efc
+  evidence:
+    role: public-demo
+    paradigm: .cursor/rules/b-layer-strategy-archetype-paradigm.mdc

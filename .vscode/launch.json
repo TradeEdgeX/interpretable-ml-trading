@@ -1,0 +1,70 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Docker: Train Wavelet Model",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/training/train_model_wavelet.py",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "/app/src"
+      },
+      "cwd": "/app",
+      "justMyCode": false
+    },
+    {
+      "name": "Docker: Rolling 2025 Advanced",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/rolling/monthly_rolling_2025_with_feature_management.py",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "/app/src"
+      },
+      "cwd": "/app",
+      "justMyCode": false
+    },
+    {
+      "name": "Docker: OOS Backtest",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/backtesting/oos_months.py",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "/app/src"
+      },
+      "cwd": "/app",
+      "justMyCode": false
+    },
+    {
+      "name": "Docker: Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "/app/src"
+      },
+      "cwd": "/app",
+      "justMyCode": false
+    },
+    {
+      "name": "Docker: Debug Tests",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "tests/",
+        "-v"
+      ],
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "/app/src"
+      },
+      "cwd": "/app",
+      "justMyCode": false
+    }
+  ]
+}
+

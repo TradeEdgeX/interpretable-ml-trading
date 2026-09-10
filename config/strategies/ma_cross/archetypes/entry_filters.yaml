@@ -1,0 +1,3 @@
+# Timing enhance is empty — the detector lives in prefilter.
+filters: []
+combination_mode: or

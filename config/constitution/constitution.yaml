@@ -1,0 +1,21 @@
+# Public research constitution — ma_cross only. Not a live account file.
+name: public_ma_cross
+version: 1
+kill_switch:
+  enabled: false
+  daily_loss_limit: 0.99
+  weekly_loss_limit: 0.99
+  monthly_loss_limit: 0.99
+  max_dd: 0.99
+resource_allocation:
+  enabled_archetypes:
+    - ma_cross
+  slot_count: 4
+  risk_per_slot: 0.01
+  equity_usdt: 10000
+  slot_policy:
+    enforce_single_trend_per_symbol: true
+    max_trend_slots_per_symbol: 1
+  per_strategy_limits:
+    ma_cross:
+      max_new_entries_per_day: 8

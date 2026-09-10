@@ -1,0 +1,91 @@
+provider: coingecko
+vs_currency: usd
+data_dir: data/market_cap
+cache_version: v1
+mode: static
+api_key_env: COINGECKO_API_KEY
+universe_yaml: config/download/crypto_4h_token_universe_groups.yaml
+universe_set: starter_a
+symbols:
+  BTCUSDT:
+    coingecko_id: bitcoin
+  ETHUSDT:
+    coingecko_id: ethereum
+  SOLUSDT:
+    coingecko_id: solana
+  AAVEUSDT:
+    coingecko_id: aave
+  BCHUSDT:
+    coingecko_id: bitcoin-cash
+  CRVUSDT:
+    coingecko_id: curve-dao-token
+  DYDXUSDT:
+    coingecko_id: dydx-chain
+  ENAUSDT:
+    coingecko_id: ethena
+  ETCUSDT:
+    coingecko_id: ethereum-classic
+  FILUSDT:
+    coingecko_id: filecoin
+  GALAUSDT:
+    coingecko_id: gala
+  GMXUSDT:
+    coingecko_id: gmx
+  IMXUSDT:
+    coingecko_id: immutable-x
+  JTOUSDT:
+    coingecko_id: jito-governance-token
+  JUPUSDT:
+    coingecko_id: jupiter-exchange-solana
+  LDOUSDT:
+    coingecko_id: lido-dao
+  MEWUSDT:
+    coingecko_id: cat-in-a-dogs-world
+  NEIROUSDT:
+    coingecko_id: neiro-3
+  PONKEUSDT:
+    coingecko_id: ponke
+  POPCATUSDT:
+    coingecko_id: popcat
+  PYTHUSDT:
+    coingecko_id: pyth-network
+  RUNEUSDT:
+    coingecko_id: thorchain
+  SANDUSDT:
+    coingecko_id: the-sandbox
+  SEIUSDT:
+    coingecko_id: sei-network
+  SHIBUSDT:
+    coingecko_id: shiba-inu
+  SNXUSDT:
+    coingecko_id: havven
+  STRKUSDT:
+    coingecko_id: starknet
+  STXUSDT:
+    coingecko_id: blockstack
+  SUIUSDT:
+    coingecko_id: sui
+  TIAUSDT:
+    coingecko_id: celestia
+  TONUSDT:
+    coingecko_id: the-open-network
+  TRXUSDT:
+    coingecko_id: tron
+  TURBOUSDT:
+    coingecko_id: turbo
+  UNIUSDT:
+    coingecko_id: uniswap
+  WIFUSDT:
+    coingecko_id: dogwifcoin
+  XLMUSDT:
+    coingecko_id: stellar
+  XRPUSDT:
+    coingecko_id: ripple
+  XTZUSDT:
+    coingecko_id: tezos
+  ZKUSDT:
+    coingecko_id: zksync
+  LTCUSDT:
+    coingecko_id: litecoin
+  NEARUSDT:
+    coingecko_id: near

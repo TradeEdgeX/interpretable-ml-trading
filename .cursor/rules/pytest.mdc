@@ -1,0 +1,67 @@
+---
+description: pytest conventions for ml_trading_bot — fast, isolated tests under tests/, aligned with repo layout and deps.
+globs: tests/**/*.py
+---
+# pytest (ml_trading_bot)
+
+Guidelines for this repo’s `pytest` suite. **Dependency:** `pytest` is listed in `requirements.txt`; optional extras (e.g. `pytest-mock`, `pytest-cov`) are not required unless you add them.
+
+## 1. Layout & discovery
+
+**This repo (typical):**
+
+```
+.
+├── requirements.txt
+├── src/              # importable packages (e.g. cli, config, …)
+├── scripts/          # CLI/tools; not always imported like library code
+├── tests/
+│   ├── conftest.py   # shared fixtures / paths
+│   ├── unit/
+│   ├── integration/
+│   └── …
+```
+
+- Prefer the **`src/`** tree for library code; tests live under **`tests/`** (e.g. `tests/unit/test_*.py`).
+- **`tests/__init__.py` is optional.** Many directories here omit it; pytest discovery does not require it. Add `__init__.py` only if you need package-style imports inside tests.
+
+## 2. Naming
+
+- Files: **`test_*.py`** (preferred).
+- Functions / methods: **`test_*`**. Classes: **`Test*`**.
+- Names should describe behavior (readable as a spec sentence).
+
+## 3. Imports under test
+
+Match how CI/local runs resolve imports: tests commonly use package roots from **`src/`**, e.g. `from cli.main import cli`, not `from src.cli...`.
+
+Run pytest from the **repository root** unless a script documents otherwise (so `tests/conftest.py` and path hacks stay consistent).
+
+## 4. Style & scope
+
+- **Prefer one main behavior per test**; multiple asserts are fine when they check the same outcome (e.g. CLI exit code + substring).
+- Use **`@pytest.mark.parametrize`** for tables of inputs.
+- Use **`pytest.raises`** for expected errors.
+- Prefer **`pytest` fixtures** (`conftest.py`, module fixtures) over unittest `setup_method` for shared setup.
+
+Fixture scopes: default **`function`**; use **`module`** / **`session`** only for expensive shared resources and document why.
+
+Avoid **`autouse=True`** unless the effect is clearly global and harmless.
+
+## 5. Mocking
+
+- **`unittest.mock`** (`patch`, `MagicMock`) and pytest’s **`monkeypatch`** are fine and match current deps.
+- **`pytest-mock` / `mocker` fixture:** optional nicety; only use if the dependency is added. Do not assume it is installed.
+
+## 6. Speed & isolation
+
+- Mock or stub network, exchange APIs, and heavy IO where possible.
+- Keep unit tests small; push slow paths behind markers or separate dirs if needed.
+
+## 7. Coverage
+
+- **`pytest-cov`** is optional. When used, prioritize **critical paths** (CLI contracts, pipeline steps, config loaders) over chasing a fixed percentage.
+
+## 8. Types in tests
+
+Type hints on fixtures and helpers are welcome where they clarify intent; not mandatory in every test file.

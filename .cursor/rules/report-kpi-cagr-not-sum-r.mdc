@@ -1,0 +1,10 @@
+---
+description: Headline CAGR / Calmar / WR / MaxDD / Sharpe — never Total R
+alwaysApply: true
+---
+
+# Five KPIs
+
+Canonical: [`docs/lessons.md#kpi`](../../docs/lessons.md#kpi)
+
+Do not headline Total R / ΣR / `pnl_r`.

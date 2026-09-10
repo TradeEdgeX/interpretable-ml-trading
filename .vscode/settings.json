@@ -1,0 +1,53 @@
+{
+  // 保存时自动格式化
+  "editor.formatOnSave": true,
+  // 保存时自动修复（如删除未使用的导入等）
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  },
+  // Python 格式化工具设置
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  // 其他文件类型的格式化设置
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[yaml]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[markdown]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  // Black 格式化器配置（与 Makefile 中的配置保持一致）
+  "black-formatter.args": [
+    "--line-length=88"
+  ],
+  // Python 相关设置
+  "python.defaultInterpreterPath": "python3",
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  // 文件关联
+  "files.associations": {
+    "*.yaml": "yaml",
+    "*.yml": "yaml"
+  },
+  // 排除不需要格式化的文件
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true
+  }
+}

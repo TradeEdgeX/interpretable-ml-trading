@@ -1,0 +1,5 @@
+# Shared tree-core FeatureStore config (core-4 union)
+strategy:
+  name: tree-core-120T
+  description: Shared FeatureStore layer for BPC/TPC/ME/SRB (core-4 union).
+  timeframe: 120T
