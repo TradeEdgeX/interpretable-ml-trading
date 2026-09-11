@@ -2,7 +2,7 @@
 
 **中文**: [README_CN.md](README_CN.md)
 
-**Start with the teaching site** (GitHub Pages; locally `cd website && mkdocs serve`): basics → features → framework → this golden-cross table → [gallery](website/docs/en/gallery/index.md).  
+**Start with the teaching site** ([中文](https://tradeedgex.github.io/interpretable-ml-trading/) · [English](https://tradeedgex.github.io/interpretable-ml-trading/en/); locally `cd website && mkdocs serve`): basics → features → framework → this golden-cross table → [gallery](website/docs/en/gallery/index.md).  
 Human-facing path: [`website/`](website/). Fine print and the AI still use [`docs/`](docs/README.md).
 
 You have a trading idea and you are not sure it actually works.  

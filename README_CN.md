@@ -2,7 +2,7 @@
 
 **English**: [README.md](README.md)
 
-**先读教学站**（GitHub Pages，本地也可 `cd website && mkdocs serve`）：常识 → 特征 → 框架 → 金叉对照 → [已量展厅](website/docs/zh/gallery/index.md)。  
+**先读教学站**（[中文](https://tradeedgex.github.io/interpretable-ml-trading/) · [English](https://tradeedgex.github.io/interpretable-ml-trading/en/)；本地也可 `cd website && mkdocs serve`）：常识 → 特征 → 框架 → 金叉对照 → [已量展厅](website/docs/zh/gallery/index.md)。  
 人话学习路径在 [`website/`](website/)；细则与 AI 仍翻 [`docs/`](docs/README.md)。
 
 你有一个交易的 idea，拿不准它到底有没有用。  

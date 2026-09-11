@@ -1,7 +1,6 @@
 site_name: interpretable-ml-trading
 site_description: Hypothesis validator — measure a trading sentence on locked local data
-# Set when the public Pages URL is known, e.g. https://ORG.github.io/REPO/
-site_url: ""
+site_url: https://tradeedgex.github.io/interpretable-ml-trading/
 repo_url: https://github.com/TradeEdgeX/interpretable-ml-trading
 repo_name: interpretable-ml-trading
 edit_uri: ""
@@ -102,10 +101,10 @@ extra:
   alternate:
     - name: 中文
       lang: zh
-      link: /
+      link: /interpretable-ml-trading/
     - name: English
       lang: en
-      link: /en/
+      link: /interpretable-ml-trading/en/
 
 nav:
   - 首页: index.md
