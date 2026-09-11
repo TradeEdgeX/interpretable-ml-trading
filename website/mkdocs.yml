@@ -1,0 +1,143 @@
+site_name: interpretable-ml-trading
+site_description: Hypothesis validator — measure a trading sentence on locked local data
+# Set when the public Pages URL is known, e.g. https://ORG.github.io/REPO/
+site_url: ""
+repo_url: https://github.com/TradeEdgeX/interpretable-ml-trading
+repo_name: interpretable-ml-trading
+edit_uri: ""
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  language: zh
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - content.code.copy
+    - toc.follow
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: folder
+      fallback_to_default: true
+      reconfigure_material: true
+      languages:
+        - locale: zh
+          default: true
+          name: 中文
+          build: true
+        - locale: en
+          name: English
+          build: true
+          nav_translations:
+            首页: Home
+            量化常识: Quant basics
+            策略是合同: A strategy is a contract
+            闭棒: Closed bar
+            三段日历: Three windows
+            五项 KPI: Five KPIs
+            先分类: Classify first
+            特征与因子: Features and factors
+            什么是特征: What is a feature
+            因子·特征·合同: Factor · feature · contract
+            特征五族: Five families
+            特征库优先: Feature store first
+            数学不作门: Math is not a gate
+            框架: Framework
+            本机四层: Four local layers
+            怎么选: How to choose
+            验证流程: Process
+            三种评测机: Which court
+            怎么写成假设: Write the hypothesis
+            填模板: Fill the template
+            五格: Five boxes
+            常见错误: Common mistakes
+            技术: Tech
+            为何本机测量: Why local
+            数据流与目录: Stack and paths
+            YAML 合同: YAML contract
+            命令地图: Commands map
+            谁写哪一格: Who writes what
+            怎么用: How to use
+            跟 AI 说话: Talk to the AI
+            安装与第一次: Install and first run
+            已量展厅: Gallery
+            词汇表: Glossary
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - toc:
+      permalink: true
+  - attr_list
+  - md_in_html
+
+extra:
+  alternate:
+    - name: 中文
+      lang: zh
+      link: /
+    - name: English
+      lang: en
+      link: /en/
+
+nav:
+  - 首页: index.md
+  - 量化常识:
+      - 策略是合同: quant/what-is-a-strategy.md
+      - 闭棒: quant/closed-bar.md
+      - 三段日历: quant/three-windows.md
+      - 五项 KPI: quant/five-kpis.md
+      - 先分类: quant/classify.md
+  - 特征与因子:
+      - 什么是特征: features/what-is-a-feature.md
+      - 因子·特征·合同: features/factor-vs-feature-vs-contract.md
+      - 特征五族: features/families.md
+      - 特征库优先: features/store-first.md
+      - 数学不作门: features/math-is-not-a-gate.md
+  - 框架:
+      - 本机四层: framework/four-layers.md
+      - 怎么选: framework/how-to-choose.md
+      - 验证流程: framework/process.md
+      - 三种评测机: framework/which-court.md
+  - 怎么写成假设:
+      - 填模板: design/write-the-sentence.md
+      - 五格: design/five-boxes.md
+      - 常见错误: design/common-mistakes.md
+  - 技术:
+      - 为何本机测量: tech/why-local.md
+      - 数据流与目录: tech/stack.md
+      - YAML 合同: tech/yaml-contract.md
+      - 命令地图: tech/commands-map.md
+      - 谁写哪一格: tech/who-writes-what.md
+  - 怎么用:
+      - 跟 AI 说话: use/talk-to-the-ai.md
+      - 安装与第一次: use/install-and-first-run.md
+  - 已量展厅: gallery/index.md
+  - 词汇表: glossary.md

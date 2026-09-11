@@ -1,7 +1,10 @@
 # 文档目录
 
+**人先读教学站** [`website/`](../website/)（GitHub Pages / `mkdocs serve`）。  
+这里给 **AI**、以及想自己翻细则的人。
+
 主入口在仓库根目录：[README_CN.md](../README_CN.md) · [README.md](../README.md)。  
-完整例子（金叉：网页 AI vs 本机数据 + 特征 + 尺子）写在那里。平时跟 AI 说话就行。这里是给 AI、以及想自己翻的人。
+完整例子（金叉：网页 AI vs 本机数据 + 特征 + 尺子）写在那里。平时跟 AI 说话就行。
 
 | 文 | 内容 |
 |---|---|
