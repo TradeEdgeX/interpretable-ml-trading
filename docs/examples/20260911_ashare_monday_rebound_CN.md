@@ -1,7 +1,6 @@
 # A 股周一跌、后四天涨
 
-实验：[config/experiments/20260911_ashare_monday_rebound/](../../config/experiments/20260911_ashare_monday_rebound/)  
-家族是 `ashare_monday`，结果在 `results/ashare_monday/…`。
+实验：[config/experiments/20260911_ashare_monday_rebound/](../../config/experiments/20260911_ashare_monday_rebound/)
 
 > 周一收盘下跌后做多沪深300，持有四个交易日。用 A 股自己的三段日历测。
 

@@ -1,7 +1,6 @@
 # A-share Monday down → next four sessions up
 
-Experiment: [config/experiments/20260911_ashare_monday_rebound/](../../config/experiments/20260911_ashare_monday_rebound/).  
-Family is `ashare_monday` (results under `results/ashare_monday/…`).
+Experiment: [config/experiments/20260911_ashare_monday_rebound/](../../config/experiments/20260911_ashare_monday_rebound/).
 
 > After CSI 300 Monday close is down, go long and hold four trading days. Measure on the A-share calendar.
 

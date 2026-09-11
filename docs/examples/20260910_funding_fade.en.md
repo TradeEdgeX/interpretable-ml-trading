@@ -1,9 +1,8 @@
 # Fade crowded funding
 
-Paper: [config/experiments/20260910_funding_fade/](../../config/experiments/20260910_funding_fade/)  
-Family is `funding_fade` (results under `results/funding_fade/…`). Do not edit `config/strategies/ma_cross/`.
+Paper: [config/experiments/20260910_funding_fade/](../../config/experiments/20260910_funding_fade/)
 
-Short when funding is very high, long when it is very low, exit when it normalizes. This repo can download funding (`mlbot data download-funding-rate`) and already has `funding_rate_zscore_50`. No paid chain dashboard.
+Short when funding is very high, long when it is very low, exit when it normalizes. This repo can download funding (`mlbot data download-funding-rate`) and already has `funding_rate_zscore_50`.
 
 中文：[20260910_funding_fade_CN.md](20260910_funding_fade_CN.md)
 

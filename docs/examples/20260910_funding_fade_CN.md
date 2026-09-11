@@ -1,9 +1,8 @@
 # 资金费率极端拥挤就反手
 
-实验：[config/experiments/20260910_funding_fade/](../../config/experiments/20260910_funding_fade/)  
-家族是 `funding_fade`，结果在 `results/funding_fade/…`。不要改默认练习包 `config/strategies/ma_cross/`。
+实验：[config/experiments/20260910_funding_fade/](../../config/experiments/20260910_funding_fade/)
 
-资金费率特别高就空、特别低就多，回到正常就走。费率本仓库能下（`mlbot data download-funding-rate`），特征库里已有 `funding_rate_zscore_50`，不必去买链上仪表盘。
+资金费率特别高就空、特别低就多，回到正常就走。费率本仓库能下（`mlbot data download-funding-rate`），特征库里已有 `funding_rate_zscore_50`。
 
 ---
 
