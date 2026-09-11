@@ -1,5 +1,5 @@
 experiment_id: 20260911_ashare_monday_rebound
-strategy: ma_cross
+strategy: ashare_monday
 strategies_root: config/experiments/20260911_ashare_monday_rebound/strategies
 symbols: ["000300.SH"]
 data_path: data/ashare/daily
@@ -13,4 +13,4 @@ segment_matrix:
   segments: [bear_2021, bull_924, chop_recent]
   variants:
     - suffix: monday_down
-      output_dir: results/ma_cross/experiments/20260911_ashare_monday_rebound/monday_down
+      output_dir: results/ashare_monday/experiments/20260911_ashare_monday_rebound/monday_down

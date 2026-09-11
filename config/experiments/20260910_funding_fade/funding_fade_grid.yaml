@@ -1,5 +1,5 @@
 experiment_id: 20260910_funding_fade
-strategy: ma_cross
+strategy: funding_fade
 strategies_root: config/experiments/20260910_funding_fade/strategies
 symbols: [BTCUSDT]
 data_path: data/parquet_data
@@ -11,4 +11,4 @@ segment_matrix:
   segments: [bear_2022, bull_2023_2024, recent_range_to_bear]
   variants:
     - suffix: funding_z15
-      output_dir: results/ma_cross/experiments/20260910_funding_fade/funding_z15
+      output_dir: results/funding_fade/experiments/20260910_funding_fade/funding_z15

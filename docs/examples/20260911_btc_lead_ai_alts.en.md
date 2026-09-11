@@ -1,6 +1,5 @@
 # Example: BTC surge → AI alts follow
 
-Landing: [README.md](../../README.md).  
 Experiment: [config/experiments/20260911_btc_lead_ai_alts/](../../config/experiments/20260911_btc_lead_ai_alts/).
 
 Claim class: **beta** (alts vs BTC), not point-entry alpha.  

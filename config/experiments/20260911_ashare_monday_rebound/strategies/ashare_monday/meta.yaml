@@ -1,10 +1,10 @@
 strategy:
-  name: ma_cross-1D-ashare-monday
+  name: ashare_monday-1D
   description: >-
     A-share Monday-down rebound court example (CSI 300).
     Long only after Monday down; hold 4 daily bars. Kill switch off.
   owner: public_demo
-  archetype: MovingAverageCross
+  archetype: ashare_monday
   timeframe: 1D
   live_enabled: false
   research_retained: true

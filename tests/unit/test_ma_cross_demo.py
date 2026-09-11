@@ -6,7 +6,8 @@ from pathlib import Path
 
 import yaml
 
-from src.research.harness_registry import required_harness
+from src.research.court_run import convention_results_root
+from src.research.harness_registry import event_backtest_families, required_harness
 
 _ROOT = Path(__file__).resolve().parents[2]
 _PACK = _ROOT / "config/strategies/ma_cross"
@@ -59,3 +60,15 @@ def test_ma_cross_requests_cross_feature() -> None:
 def test_ma_cross_harness_is_event_backtest() -> None:
     assert required_harness("ma_cross") == "event_backtest"
     assert required_harness("ma") == "event_backtest"
+
+
+def test_example_families_are_not_ma_cross() -> None:
+    assert required_harness("funding_fade") == "event_backtest"
+    assert required_harness("tenbagger_smallcap") == "cohort_hold"
+    families = event_backtest_families()
+    assert "ma_cross" in families
+    assert "funding_fade" in families
+    assert "tenbagger_smallcap" not in families
+    assert convention_results_root("funding_fade", "20260910_funding_fade") == (
+        "results/funding_fade/experiments/20260910_funding_fade"
+    )

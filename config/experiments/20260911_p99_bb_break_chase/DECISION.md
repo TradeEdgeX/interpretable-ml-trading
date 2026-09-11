@@ -1,6 +1,6 @@
 ---
 topic: "20260911_p99_bb_break_chase"
-strategy: "ma_cross"
+strategy: "p99_bb_chase"
 harness: event_backtest
 segments: [bear_2022, bull_2023_2024, recent_range_to_bear]
 kill_switch: false
@@ -48,7 +48,7 @@ tags: [p99, bollinger, chase, fattail]
 | 预期市况 | 拥挤动量延续；三段不该做穿。 |
 | 合同 | 回到带内或 12 根时间出场；不加仓；熔断关。闭棒。 |
 | 证伪条件 | 任一段年化 < 0，或近窗回撤深于趋势段。 |
-| 落地 | 机器：本目录 `strategies/ma_cross`。人手同一句。 |
+| 落地 | 机器：本目录 `strategies/p99_bb_chase`。人手同一句。 |
 
 ## 谱系
 
@@ -64,4 +64,4 @@ tags: [p99, bollinger, chase, fattail]
 
 出场几乎全是 `structural_exit_bb_position_lt1`（回到带内）。牛段年化为负，按证伪线已打中。判决仍留空。
 
-产物：`results/ma_cross/experiments/20260911_p99_bb_break_chase/p99_bb/{bear_2022,bull_2023_2024,recent_range_to_bear}`
+产物：`results/p99_bb_chase/experiments/20260911_p99_bb_break_chase/p99_bb/{bear_2022,bull_2023_2024,recent_range_to_bear}`

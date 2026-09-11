@@ -1,6 +1,6 @@
 ---
 topic: "20260910_funding_fade"
-strategy: "ma_cross"
+strategy: "funding_fade"
 harness: event_backtest
 segments: [bear_2022, bull_2023_2024, recent_range_to_bear]
 kill_switch: false
@@ -27,7 +27,7 @@ tags: [funding, fade, zscore]
 | 预期市况 | 费率极端拥挤的一段该回吐；熊 / 牛 / 近窗都不该把账户做穿。 |
 | 合同 | z 分数回到 0 就走（多头 z≥0，空头 z≤0）。不加仓、不摊、不跟踪止盈。 |
 | 证伪条件 | 任一段年化为负，或近窗回撤深于两个趋势段。 |
-| 落地 | 机器：本目录 `strategies/ma_cross`。人手同一句。 |
+| 落地 | 机器：本目录 `strategies/funding_fade`。人手同一句。 |
 
 ## 谱系
 
@@ -43,6 +43,6 @@ tags: [funding, fade, zscore]
 
 近窗年化为负，且最大回撤深于两个趋势段。按写好的证伪线，这句话已经被这段数字打中。判决仍留空，等人 `--declare`。
 
-产物：`results/ma_cross/experiments/20260910_funding_fade/funding_z15/bear_2022`
-产物：`results/ma_cross/experiments/20260910_funding_fade/funding_z15/bull_2023_2024`
-产物：`results/ma_cross/experiments/20260910_funding_fade/funding_z15/recent_range_to_bear`
+产物：`results/funding_fade/experiments/20260910_funding_fade/funding_z15/bear_2022`
+产物：`results/funding_fade/experiments/20260910_funding_fade/funding_z15/bull_2023_2024`
+产物：`results/funding_fade/experiments/20260910_funding_fade/funding_z15/recent_range_to_bear`

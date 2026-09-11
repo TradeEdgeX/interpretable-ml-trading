@@ -1,28 +1,13 @@
-# Example: A-share Monday down → next four sessions up
+# A-share Monday down → next four sessions up
 
-Landing: [README.md](../../README.md).  
 Experiment: [config/experiments/20260911_ashare_monday_rebound/](../../config/experiments/20260911_ashare_monday_rebound/).  
-Public family stays `ma_cross`. Do **not** edit `config/strategies/ma_cross/`.
+Family is `ashare_monday` (results under `results/ashare_monday/…`).
+
+> After CSI 300 Monday close is down, go long and hold four trading days. Measure on the A-share calendar.
 
 ---
 
-## What you tell a web AI
-
-> After a down Monday in A-shares, do the next four sessions tend to rebound?
-
-It usually narrates weekend news and Monday panic. It has no A-share segment table and no falsifier.
-
----
-
-## What you tell this repo
-
-> After CSI 300 Monday close is down, go long and hold four trading days. Treat it as emotion clearing. Measure on the A-share calendar.
-
-The AI must follow the court path below — no web essay as evidence.
-
----
-
-## Template → validate → data → FeatureStore → three windows
+## Rule
 
 | Piece | Choice |
 |---|---|
@@ -49,6 +34,6 @@ PYTHONPATH=src python -m scripts.event_backtest --variant-grid \
 | bull_924 | +0.46% | 1.52 | 50.0% | −0.30% | 0.12 | 16 |
 | chop_recent | +0.06% | 0.14 | 58.8% | −0.45% | 0.03 | 17 |
 
-All three CAGRs positive; recent Calmar is much weaker than the trend windows. **You declare.** Leave `verdict:` empty.
+All three CAGRs positive; recent Calmar is much weaker than the trend windows. Declare with `--declare`.
 
 中文：[20260911_ashare_monday_rebound_CN.md](20260911_ashare_monday_rebound_CN.md)

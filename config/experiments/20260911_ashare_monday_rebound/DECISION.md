@@ -1,6 +1,6 @@
 ---
 topic: "20260911_ashare_monday_rebound"
-strategy: "ma_cross"
+strategy: "ashare_monday"
 harness: event_backtest
 segments: [bear_2021, bull_924, chop_recent]
 kill_switch: false
@@ -48,7 +48,7 @@ A 股周一跌了，后四个交易日会涨。测一下。
 | 预期市况 | 情绪出清后收复；三段都不该把账户做穿。 |
 | 合同 | 周二开盘进、四根日线时间出场；不加仓、不摊。闭棒。 |
 | 证伪条件 | 任一段年化 < 0，或近窗回撤深于两段趋势。 |
-| 落地 | 机器：本目录 `strategies/ma_cross`。人手同一句。 |
+| 落地 | 机器：本目录 `strategies/ashare_monday`。人手同一句。 |
 
 ## 谱系
 
@@ -64,6 +64,6 @@ A 股周一跌了，后四个交易日会涨。测一下。
 
 三段年化均为正，但近窗 Calmar 明显弱于两段趋势。判决仍留空，等人 `--declare`。
 
-产物：`results/ma_cross/experiments/20260911_ashare_monday_rebound/monday_down/bear_2021`
-产物：`results/ma_cross/experiments/20260911_ashare_monday_rebound/monday_down/bull_924`
-产物：`results/ma_cross/experiments/20260911_ashare_monday_rebound/monday_down/chop_recent`
+产物：`results/ashare_monday/experiments/20260911_ashare_monday_rebound/monday_down/bear_2021`
+产物：`results/ashare_monday/experiments/20260911_ashare_monday_rebound/monday_down/bull_924`
+产物：`results/ashare_monday/experiments/20260911_ashare_monday_rebound/monday_down/chop_recent`

@@ -5,7 +5,7 @@
 
 | 文 | 内容 |
 |---|---|
-| [第二个例子：资金费率极端拥挤就反手](examples/20260910_funding_fade_CN.md) · [EN](examples/20260910_funding_fade.en.md) | 从一句话到五格、数据、特征库、YAML、三段数字 |
+| [资金费率极端拥挤就反手](examples/20260910_funding_fade_CN.md) · [EN](examples/20260910_funding_fade.en.md) | 费率 z 分数反手、回到 0 出场、三段数字 |
 | [A 股周一跌、后四天涨](examples/20260911_ashare_monday_rebound_CN.md) · [EN](examples/20260911_ashare_monday_rebound.en.md) | 日线下载、A 股三段日历、日历 alpha |
 | [BTC 大涨后 AI 山寨跟涨](examples/20260911_btc_lead_ai_alts_CN.md) · [EN](examples/20260911_btc_lead_ai_alts.en.md) | BTC 闭棒领涨 FS 列、beta 声称 |
 | [P99 大单 + 布林上轨追涨](examples/20260911_p99_bb_break_chase_CN.md) · [EN](examples/20260911_p99_bb_break_chase.en.md) | tick P99 + bb_position、肥尾右尾 |

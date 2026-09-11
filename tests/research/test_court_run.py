@@ -9,6 +9,8 @@ from src.research.court_run import (
     CourtRunError,
     argv_for_grid,
     check_runnable,
+    convention_results_root,
+    load_court_grid,
     resolve_court_grid,
     run_experiment,
     validate_court_grid,
@@ -116,6 +118,17 @@ def test_refuse_rolling(tmp_path: Path) -> None:
     _decision(exp, strategy="rolling_trend")
     with pytest.raises(CourtRunError, match="event_backtest"):
         check_runnable(exp, repo_root=tmp_path)
+
+
+def test_funding_fade_grid_is_its_own_family() -> None:
+    root = Path(__file__).resolve().parents[2]
+    grid = root / "config/experiments/20260910_funding_fade/funding_fade_grid.yaml"
+    data = load_court_grid(grid)
+    validate_court_grid(data, family="funding_fade", experiment_id="20260910_funding_fade")
+    assert data["strategy"] == "funding_fade"
+    assert data["segment_matrix"]["variants"][0]["output_dir"].startswith(
+        convention_results_root("funding_fade", "20260910_funding_fade")
+    )
 
 
 def test_refuse_trusted_without_force(tmp_path: Path) -> None:

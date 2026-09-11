@@ -50,6 +50,34 @@ _SPECS: Tuple[HarnessSpec, ...] = (
         forbid_event_backtest=True,
         notes="A-share small-cap hold panel; not the 2h event clock",
     ),
+    HarnessSpec(
+        "funding_fade",
+        "event_backtest",
+        "python -m scripts.event_backtest --variant-grid "
+        "config/experiments/20260910_funding_fade/funding_fade_grid.yaml",
+        notes="Fade funding z-score; own pack, not ma_cross",
+    ),
+    HarnessSpec(
+        "ashare_monday",
+        "event_backtest",
+        "python -m scripts.event_backtest --variant-grid "
+        "config/experiments/20260911_ashare_monday_rebound/monday_rebound_grid.yaml",
+        notes="A-share Monday rebound; own pack, not ma_cross",
+    ),
+    HarnessSpec(
+        "btc_lead_alts",
+        "event_backtest",
+        "python -m scripts.event_backtest --variant-grid "
+        "config/experiments/20260911_btc_lead_ai_alts/btc_lead_alts_grid.yaml",
+        notes="BTC prior-bar lead into AI alts; own pack, not ma_cross",
+    ),
+    HarnessSpec(
+        "p99_bb_chase",
+        "event_backtest",
+        "python -m scripts.event_backtest --variant-grid "
+        "config/experiments/20260911_p99_bb_break_chase/p99_bb_chase_grid.yaml",
+        notes="P99 notional + Bollinger chase; own pack, not ma_cross",
+    ),
 )
 
 _ALIASES: Dict[str, str] = {
@@ -122,3 +150,8 @@ def harness_mismatch_issue(family: Optional[str], harness: Optional[str]) -> Opt
 
 def list_specs() -> Tuple[HarnessSpec, ...]:
     return _SPECS
+
+
+def event_backtest_families() -> frozenset[str]:
+    """Families whose registered court is event_backtest."""
+    return frozenset(s.family for s in _SPECS if s.harness == "event_backtest")

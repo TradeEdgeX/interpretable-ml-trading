@@ -28,11 +28,14 @@ from src.research.experiment_index import (
     load_known_segments,
     read_experiment_meta,
 )
-from src.research.harness_registry import normalize_family, spec_for
+from src.research.harness_registry import (
+    event_backtest_families,
+    normalize_family,
+    spec_for,
+)
 from src.research.scorecard import CENSUS_PATH, build_scorecard_census
 
 COURT_EXIT = 2
-EVENT_BACKTEST_FAMILIES = frozenset({"ma_cross"})
 NO_RUN_GRID = (
     "run_grid.py is not the court runner. Write a unique *_grid.yaml "
     "(nested results/<family>/experiments/<id>/<variant>/<segment>/). "
@@ -183,11 +186,13 @@ def check_runnable(
     )
     family = normalize_family(meta.strategy or "")
     spec = spec_for(family) if family else None
-    if spec is None or family not in EVENT_BACKTEST_FAMILIES:
+    allowed = event_backtest_families()
+    if spec is None or family not in allowed:
         need = spec.harness if spec else "unknown"
+        names = ", ".join(sorted(allowed)) or "(none)"
         raise CourtRunError(
             f"v1 run only registered event_backtest families "
-            f"(ma_cross); {family or 'unset'} → {need}. Do not exec a hint."
+            f"({names}); {family or 'unset'} → {need}. Do not exec a hint."
         )
     if spec.harness != "event_backtest":
         raise CourtRunError(

@@ -1,5 +1,5 @@
 experiment_id: 20260911_btc_lead_ai_alts
-strategy: ma_cross
+strategy: btc_lead_alts
 strategies_root: config/experiments/20260911_btc_lead_ai_alts/strategies
 symbols: [NEARUSDT, FETUSDT, RENDERUSDT]
 data_path: data/parquet_data
@@ -12,4 +12,4 @@ segment_matrix:
   segments: [bear_2022, bull_2023_2024, recent_range_to_bear]
   variants:
     - suffix: btc_lead_3pct
-      output_dir: results/ma_cross/experiments/20260911_btc_lead_ai_alts/btc_lead_3pct
+      output_dir: results/btc_lead_alts/experiments/20260911_btc_lead_ai_alts/btc_lead_3pct

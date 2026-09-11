@@ -1,6 +1,6 @@
 ---
 topic: "20260911_btc_lead_ai_alts"
-strategy: "ma_cross"
+strategy: "btc_lead_alts"
 harness: event_backtest
 segments: [bear_2022, bull_2023_2024, recent_range_to_bear]
 kill_switch: false
@@ -48,7 +48,7 @@ BTC 先定价风险偏好，散户/主题盘后买叙事币，付钱给已在场
 | 预期市况 | 风险偏好传导；三段不该做穿。 |
 | 合同 | 时间出场 6 根 2h；不加仓；熔断关。闭棒。 |
 | 证伪条件 | 任一段年化 < 0，或近窗回撤深于趋势段。 |
-| 落地 | 机器：本目录 `strategies/ma_cross`。人手同一句。 |
+| 落地 | 机器：本目录 `strategies/btc_lead_alts`。人手同一句。 |
 
 ## 谱系
 
@@ -64,4 +64,4 @@ BTC 先定价风险偏好，散户/主题盘后买叙事币，付钱给已在场
 
 `bear_2022`：本机 tick 自 2023-01 起，无上市样本，不能靠近窗单独 promote。近窗年化为负且回撤深于牛段。判决仍留空。
 
-产物：`results/ma_cross/experiments/20260911_btc_lead_ai_alts/btc_lead_3pct/{bull_2023_2024,recent_range_to_bear}`
+产物：`results/btc_lead_alts/experiments/20260911_btc_lead_ai_alts/btc_lead_3pct/{bull_2023_2024,recent_range_to_bear}`

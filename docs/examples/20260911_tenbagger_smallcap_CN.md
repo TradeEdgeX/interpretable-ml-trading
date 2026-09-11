@@ -1,12 +1,11 @@
-# 例子：十倍股是不是都得小市值、拿三四年
+# 十倍股是不是都得小市值、拿三四年
 
-主入口：[README_CN.md](../../README_CN.md)。  
-实验纸面：[config/experiments/20260911_tenbagger_smallcap/](../../config/experiments/20260911_tenbagger_smallcap/)  
-评测机是 **cohort_hold**，不是 2h `event_backtest`。判决仍由人写。
+实验：[config/experiments/20260911_tenbagger_smallcap/](../../config/experiments/20260911_tenbagger_smallcap/)  
+评测机是 **cohort_hold**，不是 2h `event_backtest`。已 `--declare reject`。
 
 ---
 
-## 两类人
+## 能量什么
 
 | 人想做什么 | 本仓库 |
 |---|---|

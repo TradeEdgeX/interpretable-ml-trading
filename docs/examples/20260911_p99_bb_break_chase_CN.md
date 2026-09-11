@@ -1,19 +1,11 @@
-# 例子：P99 大单 + 布林上轨突破追涨
+# P99 大单 + 布林上轨突破追涨
 
-主入口：[README_CN.md](../../README_CN.md)。  
-实验：[config/experiments/20260911_p99_bb_break_chase/](../../config/experiments/20260911_p99_bb_break_chase/)。  
-公开家族仍是 `ma_cross`。
-
----
-
-## 网上的 AI vs 本仓库
-
-网上的 AI 会讲「大单吃货 + 突破上轨追涨」。  
-本仓库要：模板 → validate → FeatureStore（tick P99 + `bb_position`）→ 三段法庭。统计类是动量 / 肥尾右尾；去 Top-3 只作分类，不单独否。
+实验：[config/experiments/20260911_p99_bb_break_chase/](../../config/experiments/20260911_p99_bb_break_chase/)  
+动量 / 肥尾右尾。去 Top-3 只分类，不单独否。
 
 ---
 
-## 合同
+## 规则
 
 | 格 | 内容 |
 |---|---|
@@ -31,7 +23,7 @@
 ```bash
 PYTHONPATH=src python -m cli.main research validate 20260911_p99_bb_break_chase
 PYTHONPATH=src python scripts/build_feature_store_from_config.py \
-  --config config/experiments/20260911_p99_bb_break_chase/strategies/ma_cross \
+  --config config/experiments/20260911_p99_bb_break_chase/strategies/p99_bb_chase \
   --symbols BTCUSDT --timeframe 120T --root feature_store \
   --layer features_p99_bb_chase_120T --data-path data/parquet_data \
   --start-date 2022-01-01 --end-date 2026-05-31 --no-reuse
@@ -49,6 +41,6 @@ PYTHONPATH=src python -m scripts.event_backtest --variant-grid \
 | bull_2023_2024 | −0.25% | −0.26 | 36.4% | −0.95% | −0.10 | 22 |
 | recent_range_to_bear | +0.28% | 0.92 | 57.1% | −0.30% | 0.16 | 21 |
 
-出场几乎全是回到带内。牛段年化为负 → 证伪线打中。**判决你来写。**
+出场几乎全是回到带内。牛段年化为负，证伪线打中。判决用 `--declare`。
 
 English: [20260911_p99_bb_break_chase.en.md](20260911_p99_bb_break_chase.en.md)
