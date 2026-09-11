@@ -90,8 +90,10 @@ If you did not ask to measure, it must not download or backtest.
 
 ### More examples
 
-A second full loop (fade crowded funding; exit when the z-score returns through 0):  
-[docs/examples/20260910_funding_fade.en.md](docs/examples/20260910_funding_fade.en.md) · [中文](docs/examples/20260910_funding_fade_CN.md)
+- Fade crowded funding: [docs/examples/20260910_funding_fade.en.md](docs/examples/20260910_funding_fade.en.md) · [中文](docs/examples/20260910_funding_fade_CN.md)
+- A-share Monday down → four sessions: [docs/examples/20260911_ashare_monday_rebound.en.md](docs/examples/20260911_ashare_monday_rebound.en.md) · [中文](docs/examples/20260911_ashare_monday_rebound_CN.md)
+- BTC surge → AI alts follow: [docs/examples/20260911_btc_lead_ai_alts.en.md](docs/examples/20260911_btc_lead_ai_alts.en.md) · [中文](docs/examples/20260911_btc_lead_ai_alts_CN.md)
+- P99 large trade + Bollinger chase: [docs/examples/20260911_p99_bb_break_chase.en.md](docs/examples/20260911_p99_bb_break_chase.en.md) · [中文](docs/examples/20260911_p99_bb_break_chase_CN.md)
 
 ---
 

@@ -256,6 +256,41 @@ def data_download_open_interest(
     sys.exit(run_script("src/data_tools/download_open_interest.py", args))
 
 
+@data.command("download-ashare")
+@click.option(
+    "--symbols",
+    "-s",
+    default="000300.SH",
+    help="Comma-separated A-share codes (e.g. 000300.SH,600519)",
+)
+@click.option("--years", default=5, show_default=True, type=int)
+@click.option("--start-date", default=None, help="YYYY-MM-DD (overrides --years)")
+@click.option("--end-date", default=None, help="YYYY-MM-DD")
+@click.option("--output-dir", default="data/ashare/daily", show_default=True)
+@click.option("--no-resume", is_flag=True, help="Re-download even if parquet exists")
+def data_download_ashare(symbols, years, start_date, end_date, output_dir, no_resume):
+    """Download A-share / index daily OHLCV via AKShare (court examples only)."""
+    from src.data_tools.ashare_downloader import download_ashare_daily
+
+    syms = [s.strip() for s in str(symbols).split(",") if s.strip()]
+    stats = download_ashare_daily(
+        syms,
+        output_dir=output_dir,
+        years=int(years),
+        start_date=start_date,
+        end_date=end_date,
+        resume=not no_resume,
+    )
+    click.echo(
+        f"ashare daily: total={stats['total']} success={stats['success']} "
+        f"skipped={stats['skipped']} failed={stats['failed']} "
+        f"elapsed={stats['elapsed_sec']}s → {stats['output_dir']}"
+    )
+    if stats["failed"]:
+        click.echo(f"failed symbols: {stats['failed_symbols']}")
+        sys.exit(1)
+
+
 @data.command("pipeline")
 @click.pass_context
 @click.option("--symbols", "-s", default="BTCUSDT,ETHUSDT")

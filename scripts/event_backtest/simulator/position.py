@@ -1457,6 +1457,7 @@ class PositionSimulator:
                 ema_1200_position=ema_1200_pv,
                 ema_50_position=getattr(self, "_ema_50_position", None),
                 funding_rate_zscore_50=getattr(self, "_funding_rate_zscore_50", None),
+                bb_position=getattr(self, "_bb_position", None),
                 macro_cycle_exit_signal=self._macro_cycle_exit_signal,
                 macro_regime_score=self._macro_regime_score,
                 primary_tf_atr=self._primary_tf_atr,

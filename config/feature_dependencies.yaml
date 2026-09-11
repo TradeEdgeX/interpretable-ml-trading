@@ -27,6 +27,59 @@ features:
       high: high
       low: low
       close: close
+  weekday_monday_f:
+    module: court_example
+    compute_func: compute_weekday_monday_features_from_series
+    dependencies: []
+    required_columns:
+      - close
+    output_columns:
+      - weekday
+      - monday_return
+      - monday_down
+    category: calendar
+    description: Weekday and Monday down flag for A-share daily court examples.
+    pass_full_df: false
+    compute_params:
+      node_cache_version: v1
+    column_mappings:
+      close: close
+  btc_prior_bar_return_f:
+    module: court_example
+    compute_func: compute_btc_prior_bar_return_from_df
+    dependencies: []
+    required_columns: []
+    output_columns:
+      - btc_prior_bar_return
+    category: cross_symbol
+    description:
+      BTCUSDT prior closed-bar return aligned onto host bars (FeatureStore column,
+      not btc_roc90 inject).
+    pass_full_df: true
+    compute_params:
+      data_path: data/parquet_data
+      timeframe: 120T
+      on_missing: nan
+      node_cache_version: v1
+  bar_max_notional_p99_f:
+    module: court_example
+    compute_func: compute_bar_max_notional_p99_from_df
+    dependencies: []
+    required_columns: []
+    output_columns:
+      - bar_max_notional
+      - bar_max_notional_p99
+      - bar_max_notional_ge_p99
+    category: order_flow
+    description:
+      Within-bar max trade notional vs rolling P99. NaN when ticks are missing.
+    pass_full_df: true
+    compute_params:
+      data_path: data/parquet_data
+      lookback: 100
+      q: 0.99
+      on_missing: nan
+      node_cache_version: v1
   rsi_f:
     module: baseline
     compute_func: compute_rsi_from_series

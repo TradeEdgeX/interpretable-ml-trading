@@ -36,6 +36,10 @@ mlbot data download-funding-rate --symbols BTCUSDT \
 mlbot data download-open-interest --symbols BTCUSDT \
   --start-year 2022 --start-month 1
 
+# A-share / index daily (court examples only; no Lab aux panels)
+mlbot data download-ashare --symbols 000300.SH --start-date 2019-01-01
+# → data/ashare/daily/ ; calendar: config/market_segment_ashare.yaml
+
 mlbot feature-store build \
   --config config/strategies/ma_cross \
   --symbols BTCUSDT,ETHUSDT \

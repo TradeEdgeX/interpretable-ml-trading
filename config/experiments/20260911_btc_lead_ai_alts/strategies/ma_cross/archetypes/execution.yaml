@@ -1,0 +1,28 @@
+add_position:
+  add_size_multipliers: []
+  inherit_parent_stop: true
+  min_current_r_by_add: []
+  min_current_r_unit: atr
+  sizing_mode: fixed_multiplier
+  trigger:
+    type: float_r_ladder_only
+execution_constraints:
+  allow_add_on: false
+  min_order_interval_minutes: 120
+holding:
+  max_holding_bars: 6
+  time_stop_bars: 6
+stop_loss:
+  breakeven:
+    enabled: false
+  guardrails:
+    max_stop_pct: 0.12
+    min_stop_pct: 0.005
+  initial_r: 8.0
+  structural_exit: null
+  trailing:
+    enabled: false
+  type: trailing
+take_profit:
+  enabled: false
+version: 2

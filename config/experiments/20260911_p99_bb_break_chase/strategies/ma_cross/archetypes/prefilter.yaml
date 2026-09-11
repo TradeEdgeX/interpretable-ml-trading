@@ -1,0 +1,9 @@
+rules:
+  - feature: bar_max_notional_ge_p99
+    operator: ">="
+    value: 1.0
+    rationale: "within-bar max notional at/above rolling P99"
+  - feature: bb_position
+    operator: ">="
+    value: 1.0
+    rationale: "close at/above Bollinger upper band"

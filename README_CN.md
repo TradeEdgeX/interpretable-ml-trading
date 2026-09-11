@@ -90,8 +90,10 @@ AI 缺列时要先补特征库，不许在回测里现场编一列。
 
 ### 更多例子
 
-第二个完整过程（资金费率极端拥挤就反手，z 分数回到 0 就走）：  
-[docs/examples/20260910_funding_fade_CN.md](docs/examples/20260910_funding_fade_CN.md) · [EN](docs/examples/20260910_funding_fade.en.md)
+- 资金费率极端拥挤就反手：[docs/examples/20260910_funding_fade_CN.md](docs/examples/20260910_funding_fade_CN.md) · [EN](docs/examples/20260910_funding_fade.en.md)
+- A 股周一跌、后四天涨：[docs/examples/20260911_ashare_monday_rebound_CN.md](docs/examples/20260911_ashare_monday_rebound_CN.md) · [EN](docs/examples/20260911_ashare_monday_rebound.en.md)
+- BTC 大涨后 AI 山寨跟涨：[docs/examples/20260911_btc_lead_ai_alts_CN.md](docs/examples/20260911_btc_lead_ai_alts_CN.md) · [EN](docs/examples/20260911_btc_lead_ai_alts.en.md)
+- P99 大单 + 布林上轨追涨：[docs/examples/20260911_p99_bb_break_chase_CN.md](docs/examples/20260911_p99_bb_break_chase_CN.md) · [EN](docs/examples/20260911_p99_bb_break_chase.en.md)
 
 ---
 

@@ -38,11 +38,29 @@ def load_raw_data(
     Returns:
         DataFrame with raw OHLCV data (resampled, with _symbol column)
     """
+    from src.data_tools.ashare_downloader import (
+        is_ashare_daily_path,
+        load_ashare_daily_bars,
+    )
+
     symbol_list = [s.strip() for s in symbol.split(",") if s.strip()]
-    loader = MarketDataLoader(data_path)
     all_dfs = []
 
     for sym in symbol_list:
+        # A-share daily court path: read daily parquet directly (no tick resample).
+        if is_ashare_daily_path(data_path, sym) and str(timeframe).upper() in (
+            "1D",
+            "D",
+            "1DAY",
+        ):
+            df_single = load_ashare_daily_bars(
+                data_path, sym, start_date=start_date, end_date=end_date
+            )
+            if df_single is not None and not df_single.empty:
+                all_dfs.append(df_single)
+            continue
+
+        loader = MarketDataLoader(data_path)
         df_single = loader.load_data(
             symbol=sym, start_date=start_date, end_date=end_date, timeframe=timeframe
         )

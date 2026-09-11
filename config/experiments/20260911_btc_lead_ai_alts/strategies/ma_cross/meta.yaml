@@ -1,0 +1,16 @@
+strategy:
+  name: ma_cross-120T-btc-lead-alts
+  description: >-
+    BTC prior-bar surge then long AI alts (beta sleeve). Kill switch off.
+  owner: public_demo
+  archetype: MovingAverageCross
+  timeframe: 120T
+  live_enabled: false
+  research_retained: true
+  symbol_include:
+    - NEARUSDT
+    - FETUSDT
+    - RENDERUSDT
+  feature_store_layer: features_btc_lead_alts_120T
+  evidence:
+    role: public-demo

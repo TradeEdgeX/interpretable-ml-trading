@@ -1,0 +1,16 @@
+experiment_id: 20260911_ashare_monday_rebound
+strategy: ma_cross
+strategies_root: config/experiments/20260911_ashare_monday_rebound/strategies
+symbols: ["000300.SH"]
+data_path: data/ashare/daily
+market_segment_path: config/market_segment_ashare.yaml
+constitution_yaml: config/constitution/constitution.yaml
+extra_argv:
+  - --feature-store-strict
+  - --fast
+  - --no-kill-switch
+segment_matrix:
+  segments: [bear_2021, bull_924, chop_recent]
+  variants:
+    - suffix: monday_down
+      output_dir: results/ma_cross/experiments/20260911_ashare_monday_rebound/monday_down

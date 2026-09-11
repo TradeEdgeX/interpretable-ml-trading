@@ -1,0 +1,7 @@
+name: p99_bb_break_chase
+description: Tick P99 max notional + Bollinger position + ATR.
+feature_pipeline:
+  requested_features:
+    - atr_f
+    - bb_width_f
+    - bar_max_notional_p99_f

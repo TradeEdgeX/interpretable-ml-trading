@@ -278,6 +278,8 @@ def get_registry() -> FeatureRegistry:
 FEATURE_MODULES = [
     # Baseline features
     "src.features.time_series.baseline_features",
+    # Court-example calendar / BTC-lead / tick P99
+    "src.features.time_series.court_example_features",
     # Market-cap / cross-sectional normalization features
     "src.features.time_series.market_cap_features",
     # Funding rate features

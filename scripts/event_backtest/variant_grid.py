@@ -117,6 +117,9 @@ def _build_event_backtest_cmd(
     seg_id = run.get("segment")
     if seg_id:
         cmd += ["--seg-id", str(seg_id)]
+    seg_path = run.get("market_segment_path") or grid.get("market_segment_path")
+    if seg_path:
+        cmd += ["--market-segment-path", str(seg_path)]
     inject_scores = run.get("inject_scores") or grid.get("inject_scores")
     if inject_scores:
         inj_path = Path(str(inject_scores))

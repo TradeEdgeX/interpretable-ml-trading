@@ -1,0 +1,6 @@
+name: ashare_monday_rebound
+description: Weekday/Monday calendar features + ATR for sizing.
+feature_pipeline:
+  requested_features:
+    - atr_f
+    - weekday_monday_f

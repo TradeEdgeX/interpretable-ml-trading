@@ -1,0 +1,27 @@
+# A-share market segments — hand-labeled CSI 300 regimes (court examples).
+# Do NOT reuse crypto bear_2022 / bull_2023_2024 windows for A-share.
+
+segments:
+  - id: bear_2021
+    label: Bear
+    regime: bear
+    start_date: "2021-07-01"
+    end_date: "2022-10-31"
+    purpose: |
+      沪深300见顶后持续下跌（地产/教育/互联网监管 + 疫情）。
+
+  - id: bull_924
+    label: Bull
+    regime: bull
+    start_date: "2024-09-24"
+    end_date: "2025-05-31"
+    purpose: |
+      924 政策组合拳后的快牛。
+
+  - id: chop_recent
+    label: Chop
+    regime: chop
+    start_date: "2025-06-01"
+    end_date: "2026-09-10"
+    purpose: |
+      政策效果消化期窄幅震荡；近窗评测段。

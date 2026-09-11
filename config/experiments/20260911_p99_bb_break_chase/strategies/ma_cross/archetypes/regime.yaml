@@ -1,0 +1,13 @@
+allowed_regimes:
+  always:
+    description: P99 BB chase — no regime gate
+    match: any
+    rules:
+      - feature: atr
+        operator: ">"
+        value: 0
+allowed_sides:
+  - long
+reject_neutral: false
+side_mask:
+  enabled: false

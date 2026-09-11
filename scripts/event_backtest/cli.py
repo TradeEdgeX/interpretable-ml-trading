@@ -99,9 +99,14 @@ def main():
         default=None,
         metavar="SEGMENT_ID",
         help=(
-            "config/market_segment.yaml segment id: fills start/end when omitted "
+            "market_segment yaml segment id: fills start/end when omitted "
             "and sets MLBOT_TREND_POOL_ACTIVE_REGIME (backtest only)"
         ),
+    )
+    parser.add_argument(
+        "--market-segment-path",
+        default=None,
+        help="Override segment calendar YAML (default config/market_segment.yaml)",
     )
     parser.add_argument(
         "--live-root",
@@ -351,7 +356,8 @@ def main():
             load_market_segments,
         )
 
-        segs = load_market_segments()
+        seg_path = getattr(args, "market_segment_path", None) or "config/market_segment.yaml"
+        segs = load_market_segments(seg_path)
         sid = str(args.seg_id).strip()
         if sid not in segs:
             known = ", ".join(sorted(segs))

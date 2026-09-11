@@ -6,6 +6,9 @@
 | 文 | 内容 |
 |---|---|
 | [第二个例子：资金费率极端拥挤就反手](examples/20260910_funding_fade_CN.md) · [EN](examples/20260910_funding_fade.en.md) | 从一句话到五格、数据、特征库、YAML、三段数字 |
+| [A 股周一跌、后四天涨](examples/20260911_ashare_monday_rebound_CN.md) · [EN](examples/20260911_ashare_monday_rebound.en.md) | 日线下载、A 股三段日历、日历 alpha |
+| [BTC 大涨后 AI 山寨跟涨](examples/20260911_btc_lead_ai_alts_CN.md) · [EN](examples/20260911_btc_lead_ai_alts.en.md) | BTC 闭棒领涨 FS 列、beta 声称 |
+| [P99 大单 + 布林上轨追涨](examples/20260911_p99_bb_break_chase_CN.md) · [EN](examples/20260911_p99_bb_break_chase.en.md) | tick P99 + bb_position、肥尾右尾 |
 | [假设模板](hypothesis_template.md) · [EN](hypothesis_template.en.md) | 社会 / 数学 / 统计现象、验证标准、数据范围；AI 验模板再编排 |
 | [验证假设](hypothesis.md) · [EN](hypothesis.en.md) | 怎么写成可验证的几条、结论怎么用 |
 | [教训](lessons.md) | 闭棒、熔断、五项 KPI |

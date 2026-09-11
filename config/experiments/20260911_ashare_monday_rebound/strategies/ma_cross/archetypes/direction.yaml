@@ -1,0 +1,6 @@
+description: Always long after Monday panic
+fixed_direction: long
+direction_rules: []
+validation:
+  require_nonzero: true
+  allowed_values: [1]

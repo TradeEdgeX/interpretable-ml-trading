@@ -304,13 +304,24 @@ class EventBacktester:
     def _load_research_data(
         self, sym: str, start_date: str, end_date: str
     ) -> Tuple[pd.DataFrame, pd.DataFrame]:
-        """从研究数据目录 (data/parquet_data) 加载 1min bars + ticks
+        """从研究数据目录加载 bars + ticks。
 
-        与 compare_same_data.py 的实盘路径加载逻辑一致:
-          DataHandler.load_ohlcv(timeframe="1T") → 1min bars
-          glob {SYMBOL}_*.parquet → ticks
+        币圈: DataHandler 1T + tick parquet。
+        A 股日线: ``data/ashare/daily/{code}.parquet`` → 日棒充当 bars_1min 底盘，
+        策略 timeframe 应为 ``1D``（resample 恒等）。
         """
         data_root = Path(self.data_path)
+
+        from src.data_tools.ashare_downloader import (
+            is_ashare_daily_path,
+            load_ashare_daily_bars,
+        )
+
+        if is_ashare_daily_path(data_root, sym):
+            bars = load_ashare_daily_bars(
+                data_root, sym, start_date=start_date, end_date=end_date
+            )
+            return bars, pd.DataFrame()
 
         # 1. 加载 1min bars (resample from tick data via DataHandler)
         dh = DataHandler(str(data_root))
@@ -699,7 +710,10 @@ class EventBacktester:
                 f"  Data: {len(bars_1min)} 1min bars, {len(ticks_1min)} ticks "
                 f"({time.time()-t0:.1f}s)"
             )
-            if len(bars_1min) < 100:
+            from src.data_tools.ashare_downloader import is_ashare_daily_path
+
+            _min_bars = 20 if is_ashare_daily_path(Path(self.data_path), sym) else 100
+            if len(bars_1min) < _min_bars:
                 logger.warning(f"  {sym}: bars 不足, 跳过")
                 continue
 
@@ -1890,6 +1904,15 @@ class EventBacktester:
                     pass
             else:
                 simulator._funding_rate_zscore_50 = None
+
+            _bbp = primary_features.get("bb_position")
+            if _bbp is not None:
+                try:
+                    simulator._bb_position = float(_bbp)
+                except (TypeError, ValueError):
+                    pass
+            else:
+                simulator._bb_position = None
 
             # EMA1200 structural exit: 同步 ema_1200_position 和冻结的 EMA1200 水平
             _ev = primary_features.get("ema_1200_position")

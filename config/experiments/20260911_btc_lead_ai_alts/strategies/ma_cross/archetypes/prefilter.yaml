@@ -1,0 +1,5 @@
+rules:
+  - feature: btc_prior_bar_return
+    operator: ">="
+    value: 0.03
+    rationale: "BTC prior closed 2h bar return >= +3%"

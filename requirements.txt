@@ -57,6 +57,7 @@ python-socks[asyncio]>=2.8.0
 websockets==12.0
 aiohttp>=3.9.0
 websocket-client>=1.6.0  # sync fallback for WebSocket (used in thread bridge)
+akshare>=1.14.0  # optional: mlbot data download-ashare (A-share court examples only)
 
 # Reinforcement Learning (local research only — not in requirements-ci.txt)
 # gymnasium==0.29.1

@@ -1,0 +1,14 @@
+strategy:
+  name: ma_cross-120T-p99-bb-chase
+  description: >-
+    P99 large trade + Bollinger upper break chase on BTC 2h. Kill switch off.
+  owner: public_demo
+  archetype: MovingAverageCross
+  timeframe: 120T
+  live_enabled: false
+  research_retained: true
+  symbol_include:
+    - BTCUSDT
+  feature_store_layer: features_p99_bb_chase_120T
+  evidence:
+    role: public-demo

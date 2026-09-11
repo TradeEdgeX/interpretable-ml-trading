@@ -1,0 +1,9 @@
+# No extra hard denies on the public demo.
+schema:
+  phases:
+    - hard_gate
+    - guardrail
+  evaluation_order: hard_gate -> guardrail
+
+hard_gates: []
+guardrails: []

@@ -355,7 +355,11 @@ def main() -> None:
     }
 
     # Pre-check: verify all symbols have tick data for requested range
-    if args.start_date and args.end_date:
+    # (skip for A-share daily layout — single {symbol}.parquet, not monthly ticks)
+    from src.data_tools.ashare_downloader import is_ashare_daily_path
+
+    _ashare_daily = any(is_ashare_daily_path(args.data_path, s) for s in symbols)
+    if args.start_date and args.end_date and not _ashare_daily:
         print("\n🔍 Pre-checking tick data availability...")
         expected_months = (
             pd.date_range(start=args.start_date, end=args.end_date, freq="MS")
@@ -408,6 +412,8 @@ def main() -> None:
                 )
                 raise ValueError("\n".join(error_lines))
         print("   ✅ All symbols have complete tick data for requested range\n")
+    elif _ashare_daily:
+        print("\n🔍 A-share daily path detected — skipping tick month pre-check\n")
 
     workers = max(1, int(getattr(args, "workers", 1) or 1))
     if workers > 1 and len(symbols) > 1:

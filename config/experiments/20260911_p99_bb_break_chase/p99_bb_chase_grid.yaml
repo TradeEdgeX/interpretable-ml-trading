@@ -1,0 +1,15 @@
+experiment_id: 20260911_p99_bb_break_chase
+strategy: ma_cross
+strategies_root: config/experiments/20260911_p99_bb_break_chase/strategies
+symbols: [BTCUSDT]
+data_path: data/parquet_data
+constitution_yaml: config/constitution/constitution.yaml
+extra_argv:
+  - --feature-store-strict
+  - --fast
+  - --no-kill-switch
+segment_matrix:
+  segments: [bear_2022, bull_2023_2024, recent_range_to_bear]
+  variants:
+    - suffix: p99_bb
+      output_dir: results/ma_cross/experiments/20260911_p99_bb_break_chase/p99_bb

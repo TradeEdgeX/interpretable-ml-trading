@@ -1,0 +1,6 @@
+name: btc_lead_ai_alts
+description: BTC prior closed-bar return on alt bars + ATR.
+feature_pipeline:
+  requested_features:
+    - atr_f
+    - btc_prior_bar_return_f

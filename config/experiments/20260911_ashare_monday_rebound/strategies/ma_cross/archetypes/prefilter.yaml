@@ -1,0 +1,9 @@
+rules:
+  - feature: monday_down
+    operator: ">="
+    value: 1.0
+    rationale: "Monday closed down"
+  - feature: weekday
+    operator: "=="
+    value: 0
+    rationale: "signal bar is Monday (closed-bar)"

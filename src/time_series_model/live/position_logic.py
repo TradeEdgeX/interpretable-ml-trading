@@ -532,6 +532,7 @@ def enforce_position(
     ema_1200_position: Optional[float] = None,
     ema_50_position: Optional[float] = None,
     funding_rate_zscore_50: Optional[float] = None,
+    bb_position: Optional[float] = None,
     macro_cycle_exit_signal: Optional[float] = None,
     macro_regime_score: Optional[float] = None,
     primary_tf_atr: Optional[float] = None,
@@ -763,6 +764,21 @@ def enforce_position(
                 elif not is_long and zf <= 0.0:
                     close_reason = "structural_exit_funding_zscore0"
                     exit_price = price_close
+        except (TypeError, ValueError):
+            pass
+
+    # ── 3d4. Structural exit (back inside Bollinger band) — P99 chase demo
+    if (
+        close_reason is None
+        and str(pos.get("structural_exit") or "").strip().lower()
+        == "bb_position_lt1"
+        and bb_position is not None
+    ):
+        try:
+            bp = float(bb_position)
+            if bp == bp and is_long and bp < 1.0:
+                close_reason = "structural_exit_bb_position_lt1"
+                exit_price = price_close
         except (TypeError, ValueError):
             pass
 

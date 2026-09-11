@@ -162,10 +162,21 @@ def validate_template_text(text: str) -> TemplateReport:
     joined += "\n" + text
     if not _has_token(joined, KPI_TOKENS):
         issues.append("validation standard must name a court KPI (CAGR / Calmar / WR / MaxDD / Sharpe)")
-    if not _has_token(joined, CANONICAL_SEGMENTS) and "market_segment.yaml" not in joined:
+    if not _has_token(joined, CANONICAL_SEGMENTS) and not any(
+        tok in joined
+        for tok in (
+            "market_segment.yaml",
+            "market_segment_ashare.yaml",
+            "market_segment_crypto.yaml",
+            "bear_2021",
+            "bull_924",
+            "chop_recent",
+        )
+    ):
         issues.append(
             "data range must name canonical segments "
-            "(bear_2022 / bull_2023_2024 / recent_range_to_bear) or market_segment.yaml"
+            "(bear_2022 / bull_2023_2024 / recent_range_to_bear) "
+            "or market_segment.yaml / market_segment_ashare.yaml"
         )
     if not _has_token(slots.get("stats", "") + slots.get("boxes", ""), CLASS_TOKENS):
         issues.append("statistics must classify the claim (alpha / fat-tail / beta / 无用)")
