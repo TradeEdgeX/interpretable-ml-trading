@@ -61,7 +61,7 @@ beta 的钱来自「待在热的那一侧」，不是从同宇宙等权里抠超
 
 全部 A 股日线 + `config/industry_map_ashare.yaml`。周期 1D，再平衡周频。  
 日历：`market_segment_ashare.yaml` 的 `bear_2021` / `bull_924` / `chop_recent`。  
-评测机 **cs_panel**。未量。
+评测机 **cs_panel**。已量。
 
 ## 五格
 
@@ -76,15 +76,21 @@ beta 的钱来自「待在热的那一侧」，不是从同宇宙等权里抠超
 ## 谱系
 
 `20260911_ashare_cs_sector_cost` 已量、日频、相对等权死。  
-`20260911_ashare_cs_sector_alpha` 是多空残差，未量，不是这一句。  
-公开仓库无已结案周频板块 beta。
+`20260911_ashare_cs_sector_alpha` 是多空残差，已量、牛/震荡死。不是这一句。
 
 ## 分段结果
 
-未量。人说了测再跑。判决留空。
+人说了测。书：周频热板块前 20% 多头，再平衡日 10bp，对照现金。
+
+| 书 | bear_2021 | bull_924 | chop_recent |
+|---|---:|---:|---:|
+| 周频热板块（10bp） | +12.17% | +59.81% | +3.53% |
+| MaxDD | −23.65% | −19.98% | −25.02% |
+| 毛收益 | +15.60% | +65.69% | +7.04% |
+
+**类：beta / 板块暴露。** 对现金：三段年化都正，MaxDD 未破 −40%。对同宇宙等权：牛 −14.8pp、震荡 −27.0pp。人看完「并不比拿着全部不动更好」，`--declare reject`。
 
 ## Promote
 
-- [ ] `mlbot research validate 20260911_ashare_cs_sector_beta` 通过
-- [ ] 人说了测再跑周频书
-- [ ] `mlbot research close` 后 `--declare`
+- [x] 人说了测，周频书已跑
+- [x] `mlbot research close` 后 `--declare reject`

@@ -86,7 +86,8 @@ harness 是考试卷（时钟、成交、成本、宇宙），不是 Cursor 循�
 公开 dummy：`ma_cross` → `event_backtest`。`mlbot research harness` 先查。  
 `DECISION.md` 的 `harness:` 必须和登记表一致。用错卷子的数字不算结案。
 
-本树不再用滚仓 / 网格 / A 股专用 harness 给那些已删家族排名。
+登记过的卷子还有：`cohort_hold`（入场日长持面板）、`cs_panel`（日频横截面多因子 / 板块书）。  
+横截面怎么跑：[cs_panel_CN.md](cs_panel_CN.md)。不要用已删私有家族的卷子给那些策略排名。
 
 ---
 

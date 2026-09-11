@@ -77,16 +77,25 @@ _SPECS: Tuple[HarnessSpec, ...] = (
     HarnessSpec(
         "ashare_cs_sector_alpha",
         "cs_panel",
-        "python scripts/research/cs_sector.py",
+        "python scripts/research/cs_sector.py --mode ls --out "
+        "results/ashare_cs_sector/experiments/20260911_ashare_cs_sector_alpha",
         forbid_event_backtest=True,
         notes="Long-short sector residual; not the long-only sector paper",
     ),
     HarnessSpec(
         "ashare_cs_sector_beta",
         "cs_panel",
-        "python scripts/research/cs_sector.py",
+        "python scripts/research/cs_sector.py --mode weekly --out "
+        "results/ashare_cs_sector/experiments/20260911_ashare_cs_sector_beta",
         forbid_event_backtest=True,
         notes="Weekly sector-beta long-only vs cash; not daily vs EW",
+    ),
+    HarnessSpec(
+        "ashare_regime_jump",
+        "cs_panel",
+        "python scripts/research/regime_jump.py",
+        forbid_event_backtest=True,
+        notes="000300 +3% flip; calendar bull_924 is not the signal",
     ),
     HarnessSpec(
         "funding_fade",

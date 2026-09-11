@@ -62,7 +62,9 @@ flowchart TB
 | 合同 | 进 / 向 / 出写在实验包 YAML，不改默认 `ma_cross` | 必须是均线家族；公开练习只是 YAML 形状 |
 | 法庭 | 分窗、熔断关、五项 KPI、程序不写 `verdict` | 必须用币圈 `bear_2022`；日历跟市场走 |
 
-公开评测机是 `event_backtest`。时钟：开盘决策只读**上一根已收盘**行。细则：[lessons.md](lessons.md)。
+公开评测机默认是 `event_backtest`（一根品种、一条时间轴）。  
+横截面多因子（每天对一篮子打分）走 **`cs_panel`**：[cs_panel_CN.md](cs_panel_CN.md)。入场日长持走 `cohort_hold`。  
+`mlbot research run` 只派 `event_backtest`。时钟：开盘决策只读**上一根已收盘**行。细则：[lessons.md](lessons.md)。
 
 ---
 
@@ -105,6 +107,8 @@ mlbot research close <id>      # 人再 --declare
 **原则：** 数学点名什么，就下什么、用什么周期。不要为了「显得科学」换一层无关的数据。缺年的段写「无样本」，不能靠近窗单独结案。
 
 还没发生的故事（「下一家十倍股是谁」）没有闭棒列，**不能**当假设去量。只能量已经发生过的规则（例如入场日小市值、固定拿满年数）。那种句子要 **cohort 面板**，不是 `event_backtest`。已量例子：[examples/20260911_tenbagger_smallcap_CN.md](examples/20260911_tenbagger_smallcap_CN.md)。
+
+「每天对全市场打分、买前 20%」是**横截面**，要 **`cs_panel`**，也不是 `event_backtest`。[cs_panel_CN.md](cs_panel_CN.md)。已量句均 reject，那是能力说明，不是推荐策略。
 
 ### 3.1 声称分类（先选尺子）
 
@@ -209,6 +213,7 @@ mlbot research close <id>      # 人再 --declare
 - [examples/20260911_ashare_monday_rebound_CN.md](examples/20260911_ashare_monday_rebound_CN.md)
 - [examples/20260911_btc_lead_ai_alts_CN.md](examples/20260911_btc_lead_ai_alts_CN.md)
 - [examples/20260911_p99_bb_break_chase_CN.md](examples/20260911_p99_bb_break_chase_CN.md)
+- [cs_panel_CN.md](cs_panel_CN.md)（横截面多因子能力；已量句 reject）
 
 ---
 

@@ -62,7 +62,9 @@ flowchart TB
 | Contract | Entry / side / exit in the **experiment** pack; do not edit default `ma_cross` | Must be an MA family; the public dummy is only a YAML shape |
 | Court | Windows, kill switch off, five KPIs, program does not write `verdict` | Must use crypto `bear_2022`; the calendar follows the **market** |
 
-Public harness: `event_backtest`. Clock: decide at open using only the **previous closed** row. [lessons.md](lessons.md).
+Default public harness: `event_backtest` (one symbol, one clock).  
+Cross-section multi-factor books use **`cs_panel`**: [cs_panel.en.md](cs_panel.en.md). Entry-date holds use `cohort_hold`.  
+`mlbot research run` only dispatches `event_backtest`. Clock: decide at open using only the **previous closed** row. [lessons.md](lessons.md).
 
 ---
 
@@ -103,6 +105,8 @@ mlbot research close <id>      # then --declare
 **Rule:** download and sample what the math names. Do not switch to unrelated data to look rigorous. A window with no listing or no files is “no sample.” Do not promote on the recent window alone.
 
 A story that has not happened (“which name 10×s next”) has no closed-bar column and **cannot** be measured. Only a historical rule can (e.g. small on the entry date, hold a fixed number of years). That exam is a **cohort panel**, not `event_backtest`. Measured: [examples/20260911_tenbagger_smallcap.en.md](examples/20260911_tenbagger_smallcap.en.md).
+
+“Score the whole market each day, buy the top 20%” is a **cross-section**. That exam is **`cs_panel`**, also not `event_backtest`. [cs_panel.en.md](cs_panel.en.md). Measured sentences are reject — that documents the court, not a sleeve.
 
 ### 3.1 Claim class
 

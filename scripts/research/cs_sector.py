@@ -40,6 +40,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--basic", default="data/ashare/stock_basic/stock_basic.parquet")
     p.add_argument("--industry", default="config/industry_map_ashare.yaml")
     p.add_argument("--segments", default="config/market_segment_ashare.yaml")
+    p.add_argument("--mode", choices=("daily", "ls", "weekly"), default="daily")
     p.add_argument(
         "--out",
         default="results/ashare_cs_sector/experiments/20260911_ashare_cs_sector_cost",
@@ -50,6 +51,7 @@ def main(argv: list[str] | None = None) -> int:
         basic_path=_REPO / args.basic,
         industry_path=_REPO / args.industry,
         segments_path=_REPO / args.segments,
+        mode=args.mode,
     )
     out = _REPO / args.out
     out.mkdir(parents=True, exist_ok=True)

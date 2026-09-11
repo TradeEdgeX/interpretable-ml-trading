@@ -60,7 +60,7 @@ alpha 尺子另加一条：每段去掉残差最好的 3 个交易日后年化�
 
 全部 A 股日线 + `config/industry_map_ashare.yaml`。周期 1D。  
 日历：`market_segment_ashare.yaml` 的 `bear_2021` / `bull_924` / `chop_recent`。  
-评测机 **cs_panel**（板块多空残差书），不是 `event_backtest`。未量。
+评测机 **cs_panel**（板块多空残差书），不是 `event_backtest`。已量。
 
 ## 五格
 
@@ -79,10 +79,17 @@ alpha 尺子另加一条：每段去掉残差最好的 3 个交易日后年化�
 
 ## 分段结果
 
-未量。人说了测再跑。判决留空。
+人说了测。书：多前 20% 板块、空后 20% 板块，两边单边 10bp，对照现金。
+
+| 书 | bear_2021 | bull_924 | chop_recent |
+|---|---:|---:|---:|
+| 多空残差（10bp） | +16.78% | **−33.46%** | **−18.57%** |
+| 去 Top-3 日 | +9.48% | −42.99% | −25.80% |
+| 毛残差 | +41.31% | −17.80% | −1.46% |
+
+**类：声称 alpha，量出来无用。** 只有熊段为正；牛、震荡残差年化 ≤ 0，证伪打中。去 Top-3 后牛/震荡更负。日均两边换手合计约 0.76–0.84。
 
 ## Promote
 
-- [ ] `mlbot research validate 20260911_ashare_cs_sector_alpha` 通过
-- [ ] 人说了测再跑多空残差书
-- [ ] `mlbot research close` 后 `--declare`
+- [x] 人说了测，多空残差书已跑
+- [x] `mlbot research close` 后 `--declare reject`

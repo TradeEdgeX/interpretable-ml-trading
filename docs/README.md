@@ -10,6 +10,7 @@
 | [BTC 大涨后 AI 山寨跟涨](examples/20260911_btc_lead_ai_alts_CN.md) · [EN](examples/20260911_btc_lead_ai_alts.en.md) | BTC 闭棒领涨 FS 列、beta 声称 |
 | [P99 大单 + 布林上轨追涨](examples/20260911_p99_bb_break_chase_CN.md) · [EN](examples/20260911_p99_bb_break_chase.en.md) | tick P99 + bb_position、肥尾右尾 |
 | [十倍股 / 小市值长持（cohort）](examples/20260911_tenbagger_smallcap_CN.md) · [EN](examples/20260911_tenbagger_smallcap.en.md) | 入场日小市值长持已量；未来谁十倍不能量 |
+| [横截面多因子（cs_panel）](cs_panel_CN.md) · [EN](cs_panel.en.md) | 框架能力：日频打分 / 板块书；不是推荐策略 |
 | [A 股动量+成交额横截面](examples/20260911_ashare_cs_mom_amount_CN.md) | 两因子锁死、相对等权失败、已 reject |
 | [A 股热板块相对等权](examples/20260911_ashare_cs_sector_cost_CN.md) | 板块排序 + 10bp；相对等权不是 alpha；已 reject |
 | [假设模板](hypothesis_template.md) · [EN](hypothesis_template.en.md) | 社会 / 数学 / 统计现象、验证标准、数据范围；AI 验模板再编排 |

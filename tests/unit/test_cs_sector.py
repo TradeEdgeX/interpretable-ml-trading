@@ -4,7 +4,12 @@ from __future__ import annotations
 
 import pandas as pd
 
-from src.research.cs_sector import cost_from_turnover, load_industry, one_way_turnover
+from src.research.cs_sector import (
+    cost_from_turnover,
+    load_industry,
+    one_way_turnover,
+    week_end_dates,
+)
 
 
 def test_one_way_turnover_half_rotate():
@@ -24,3 +29,10 @@ def test_load_industry_yaml(tmp_path):
 def test_ten_bp_on_full_deploy():
     assert abs(cost_from_turnover(1.0, bp=10) - 0.001) < 1e-12
     assert abs(cost_from_turnover(0.5, bp=10) - 0.0005) < 1e-12
+
+
+def test_week_end_is_last_session():
+    days = pd.to_datetime(["2024-09-23", "2024-09-24", "2024-09-25", "2024-09-26", "2024-09-27"])
+    ends = week_end_dates(days)
+    assert pd.Timestamp("2024-09-27") in ends
+    assert pd.Timestamp("2024-09-23") not in ends

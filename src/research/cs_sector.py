@@ -26,6 +26,7 @@ from src.research.cs_panel import (
 
 COST_BP = 10.0
 MIN_SECTOR = 8
+BOT_Q = 0.20
 
 
 def one_way_turnover(prev: pd.Series, new: pd.Series) -> float:
@@ -83,6 +84,26 @@ def _sector_scores(g: pd.DataFrame) -> Optional[pd.Series]:
     return 0.5 * sec["mom_20"] + 0.5 * sec["amount_z_20"]
 
 
+def week_end_dates(dates: Iterable) -> set:
+    idx = pd.DatetimeIndex(pd.to_datetime(list(dates))).normalize().unique().sort_values()
+    if idx.empty:
+        return set()
+    iso = idx.isocalendar()
+    key = iso.year.astype(int) * 100 + iso.week.astype(int)
+    last = pd.Series(idx, index=key).groupby(level=0).max()
+    return {pd.Timestamp(x).normalize() for x in last}
+
+
+def cagr_ex_top3(rets: pd.Series) -> float:
+    r = pd.to_numeric(rets, errors="coerce").dropna()
+    if len(r) < 8:
+        return float("nan")
+    dropped = r.drop(r.nlargest(3).index)
+    if dropped.empty:
+        return float("nan")
+    return float(book_kpis(_equity(dropped))["cagr"])
+
+
 def _ew_weights(symbols: Iterable[str]) -> pd.Series:
     names = pd.Index(sorted(set(symbols)))
     if len(names) == 0:
@@ -134,7 +155,110 @@ def daily_sector_books(long: pd.DataFrame, *, top_q: float = TOP_Q, bp: float = 
     return pd.DataFrame(rows).set_index("date").sort_index()
 
 
-def segment_kpi_table(books: pd.DataFrame, segments) -> pd.DataFrame:
+def daily_sector_ls_books(long: pd.DataFrame, *, top_q: float = TOP_Q, bot_q: float = BOT_Q, bp: float = COST_BP) -> pd.DataFrame:
+    prev_long: pd.Series = pd.Series(dtype=float)
+    prev_short: pd.Series = pd.Series(dtype=float)
+    rows: List[dict] = []
+    for day, grp in long.groupby(level=0):
+        g = grp.dropna(subset=["mom_20", "amount_z_20", "book_ret", "industry", "symbol"])
+        if len(g) < MIN_NAMES:
+            continue
+        scores = _sector_scores(g)
+        if scores is None:
+            continue
+        hi = float(scores.quantile(top_q))
+        lo = float(scores.quantile(bot_q))
+        long_secs = scores.index[scores >= hi]
+        short_secs = scores.index[scores <= lo]
+        long_names = g.loc[g["industry"].isin(long_secs)]
+        short_names = g.loc[g["industry"].isin(short_secs)]
+        if long_names.empty or short_names.empty:
+            continue
+        w_l = _ew_weights(long_names["symbol"])
+        w_s = _ew_weights(short_names["symbol"])
+        ret_map = g.set_index("symbol")["book_ret"]
+        long_g = float(ret_map.reindex(w_l.index).dot(w_l))
+        short_g = float(ret_map.reindex(w_s.index).dot(w_s))
+        to_l = one_way_turnover(prev_long, w_l)
+        to_s = one_way_turnover(prev_short, w_s)
+        ls_gross = long_g - short_g
+        rows.append(
+            {
+                "date": pd.Timestamp(day).normalize(),
+                "ls_gross": ls_gross,
+                "ls_ret": ls_gross - cost_from_turnover(to_l, bp=bp) - cost_from_turnover(to_s, bp=bp),
+                "to_fac": to_l + to_s,
+                "n_long": int(len(w_l)),
+                "n_short": int(len(w_s)),
+            }
+        )
+        prev_long, prev_short = w_l, w_s
+    if not rows:
+        return pd.DataFrame()
+    return pd.DataFrame(rows).set_index("date").sort_index()
+
+
+def weekly_sector_books(long: pd.DataFrame, *, top_q: float = TOP_Q, bp: float = COST_BP) -> pd.DataFrame:
+    ends = week_end_dates(long.index.get_level_values(0).unique())
+    prev: pd.Series = pd.Series(dtype=float)
+    rows: List[dict] = []
+    for day, grp in long.groupby(level=0):
+        g = grp.dropna(subset=["mom_20", "amount_z_20", "book_ret", "industry", "symbol"])
+        if len(g) < MIN_NAMES:
+            continue
+        day_n = pd.Timestamp(day).normalize()
+        rebalance = day_n in ends
+        if rebalance:
+            scores = _sector_scores(g)
+            if scores is None:
+                continue
+            cut = float(scores.quantile(top_q))
+            picked = g.loc[g["industry"].isin(scores.index[scores >= cut])]
+            if picked.empty:
+                continue
+            w = _ew_weights(picked["symbol"])
+            to = one_way_turnover(prev, w)
+            prev = w
+        else:
+            if prev.empty:
+                continue
+            w = prev
+            to = 0.0
+        ret_map = g.set_index("symbol")["book_ret"]
+        aligned = ret_map.reindex(w.index)
+        if aligned.isna().any():
+            keep = aligned.dropna()
+            if keep.empty:
+                continue
+            w = w.reindex(keep.index)
+            w = w / float(w.sum())
+            aligned = keep
+        fac_gross = float(aligned.dot(w))
+        rows.append(
+            {
+                "date": day_n,
+                "fac_gross": fac_gross,
+                "fac_ret": fac_gross - cost_from_turnover(to, bp=bp),
+                "to_fac": float(to),
+                "n_fac": int(len(w)),
+                "rebalance": bool(rebalance),
+            }
+        )
+    if not rows:
+        return pd.DataFrame()
+    return pd.DataFrame(rows).set_index("date").sort_index()
+
+
+def segment_kpi_table(books: pd.DataFrame, segments, *, pairs=None) -> pd.DataFrame:
+    if pairs is None:
+        pairs = (
+            ("sector_top", "fac_ret"),
+            ("ew_cost", "ew_ret"),
+            ("sector_top_gross", "fac_gross"),
+            ("ew_gross", "ew_gross"),
+            ("sector_ls", "ls_ret"),
+            ("sector_ls_gross", "ls_gross"),
+        )
     rows: List[dict] = []
     for seg in segments:
         if seg["id"] not in COURT_SEGMENTS:
@@ -142,8 +266,7 @@ def segment_kpi_table(books: pd.DataFrame, segments) -> pd.DataFrame:
         sl = books.loc[(books.index >= seg["start"]) & (books.index <= seg["end"])]
         if sl.empty:
             continue
-        for group, col in (("sector_top", "fac_ret"), ("ew_cost", "ew_ret"),
-                           ("sector_top_gross", "fac_gross"), ("ew_gross", "ew_gross")):
+        for group, col in pairs:
             if col not in sl.columns:
                 continue
             kpi = book_kpis(_equity(sl[col]))
@@ -151,7 +274,10 @@ def segment_kpi_table(books: pd.DataFrame, segments) -> pd.DataFrame:
             kpi["group"] = group
             kpi["segment"] = seg["id"]
             kpi["n_days"] = int(len(sl))
-            kpi["to_mean"] = float(sl["to_fac" if "sector" in group else "to_ew"].mean())
+            to_col = "to_fac" if ("sector" in group or group.startswith("ls")) else "to_ew"
+            kpi["to_mean"] = float(sl[to_col].mean()) if to_col in sl.columns else float("nan")
+            if col in sl.columns:
+                kpi["cagr_ex_top3"] = cagr_ex_top3(sl[col])
             rows.append(kpi)
     return pd.DataFrame(rows)
 
@@ -162,6 +288,7 @@ def run_cs_sector(
     basic_path: Path,
     industry_path: Path,
     segments_path: Path,
+    mode: str = "daily",
 ) -> dict:
     from src.data_tools.ashare_baostock import fetch_stock_industry
 
@@ -186,16 +313,27 @@ def run_cs_sector(
     long = stack_panel(panel)
     # stack_panel adds market-wide score; sector book uses raw mom/amount + industry
     long = attach_industry(long, industry)
-    print(f"panel {len(panel)}; rows with industry {len(long)}", flush=True)
-    books = daily_sector_books(long)
+    print(f"panel {len(panel)}; rows with industry {len(long)}; mode={mode}", flush=True)
+    if mode == "ls":
+        books = daily_sector_ls_books(long)
+        pairs = (("sector_ls", "ls_ret"), ("sector_ls_gross", "ls_gross"))
+    elif mode == "weekly":
+        books = weekly_sector_books(long)
+        pairs = (("sector_weekly", "fac_ret"), ("sector_weekly_gross", "fac_gross"))
+    elif mode == "daily":
+        books = daily_sector_books(long)
+        pairs = None
+    else:
+        raise ValueError(f"unknown sector mode {mode!r}")
     segments = load_segments(segments_path)
-    kpis = segment_kpi_table(books, segments)
+    kpis = segment_kpi_table(books, segments, pairs=pairs)
     return {
         "coverage": {
             "universe": len(symbols),
             "panel": len(panel),
             "industry_n": int(industry.nunique()),
             "industry_pit": False,
+            "mode": mode,
         },
         "books": books,
         "kpis": kpis,
