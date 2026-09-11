@@ -39,9 +39,9 @@
 熔断关着比 edge。
 
 ### 数据范围
-品种、周期、日历。公开法庭默认
-`bear_2022` / `bull_2023_2024` / `recent_range_to_bear`
-（`config/market_segment.yaml`）。
+品种、周期、日历。怎么选（粒度 / 市场自己的三段 / 无样本）：[framework.md](framework.md) §3。  
+币圈默认 `bear_2022` / `bull_2023_2024` / `recent_range_to_bear`（`config/market_segment.yaml`）。  
+A 股用 `market_segment_ashare.yaml`，不要套币圈日期。  
 `recent_6m_oos` 不能单独结案。
 
 ## 五格

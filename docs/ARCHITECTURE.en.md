@@ -4,7 +4,8 @@
 > This repo is a hypothesis validator. Not an order ticket. Not a CLI cheat-sheet for humans.
 
 Landing: [README.md](../README.md) · [README_CN.md](../README_CN.md)  
-中文: [ARCHITECTURE.md](ARCHITECTURE.md)
+中文: [ARCHITECTURE.md](ARCHITECTURE.md)  
+Stack, how to use, how to choose TF / calendar / symbols: [framework.en.md](framework.en.md) · [中文](framework.md)
 
 ---
 
@@ -66,6 +67,21 @@ Checked on this machine: the four `mlbot` groups and `event_backtest --help` sta
 Day to day, talk to the AI. If you type by hand, use the table above. There is no `mlbot train` / `console` / `pipeline`.
 
 Flags: [usage.en.md](usage.en.md). Who writes which field: [agent/rd_playbook.md](agent/rd_playbook.md).
+
+---
+
+## Measurement stack
+
+```mermaid
+flowchart LR
+  RAW[Local data<br/>ticks / daily / funding] --> FS[FeatureStore<br/>closed-bar columns]
+  FS --> YAML[Experiment YAML<br/>entry / side / exit]
+  YAML --> EB[event_backtest<br/>windows · KS off]
+  EB --> KPI[Five KPIs]
+  KPI --> HUM[Person writes verdict]
+```
+
+Grain, timeframe, and calendar may change; do not mix markets. How to choose: [framework.en.md](framework.en.md) §3.
 
 ---
 

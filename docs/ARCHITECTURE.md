@@ -4,7 +4,8 @@
 > 本仓库是假设验证器。不是下单说明书，也不是给人手抄的命令手册。
 
 主入口：[README_CN.md](../README_CN.md) · [README.md](../README.md)  
-English: [ARCHITECTURE.en.md](ARCHITECTURE.en.md)
+English: [ARCHITECTURE.en.md](ARCHITECTURE.en.md)  
+技术栈、怎么用、周期 / 日历 / 品种怎么选：[framework.md](framework.md) · [EN](framework.en.md)
 
 ---
 
@@ -66,6 +67,21 @@ flowchart TD
 人平时跟 AI 说话即可。要自己敲，走上面这张表。没有 `mlbot train` / `console` / `pipeline`。
 
 详细开关在 [usage.md](usage.md)。谁许写哪一格在 [agent/rd_playbook.md](agent/rd_playbook.md)。
+
+---
+
+## 技术栈（测量机器）
+
+```mermaid
+flowchart LR
+  RAW[本机数据<br/>tick / 日线 / 费率] --> FS[FeatureStore<br/>闭棒列]
+  FS --> YAML[实验包 YAML<br/>进 / 向 / 出]
+  YAML --> EB[event_backtest<br/>分窗 · 熔断关]
+  EB --> KPI[五项 KPI]
+  KPI --> HUM[人写 verdict]
+```
+
+数据粒度、周期、日历都可以换，但不能混市场。怎么选见 [framework.md](framework.md) §3。
 
 ---
 
@@ -134,6 +150,7 @@ flowchart LR
 | 学习路径 | [README_CN.md](../README_CN.md) |
 | 验证假设 / 教训 | [hypothesis.md](hypothesis.md) · [hypothesis_template.md](hypothesis_template.md) · [lessons.md](lessons.md) |
 | 哲学 / 数学 / 使用 | [philosophy.md](philosophy.md) · [math.md](math.md) · [usage.md](usage.md) |
+| 框架 / 各层怎么选 | [framework.md](framework.md) · [EN](framework.en.md) |
 | 特征计算 | [features.md](features.md) · [EN](features.en.md) |
 | Court | [agent/rd_playbook.md](agent/rd_playbook.md) |
 | 定性 | [design/alpha_vs_fattail_vs_beta_CN.md](design/alpha_vs_fattail_vs_beta_CN.md) |

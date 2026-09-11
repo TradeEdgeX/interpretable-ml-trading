@@ -110,7 +110,8 @@ Download and FeatureStore commands: [docs/usage.en.md](docs/usage.en.md).
 How features are computed, order-flow / math support, and how to add a column without rebuilding the layer: [docs/features.en.md](docs/features.en.md).  
 Day to day you still say “measure this.”
 
-How the person, the instructions, and the commands share one ruler: [docs/ARCHITECTURE.en.md](docs/ARCHITECTURE.en.md).
+How the person, the instructions, and the commands share one ruler: [docs/ARCHITECTURE.en.md](docs/ARCHITECTURE.en.md).  
+Stack, how to use, and how to choose timeframe / calendar / symbols (with the examples): [docs/framework.en.md](docs/framework.en.md).
 
 ---
 

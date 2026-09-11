@@ -110,7 +110,8 @@ pip install -e .[dev]
 特征怎么算、订单流 / 数学特征、加一列怎么复用旧层：[docs/features.md](docs/features.md)。  
 平时仍是跟 AI 说「测一下」，不用自己敲。
 
-人和 AI、指令、命令怎么接成一条尺子，见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。
+人和 AI、指令、命令怎么接成一条尺子，见 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)。  
+技术栈、使用流程、周期 / 日历 / 品种怎么选（对照金叉和后面几个例子）：[docs/framework.md](docs/framework.md)。
 
 ---
 
