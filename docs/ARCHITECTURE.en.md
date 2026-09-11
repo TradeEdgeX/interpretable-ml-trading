@@ -122,4 +122,6 @@ flowchart LR
 | `scripts/event_backtest/` | Event backtest |
 | `config/strategies/ma_cross/` | Public dummy |
 
+Feature compute, order flow, incremental columns: [features.en.md](features.en.md).
+
 Landing: [README.md](../README.md) · prev [Court](agent/rd_playbook.md)

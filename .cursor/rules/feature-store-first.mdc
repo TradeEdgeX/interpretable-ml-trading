@@ -5,7 +5,7 @@ alwaysApply: true
 
 # FeatureStore-first
 
-Canonical: [`docs/lessons.md#features`](../../docs/lessons.md#features) · [`docs/usage.md`](../../docs/usage.md)
+Canonical: [`docs/features.md`](../../docs/features.md) · [`docs/lessons.md#features`](../../docs/lessons.md#features) · [`docs/usage.md`](../../docs/usage.md)
 
 ## Rule
 

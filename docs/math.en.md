@@ -3,7 +3,7 @@
 **中文:** [math.md](math.md)  
 **Landing:** [../README.md](../README.md)
 
-Loop: [hypothesis.en.md](hypothesis.en.md). This page only locks the math the harness still enforces. Implementations live in `config/feature_dependencies.yaml` and `src/features/`.
+Loop: [hypothesis.en.md](hypothesis.en.md). This page only locks the math the harness still enforces. Implementations live in `config/feature_dependencies.yaml` and `src/features/`. How to build, add a column, order flow: [features.en.md](features.en.md).
 
 ---
 

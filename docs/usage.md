@@ -43,7 +43,8 @@ mlbot feature-store build \
   --start-date 2022-01-01 --end-date 2026-06-01
 ```
 
-缺列不要在回测里 `compute_*` 兜底：先 backfill FeatureStore。见 `.cursor/rules/feature-store-first.mdc`。
+缺列不要在回测里 `compute_*` 兜底：先 backfill FeatureStore。  
+怎么算、订单流 / 数学特征、加一列复用旧层：[features.md](features.md)。规则：`.cursor/rules/feature-store-first.mdc`。
 
 宇宙配置：`config/download/crypto_4h_token_universe_groups.yaml`（`mlbot data download --universe-config …`）。
 

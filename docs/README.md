@@ -9,6 +9,7 @@
 | [验证假设](hypothesis.md) · [EN](hypothesis.en.md) | 怎么写成可验证的几条、结论怎么用 |
 | [教训](lessons.md) | 闭棒、熔断、五项 KPI |
 | [使用方法](usage.md) · [EN](usage.en.md) | 安装、数据、回测命令 |
+| [特征计算](features.md) · [EN](features.en.md) | FeatureStore、订单流、数学特征、加速、加一列复用旧层 |
 | [哲学](philosophy.md) · [EN](philosophy.en.md) | 为什么这样验 |
 | [数学](math.md) · [EN](math.en.md) | 时钟和 KPI |
 | [Court](agent/rd_playbook.md) | 谁写数字、谁宣判 |

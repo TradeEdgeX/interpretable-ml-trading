@@ -93,7 +93,8 @@ harness 是考试卷（时钟、成交、成本、宇宙），不是 Cursor 循�
 ## 特征来自 FeatureStore {#features}
 
 回测路径禁止现场 `compute_*`。缺列先登记 `feature_dependencies.yaml` 再 backfill。  
-特征是测量；进 / 止 / 加 / 出是合同，写在 YAML 或手做清单，不要叠成一个分数当更强假设。
+特征是测量；进 / 止 / 加 / 出是合同，写在 YAML 或手做清单，不要叠成一个分数当更强假设。  
+怎么算、订单流 / 数学特征、加一列复用旧层：[features.md](features.md)。
 
 ---
 

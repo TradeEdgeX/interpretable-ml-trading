@@ -38,7 +38,8 @@ mlbot feature-store build \
   --start-date 2022-01-01 --end-date 2026-06-01
 ```
 
-If a column is missing, do not `compute_*` inside the backtest. Backfill FeatureStore first.
+If a column is missing, do not `compute_*` inside the backtest. Backfill FeatureStore first.  
+How to compute, order-flow / math features, and add a column without rebuilding the layer: [features.en.md](features.en.md).
 
 Universe YAML: `config/download/crypto_4h_token_universe_groups.yaml` (`mlbot data download --universe-config …`).
 

@@ -3,7 +3,7 @@
 **English:** [math.en.md](math.en.md)  
 **入口:** [../README_CN.md](../README_CN.md)
 
-循环在 [hypothesis.md](hypothesis.md)。本文只锁**评测机还认的数学约束**，不抄全部特征公式。实现见 `config/feature_dependencies.yaml` 与 `src/features/`。
+循环在 [hypothesis.md](hypothesis.md)。本文只锁**评测机还认的数学约束**，不抄全部特征公式。实现见 `config/feature_dependencies.yaml` 与 `src/features/`。怎么建库、加列、订单流：[features.md](features.md)。
 
 ---
 

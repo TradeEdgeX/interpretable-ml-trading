@@ -131,6 +131,7 @@ flowchart LR
 | 学习路径 | [README_CN.md](../README_CN.md) |
 | 验证假设 / 教训 | [hypothesis.md](hypothesis.md) · [lessons.md](lessons.md) |
 | 哲学 / 数学 / 使用 | [philosophy.md](philosophy.md) · [math.md](math.md) · [usage.md](usage.md) |
+| 特征计算 | [features.md](features.md) · [EN](features.en.md) |
 | Court | [agent/rd_playbook.md](agent/rd_playbook.md) |
 | 定性 | [design/alpha_vs_fattail_vs_beta_CN.md](design/alpha_vs_fattail_vs_beta_CN.md) |
 
