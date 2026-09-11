@@ -1,32 +1,29 @@
 # Four local layers
 
-**One line:** Measurement is locked on four local layers — switching AI models cannot change the numbers.
+**One-liner:** From raw trades to a KPI table, data passes through four layers: data → feature store → strategy YAML → court. Each layer has a locked format, and layers only talk to each other through files.
 
-## Layers
+## The four layers at a glance
 
-```mermaid
-flowchart LR
-  data[Data files] --> fs[Feature store]
-  fs --> yaml[Contract YAML]
-  yaml --> court[Court]
-  court --> kpi[Five KPIs]
-  kpi --> human[Human verdict]
-```
-
-| Layer | Locks | Does not lock |
+| Layer | What it does | Locked format |
 |---|---|---|
-| **Data** | Auditable local files; no hand-written klines | Must be Binance ticks — daily, funding, indexes OK if they match the math |
-| **Features** | Registered closed-bar columns; backfill gaps first | Must use all 100+ columns of a layer |
-| **Contract** | Entry / direction / exit in experiment YAML | Must be an MA family — public `ma_cross` is only the YAML shape |
-| **Court** | Windows, kill-switch off, five KPIs; program never writes the verdict | Must use crypto `bear_2022` — calendars follow the market |
+| Data | Download, clean, monthly parquet | `data/parquet_data/<SYMBOL>/<TF>/<YYYY-MM>.parquet` |
+| Feature store | Compute all measurement columns monthly | `feature_store/features_<arch>_<TF>_<hash>/<SYMBOL>/<YYYY-MM>.parquet` |
+| Strategy YAML | Write the contract as machine-readable rules | `config/strategies/<archetype>/*.yaml` |
+| Court | Run the backtest, print the five-KPI-by-window table | `scripts/event_backtest.py` etc. |
 
-## Wrong vs right
+## Why layer it
 
-| Wrong | Right |
-|---|---|
-| Treat web articles and chat memory as evidence. | Same sentence, same ruler, local files you can re-open. |
+Layers only talk through files, not memory. So:
 
-## Deeper docs
+- Switch machines — as long as the files are there, results reproduce.
+- Change a strategy without recomputing features; change features without re-downloading data.
+- When the AI edits YAML for you, it can’t accidentally touch data or features.
 
-- [Framework](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.en.md)
-- [Architecture](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/ARCHITECTURE.en.md)
+## How this repo uses it
+
+Most of the time you only touch the “strategy YAML” layer. Data and the feature store are infrastructure; the court is the locked ruler.
+
+## Fine print
+
+- [Stack and paths](../tech/stack.md)
+- [docs/framework.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.md)

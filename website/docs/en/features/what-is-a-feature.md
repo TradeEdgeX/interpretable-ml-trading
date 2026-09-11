@@ -1,20 +1,24 @@
 # What is a feature
 
-**One line:** A feature is a precomputed, monthly-on-disk measurement — not an EMA invented inside the backtest loop.
+**One-liner:** A feature is a pre-computed measurement, not a prediction. It only answers “on this bar, what do price / volatility / funding / order flow look like”.
 
 ## Wrong vs right
 
 | Wrong | Right |
 |---|---|
-| Call `compute_ema()` ad hoc whenever the loop needs it. | Register columns, build them into the feature store; if a column is missing, backfill the same layer, then run the court. |
+| “This indicator predicts up or down.” | “This feature describes the current state; whether it makes money depends on what contract you pair it with and which window you measure it on.” |
 
-A hand-rolled MA in chat will not align with the store’s clock and cannot be audited.
+The same `ema_50_200_cross_side` (whether the 50-day line is above or below the 200-day line), paired with a trend contract, is one strategy; paired with a reversal contract, it is another. The feature itself does not take sides.
 
-## In this repo
+## How this repo uses it
 
-The golden cross reads a stored column (e.g. `ema_50_200_cross_side`), not a screenshot “daily cross”. Backtests use strict store reads: missing column stops the run — no hot-path compute.
+Features live as columns in the feature store, monthly parquet on disk. For example, the node `ema_50_200_cross_f` produces the column `ema_50_200_cross_side`: +1 when the 50-day average is above the 200-day, −1 when below. At bar open the backtest reads the **previous** bar’s value of this column to decide whether trading is allowed.
 
-## Deeper docs
+The repo ships a base feature library (moving averages, crosses, funding, order flow, cross-sectional momentum, and more). You are invited to propose more testable ideas on top of those columns, and you can add new columns to the store following the [feature-store-first](feature-store-first.md) flow.
 
-- [Features](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/features.en.md)
-- [Feature store first](store-first.md)
+## Fine print
+
+- [Five families](families.md)
+- [Feature-store-first](feature-store-first.md)
+- [Math is not a gate](math-is-not-a-gate.md)
+- [How to read features.yaml](features-yaml.md)

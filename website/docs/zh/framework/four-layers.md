@@ -1,32 +1,29 @@
 # 本机四层
 
-**一句话：** 测量锁在本机四层上——换一个 AI 模型也不能改数字。
+**一句话：** 从原始成交到一张 KPI 表，中间经过四层：数据 → 特征库 → 策略 YAML → 评测机。每一层都有锁死的格式，层与层之间只认文件。
 
-## 四层
+## 四层速览
 
-```mermaid
-flowchart LR
-  data[数据文件] --> fs[特征库]
-  fs --> yaml[合同 YAML]
-  yaml --> court[评测机]
-  court --> kpi[五项 KPI]
-  kpi --> human[人宣判]
-```
-
-| 层 | 锁什么 | 不锁什么 |
+| 层 | 干什么 | 锁死的格式 |
 |---|---|---|
-| **数据** | 本机可复查的文件；禁止手写 kline | 必须是币安 tick——日线、费率、指数都可以，**和数学对口即可** |
-| **特征** | 登记过的闭棒列；缺列先补 | 必须用满某一层全部 100+ 列 |
-| **合同** | 进 / 向 / 出写在实验 YAML | 必须是均线家族——公开 `ma_cross` 只是 YAML 形状 |
-| **评测机** | 分窗、熔断关、五项 KPI；程序不写判决 | 必须用币圈 `bear_2022`——日历跟市场走 |
+| 数据 | 下载、清洗、按月 parquet | `data/parquet_data/<SYMBOL>/<TF>/<YYYY-MM>.parquet` |
+| 特征库 | 按月算好所有测量列 | `feature_store/features_<arch>_<TF>_<hash>/<SYMBOL>/<YYYY-MM>.parquet` |
+| 策略 YAML | 把合同写成机器可读的规则 | `config/strategies/<archetype>/*.yaml` |
+| 评测机 | 跑回测，印五项 KPI 分窗表 | `scripts/event_backtest.py` 等 |
 
-## 错 vs 对
+## 为什么要分层
 
-| 错 | 对 |
-|---|---|
-| 用网页文章和聊天记忆当下证据。 | 同一句话、同一把尺子、本机文件可复查。 |
+层与层之间只认文件，不认内存。这样：
+
+- 换一台机器，只要文件在，结果就能复现。
+- 改策略不用重算特征；改特征不用重下数据。
+- AI 帮你改 YAML 时，不会顺手改掉数据或特征。
+
+## 本仓库怎么用
+
+你大多数时候只碰「策略 YAML」这一层。数据和特征库是基础设施，评测机是锁死的尺子。
 
 ## 还想看细则
 
-- [框架](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.md)
-- [架构](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/ARCHITECTURE.md)
+- [数据流与目录](../tech/stack.md)
+- [docs/framework.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.md)

@@ -1,24 +1,20 @@
 # 五格
 
-**一句话：** 机制、预期市况、合同、证伪、落地——机器 YAML 和手做清单是同一句。
+**一句话：** 五格是假设模板的骨架：机制、预期市况、合同、证伪、落地。填不满五格，这句话就还没准备好被量。
 
-## 五格
+## 五格详解
 
-| 格 | 问什么 |
-|---|---|
-| **机制** | 发生了什么才允许做 |
-| **预期市况** | 哪类行情该成立、哪类该失效 |
-| **合同** | 错了亏哪、能不能加、何时结束 |
-| **证伪** | 与验证标准同一句：坏了就死 |
-| **落地** | 机器人与人手同一句 |
+1. **机制**：这句话为什么能赚钱？是趋势延续、反转、日历效应，还是跨品种传导？
+2. **预期市况**：哪段行情应该赚、哪段应该亏？趋势策略在震荡段亏是正常的，但要在证伪格里写清「震荡段回撤不能深于趋势段」。
+3. **合同**：进 / 向 / 出写死。什么时候允许做、做错了怎么走、这一笔亏在哪。
+4. **证伪**：事先写好哪段哪个 KPI 坏了，这句话就作废。比如「任一段年化为负」或「近窗 Sharpe 低于 0」。
+5. **落地**：用哪台评测机、哪个特征库、哪些品种、哪个时间框架。
 
-回测否了的句子，晚上也不能手做「感觉这回不一样」。`promote` 只表示在约定尺子上还没被证伪——不是今晚满仓。
+## 一个填好的例子
 
-## 本仓库怎么用
-
-金叉五格见 [README 完整例子](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/README_CN.md)。公开练习包形状在 `config/strategies/ma_cross/`。
+见 [策略是合同](../quant/what-is-a-strategy.md) 里的均线金叉例子。
 
 ## 还想看细则
 
-- [验证假设](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/hypothesis.md)
-- [策略是合同](../quant/what-is-a-strategy.md)
+- [填模板](write-the-sentence.md)
+- [docs/hypothesis_template.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/hypothesis_template.md)

@@ -1,26 +1,22 @@
 # 填模板
 
-**一句话：** 先把现象写成可验证的几格，再动尺子。空格、口号不算填完。
+**一句话：** 把一句交易想法写成可验证的合同，从填 `docs/hypothesis_template.md` 的五格开始。
 
-## 每格白话（金叉示范）
+## 五格
 
-| 格 | 白话 | 金叉怎么写 |
+| 格 | 写什么 | 例子（均线金叉） |
 |---|---|---|
-| **社会学** | 谁在付钱？什么群体行为会重复？ | 教科书 50/200 是协调仪式。单边年追线的人付钱；震荡年他们互相付手续费。 |
-| **数学** | 量哪一列？哪根棒才知道？（闭棒） | 闭棒 EMA50 / EMA200；事件是变号；作废是收盘跌破 EMA50。 |
-| **统计学** | 四类里哪一类？ | 先当 **beta / 趋势暴露**，不是选点 alpha。 |
-| **验证标准** | 哪段哪个 KPI 坏了，这句话就死 | 任一段年化 &lt; 0，或震荡段回撤深于趋势段。 |
-| **数据范围** | 品种 / 周期 / 哪本日历 | BTCUSDT · 2h · 币圈三段。 |
+| 机制 | 这句话为什么能赚钱 | 趋势延续：涨过的继续涨 |
+| 预期市况 | 哪段行情应该赚、哪段应该亏 | 趋势段赚、震荡段亏 |
+| 合同 | 进 / 向 / 出写死 | 收盘在 50 日线上方且刚上穿 200 日线开多；跌破 50 日线走 |
+| 证伪 | 哪段哪个 KPI 坏了就作废 | 任一段年化为负，或震荡段回撤深于趋势段 |
+| 落地 | 用哪台评测机、哪个特征库 | 事件回测 + `features_ma_cross_120T_<hash>` |
 
-数学格链回 [什么是特征](../features/what-is-a-feature.md)；数据范围链回 [怎么选](../framework/how-to-choose.md)。
+## 填完之后
 
-## 错 vs 对
-
-| 错 | 对 |
-|---|---|
-| 只有「金叉做多」，没有付费方和证伪线。 | 解剖（为什么是现象）和五格（怎么执行、怎么判死）都要。 |
+把填好的模板交给 AI，让它帮你翻译成 YAML、跑回测、印表。你读表，对照证伪线，自己写下结论。
 
 ## 还想看细则
 
-- [假设模板](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/hypothesis_template.md)
-- [五格](five-boxes.md)
+- [docs/hypothesis_template.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/hypothesis_template.md)
+- [docs/hypothesis.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/hypothesis.md)

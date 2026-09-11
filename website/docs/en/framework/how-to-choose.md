@@ -1,32 +1,32 @@
 # How to choose
 
-**One line:** Whatever the math names, download that and use that timeframe. Do not switch layers to look scientific.
+**One-liner:** Given a sentence, ask three things first: is it measuring one symbol or a basket? Does it earn from trend, reversal, or calendar? How does it exit when wrong? Answer those and you know which court to use and what contract to write.
 
-## Ask yourself
+## The three questions
 
-1. On which bar is the decision knowable? (closed bar)
-2. How long is “one bar” in the contract? Four trading days ≠ six 2h bars.
-3. Is the symbol listed and on disk in this window? If not → “no sample”; recent alone cannot pass.
-4. Is the calendar **this market’s** bear / bull / recent?
-5. Are the columns in the feature store? Missing → register + same-layer incremental build.
+1. **One symbol or a basket?**
+   - One symbol (this coin on one bar) → event backtest
+   - A basket (score dozens of coins every day) → cross-section backtest
 
-## Gallery (plain)
+2. **Trend, reversal, or calendar?**
+   - Trend (follow MAs, momentum) → treat as beta first
+   - Reversal (buy dips, sell rips) → alpha or fat-tail
+   - Calendar (Monday, month-end, specific dates) → alpha
 
-| Sentence | Granularity | Calendar |
-|---|---|---|
-| MA cross | Trades → 2h | Crypto three windows |
-| Funding fade | Funding series | Crypto three windows |
-| Monday rebound | A-share daily | A-share three windows |
-| P99 chase | **ticks** | Crypto three windows |
-| Cross-section score | Daily universe | A-share · another court |
+3. **How does it exit when wrong?**
+   - Breaks a line → trend stop
+   - Fixed number of days → time stop
+   - Opposite signal → signal stop
 
-## Wrong vs right
+## An example
 
-| Wrong | Right |
-|---|---|
-| Explain 2h numbers with a website daily chart; paste crypto 2022 onto CSI 300. | Lock timeframe and calendar file in the template; missing years = no sample. |
+“When BTC leads, AI alts follow”:
 
-## Deeper docs
+1. Measures cross-symbol lead-lag (BTC → AI alts) → event backtest, but needs features from two symbols.
+2. Earns from trend (lead-follow) → treat as beta first.
+3. Exit when wrong → BTC breaks a line, or the AI alt breaks its own line.
 
-- [Framework §3](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.en.md)
-- [Gallery](../gallery/index.md)
+## Fine print
+
+- [Classify first](../quant/classify.md)
+- [Three courts](which-court.md)

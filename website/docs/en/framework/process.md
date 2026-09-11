@@ -1,31 +1,23 @@
 # Process
 
-**One line:** Human writes the sentence → template must pass before measuring → human declares. No “measure this” → no download, no backtest.
+**One-liner:** From an idea to a KPI table, five steps: fill the template → pick the court → write the YAML → run the backtest → read the table and conclude.
 
-## Flow
+## The five steps
 
-```mermaid
-flowchart TD
-  A[Speak a trading idea] --> B[Fill the template]
-  B --> C{Complete and fits the ruler?}
-  C -->|no| B
-  C -->|yes| D{Already judged in lineage?}
-  D -->|yes| E[Retell the close; stop]
-  D -->|no| F{Human asked to measure?}
-  F -->|no| G[Init directory only; stop]
-  F -->|yes| H[Data → features → court]
-  H --> I[Program writes numbers]
-  I --> J[Human declares]
-```
+1. **Fill the template**: write the idea into the five boxes of `docs/hypothesis_template.md` (mechanism, expected regime, contract, falsification, landing).
+2. **Pick the court**: event backtest or cross-section backtest, based on “one symbol vs a basket”.
+3. **Write the YAML**: translate the contract into `config/strategies/<archetype>/*.yaml`.
+4. **Run the backtest**: `scripts/event_backtest.py` or the cross-section script, printing the three-window five-KPI table.
+5. **Read the table and conclude**: against the falsification line you wrote in advance, write your own “this sentence holds / doesn’t hold in the recent window”.
 
-## Wrong vs right
+## Who does what
 
-| Wrong | Right |
-|---|---|
-| AI downloads, sweeps params, and says “it works” for you. | Validate the template first; don’t rescan a judged sentence; program writes numbers, human writes the verdict. |
+- **You**: fill the template, read the table, write the conclusion.
+- **The AI**: helps translate the template into YAML, runs the scripts, retells the table as prose.
+- **The program**: computes features, fills trades, prints the table.
 
-## Deeper docs
+## Fine print
 
+- [Fill the template](../design/write-the-sentence.md)
 - [Talk to the AI](../use/talk-to-the-ai.md)
 - [Who writes what](../tech/who-writes-what.md)
-- [Architecture](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/ARCHITECTURE.en.md)

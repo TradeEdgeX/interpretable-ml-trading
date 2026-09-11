@@ -1,5 +1,5 @@
 site_name: interpretable-ml-trading
-site_description: Hypothesis validator — measure a trading sentence on locked local data
+site_description: interpretable-ml-trading — write a testable trading contract and measure it on local data
 site_url: https://tradeedgex.github.io/interpretable-ml-trading/
 repo_url: https://github.com/TradeEdgeX/interpretable-ml-trading
 repo_name: interpretable-ml-trading
@@ -11,18 +11,23 @@ site_dir: site
 theme:
   name: material
   language: zh
+  font:
+    text: Noto Sans SC
+    code: IBM Plex Mono
   palette:
-    - scheme: default
-      primary: indigo
-      accent: indigo
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: amber
       toggle:
-        icon: material/brightness-7
+        icon: material/weather-night
         name: Switch to dark mode
-    - scheme: slate
-      primary: indigo
-      accent: indigo
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: amber
       toggle:
-        icon: material/brightness-4
+        icon: material/weather-sunny
         name: Switch to light mode
   features:
     - navigation.sections
@@ -31,6 +36,7 @@ theme:
     - search.suggest
     - content.code.copy
     - toc.follow
+    - header.autohide
 
 plugins:
   - search
@@ -56,10 +62,10 @@ plugins:
             先分类: Classify first
             特征与因子: Features and factors
             什么是特征: What is a feature
-            因子·特征·合同: Factor · feature · contract
             特征五族: Five families
-            特征库优先: Feature store first
+            特征库优先: Feature-store-first
             数学不作门: Math is not a gate
+            features.yaml 怎么读: How to read features.yaml
             框架: Framework
             本机四层: Four local layers
             怎么选: How to choose
@@ -68,11 +74,11 @@ plugins:
             怎么写成假设: Write the hypothesis
             填模板: Fill the template
             五格: Five boxes
-            常见错误: Common mistakes
+            AI 帮你量: The AI helps you measure
             技术: Tech
             为何本机测量: Why local
             数据流与目录: Stack and paths
-            YAML 合同: YAML contract
+            YAML 一页: YAML in one page
             命令地图: Commands map
             谁写哪一格: Who writes what
             怎么用: How to use
@@ -96,6 +102,12 @@ markdown_extensions:
       permalink: true
   - attr_list
   - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra_css:
+  - stylesheets/extra.css
 
 extra:
   alternate:
@@ -116,10 +128,10 @@ nav:
       - 先分类: quant/classify.md
   - 特征与因子:
       - 什么是特征: features/what-is-a-feature.md
-      - 因子·特征·合同: features/factor-vs-feature-vs-contract.md
       - 特征五族: features/families.md
-      - 特征库优先: features/store-first.md
+      - 特征库优先: features/feature-store-first.md
       - 数学不作门: features/math-is-not-a-gate.md
+      - features.yaml 怎么读: features/features-yaml.md
   - 框架:
       - 本机四层: framework/four-layers.md
       - 怎么选: framework/how-to-choose.md
@@ -128,11 +140,11 @@ nav:
   - 怎么写成假设:
       - 填模板: design/write-the-sentence.md
       - 五格: design/five-boxes.md
-      - 常见错误: design/common-mistakes.md
+      - AI 帮你量: design/ai-helps-measure.md
   - 技术:
       - 为何本机测量: tech/why-local.md
       - 数据流与目录: tech/stack.md
-      - YAML 合同: tech/yaml-contract.md
+      - YAML 一页: tech/yaml-one-pager.md
       - 命令地图: tech/commands-map.md
       - 谁写哪一格: tech/who-writes-what.md
   - 怎么用:

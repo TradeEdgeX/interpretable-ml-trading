@@ -1,22 +1,22 @@
 # A strategy is a contract, not a feeling
 
-**One line:** A strategy must state when trading is allowed, how you exit when wrong, what you risk, and when the trade ends. “Buy the golden cross” alone is not a strategy.
+**One-liner:** A strategy must state four things — when trading is allowed, how you exit when wrong, what you risk on this trade, and when it ends. “Buy the golden cross” alone is not a strategy.
 
 ## Wrong vs right
 
 | Wrong | Right |
 |---|---|
-| “Buy the MA cross; trends should pay.” | “Long only if close is above the 50 and just crossed the 200; exit if it breaks the 50; the sentence dies if any window’s CAGR is negative or range-year drawdown is worse.” |
+| “Buy the golden cross, feels like trends make money.” | “Only go long when the close is above the 50-day line *and* it just crossed above the 200-day line; exit when it breaks the 50-day line; if any window has negative CAGR, or the chop window draws down deeper than the trend window, this sentence is void.” |
 
-Feelings cannot be audited or falsified. Contracts can.
+A feeling cannot be re-run or falsified. A contract can: it pins down the boundary between “trade” and “don’t trade”, and pins down “what to do when wrong”, so a backtest can tell you what this sentence looks like in bear, bull, and recent windows.
 
-## In this repo
+## How this repo uses it
 
-The MA-cross practice sentence fills mechanism, regimes, contract, falsification, and deployment. The robot YAML and a human checklist are **the same sentence** — if the backtest rejects it, you do not hand-trade “this time is different” at night.
+The MA golden-cross practice sentence fills every box: mechanism, expected regime, contract, falsification, landing. The machine YAML and the hand-written checklist are **the same sentence**. When the backtest does not pass, read the report and write the same-sentence conclusion, instead of making a “this time is different” version that night.
 
-See [Five boxes](../design/five-boxes.md) · full example in [README.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/README.md).
+See [Five boxes](../design/five-boxes.md) · repo example in [README_CN.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/README_CN.md).
 
-## Deeper docs
+## Fine print
 
-- [Hypothesis template](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/hypothesis_template.en.md)
-- [Philosophy](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/philosophy.en.md)
+- [Hypothesis template](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/hypothesis_template.md)
+- [Philosophy: charts are contracts](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/philosophy.md)

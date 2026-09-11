@@ -1,19 +1,56 @@
 # Commands map
 
-**One line:** Commands are the only ruler the AI may use — not a cheat-sheet for humans. Talking is enough day to day.
+**One-liner:** Common commands fall into four groups: download data, build the feature store, run backtests, read results.
 
-## Four groups
+## Download data
 
-| Group | Role | When |
-|---|---|---|
-| `mlbot research …` | Paper: validate / index / init / close | Template and close; `--trusted` finds judged sentences only |
-| `mlbot data …` | Download trades / funding / A-shares | After “measure this”; no hand-written klines |
-| `mlbot feature-store …` | Build / backfill the store | Only when columns are missing; same-layer incremental |
-| Court | `research run` / `event_backtest` | After measure; windows on; kill-switch off |
+```bash
+# Download raw ZIPs
+mlbot data download --symbols BTCUSDT \
+  --start-year 2026 --start-month 6 --end-year 2026 --end-month 6
 
-There is no `mlbot train`. Full switches live in repo docs — this site does not copy the encyclopedia.
+# Convert to parquet
+mlbot data convert --symbols BTCUSDT
 
-## Deeper docs
+# Or in one shot
+mlbot data pipeline --symbols BTCUSDT
+```
 
-- [Usage](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/usage.en.md)
-- [Architecture · commands](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/ARCHITECTURE.en.md)
+## Build the feature store
+
+```bash
+PYTHONPATH=src python scripts/build_feature_store_from_config.py \
+  --config config/strategies/ma_cross \
+  --symbols BTCUSDT,BNBUSDT,SOLUSDT \
+  --timeframe 120T \
+  --root feature_store \
+  --layer features_ma_cross_120T_<hash> \
+  --data-path data/parquet_data
+```
+
+## Run backtests
+
+```bash
+# Event backtest
+PYTHONPATH=src python scripts/event_backtest.py \
+  --config config/strategies/ma_cross \
+  --symbols BTCUSDT \
+  --timeframe 120T
+
+# Cross-section backtest
+PYTHONPATH=src python scripts/cross_section_backtest.py \
+  --config config/strategies/cs_mom_amount \
+  --timeframe 1d
+```
+
+## Read results
+
+Results live in `results/<strategy>/<timestamp>/`, including:
+
+- `kpi_table.csv`: the three-window five-KPI table.
+- `trades.csv`: every fill.
+- `equity_curve.csv`: the equity curve.
+
+## Fine print
+
+- [docs/usage.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/usage.md)

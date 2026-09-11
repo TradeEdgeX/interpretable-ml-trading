@@ -1,31 +1,31 @@
 # Classify first
 
-**One line:** Say where the money comes from before you pick the ruler. Do not kill a trend or fat-tail sleeve with win rate or “drop the top three” alone.
+**One-liner:** Say where the money comes from first, then pick the ruler. Don’t kill a trend or fat-tail sleeve using win rate or “drop the biggest few trades” alone.
 
-## Four classes (plain)
+## Four types (in plain language)
 
-| Class | Money from | Don’t |
+| Type | Where the money comes from | Don’t |
 |---|---|---|
-| **Alpha** | Better conditional expectation on ordinary days | Prove alpha with bull-market right tails alone |
+| **Alpha** | Conditional expectation is better even on ordinary days | Prove alpha using only a big bull win |
 | **Fat-tail harvest** | A few extreme paths pay | Cut the right tail to raise win rate |
-| **Beta** | Exposure to a named factor (trend, market, …) | “Protect” long beta with short filters |
-| **Useless** | Non-positive across windows | Keep sweeping thresholds to rescue the curve |
+| **Beta** | Standing on a known exposure (trend / market) | “Protect” long beta with a short filter |
+| **Useless** | Loses across windows | Keep sweeping thresholds to save the curve |
 
-Factor = shared pay source; beta = your exposure to it; alpha = what remains after those exposures. Most “looks like alpha” lives in beta.
+Mnemonic: factor = a common paying source; beta = your exposure to it; alpha = the money left after those are paid out. Most of what looks like alpha lives in beta.
 
 ## Wrong vs right
 
 | Wrong | Right |
 |---|---|
-| MA cross WR 35%, negative after dropping top 3 → “no edge”. | Treat the cross as **beta / trend exposure** first. Negative after top-3 is often arithmetic shape, not a verdict. |
+| Golden-cross win rate 35%, dropping the biggest three trades is negative → “no edge”. | Treat the golden cross as **beta / trend exposure** first. Negative-after-Top-3 is often arithmetic shape, not a verdict. |
 
-## In this repo
+## How this repo uses it
 
-- MA golden cross → beta first
-- P99 notional chase → fat-tail right tail
-- Monday rebound → calendar alpha (weak still uses the alpha ruler across windows)
+- MA golden cross → treat as beta first
+- P99 big-order chase → fat-tail right tail
+- Monday rebound → calendar alpha (even if weak, judge it with the alpha ruler across windows)
 
-## Deeper docs
+## Fine print
 
-- [Alpha vs fat-tail vs beta](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/design/alpha_vs_fattail_vs_beta_CN.md)
-- [Lessons · classify](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/lessons.md#classify)
+- [alpha / fat-tail / beta](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/design/alpha_vs_fattail_vs_beta_CN.md)
+- [Lessons · classify first](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/lessons.md#classify)

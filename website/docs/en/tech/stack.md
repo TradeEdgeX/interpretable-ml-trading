@@ -1,33 +1,33 @@
 # Stack and paths
 
-**One line:** One data path — not a pile of unrelated scripts.
+**One-liner:** From raw trades to a KPI table, data flows through four directories: `data/agg_data/` → `data/parquet_data/` → `feature_store/` → `results/`.
 
-## Flow
+## The four directories
 
-```mermaid
-flowchart LR
-  raw[Local data ticks/daily/funding] --> fs[Feature store]
-  fs --> yaml[Experiment YAML]
-  yaml --> court[Court]
-  court --> kpi[Five KPIs]
-  kpi --> v[Human verdict]
+| Directory | What it holds | Who writes it |
+|---|---|---|
+| `data/agg_data/` | Raw ZIPs (downloaded from the exchange) | `mlbot data download` |
+| `data/parquet_data/` | Cleaned monthly parquet | `mlbot data convert` |
+| `feature_store/` | Monthly computed feature columns | `build_feature_store_from_config.py` |
+| `results/` | KPI tables and logs printed by backtests | `event_backtest.py` etc. |
+
+## The data flow
+
+```text
+Exchange ZIP
+  → data/agg_data/
+  → data/parquet_data/  (mlbot data convert)
+  → feature_store/      (build_feature_store_from_config.py)
+  → results/            (event_backtest.py)
 ```
 
-## Paths (plain)
+## Config files
 
-| Path | Role |
-|---|---|
-| `data/` | Trades, funding, A-share daily, … |
-| `feature_store/` | Monthly feature parquet |
-| `config/strategies/ma_cross/` | Public practice strategy shape |
-| `config/experiments/` | One hypothesis experiment pack |
-| `src/features/` · `src/feature_store/` | Compute and I/O |
-| `scripts/event_backtest/` | Event court |
-| `src/cli/main.py` | `mlbot` entry |
+- `config/strategies/<archetype>/features.yaml`: the feature recipe table.
+- `config/strategies/<archetype>/strategy.yaml`: the strategy contract.
+- `config/feature_dependencies.yaml`: the feature dependency registry.
 
-This extract: **validation only** — no auto factor mining, no order routing. Execution comes later; the same validated sentence can plug in.
+## Fine print
 
-## Deeper docs
-
-- [Architecture · paths](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/ARCHITECTURE.en.md)
-- [Usage](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/usage.en.md)
+- [docs/usage.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/usage.md)
+- [Commands map](commands-map.md)

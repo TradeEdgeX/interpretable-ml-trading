@@ -1,104 +1,64 @@
-# Gallery of measured sentences
+# Gallery
 
-Grouped by phenomenon, not by date. Numbers come from the local court ([framework §4](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.en.md) and each example); **humans write the verdict**. Failed cases are shown as-is — not strategy tips.
+**One-liner:** Measured sentences grouped by phenomenon, including rejects. Each card states: what the sentence is, the three-window five KPIs, and the conclusion.
 
-Each card: plain sentence → class → granularity / calendar → feature family → three-window CAGR → source.
+## Trend
 
----
+### MA golden cross (BTC · 2h)
 
-## Trend / beta
+- **Sentence**: go long when the close is above the 50-day line and just crossed above the 200-day; exit on break of the 50-day.
+- **Three-window five KPIs**: bear +3.7% / bull +3.0% / recent −3.1%.
+- **Conclusion**: recent-window CAGR is negative; against the falsification line, this sentence does not hold in the recent window.
 
-### MA golden cross
+## Funding
 
-- **Plain:** Long when price is above the 50 and just crossed the 200; exit if it breaks the 50.
-- **Class:** beta / trend exposure
-- **Granularity / calendar:** trades → 2h · crypto three windows
-- **Feature family:** close tech (EMA cross)
-- **CAGR:** bear +3.7% / bull +3.0% / recent **−3.1%**
-- [README full example](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/README.md)
+### Funding fade
 
----
-
-## Crowding fade
-
-### Extreme funding → fade
-
-- **Plain:** Fade when funding z hits ±1.5; exit when z returns to 0.
-- **Class:** crowding fade (mean-reversion-ish)
-- **Granularity / calendar:** funding series · crypto three windows
-- **Feature family:** crowding / positioning (`funding_rate_zscore_50`)
-- **CAGR:** +2.7% / +3.0% / **−3.4%**
-- [Source](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/examples/20260910_funding_fade.en.md)
-
----
+- **Sentence**: fade extreme funding rates.
+- **Three-window five KPIs**: bear +2.7% / bull +3.0% / recent −3.4%.
+- **Conclusion**: recent-window CAGR is negative; this sentence does not hold in the recent window.
 
 ## Calendar
 
-### A-share Monday down → hold four days
+### Monday rebound
 
-- **Plain:** After a Monday down close, long CSI 300 for four trading days.
-- **Class:** calendar alpha (weak)
-- **Granularity / calendar:** A-share daily · A-share three windows
-- **Feature family:** close tech (weekday / `monday_down`)
-- **CAGR:** +0.61% / +0.46% / +0.06%
-- [Source](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/examples/20260911_ashare_monday_rebound.en.md)
+- **Sentence**: buy after Monday open, sell before Friday close.
+- **Three-window five KPIs**: bear +0.61% / bull +0.46% / recent +0.06%.
+- **Conclusion**: all three windows are near zero; this sentence does not hold.
 
----
+## Cross-symbol
 
-## Cross-asset beta
+### BTC leads AI alts
 
-### BTC surge → AI alts follow
+- **Sentence**: when BTC leads, AI alts follow.
+- **Three-window five KPIs**: bear no sample / bull +2.81% / recent −1.52%.
+- **Conclusion**: recent-window CAGR is negative; this sentence does not hold in the recent window.
 
-- **Plain:** After a large prior BTC bar, long theme alts for a few 2h bars.
-- **Class:** beta (alts vs BTC)
-- **Granularity / calendar:** trades → 2h · crypto three windows; **no sample in 2022 bear**
-- **Feature family:** close tech (BTC column on host bars)
-- **CAGR:** no sample / +2.81% / **−1.52%**
-- [Source](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/examples/20260911_btc_lead_ai_alts.en.md)
+## Fat-tail
 
----
+### P99 big-order chase
 
-## Fat-tail right tail
+- **Sentence**: chase P99 big orders.
+- **Three-window five KPIs**: bear +0.24% / bull −0.25% / recent +0.28%.
+- **Conclusion**: all three windows are near zero; this sentence does not hold.
 
-### P99 notional + Bollinger chase
+## Cross-section
 
-- **Plain:** Chase when bar max notional hits P99 and price sits on the upper band.
-- **Class:** momentum / fat-tail right tail
-- **Granularity / calendar:** **ticks** · crypto three windows
-- **Feature family:** order flow + close tech (P99 + `bb_position`)
-- **CAGR:** +0.24% / **−0.25%** / +0.28%
-- [Source](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/examples/20260911_p99_bb_break_chase.en.md)
+### CS momentum + amount
 
----
+- **Sentence**: score a basket daily by momentum + amount, buy the top N.
+- **Conclusion**: loses to the equal-weight benchmark in all three windows; reject.
 
-## Cross-section (capability · rejected)
+### Hot sectors
 
-The framework can score a universe daily; **capability is not edge**. See [Which court](../framework/which-court.md) · [cs_panel](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/cs_panel.en.md).
+- **Sentence**: buy the top N hot sectors.
+- **Conclusion**: loses to the equal-weight benchmark in all three windows; reject.
 
-### Hot + strong mom → beat equal-weight?
+### Tenbagger cohort
 
-- **Class:** beta claim first; loses to equal-weight
-- **Feature family:** cross-section (`mom_20` + `amount_z_20`)
-- **Result:** top book underperforms EW in all three windows; rejected
-- [Source](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/examples/20260911_ashare_cs_mom_amount_CN.md)
+- **Sentence**: buy the tenbagger cohort.
+- **Conclusion**: needs a measurable rewrite; reject.
 
-### Hot sectors vs equal-weight?
+## Fine print
 
-- **Class:** sector rotation / beta; no stable excess vs EW
-- **Feature family:** cross-section (sector means)
-- **CAGR (10bp):** EW +6.4 / **+74.6** / **+30.5**; hot sectors +9.4 / +34.1 / +5.8 — loses in bull and chop; rejected
-- [Source](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/examples/20260911_ashare_cs_sector_cost_CN.md)
-
----
-
-## Stories you cannot measure
-
-### “Who is the next tenbagger?”
-
-No trades, no closed-bar column → **cannot** be a hypothesis. You can only measure rules that already happened (e.g. small-cap on entry day, fixed hold years); that cohort sentence was rejected.
-
-- [Source](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/examples/20260911_tenbagger_smallcap.en.md)
-
----
-
-When reading cards: [Closed bar](../quant/closed-bar.md) · [Five KPIs](../quant/five-kpis.md) · [Classify first](../quant/classify.md) · [Feature families](../features/families.md).
+- [docs/framework.md §4](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.md)

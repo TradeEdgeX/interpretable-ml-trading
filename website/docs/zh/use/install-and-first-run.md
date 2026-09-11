@@ -1,25 +1,48 @@
 # 安装与第一次
 
-**一句话：** 装一次，给本机能拉数据、算特征、跑尺子。第一条练习是均线金叉。
+**一句话：** 装一次，跑通均线金叉的例子，就知道这个仓库怎么用了。
 
 ## 安装
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -e .[dev]
-mlbot --help
+git clone git@github.com:TradeEdgeX/interpretable-ml-trading.git
+cd interpretable-ml-trading
+pip install -r requirements.txt
 ```
 
-Python 3.12。完整数据 / 特征 / 回测命令见仓库 [usage.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/usage.md)——站点不复制百科。
+## 第一次跑
 
-## 第一次练什么
+1. 下载数据：
 
-1. 读 [策略是合同](../quant/what-is-a-strategy.md) 和 [闭棒](../quant/closed-bar.md)。
-2. 打开仓库 README 的金叉对照表。
-3. 跟 AI 说同一句金叉；没说「测一下」时，它只该帮你填模板、建目录。
-4. 公开练习包：`config/strategies/ma_cross/`。
+```bash
+mlbot data pipeline --symbols BTCUSDT \
+  --start-year 2022 --start-month 1 --end-year 2026 --end-month 8
+```
+
+2. 建特征库：
+
+```bash
+PYTHONPATH=src python scripts/build_feature_store_from_config.py \
+  --config config/strategies/ma_cross \
+  --symbols BTCUSDT \
+  --timeframe 120T \
+  --root feature_store \
+  --layer features_ma_cross_120T_<hash> \
+  --data-path data/parquet_data
+```
+
+3. 跑回测：
+
+```bash
+PYTHONPATH=src python scripts/event_backtest.py \
+  --config config/strategies/ma_cross \
+  --symbols BTCUSDT \
+  --timeframe 120T
+```
+
+4. 看结果：`results/ma_cross/<timestamp>/kpi_table.csv`。
 
 ## 还想看细则
 
+- [docs/usage.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/usage.md)
 - [命令地图](../tech/commands-map.md)
-- [使用方法](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/usage.md)

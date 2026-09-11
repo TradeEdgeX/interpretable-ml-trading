@@ -1,19 +1,19 @@
 # Glossary
 
-For skimming. Full pages are in the nav.
+For skimming. Detail pages are in the nav.
 
-| Chinese | English | One line |
+| English | 中文 | One-liner |
 |---|---|---|
-| 闭棒 | Closed bar | At the open, read only the previous closed bar’s features |
-| 三段 / 三段日历 | Three windows | Bear / bull / recent reported separately; recent alone cannot promote |
-| 五项 KPI | Five KPIs | CAGR, Calmar, win rate, max drawdown, Sharpe |
-| 证伪 | Falsification | Pre-written kill line: which window and KPI kills the sentence |
-| 熔断 | Kill switch | Off when ranking edge; a separate on-run is for account protection |
-| 特征 | Feature | A precomputed, on-disk measurement column |
-| 因子 / 市况 | Factor / regime | Which side of an exposure you stand on (permission, not entry) |
-| 合同 | Contract | Locked entry / direction / exit rules |
-| 特征库 | Feature store | Monthly parquet; open reads prior bar only |
-| 评测机 | Court | Locked backtest that prints five KPIs by window |
-| 门控 | Gate | Hard allow / deny to trade |
-| 横截面 | Cross-section | Score a universe each day — not a single-name event clock |
-| 假设验证器 | Hypothesis validator | This repo: measure whether a sentence dies — no auto factor mining |
+| Closed bar | 闭棒 | At bar open, only read the previous bar’s closed features |
+| Three windows | 三段 / 三段日历 | Bear / bull / recent reported separately; recent alone cannot close the case |
+| Five KPIs | 五项 KPI | CAGR, Calmar, win rate, max drawdown, Sharpe |
+| Falsification | 证伪 | Written in advance: which KPI in which window voids this sentence |
+| Kill switch | 熔断 | Off when comparing strategies; a separate on-run only looks at account protection |
+| Feature | 特征 | A pre-computed, on-disk measurement column |
+| Factor / regime | 因子 / 市况 | Which side of an exposure you stand on (a permission, not an entry) |
+| Contract | 合同 | Entry / direction / exit written down hard |
+| Feature store | 特征库 | Monthly parquet; at open only read the previous bar |
+| Court | 评测机 | A locked backtest that only prints five KPIs by window |
+| Gate | 门控 | A hard permission to trade or not |
+| Cross-section | 横截面 | Scoring a basket every day, not a single-symbol event axis |
+| Hypothesis validator | 假设验证器 | This repo’s role (the name is still interpretable-ml-trading): write ideas as contracts, print tables with the local ruler; ships a base feature library, you write the conclusion after reading the report |

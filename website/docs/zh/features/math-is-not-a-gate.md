@@ -1,20 +1,21 @@
 # 数学不作门
 
-**一句话：** 结构 / 量能 / 订单流可以决定做不做；慢数学只能缩小仓、加谨慎——不回答「是不是突破」。
+**一句话：** 你不需要先懂随机过程或偏微分，才能用这个仓库。需要的是「会读一张五项 KPI 表」和「会把想法写成合同」。
 
 ## 错 vs 对
 
 | 错 | 对 |
 |---|---|
-| 用 Hurst / 频谱把历史上的假突破全部滤掉，再报漂亮年化。 | 价和结构写合同几何；数学只惩罚噪声、缩小暴露。 |
+| 「我数学不好，做不了量化。」 | 「我看得懂年化、回撤、胜率，就能判断这句话在近窗是不是亏钱。」 |
 
-慢数学当硬门，等于用事后过滤器把失败压成 0，那是 hindsight，不是 edge。
+仓库里的数学主要藏在两处：特征怎么算（`docs/math.md`），和回测怎么撮合（`docs/framework.md`）。你不需要推公式，只需要知道「闭棒」「三段」「五项 KPI」这几条规则，就能读报告。
 
-## 本仓库怎么用
+## 什么时候才需要更多数学
 
-公开 dummy 金叉几乎只用收盘技术量。订单流可以当门控（做 / 不做）。Hurst、WPT、Hilbert 适合执行层谨慎，不适合当主开关。
+- 想自己设计新特征 → 看懂 `docs/math.md` 里那几节就够。
+- 想改撮合逻辑（手续费、滑点）→ 需要读 `src/` 里的事件回测器。
+- 只是验证一句话 → 模板 + 五项 KPI 就够。
 
 ## 还想看细则
 
-- [数学 · 特征分层](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/math.md)
-- [哲学 · 信息分层](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/philosophy.md)
+- [docs/math.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/math.md)

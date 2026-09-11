@@ -1,20 +1,25 @@
-# Why measure locally
+# Why local
 
-**One line:** A web AI answers from articles and memory; another model tells another story. Here measurement stays on your machine.
+**One-liner:** All data and features live on your machine. Switch the chat model and the table stays the same. Evidence is re-checkable, results are reproducible.
 
 ## Wrong vs right
 
 | Wrong | Right |
 |---|---|
-| Ask a web AI “does the golden cross make money?” and keep an unauditable story. | Use your downloaded trades, store-built columns, and one three-window ruler. |
+| “I asked a web AI; it said the golden cross is a classic trend.” | “The feature store and trades on my machine printed this table: golden-cross recent-window CAGR −3.1%.” |
 
-The AI **must not** use the web as evidence and **must not** declare for you. It may check the template, orchestrate local commands, and retell five KPIs.
+A web AI gives you “a story from its training data” that you cannot re-check. Local gives you a table printed by “trades you downloaded + features you computed + a locked court”, which you can re-check line by line.
 
-## In this repo
+## What “local” means
 
-Same MA-cross sentence: a web AI says “classic trend, fake signals in ranges”; the local court prints bear / bull / recent numbers. When recent CAGR is negative, the pre-written kill line was hit — the verdict field still waits for you.
+- Data: monthly parquet in `data/parquet_data/`.
+- Features: monthly parquet in `feature_store/`.
+- Court: locked scripts in `scripts/`.
+- Results: KPI tables and logs in `results/`.
 
-## Deeper docs
+Switch the AI model — as long as these files are there, the table stays the same.
 
-- [Process](../framework/process.md)
-- [Architecture](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/ARCHITECTURE.en.md)
+## Fine print
+
+- [Stack and paths](stack.md)
+- [docs/philosophy.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/philosophy.md)

@@ -8,14 +8,11 @@ Human-facing path: [`website/`](website/). Fine print and the AI still use [`doc
 You have a trading idea and you are not sure it actually works.  
 Open this repo and talk to the AI.
 
-This repo is a **hypothesis validator**. First write the idea as a template: what social / mathematical / statistical phenomenon it is, what kills it, which data range measures it. The AI only checks that the template is complete and fits the ruler, then orchestrates commands. It **must not use the web as evidence**, and it must not declare for you.
-
-A web AI answers from articles and its own memory. You cannot reproduce that answer, and you can barely falsify it.  
-Here the AI has to use the trades you downloaded, features already computed in this tree, and one locked ruler.
+**interpretable-ml-trading** is a **hypothesis validator**: write the idea as a template (what social / mathematical / statistical phenomenon it is, how you will judge it, which data range measures it), then print numbers from your local trades, the feature store, and one locked ruler. The repo ships a base feature library; you are invited to propose more testable ideas on those columns. The AI helps complete the template, orchestrates commands, and retells five KPIs. You read the report and the strategy, then write your own conclusion.
 
 Template: [docs/hypothesis_template.en.md](docs/hypothesis_template.en.md).
 
-Validation only — no auto-mined factors. Execution comes later as a generic layer (Nautilus). The same rules you already validated can plug in.
+The same validated rules can plug into a generic execution layer later (Nautilus is the planned one).
 
 ---
 
@@ -77,10 +74,9 @@ Not the daily chart from a webpage. Entries are the cross; every exit is a close
 | Bull 2023–2024 | +3.0% | 0.97 | 33.3% | −3.1% | 0.15 | 33 |
 | Recent range → bear | −3.1% | −0.68 | 24.3% | −4.5% | −0.36 | 37 |
 
-Recent CAGR is negative. That hits the falsifier you wrote down.  
-**You write the verdict.** Fail: the robot does not run it, and you do not hand-trade it tonight.
+Recent CAGR is negative. Compare it to the kill line you wrote, then read the table and the strategy and write your own conclusion.
 
-A web AI cannot produce this table.
+A web AI cannot produce this table: it does not have your trades or this ruler.
 
 ### 4. You can also say
 
@@ -88,8 +84,8 @@ A web AI cannot produce this table.
 > Don’t backtest. Just open an experiment folder.  
 > This idea is dead. Record that.
 
-Already judged → restate the close. Do not scan it again.  
-If you did not ask to measure, it must not download or backtest.
+If the same sentence already has a conclusion, retell it first, then decide whether to write a new one.  
+Download and backtest after you say “measure this”.
 
 ### More examples
 
