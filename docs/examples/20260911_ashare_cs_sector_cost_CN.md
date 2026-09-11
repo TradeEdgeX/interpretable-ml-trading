@@ -1,7 +1,7 @@
 # 热板块相对同宇宙等权，是不是选板块 alpha？
 
 实验：[config/experiments/20260911_ashare_cs_sector_cost/](../../config/experiments/20260911_ashare_cs_sector_cost/)  
-评测机是 **cs_panel**（`scripts/research/cs_sector.py`），不是 2h `event_backtest`。判决未写。
+评测机是 **cs_panel**（`scripts/research/cs_sector.py`），不是 2h `event_backtest`。已 `--declare reject`。
 
 > 先按板块排序，再扣再平衡成本。相对同一宇宙、同一 10bp 的等权，热板块该更好。
 
@@ -38,13 +38,6 @@
 
 分类：**板块轮动 / beta 声称，相对等权没有稳定超额。** 不是选板块 alpha。
 
-```bash
-PYTHONPATH=src python -m cli.main research close 20260911_ashare_cs_sector_cost
-PYTHONPATH=src python -m cli.main research close 20260911_ashare_cs_sector_cost --declare reject
-```
+已 `--declare reject`。机器不跑这一句，人也不按热板块相对等权手做。
 
----
-
-## 不是下一句
-
-「没有 alpha，板块 beta、赚钱且稳定」是另一张纸：[`20260911_ashare_cs_sector_beta`](../../config/experiments/20260911_ashare_cs_sector_beta/)。周频、对照现金、MaxDD 不深于 −40%。**未量。** 不能拿上表的绝对年化事后当那句已经过关。
+周频板块 beta / 多空残差两张纸同样 `--declare reject`（未量，人要求全部结案）。不能拿上表的绝对年化事后当 beta 过关。

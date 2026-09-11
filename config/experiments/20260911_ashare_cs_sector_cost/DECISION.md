@@ -1,13 +1,21 @@
 ---
-topic: "20260911_ashare_cs_sector_cost"
-strategy: "ashare_cs_sector"
+topic: 20260911_ashare_cs_sector_cost
+strategy: ashare_cs_sector
 harness: cs_panel
-segments: [bear_2021, bull_924, chop_recent]
+segments:
+- bear_2021
+- bull_924
+- chop_recent
 kill_switch: false
-verdict:
+verdict: reject
 kpi: {}
 supersedes: []
-tags: [ashare, cross-section, sector, cost, rebalance]
+tags:
+- ashare
+- cross-section
+- sector
+- cost
+- rebalance
 ---
 
 # DECISION — 20260911_ashare_cs_sector_cost
@@ -80,10 +88,10 @@ tags: [ashare, cross-section, sector, cost, rebalance]
 
 日均单边换手：热板块约 **0.38**，等权约 **0.001**。10bp × 0.38 × 252 ≈ 每年约 9–10 个点，所以熊段毛 +20.5% 扣完只剩 +9.4%。等权几乎不换仓，费用可忽略。
 
-旧的零成本全 A 等权表不结本案。判决留空，等人看完三段再 `--declare`。
+旧的零成本全 A 等权表不结本案。人已 `--declare reject`。
 
 ## Promote
 
 - [x] 行业表落在本仓库 `config/industry_map_ashare.yaml`
 - [x] 人说了测，书已跑
-- [ ] `mlbot research close` 后 `--declare`
+- [x] `mlbot research close` 后 `--declare reject`

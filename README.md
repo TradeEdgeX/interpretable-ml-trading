@@ -95,8 +95,8 @@ If you did not ask to measure, it must not download or backtest.
 - BTC surge → AI alts follow: [docs/examples/20260911_btc_lead_ai_alts.en.md](docs/examples/20260911_btc_lead_ai_alts.en.md) · [中文](docs/examples/20260911_btc_lead_ai_alts_CN.md)
 - P99 large trade + Bollinger chase: [docs/examples/20260911_p99_bb_break_chase.en.md](docs/examples/20260911_p99_bb_break_chase.en.md) · [中文](docs/examples/20260911_p99_bb_break_chase_CN.md)
 - Tenbagger / small-cap hold (cohort, measured): [docs/examples/20260911_tenbagger_smallcap.en.md](docs/examples/20260911_tenbagger_smallcap.en.md) · [中文](docs/examples/20260911_tenbagger_smallcap_CN.md)
-- A-share hot names vs equal-weight (CS panel): [docs/examples/20260911_ashare_cs_mom_amount_CN.md](docs/examples/20260911_ashare_cs_mom_amount_CN.md)
-- A-share hot sectors vs equal-weight: [docs/examples/20260911_ashare_cs_sector_cost_CN.md](docs/examples/20260911_ashare_cs_sector_cost_CN.md)
+- A-share hot names vs equal-weight (CS panel, reject): [docs/examples/20260911_ashare_cs_mom_amount_CN.md](docs/examples/20260911_ashare_cs_mom_amount_CN.md)
+- A-share hot sectors vs equal-weight (reject): [docs/examples/20260911_ashare_cs_sector_cost_CN.md](docs/examples/20260911_ashare_cs_sector_cost_CN.md)
 
 ---
 

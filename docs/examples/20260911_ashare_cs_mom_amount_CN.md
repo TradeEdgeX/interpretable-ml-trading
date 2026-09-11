@@ -1,7 +1,7 @@
 # 涨得多又热的票，相对全市场继续涨？
 
 实验：[config/experiments/20260911_ashare_cs_mom_amount/](../../config/experiments/20260911_ashare_cs_mom_amount/)  
-评测机是 **cs_panel**，不是 2h `event_backtest`。判决未写。
+评测机是 **cs_panel**，不是 2h `event_backtest`。已 `--declare reject`。
 
 > 过去 20 日涨得多、且自身成交额也热的股票，未来 20 日相对全市场等权继续涨。
 
@@ -90,7 +90,4 @@ PYTHONPATH=src python scripts/research/cs_panel.py
 
 分类：**这句话是 beta 续涨声称，量出来是无用（符号是反转）。** 反转要另写一句，不能把这一张纸翻面当策略。
 
-```bash
-PYTHONPATH=src python -m cli.main research close 20260911_ashare_cs_mom_amount
-PYTHONPATH=src python -m cli.main research close 20260911_ashare_cs_mom_amount --declare reject
-```
+已 `--declare reject`。机器不跑这一句，人也不按热票相对等权手做。

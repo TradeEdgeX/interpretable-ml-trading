@@ -1,13 +1,20 @@
 ---
-topic: "20260911_ashare_regime_jump"
-strategy: "ashare_regime_jump"
+topic: 20260911_ashare_regime_jump
+strategy: ashare_regime_jump
 harness: cs_panel
-segments: [bear_2021, bull_924, chop_recent]
+segments:
+- bear_2021
+- bull_924
+- chop_recent
 kill_switch: false
-verdict:
+verdict: reject
 kpi: {}
 supersedes: []
-tags: [ashare, regime, jump, 924]
+tags:
+- ashare
+- regime
+- jump
+- 924
 ---
 
 # DECISION — 20260911_ashare_regime_jump

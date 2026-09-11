@@ -1,13 +1,22 @@
 ---
-topic: "20260911_ashare_cs_sector_alpha"
-strategy: "ashare_cs_sector_alpha"
+topic: 20260911_ashare_cs_sector_alpha
+strategy: ashare_cs_sector_alpha
 harness: cs_panel
-segments: [bear_2021, bull_924, chop_recent]
+segments:
+- bear_2021
+- bull_924
+- chop_recent
 kill_switch: false
-verdict:
+verdict: reject
 kpi: {}
 supersedes: []
-tags: [ashare, cross-section, sector, alpha, residual, long-short]
+tags:
+- ashare
+- cross-section
+- sector
+- alpha
+- residual
+- long-short
 ---
 
 # DECISION — 20260911_ashare_cs_sector_alpha

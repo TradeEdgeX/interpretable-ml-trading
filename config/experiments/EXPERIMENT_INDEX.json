@@ -1,17 +1,20 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-10T04:48:08Z",
+  "generated_at": "2026-09-11T10:43:47Z",
   "experiments_root": "config/experiments",
   "summary": {
-    "count": 2,
+    "count": 14,
     "by_verdict": {
-      "None": 2
+      "None": 5,
+      "reject": 9
     },
     "by_source": {
-      "missing": 2
+      "declared": 9,
+      "missing": 5
     },
     "by_record_class": {
-      "open": 2
+      "open": 5,
+      "trusted": 9
     },
     "invalid_count": 0
   },
@@ -25,7 +28,7 @@
       "decision_path": "config/experiments/20260910_funding_fade/DECISION.md",
       "verdict": null,
       "verdict_source": "missing",
-      "strategy": "ma_cross",
+      "strategy": "funding_fade",
       "harness": "event_backtest",
       "segments": [
         "bear_2022",
@@ -88,6 +91,341 @@
       "evidence_stale": false,
       "feature_store_layer": null,
       "stale_reasons": []
+    },
+    {
+      "id": "20260911_ashare_bear_short_index",
+      "date": "2026-09-11",
+      "topic": "ashare_bear_short_index",
+      "dir": "config/experiments/20260911_ashare_bear_short_index",
+      "decision_path": "config/experiments/20260911_ashare_bear_short_index/DECISION.md",
+      "verdict": "reject",
+      "verdict_source": "declared",
+      "strategy": "ashare_bear_short",
+      "harness": "cs_panel",
+      "segments": [
+        "bear_2021",
+        "bull_924",
+        "chop_recent"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "ashare",
+        "bear",
+        "short-index",
+        "overlay"
+      ],
+      "issues": [],
+      "record_class": "trusted"
+    },
+    {
+      "id": "20260911_ashare_cs_mom_amount",
+      "date": "2026-09-11",
+      "topic": "ashare_cs_mom_amount",
+      "dir": "config/experiments/20260911_ashare_cs_mom_amount",
+      "decision_path": "config/experiments/20260911_ashare_cs_mom_amount/DECISION.md",
+      "verdict": "reject",
+      "verdict_source": "declared",
+      "strategy": "ashare_cs_mom_amount",
+      "harness": "cs_panel",
+      "segments": [
+        "bear_2021",
+        "bull_924",
+        "chop_recent"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "ashare",
+        "cross-section",
+        "momentum",
+        "amount",
+        "ic"
+      ],
+      "issues": [],
+      "record_class": "trusted"
+    },
+    {
+      "id": "20260911_ashare_cs_reversal",
+      "date": "2026-09-11",
+      "topic": "ashare_cs_reversal",
+      "dir": "config/experiments/20260911_ashare_cs_reversal",
+      "decision_path": "config/experiments/20260911_ashare_cs_reversal/DECISION.md",
+      "verdict": "reject",
+      "verdict_source": "declared",
+      "strategy": "ashare_cs_reversal",
+      "harness": "cs_panel",
+      "segments": [
+        "bear_2021",
+        "bull_924",
+        "chop_recent"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "ashare",
+        "cross-section",
+        "reversal",
+        "momentum",
+        "amount"
+      ],
+      "issues": [],
+      "record_class": "trusted"
+    },
+    {
+      "id": "20260911_ashare_cs_sector_alpha",
+      "date": "2026-09-11",
+      "topic": "ashare_cs_sector_alpha",
+      "dir": "config/experiments/20260911_ashare_cs_sector_alpha",
+      "decision_path": "config/experiments/20260911_ashare_cs_sector_alpha/DECISION.md",
+      "verdict": "reject",
+      "verdict_source": "declared",
+      "strategy": "ashare_cs_sector_alpha",
+      "harness": "cs_panel",
+      "segments": [
+        "bear_2021",
+        "bull_924",
+        "chop_recent"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "ashare",
+        "cross-section",
+        "sector",
+        "alpha",
+        "residual",
+        "long-short"
+      ],
+      "issues": [],
+      "record_class": "trusted"
+    },
+    {
+      "id": "20260911_ashare_cs_sector_beta",
+      "date": "2026-09-11",
+      "topic": "ashare_cs_sector_beta",
+      "dir": "config/experiments/20260911_ashare_cs_sector_beta",
+      "decision_path": "config/experiments/20260911_ashare_cs_sector_beta/DECISION.md",
+      "verdict": "reject",
+      "verdict_source": "declared",
+      "strategy": "ashare_cs_sector_beta",
+      "harness": "cs_panel",
+      "segments": [
+        "bear_2021",
+        "bull_924",
+        "chop_recent"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "ashare",
+        "cross-section",
+        "sector",
+        "beta",
+        "weekly",
+        "rebalance"
+      ],
+      "issues": [],
+      "record_class": "trusted"
+    },
+    {
+      "id": "20260911_ashare_cs_sector_cost",
+      "date": "2026-09-11",
+      "topic": "ashare_cs_sector_cost",
+      "dir": "config/experiments/20260911_ashare_cs_sector_cost",
+      "decision_path": "config/experiments/20260911_ashare_cs_sector_cost/DECISION.md",
+      "verdict": "reject",
+      "verdict_source": "declared",
+      "strategy": "ashare_cs_sector",
+      "harness": "cs_panel",
+      "segments": [
+        "bear_2021",
+        "bull_924",
+        "chop_recent"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "ashare",
+        "cross-section",
+        "sector",
+        "cost",
+        "rebalance"
+      ],
+      "issues": [],
+      "record_class": "trusted"
+    },
+    {
+      "id": "20260911_ashare_ma200_adx_mom",
+      "date": "2026-09-11",
+      "topic": "ashare_ma200_adx_mom",
+      "dir": "config/experiments/20260911_ashare_ma200_adx_mom",
+      "decision_path": "config/experiments/20260911_ashare_ma200_adx_mom/DECISION.md",
+      "verdict": "reject",
+      "verdict_source": "declared",
+      "strategy": "ashare_ma200_adx",
+      "harness": "cs_panel",
+      "segments": [
+        "bear_2021",
+        "bull_924",
+        "chop_recent"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "ashare",
+        "ma200",
+        "adx",
+        "momentum",
+        "filter"
+      ],
+      "issues": [],
+      "record_class": "trusted"
+    },
+    {
+      "id": "20260911_ashare_monday_rebound",
+      "date": "2026-09-11",
+      "topic": "ashare_monday_rebound",
+      "dir": "config/experiments/20260911_ashare_monday_rebound",
+      "decision_path": "config/experiments/20260911_ashare_monday_rebound/DECISION.md",
+      "verdict": null,
+      "verdict_source": "missing",
+      "strategy": "ashare_monday",
+      "harness": "event_backtest",
+      "segments": [
+        "bear_2021",
+        "bull_924",
+        "chop_recent"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "ashare",
+        "calendar",
+        "monday",
+        "rebound"
+      ],
+      "issues": [],
+      "record_class": "open"
+    },
+    {
+      "id": "20260911_ashare_regime_jump",
+      "date": "2026-09-11",
+      "topic": "ashare_regime_jump",
+      "dir": "config/experiments/20260911_ashare_regime_jump",
+      "decision_path": "config/experiments/20260911_ashare_regime_jump/DECISION.md",
+      "verdict": "reject",
+      "verdict_source": "declared",
+      "strategy": "ashare_regime_jump",
+      "harness": "cs_panel",
+      "segments": [
+        "bear_2021",
+        "bull_924",
+        "chop_recent"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "ashare",
+        "regime",
+        "jump",
+        "924"
+      ],
+      "issues": [],
+      "record_class": "trusted"
+    },
+    {
+      "id": "20260911_btc_lead_ai_alts",
+      "date": "2026-09-11",
+      "topic": "btc_lead_ai_alts",
+      "dir": "config/experiments/20260911_btc_lead_ai_alts",
+      "decision_path": "config/experiments/20260911_btc_lead_ai_alts/DECISION.md",
+      "verdict": null,
+      "verdict_source": "missing",
+      "strategy": "btc_lead_alts",
+      "harness": "event_backtest",
+      "segments": [
+        "bear_2022",
+        "bull_2023_2024",
+        "recent_range_to_bear"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "btc-lead",
+        "ai-alts",
+        "beta"
+      ],
+      "issues": [],
+      "record_class": "open"
+    },
+    {
+      "id": "20260911_p99_bb_break_chase",
+      "date": "2026-09-11",
+      "topic": "p99_bb_break_chase",
+      "dir": "config/experiments/20260911_p99_bb_break_chase",
+      "decision_path": "config/experiments/20260911_p99_bb_break_chase/DECISION.md",
+      "verdict": null,
+      "verdict_source": "missing",
+      "strategy": "p99_bb_chase",
+      "harness": "event_backtest",
+      "segments": [
+        "bear_2022",
+        "bull_2023_2024",
+        "recent_range_to_bear"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "p99",
+        "bollinger",
+        "chase",
+        "fattail"
+      ],
+      "issues": [],
+      "record_class": "open"
+    },
+    {
+      "id": "20260911_tenbagger_smallcap",
+      "date": "2026-09-11",
+      "topic": "tenbagger_smallcap",
+      "dir": "config/experiments/20260911_tenbagger_smallcap",
+      "decision_path": "config/experiments/20260911_tenbagger_smallcap/DECISION.md",
+      "verdict": "reject",
+      "verdict_source": "declared",
+      "strategy": "tenbagger_smallcap",
+      "harness": "cohort_hold",
+      "segments": [
+        "crash_2015",
+        "bear_2018",
+        "covid_2020",
+        "bear_2021",
+        "bull_924",
+        "chop_recent"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "tenbagger",
+        "smallcap",
+        "cohort",
+        "ashare",
+        "us-equity"
+      ],
+      "issues": [],
+      "record_class": "trusted"
     }
   ],
   "gate_summary": {

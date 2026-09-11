@@ -1,13 +1,20 @@
 ---
-topic: "20260911_ashare_bear_short_index"
-strategy: "ashare_bear_short"
+topic: 20260911_ashare_bear_short_index
+strategy: ashare_bear_short
 harness: cs_panel
-segments: [bear_2021, bull_924, chop_recent]
+segments:
+- bear_2021
+- bull_924
+- chop_recent
 kill_switch: false
-verdict:
+verdict: reject
 kpi: {}
 supersedes: []
-tags: [ashare, bear, short-index, overlay]
+tags:
+- ashare
+- bear
+- short-index
+- overlay
 ---
 
 # DECISION — 20260911_ashare_bear_short_index

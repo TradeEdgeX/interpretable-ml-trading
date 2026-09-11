@@ -1,13 +1,21 @@
 ---
-topic: "20260911_ashare_cs_mom_amount"
-strategy: "ashare_cs_mom_amount"
+topic: 20260911_ashare_cs_mom_amount
+strategy: ashare_cs_mom_amount
 harness: cs_panel
-segments: [bear_2021, bull_924, chop_recent]
+segments:
+- bear_2021
+- bull_924
+- chop_recent
 kill_switch: false
-verdict:
+verdict: reject
 kpi: {}
 supersedes: []
-tags: [ashare, cross-section, momentum, amount, ic]
+tags:
+- ashare
+- cross-section
+- momentum
+- amount
+- ic
 ---
 
 # DECISION — 20260911_ashare_cs_mom_amount
@@ -108,4 +116,4 @@ IC 是 Phase 1。分数涨了不能结案。结案看三段书的五项 KPI。
 - [ ] A 股三段齐 + kill switch OFF
 - [ ] 对口 harness：`cs_panel`
 - [ ] IC 只作探照灯
-- [ ] `mlbot research close 20260911_ashare_cs_mom_amount` 后 `--declare`
+- [x] `mlbot research close 20260911_ashare_cs_mom_amount` 后 `--declare reject`

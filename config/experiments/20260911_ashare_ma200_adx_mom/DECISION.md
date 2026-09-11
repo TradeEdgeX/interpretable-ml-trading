@@ -1,13 +1,21 @@
 ---
-topic: "20260911_ashare_ma200_adx_mom"
-strategy: "ashare_ma200_adx"
+topic: 20260911_ashare_ma200_adx_mom
+strategy: ashare_ma200_adx
 harness: cs_panel
-segments: [bear_2021, bull_924, chop_recent]
+segments:
+- bear_2021
+- bull_924
+- chop_recent
 kill_switch: false
-verdict:
+verdict: reject
 kpi: {}
 supersedes: []
-tags: [ashare, ma200, adx, momentum, filter]
+tags:
+- ashare
+- ma200
+- adx
+- momentum
+- filter
 ---
 
 # DECISION — 20260911_ashare_ma200_adx_mom

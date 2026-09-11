@@ -1,13 +1,21 @@
 ---
-topic: "20260911_ashare_cs_reversal"
-strategy: "ashare_cs_reversal"
+topic: 20260911_ashare_cs_reversal
+strategy: ashare_cs_reversal
 harness: cs_panel
-segments: [bear_2021, bull_924, chop_recent]
+segments:
+- bear_2021
+- bull_924
+- chop_recent
 kill_switch: false
-verdict:
+verdict: reject
 kpi: {}
 supersedes: []
-tags: [ashare, cross-section, reversal, momentum, amount]
+tags:
+- ashare
+- cross-section
+- reversal
+- momentum
+- amount
 ---
 
 # DECISION — 20260911_ashare_cs_reversal
