@@ -19,6 +19,8 @@ KNOWN_HARNESSES: Tuple[str, ...] = (
     "phase1_scan_only",
     # Buy-and-hold panel (entry date × universe × fixed years).
     "cohort_hold",
+    # Daily cross-section book (locked factors → rank → long top).
+    "cs_panel",
 )
 
 
@@ -49,6 +51,42 @@ _SPECS: Tuple[HarnessSpec, ...] = (
         "python scripts/research/cohort_hold.py",
         forbid_event_backtest=True,
         notes="A-share small-cap hold panel; not the 2h event clock",
+    ),
+    HarnessSpec(
+        "ashare_cs_mom_amount",
+        "cs_panel",
+        "python scripts/research/cs_panel.py",
+        forbid_event_backtest=True,
+        notes="A-share 2-factor cross-section; IC flashlight then panel book",
+    ),
+    HarnessSpec(
+        "ashare_cs_reversal",
+        "cs_panel",
+        "python scripts/research/cs_panel.py --out "
+        "results/ashare_cs_reversal/experiments/20260911_ashare_cs_reversal",
+        forbid_event_backtest=True,
+        notes="Same two factors, inverted book; not the continuation paper",
+    ),
+    HarnessSpec(
+        "ashare_cs_sector",
+        "cs_panel",
+        "python scripts/research/cs_sector.py",
+        forbid_event_backtest=True,
+        notes="Sector-rank CS + 10bp; industry snapshot is not PIT",
+    ),
+    HarnessSpec(
+        "ashare_cs_sector_alpha",
+        "cs_panel",
+        "python scripts/research/cs_sector.py",
+        forbid_event_backtest=True,
+        notes="Long-short sector residual; not the long-only sector paper",
+    ),
+    HarnessSpec(
+        "ashare_cs_sector_beta",
+        "cs_panel",
+        "python scripts/research/cs_sector.py",
+        forbid_event_backtest=True,
+        notes="Weekly sector-beta long-only vs cash; not daily vs EW",
     ),
     HarnessSpec(
         "funding_fade",

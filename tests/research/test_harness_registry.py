@@ -9,6 +9,13 @@ from src.research.harness_registry import (
 )
 
 
+def test_cs_panel_forbids_event_backtest() -> None:
+    assert required_harness("ashare_cs_mom_amount") == "cs_panel"
+    reason = event_backtest_reject_reason(["ashare_cs_mom_amount"])
+    assert reason is not None
+    assert "cs_panel" in reason
+
+
 def test_ma_cross_uses_event_backtest() -> None:
     assert required_harness("ma_cross") == "event_backtest"
     assert event_backtest_reject_reason(["ma_cross"]) is None

@@ -160,6 +160,30 @@ def fetch_stock_basic(out: str | Path) -> pd.DataFrame:
     return df
 
 
+def fetch_stock_industry(out: str | Path) -> pd.DataFrame:
+    """Latest baostock industry map (not point-in-time)."""
+    out = Path(out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    bs = _login()
+    try:
+        rs = bs.query_stock_industry()
+        if rs.error_code != "0":
+            raise RuntimeError(f"query_stock_industry: {rs.error_msg}")
+        df = _rows_from_rs(rs)
+    finally:
+        bs.logout()
+    if df.empty:
+        raise RuntimeError("query_stock_industry returned 0 rows")
+    df = df.copy()
+    df["symbol"] = df["code"].map(baostock_code_to_symbol)
+    if "industry" not in df.columns:
+        raise RuntimeError("query_stock_industry missing industry")
+    df["industry"] = df["industry"].astype(str).str.strip()
+    df = df[df["industry"].ne("") & df["industry"].ne("nan")]
+    df.to_parquet(out, index=False)
+    return df
+
+
 def listed_a_shares(basic: pd.DataFrame) -> pd.DataFrame:
     df = basic
     if "type" in df.columns:
