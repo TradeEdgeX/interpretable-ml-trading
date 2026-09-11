@@ -7,7 +7,7 @@ Loop: [hypothesis.en.md](hypothesis.en.md).
 
 ## 1. What the system optimizes
 
-Not maximum profit. **Survivable learning**: on real market regimes, confirm as fast as possible that a *complete* trading sentence works, fails, or works only under named conditions.
+Not maximum profit. This repo is a **hypothesis validator**: on real market regimes, confirm as fast as possible that a *complete* trading sentence works, fails, or works only under named conditions. Fill the [template](hypothesis_template.en.md) first. The AI checks the template against this tree, not web memory.
 
 > A full loop × real time cost = real knowledge. Half-paths and time-compressed backtests do not count.
 
@@ -99,6 +99,7 @@ Do not ship a combined “MA + level + structure-arrow” indicator.
 
 | Essay | Path |
 |---|---|
+| Hypothesis template | [hypothesis_template.en.md](hypothesis_template.en.md) |
 | Falsify a hypothesis | [hypothesis.en.md](hypothesis.en.md) |
 | Lessons | [lessons.md](lessons.md) |
 | Human claim vs auto-mine | [design/2026-08-23_human_hypothesis_vs_auto_mine_CN.md](design/2026-08-23_human_hypothesis_vs_auto_mine_CN.md) |

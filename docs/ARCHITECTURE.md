@@ -1,7 +1,7 @@
 # 系统架构
 
-> 研究核：人说话 → AI 按指令收成五格 → 只许用本机命令量 → 程序写数字 → 人宣判。  
-> 不是下单说明书，也不是给人手抄的命令手册。
+> 研究核：人说话 → 先填假设模板 → AI 验模板（齐不齐、对不对尺子）→ 只许用本机命令量 → 程序写数字 → 人宣判。  
+> 本仓库是假设验证器。不是下单说明书，也不是给人手抄的命令手册。
 
 主入口：[README_CN.md](../README_CN.md) · [README.md](../README.md)  
 English: [ARCHITECTURE.en.md](ARCHITECTURE.en.md)
@@ -22,7 +22,10 @@ English: [ARCHITECTURE.en.md](ARCHITECTURE.en.md)
 
 ```mermaid
 flowchart TD
-  H[人说话] --> A[AI 先写成五格<br/>机制 / 市况 / 合同 / 证伪 / 落地]
+  H[人说话] --> T[填假设模板<br/>社会 / 数学 / 统计 / 标准 / 范围 / 五格]
+  T --> V{mlbot research validate}
+  V -->|不过| T
+  V -->|过| A[AI 不改题]
   A --> I{谱系里有没有已经宣判的}
   I -->|trusted 命中| STOP[复述结案，停]
   I -->|没有| ASK{人有没有说测一下}
@@ -38,9 +41,9 @@ flowchart TD
 | 人 | 那一句话、`verdict` | 不许让 AI 代宣判 |
 | 指令 | 何时许量、用哪把尺子 | 不代替数字 |
 | 命令 / 程序 | 特征库、三段回测、`gate_status`、五项 KPI | 不写 `verdict` |
-| AI | 五格、编排命令、读产物、用数字复述 | 不许用网页当证据，不许手改 `verdict` |
+| AI | 模板、结构校验、编排命令、读产物、用数字复述 | 不许用网页当证据，不许手改 `verdict` |
 
-「测一下」之前，AI 只许查谱系、对 harness、建实验目录。没让测，就不许下载、不许回测。
+「测一下」之前，AI 只许填模板、`validate`、查谱系、对 harness、建实验目录。没让测，就不许下载、不许回测。
 
 ---
 
@@ -129,7 +132,7 @@ flowchart LR
 | 区域 | 路径 |
 |---|---|
 | 学习路径 | [README_CN.md](../README_CN.md) |
-| 验证假设 / 教训 | [hypothesis.md](hypothesis.md) · [lessons.md](lessons.md) |
+| 验证假设 / 教训 | [hypothesis.md](hypothesis.md) · [hypothesis_template.md](hypothesis_template.md) · [lessons.md](lessons.md) |
 | 哲学 / 数学 / 使用 | [philosophy.md](philosophy.md) · [math.md](math.md) · [usage.md](usage.md) |
 | 特征计算 | [features.md](features.md) · [EN](features.en.md) |
 | Court | [agent/rd_playbook.md](agent/rd_playbook.md) |

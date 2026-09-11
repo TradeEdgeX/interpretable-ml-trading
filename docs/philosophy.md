@@ -7,7 +7,7 @@
 
 ## 1. 系统在优化什么
 
-不是利润最大值。是**可幸存的学习**：在真实行情阶段上，尽快确认一句完整的交易话行 / 不行 / 在什么条件下行。
+不是利润最大值。本仓库是**假设验证器**：在真实行情阶段上，尽快确认一句完整的交易话行 / 不行 / 在什么条件下行。先填 [假设模板](hypothesis_template.md)，AI 只验模板和尺子，不拿网页记忆当证据。
 
 > 完整闭环 × 真时间成本 = 真实认知。半道不算数，压缩时间的回测也不算数。
 
@@ -101,6 +101,7 @@ IC 为正不能上线。单窗漂亮不能上线。熔断截断后的曲线不�
 
 | 文 | 位置 |
 |---|---|
+| 假设模板 | [hypothesis_template.md](hypothesis_template.md) |
 | 验证假设 | [hypothesis.md](hypothesis.md) |
 | 教训 | [lessons.md](lessons.md) |
 | 人出假设 vs 自动挖 | [design/2026-08-23_human_hypothesis_vs_auto_mine_CN.md](design/2026-08-23_human_hypothesis_vs_auto_mine_CN.md) |

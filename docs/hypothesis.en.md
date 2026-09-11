@@ -48,26 +48,33 @@ It is not “go full size tonight.” The robot follows YAML. The human follows 
 
 ---
 
-## 3. Write the claim first
+## 3. Template first, then five boxes, then measure
 
-Put this in `DECISION.md`. Do not download data or backtest until it exists.
+This repo is a hypothesis validator. Five boxes alone read like a strategy sheet. First name the social / mathematical / statistical phenomenon, the ruler, and the data range that can kill the sentence.
+
+Full slots, how the AI checks them, and what it may orchestrate: [hypothesis_template.en.md](hypothesis_template.en.md).
+
+Do not download or backtest until the template exists.
 
 ```text
-Mechanism:     what must be true before a trade is allowed
-Regimes:       where it should hold; where it should fail
-Contract:      when you are wrong, what that costs, whether you may add, when it ends
-Falsifiers:    which segment and which KPI kill the claim
-Landing:       robot YAML / human checklist / the same sentence for both
+Claim              the human sentence (the AI does not swap it)
+Sociology          who pays; which group behavior repeats
+Mathematics        the measured object + closed bar
+Statistics         the sampling claim + classify first (alpha / fat-tail / beta / useless)
+Validation standard which window and which of the five KPIs kill it
+Data range         symbols, timeframe, the three canonical windows
+Five boxes         mechanism / regimes / contract / falsifiers / landing
 ```
 
-The AI restates those five boxes and checks lineage.  
-It must not swap your sentence for a nearby pack (a 50/200 cross ≠ an EMA dead zone ≠ a structure break).
+The AI checks structure (completeness, fit to lessons), **not** truth from memory:
 
 ```bash
+mlbot research validate <id>
 mlbot research index --trusted --query <english-slug>
 ```
 
-A trusted hit → restate the close. Stop. Do not rescan the same claim.
+Template fails → edit paper only. Trusted hit → restate the close. Stop.  
+It must not swap your sentence for a nearby pack (a 50/200 cross ≠ an EMA dead zone ≠ a structure break).
 
 ---
 

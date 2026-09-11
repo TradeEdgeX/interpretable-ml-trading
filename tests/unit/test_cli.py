@@ -74,6 +74,7 @@ class TestResearchCommands:
             "close",
             "run",
             "init",
+            "validate",
             "replay",
             "scorecard",
         ):

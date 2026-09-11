@@ -1,7 +1,7 @@
 # Architecture
 
-> Research core: a person talks → the AI restates five boxes → it may only measure with local commands → the program writes the numbers → the person declares.  
-> Not an order ticket. Not a CLI cheat-sheet for humans.
+> Research core: a person talks → fill the hypothesis template → the AI checks the template → it may only measure with local commands → the program writes the numbers → the person declares.  
+> This repo is a hypothesis validator. Not an order ticket. Not a CLI cheat-sheet for humans.
 
 Landing: [README.md](../README.md) · [README_CN.md](../README_CN.md)  
 中文: [ARCHITECTURE.md](ARCHITECTURE.md)
@@ -22,7 +22,10 @@ The instructions (`AGENTS.md`, the court playbook, the `rd-experiment` skill) sa
 
 ```mermaid
 flowchart TD
-  H[Person talks] --> A[AI writes five boxes<br/>mechanism / regimes / contract / falsifiers / landing]
+  H[Person talks] --> T[Fill the template<br/>social / math / stats / standard / range / five boxes]
+  T --> V{mlbot research validate}
+  V -->|fail| T
+  V -->|pass| A[AI does not swap the claim]
   A --> I{Already declared in the index?}
   I -->|trusted hit| STOP[Restate the close. Stop]
   I -->|no| ASK{Did they ask to measure?}
@@ -38,7 +41,7 @@ flowchart TD
 | Person | The sentence, `verdict` | Must not let the AI declare |
 | Instructions | When measuring is allowed, which ruler | Not the numbers |
 | Commands / program | FeatureStore, three windows, `gate_status`, five KPIs | Not `verdict` |
-| AI | Five boxes, command order, reading artifacts, restating numbers | No web evidence, no hand-edited `verdict` |
+| AI | Template, structural check, command order, reading artifacts, restating numbers | No web evidence, no hand-edited `verdict` |
 
 Until someone says “measure this,” the AI may only check lineage, the harness, and open a folder. No download. No backtest.
 

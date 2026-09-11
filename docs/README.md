@@ -6,6 +6,7 @@
 | 文 | 内容 |
 |---|---|
 | [第二个例子：资金费率极端拥挤就反手](examples/20260910_funding_fade_CN.md) · [EN](examples/20260910_funding_fade.en.md) | 从一句话到五格、数据、特征库、YAML、三段数字 |
+| [假设模板](hypothesis_template.md) · [EN](hypothesis_template.en.md) | 社会 / 数学 / 统计现象、验证标准、数据范围；AI 验模板再编排 |
 | [验证假设](hypothesis.md) · [EN](hypothesis.en.md) | 怎么写成可验证的几条、结论怎么用 |
 | [教训](lessons.md) | 闭棒、熔断、五项 KPI |
 | [使用方法](usage.md) · [EN](usage.en.md) | 安装、数据、回测命令 |

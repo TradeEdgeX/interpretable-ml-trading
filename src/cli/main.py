@@ -409,6 +409,12 @@ def research_stale(args):
     _research_forward("stale", list(args))
 
 
+@research.command("validate", context_settings=_RESEARCH_CTX)
+@click.argument("args", nargs=-1, type=click.UNPROCESSED)
+def research_validate(args):
+    _research_forward("validate", list(args))
+
+
 @research.command("init")
 @click.argument("topic")
 @click.option("--strategy", default="ma_cross")

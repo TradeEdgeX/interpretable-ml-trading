@@ -14,6 +14,7 @@ Court vs CV / IC: [`rd_qa.yaml`](rd_qa.yaml) · [`rd_qa_CN.md`](rd_qa_CN.md) · 
 | Artifact | Who | Tool |
 |---|---|---|
 | Hypothesis sentence | **Human** | chat + `DECISION.md` body |
+| Hypothesis template (anatomy + range) | **Human**, AI restates | `docs/hypothesis_template.md` · `mlbot research validate` |
 | Feature code + `feature_dependencies.yaml` | Agent (after the column is named) | editor |
 | FeatureStore / Phase 1 / Phase 3 numbers | **Program** (only if human asked to measure) | CLI |
 | `gate_status` | **Program** | `mlbot research close` |
@@ -50,6 +51,7 @@ tags: [ma-cross, demo]
 
 | Command | Writes | Does not |
 |---|---|---|
+| `mlbot research validate <id>` | nothing (prints template OK / INCOMPLETE) | truth, `verdict`, backtest |
 | `mlbot research init <id>` | experiment dir from `_template` | backtest, `verdict` |
 | `mlbot research run <id>` | unique `*_grid.yaml` via `event_backtest`, KS OFF | `verdict` |
 | `mlbot research close <id>` | `gate_status` | `verdict` |
@@ -70,12 +72,17 @@ tags: [ma-cross, demo]
 ```text
 Human: I want <mechanism>.
 Agent:
-  1. Restate the five boxes in docs/hypothesis.md §3. Do not swap the claim.
-  2. mlbot research index --trusted --query <english-slug>
+  1. Fill docs/hypothesis_template.md (sociology / math / stats /
+     standard / data range / five boxes). Do not swap the claim.
+     Check completeness against lessons in this tree — not web memory.
+  2. mlbot research init … (if no folder yet)
+     mlbot research validate <id>
+     Incomplete → edit paper only.
+  3. mlbot research index --trusted --query <english-slug>
      Hit → restate the close. Stop.
-  3. mlbot research harness ma_cross
-  4. If they only wanted the paperwork: mlbot research init … and stop.
-  5. If they asked to measure: FeatureStore if the column is new,
+  4. mlbot research harness ma_cross
+  5. If they only wanted the paperwork: stop after validate + init.
+  6. If they asked to measure: FeatureStore if the column is new,
      Phase 1 optional, Phase 3, then
      mlbot research close <id>
      Human --declare. A reject binds the robot and the hands.

@@ -5,8 +5,12 @@
 You have a trading idea and you are not sure it actually works.  
 Open this repo and talk to the AI.
 
+This repo is a **hypothesis validator**. First write the idea as a template: what social / mathematical / statistical phenomenon it is, what kills it, which data range measures it. The AI only checks that the template is complete and fits the ruler, then orchestrates commands. It **must not use the web as evidence**, and it must not declare for you.
+
 A web AI answers from articles and its own memory. You cannot reproduce that answer, and you can barely falsify it.  
-The AI in this repo **must not use the web as evidence**. It has to use the trades you downloaded, features already computed in this tree, and one locked ruler. Then a person and a robot can share one conclusion you can audit.
+Here the AI has to use the trades you downloaded, features already computed in this tree, and one locked ruler.
+
+Template: [docs/hypothesis_template.en.md](docs/hypothesis_template.en.md).
 
 Validation only — no auto-mined factors. Execution comes later as a generic layer (Nautilus). The same rules you already validated can plug in.
 
@@ -38,7 +42,15 @@ You still just talk. The difference is the AI **must take the path below**.
 | Falsifiers | Range-window drawdown worse than the trend window, or any window with negative CAGR. |
 | Landing | Same sentence for the robot and for your hands. |
 
-A web AI often stops here and suggests RSI. This repo starts measuring here.
+| Template slot | This sentence |
+|---|---|
+| Sociology | The textbook 50/200 is a coordination ritual. Chasers pay in a one-way year; they pay each other’s fees in a range. |
+| Mathematics | Closed-bar EMA50 / EMA200 sign change; void is a close through EMA50. |
+| Statistics | Treat as beta / trend exposure, not entry alpha. Three windows, listed separately. |
+| Validation standard | Any window with negative CAGR, or a deeper range drawdown. |
+| Data range | BTCUSDT · 2h · `bear_2022` / `bull_2023_2024` / `recent_range_to_bear`. |
+
+A web AI often stops here and suggests RSI. This repo first fills the [hypothesis template](docs/hypothesis_template.en.md) (who pays, what is measured, how it is sampled, which window, which KPI kills it). Only a passing template may be measured.
 
 ### 2. Not the web — your machine
 
@@ -83,15 +95,6 @@ A second full loop (fade crowded funding; exit when the z-score returns through 
 
 ---
 
-## Not here yet
-
-- Predicting tomorrow’s close
-- AI mining a pile of factors and shipping when the score looks high
-- Wired exchange orders
-- Using web articles or Nansen / Glassnode / Dune screenshots as a substitute for local data
-
----
-
 ## Install once
 
 So the AI can download bars, build features, and run the ruler on your machine. After that, keep talking.
@@ -101,7 +104,9 @@ python -m venv .venv && source .venv/bin/activate
 pip install -e .[dev]
 ```
 
-Download and FeatureStore commands: [docs/usage.en.md](docs/usage.en.md). Day to day you still say “measure this.”
+Download and FeatureStore commands: [docs/usage.en.md](docs/usage.en.md).  
+How features are computed, order-flow / math support, and how to add a column without rebuilding the layer: [docs/features.en.md](docs/features.en.md).  
+Day to day you still say “measure this.”
 
 How the person, the instructions, and the commands share one ruler: [docs/ARCHITECTURE.en.md](docs/ARCHITECTURE.en.md).
 
