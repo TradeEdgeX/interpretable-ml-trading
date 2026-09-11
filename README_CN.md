@@ -94,6 +94,7 @@ AI 缺列时要先补特征库，不许在回测里现场编一列。
 - A 股周一跌、后四天涨：[docs/examples/20260911_ashare_monday_rebound_CN.md](docs/examples/20260911_ashare_monday_rebound_CN.md) · [EN](docs/examples/20260911_ashare_monday_rebound.en.md)
 - BTC 大涨后 AI 山寨跟涨：[docs/examples/20260911_btc_lead_ai_alts_CN.md](docs/examples/20260911_btc_lead_ai_alts_CN.md) · [EN](docs/examples/20260911_btc_lead_ai_alts.en.md)
 - P99 大单 + 布林上轨追涨：[docs/examples/20260911_p99_bb_break_chase_CN.md](docs/examples/20260911_p99_bb_break_chase_CN.md) · [EN](docs/examples/20260911_p99_bb_break_chase.en.md)
+- 十倍股是不是小市值长持（cohort 已量）：[docs/examples/20260911_tenbagger_smallcap_CN.md](docs/examples/20260911_tenbagger_smallcap_CN.md) · [EN](docs/examples/20260911_tenbagger_smallcap.en.md)
 
 ---
 

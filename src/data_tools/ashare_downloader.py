@@ -8,9 +8,10 @@ from __future__ import annotations
 
 import logging
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, timedelta
 from pathlib import Path
-from typing import Optional
+from typing import Iterable, Optional
 
 import pandas as pd
 
@@ -40,6 +41,7 @@ _STD_COLS = [
     "close",
     "volume",
     "amount",
+    "turnover",
 ]
 
 
@@ -150,6 +152,39 @@ def _download_with_retry(
     raise last_exc  # type: ignore[misc]
 
 
+def _sina_symbol(symbol: str) -> str:
+    code = normalize_ashare_symbol(symbol)
+    digits = code.split(".", 1)[0] if "." in code else code
+    if digits.startswith(("6", "5", "9")):
+        return f"sh{digits}"
+    if digits.startswith(("4", "8")):
+        return f"bj{digits}"
+    return f"sz{digits}"
+
+
+def download_one_sina(symbol: str, start_date: str, end_date: str) -> pd.DataFrame:
+    """Sina daily qfq. Turnover is stored as a fraction; convert to percent."""
+    import akshare as ak
+
+    start = start_date.replace("-", "")[:8]
+    end = end_date.replace("-", "")[:8]
+    raw = ak.stock_zh_a_daily(
+        symbol=_sina_symbol(symbol),
+        start_date=start,
+        end_date=end,
+        adjust="qfq",
+    )
+    if raw is None or raw.empty:
+        return pd.DataFrame()
+    out = raw.copy()
+    out = out.rename(columns={c: str(c).strip() for c in out.columns})
+    if "turnover" in out.columns:
+        out["turnover"] = pd.to_numeric(out["turnover"], errors="coerce") * 100.0
+    digits = normalize_ashare_symbol(symbol)
+    digits = digits.split(".", 1)[0] if "." in digits else digits
+    return _normalize_ohlcv(out, digits)
+
+
 def download_ashare_daily(
     symbols: list[str],
     *,
@@ -209,6 +244,115 @@ def download_ashare_daily(
 
     return {
         "total": total,
+        "success": success,
+        "skipped": skipped,
+        "failed": failed,
+        "failed_symbols": failed_symbols,
+        "elapsed_sec": round(time.monotonic() - t0, 1),
+        "output_dir": str(output_dir),
+    }
+
+
+def _file_covers_start(path: Path, start: str, *, min_rows: int = 20) -> bool:
+    """Resume if the parquet already has a usable daily tape.
+
+    Names listed after ``start`` correctly begin at IPO — do not treat that
+    as incomplete history.
+    """
+    del start
+    if not path.is_file():
+        return False
+    try:
+        df = pd.read_parquet(path)
+    except Exception:  # noqa: BLE001
+        return False
+    if df.empty or len(df) < min_rows or "close" not in df.columns:
+        return False
+    if "turnover" not in df.columns or "amount" not in df.columns:
+        return False
+    return True
+
+
+def download_ashare_universe_sina(
+    symbols: Iterable[str],
+    *,
+    output_dir: str | Path = "data/ashare/daily",
+    start_date: str = "2016-01-01",
+    end_date: Optional[str] = None,
+    resume: bool = True,
+    workers: int = 4,
+    sleep_between: float = 0.05,
+) -> dict:
+    """Thread-pooled Sina qfq download. Resume skips files that already reach start."""
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    end = (end_date or date.today().isoformat())[:10]
+    start = start_date[:10]
+    todo: list[str] = []
+    skipped = 0
+    for raw in symbols:
+        sym = normalize_ashare_symbol(raw)
+        if "." in sym:
+            sym = sym.split(".", 1)[0]
+        if not sym:
+            continue
+        dest = output_dir / f"{sym}.parquet"
+        if resume and _file_covers_start(dest, start):
+            skipped += 1
+            continue
+        todo.append(sym)
+
+    success = failed = 0
+    failed_symbols: list[str] = []
+    t0 = time.monotonic()
+    if not todo:
+        return {
+            "total": skipped,
+            "success": 0,
+            "skipped": skipped,
+            "failed": 0,
+            "failed_symbols": [],
+            "elapsed_sec": 0.0,
+            "output_dir": str(output_dir),
+        }
+
+    def _one(sym: str) -> tuple[str, str, int]:
+        dest = output_dir / f"{sym}.parquet"
+        try:
+            df = download_one_sina(sym, start.replace("-", ""), end.replace("-", ""))
+            time.sleep(sleep_between)
+            if df.empty:
+                return sym, "empty", 0
+            df.to_parquet(dest, index=False)
+            return sym, "ok", int(len(df))
+        except Exception as exc:  # noqa: BLE001
+            return sym, f"err:{exc}"[:80], 0
+
+    logger.info("sina qfq: %d to fetch, %d skipped, workers=%d", len(todo), skipped, workers)
+    with ThreadPoolExecutor(max_workers=max(1, int(workers))) as pool:
+        futs = {pool.submit(_one, s): s for s in todo}
+        done = 0
+        for fut in as_completed(futs):
+            done += 1
+            try:
+                sym, status, rows = fut.result()
+            except Exception as exc:  # noqa: BLE001
+                failed += 1
+                failed_symbols.append(futs[fut])
+                logger.error("[%d/%d] %s %s", done, len(todo), futs[fut], exc)
+                continue
+            if status == "ok":
+                success += 1
+                if done % 50 == 0 or done == len(todo):
+                    logger.info("[%d/%d] %s rows=%d", done, len(todo), sym, rows)
+            else:
+                failed += 1
+                failed_symbols.append(sym)
+                if done % 50 == 0:
+                    logger.warning("[%d/%d] %s %s", done, len(todo), sym, status)
+
+    return {
+        "total": skipped + len(todo),
         "success": success,
         "skipped": skipped,
         "failed": failed,

@@ -7,6 +7,7 @@ from pathlib import Path
 import pandas as pd
 
 from src.data_tools.ashare_downloader import (
+    _sina_symbol,
     is_ashare_daily_path,
     load_ashare_daily_bars,
     normalize_ashare_symbol,
@@ -17,6 +18,9 @@ def test_normalize_ashare_symbol():
     assert normalize_ashare_symbol("000300.SH") == "000300.SH"
     assert normalize_ashare_symbol("sh000300") == "000300.SH"
     assert normalize_ashare_symbol("600519") == "600519"
+    assert _sina_symbol("600519") == "sh600519"
+    assert _sina_symbol("000001.SZ") == "sz000001"
+    assert _sina_symbol("300750") == "sz300750"
 
 
 def test_load_ashare_daily_bars_roundtrip(tmp_path: Path):
@@ -29,6 +33,8 @@ def test_load_ashare_daily_bars_roundtrip(tmp_path: Path):
             "low": [0.9, 1.0],
             "close": [1.1, 1.25],
             "volume": [100, 110],
+            "amount": [1e8, 1.1e8],
+            "turnover": [1.2, 1.3],
         }
     )
     out = tmp_path / "000300.SH.parquet"

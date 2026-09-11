@@ -17,6 +17,8 @@ from typing import Dict, Iterable, Optional, Tuple
 KNOWN_HARNESSES: Tuple[str, ...] = (
     "event_backtest",
     "phase1_scan_only",
+    # Buy-and-hold panel (entry date × universe × fixed years).
+    "cohort_hold",
 )
 
 
@@ -40,6 +42,13 @@ _SPECS: Tuple[HarnessSpec, ...] = (
         "event_backtest",
         "python -m scripts.event_backtest --strategy ma_cross --no-kill-switch",
         notes="Public textbook MA demo — not a live sleeve",
+    ),
+    HarnessSpec(
+        "tenbagger_smallcap",
+        "cohort_hold",
+        "python scripts/research/cohort_hold.py",
+        forbid_event_backtest=True,
+        notes="A-share small-cap hold panel; not the 2h event clock",
     ),
 )
 

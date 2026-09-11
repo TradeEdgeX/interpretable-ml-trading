@@ -102,6 +102,8 @@ mlbot research close <id>      # then --declare
 
 **Rule:** download and sample what the math names. Do not switch to unrelated data to look rigorous. A window with no listing or no files is “no sample.” Do not promote on the recent window alone.
 
+A story that has not happened (“which name 10×s next”) has no closed-bar column and **cannot** be measured. Only a historical rule can (e.g. small on the entry date, hold a fixed number of years). That exam is a **cohort panel**, not `event_backtest`. Measured: [examples/20260911_tenbagger_smallcap.en.md](examples/20260911_tenbagger_smallcap.en.md).
+
 ### 3.1 Claim class
 
 | Class | Where the money comes from | When choosing data | Do not |

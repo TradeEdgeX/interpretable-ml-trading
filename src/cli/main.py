@@ -268,27 +268,101 @@ def data_download_open_interest(
 @click.option("--end-date", default=None, help="YYYY-MM-DD")
 @click.option("--output-dir", default="data/ashare/daily", show_default=True)
 @click.option("--no-resume", is_flag=True, help="Re-download even if parquet exists")
-def data_download_ashare(symbols, years, start_date, end_date, output_dir, no_resume):
-    """Download A-share / index daily OHLCV via AKShare (court examples only)."""
-    from src.data_tools.ashare_downloader import download_ashare_daily
+@click.option(
+    "--universe",
+    default=None,
+    help="listed,delisted,or listed,delisted — full SH/SZ A-share tape via baostock",
+)
+@click.option(
+    "--backend",
+    type=click.Choice(["akshare", "baostock", "sina"]),
+    default="akshare",
+    show_default=True,
+)
+@click.option("--workers", default=3, show_default=True, type=int)
+@click.option(
+    "--basic-path",
+    default="data/ashare/stock_basic/stock_basic.parquet",
+    show_default=True,
+)
+def data_download_ashare(
+    symbols,
+    years,
+    start_date,
+    end_date,
+    output_dir,
+    no_resume,
+    universe,
+    backend,
+    workers,
+    basic_path,
+):
+    """Download A-share / index daily OHLCV (court examples only)."""
+    if universe:
+        from src.data_tools.ashare_baostock import fetch_stock_basic, universe_symbols
 
-    syms = [s.strip() for s in str(symbols).split(",") if s.strip()]
-    stats = download_ashare_daily(
-        syms,
-        output_dir=output_dir,
-        years=int(years),
-        start_date=start_date,
-        end_date=end_date,
-        resume=not no_resume,
-    )
+        import pandas as pd
+
+        basic_fp = Path(basic_path)
+        if basic_fp.is_file():
+            basic = pd.read_parquet(basic_fp)
+        else:
+            basic = fetch_stock_basic(basic_fp)
+        start = start_date or None
+        if start is None:
+            from datetime import date, timedelta
+
+            start = (date.today() - timedelta(days=int(years) * 365)).isoformat()
+        syms = universe_symbols(basic, include=universe)
+        engine = backend if backend != "akshare" else "sina"
+        if engine == "baostock":
+            from src.data_tools.ashare_baostock import download_ashare_universe
+
+            stats = download_ashare_universe(
+                syms,
+                output_dir=output_dir,
+                start_date=start,
+                end_date=end_date,
+                resume=not no_resume,
+                workers=int(workers),
+            )
+        else:
+            from src.data_tools.ashare_downloader import download_ashare_universe_sina
+
+            stats = download_ashare_universe_sina(
+                syms,
+                output_dir=output_dir,
+                start_date=start,
+                end_date=end_date,
+                resume=not no_resume,
+                workers=int(workers),
+            )
+    else:
+        from src.data_tools.ashare_downloader import download_ashare_daily
+
+        if backend == "baostock":
+            click.echo("baostock backend requires --universe; use akshare for --symbols")
+            sys.exit(2)
+        syms = [s.strip() for s in str(symbols).split(",") if s.strip()]
+        stats = download_ashare_daily(
+            syms,
+            output_dir=output_dir,
+            years=int(years),
+            start_date=start_date,
+            end_date=end_date,
+            resume=not no_resume,
+        )
     click.echo(
         f"ashare daily: total={stats['total']} success={stats['success']} "
         f"skipped={stats['skipped']} failed={stats['failed']} "
         f"elapsed={stats['elapsed_sec']}s → {stats['output_dir']}"
     )
     if stats["failed"]:
-        click.echo(f"failed symbols: {stats['failed_symbols']}")
-        sys.exit(1)
+        click.echo(f"failed symbols: {stats['failed_symbols'][:20]}")
+        if len(stats["failed_symbols"]) > 20:
+            click.echo(f"  … +{len(stats['failed_symbols']) - 20} more")
+        if not universe:
+            sys.exit(1)
 
 
 @data.command("pipeline")

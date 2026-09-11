@@ -33,6 +33,7 @@ mlbot data convert --symbols BTCUSDT,ETHUSDT
 
 # A-share / index daily (court examples only; no Lab aux panels)
 mlbot data download-ashare --symbols 000300.SH --start-date 2019-01-01
+mlbot data download-ashare --universe listed,delisted --start-date 2016-01-01 --backend sina
 # → data/ashare/daily/ ; calendar: config/market_segment_ashare.yaml
 
 mlbot feature-store build \
