@@ -428,6 +428,31 @@ def research_init(topic, strategy, layers, segment, force):
     click.echo(f"created {out}")
 
 
+@cli.command("lab")
+@click.option("--port", "-p", type=int, default=8008, show_default=True)
+@click.option("--bind", default="127.0.0.1", show_default=True)
+@click.option("--reload", is_flag=True, help="Reload on code changes (dev)")
+def lab_cmd(port: int, bind: str, reload: bool) -> None:
+    """Local court Lab: experiments, Q&A, results browse. No auxiliary trading."""
+    from cli.i18n import t
+
+    host_label = bind if bind not in ("0.0.0.0", "::") else "localhost"
+    click.echo(t("cli.lab.banner"))
+    click.echo(t("cli.bind", bind=bind, port=port))
+    click.echo(t("cli.lab.rd", host=host_label, port=port))
+    click.echo(t("cli.lab.qa", host=host_label, port=port))
+    click.echo(t("cli.lab.browse", host=host_label, port=port))
+    click.echo(t("cli.stop"))
+    import uvicorn
+
+    if reload:
+        uvicorn.run("src.lab.app:app", host=bind, port=int(port), reload=True)
+        return
+    from src.lab.app import app
+
+    uvicorn.run(app, host=bind, port=int(port))
+
+
 def main() -> None:
     cli()
 

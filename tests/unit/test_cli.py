@@ -15,7 +15,7 @@ class TestCLI:
         assert "research" in result.output
         assert "train" not in result.output
         assert "nnmultihead" not in result.output
-        assert "lab" not in result.output
+        assert "lab" in result.output
         assert "console" not in result.output
 
     def test_cli_version(self):
@@ -78,6 +78,16 @@ class TestResearchCommands:
             "scorecard",
         ):
             assert name in result.output
+
+
+class TestLabCommand:
+    def test_lab_help(self):
+        result = CliRunner().invoke(cli, ["lab", "--help"])
+        assert result.exit_code == 0
+        assert "experiments" in result.output.lower() or "实验" in result.output
+        assert "auxiliary" in result.output.lower() or "辅助" in result.output
+        assert "ashare" not in result.output.lower()
+        assert "console" not in result.output.lower()
 
 
 class TestFeatureStoreCommands:

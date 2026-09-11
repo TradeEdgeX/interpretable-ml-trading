@@ -81,6 +81,15 @@ mlbot research close --all
 
 公开 dummy：`config/strategies/ma_cross/`。示例头信息：`config/experiments/_examples/`。
 
+本机看实验卡片、问答、`results/`：
+
+```bash
+mlbot lab
+# http://127.0.0.1:8008/rd
+```
+
+不含 A股 / 港股 / 币圈辅助，也不含 CMS。
+
 ---
 
 ## 5. 执行

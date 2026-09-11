@@ -40,6 +40,10 @@ setup(
     package_dir={
         "": ".",
     },
+    package_data={
+        "src.lab": ["static/*"],
+    },
+    include_package_data=True,
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",

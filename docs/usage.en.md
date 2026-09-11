@@ -73,6 +73,15 @@ mlbot research close --all
 
 Public dummy: `config/strategies/ma_cross/`. Example front-matter: `config/experiments/_examples/`.
 
+Local experiment cards, Q&A, and `results/`:
+
+```bash
+mlbot lab
+# http://127.0.0.1:8008/rd
+```
+
+No A-share / HK / crypto auxiliary panels, and no CMS.
+
 ---
 
 ## 5. Execution

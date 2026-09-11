@@ -57,9 +57,10 @@ Checked on this machine: the four `mlbot` groups and `event_backtest --help` sta
 | `mlbot research index` / `harness` / `init` / `close` / `scorecard` / `stale` / `standardize` | Runs | Court paperwork. `--trusted` only sees declared rows |
 | `mlbot research review` | Runs | Needs an id or `--all`; bare invoke is a usage error |
 | `mlbot research run` / `python -m scripts.event_backtest` | Entry runs | Only if asked to measure; three windows, kill switch off, `feature_store_strict` |
+| `mlbot lab` | Entry runs | Local court portal: `/rd`, `/rd/qa`, `/browse`. No auxiliary trading / CMS |
 | `--margin-mode coin_m` | **Refused on purpose** | Public court is USD-M |
 
-Day to day, talk to the AI. If you type by hand, use the table above. There is no `mlbot train` / `lab` / `console` / `pipeline`.
+Day to day, talk to the AI. If you type by hand, use the table above. There is no `mlbot train` / `console` / `pipeline`.
 
 Flags: [usage.en.md](usage.en.md). Who writes which field: [agent/rd_playbook.md](agent/rd_playbook.md).
 
@@ -117,6 +118,7 @@ flowchart LR
 | `config/feature_dependencies.yaml` | Feature DAG |
 | `src/research/` | Court / gate / harness |
 | `src/cli/main.py` | Public `mlbot` |
+| `src/lab/` | `mlbot lab`: experiments / Q&A / results browse |
 | `scripts/event_backtest/` | Event backtest |
 | `config/strategies/ma_cross/` | Public dummy |
 

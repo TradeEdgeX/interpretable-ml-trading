@@ -57,9 +57,10 @@ flowchart TD
 | `mlbot research index` / `harness` / `init` / `close` / `scorecard` / `stale` / `standardize` | 能跑 | 法庭纸面。`--trusted` 只找已经宣判的 |
 | `mlbot research review` | 能跑 | 必须带实验 id 或 `--all`，光敲子命令会用法退出 |
 | `mlbot research run` / `python -m scripts.event_backtest` | 入口能跑 | 人说了测才许用；要三段、熔断关、`feature_store_strict` |
+| `mlbot lab` | 入口能跑 | 本机法庭门户：`/rd` 实验、`/rd/qa` 问答、`/browse` results。不含辅助盘 / CMS |
 | `--margin-mode coin_m` | **故意拒绝** | 公开法庭只走 U 本位 |
 
-人平时跟 AI 说话即可。要自己敲，走上面这张表。没有 `mlbot train` / `lab` / `console` / `pipeline`。
+人平时跟 AI 说话即可。要自己敲，走上面这张表。没有 `mlbot train` / `console` / `pipeline`。
 
 详细开关在 [usage.md](usage.md)。谁许写哪一格在 [agent/rd_playbook.md](agent/rd_playbook.md)。
 
@@ -117,6 +118,7 @@ flowchart LR
 | `config/feature_dependencies.yaml` | 特征 DAG |
 | `src/research/` | court / gate / harness |
 | `src/cli/main.py` | `mlbot` 公开入口 |
+| `src/lab/` | `mlbot lab`：实验 / 问答 / results 浏览 |
 | `scripts/event_backtest/` | 事件回测 |
 | `config/strategies/ma_cross/` | 公开 dummy |
 

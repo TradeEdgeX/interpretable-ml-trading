@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>问答 · MLBot Lab</title>
+  <link rel="stylesheet" href="/static/lab.css"/>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="top-nav" aria-label="Lab">
+      <span class="brand">MLBot Lab</span>
+      <a href="/rd">实验管理</a>
+      <a href="/rd/qa" class="active">问答</a>
+      <a href="/browse">浏览 results</a>
+    </nav>
+    <header>
+      <h1 id="qaTitle">研发问答</h1>
+      <p class="subhead" id="qaBlurb"></p>
+      <p class="muted" id="qaMeta"></p>
+      <div class="toolbar">
+        <label>搜索 <input id="searchInput" type="search" placeholder="问题 / 标签 / TSS / IC"/></label>
+        <label>语言
+          <select id="langSelect">
+            <option value="zh">中文</option>
+            <option value="en">English</option>
+          </select>
+        </label>
+        <span id="countLine" class="muted"></span>
+      </div>
+    </header>
+    <div id="qaList"></div>
+  </div>
+  <script defer src="/static/qa.js"></script>
+</body>
+</html>

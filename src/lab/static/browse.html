@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>浏览 results · MLBot Lab</title>
+  <link rel="stylesheet" href="/static/lab.css"/>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="top-nav" aria-label="Lab">
+      <span class="brand">MLBot Lab</span>
+      <a href="/rd">实验管理</a>
+      <a href="/rd/qa">问答</a>
+      <a href="/browse" class="active">浏览 results</a>
+    </nav>
+    <header>
+      <h1>浏览 results</h1>
+      <p class="subhead">只读本机 <code>results/</code>。不写盘，不下单。</p>
+      <p class="crumbs" id="crumbs"></p>
+    </header>
+    <div class="pane">
+      <table>
+        <thead><tr><th>类型</th><th>名称</th><th>大小</th></tr></thead>
+        <tbody id="browseBody"><tr><td colspan="3" class="muted">加载中…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+  <script defer src="/static/browse.js"></script>
+</body>
+</html>

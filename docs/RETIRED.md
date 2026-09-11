@@ -8,8 +8,8 @@
 | 已从本树删除 | 原因 |
 |---|---|
 | 自制 OMS / 多账户 / 币本位 | 绑死私有数据库与密钥；公开执行核改 Nautilus |
-| CMS / frontend / website | 写路径与个人运维 |
-| A 股 / 港股 / `lab/` / `trade_log` | 个人持仓与辅助盘 |
+| CMS / live frontend / website | 写路径与个人运维 |
+| A 股 / 港股 / 币圈辅助 / 大环境 / `trade_log` | 个人持仓与辅助盘；`mlbot lab` 只留法庭页 |
 | `live/` · `deploy/` · 生产 Makefile SSH | 主机与密钥面 |
 | 270+ 实验变体树 | 公开只要 court 软件 + `_examples` |
 | NN / 树模型 / `nnmultihead` / RL / `mlbot train` | 历史路径，不是主叙事 |
