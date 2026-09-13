@@ -1,4 +1,4 @@
-"""Court Lab HTTP app: /rd, /rd/qa, /browse. No auxiliary or CMS routes."""
+"""Court Lab HTTP app: /rd, /rd/qa, /browse."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ STATIC = static_dir()
 
 app = FastAPI(
     title="MLBot Lab",
-    description="Local court Lab: experiments, Q&A, results browse. No auxiliary trading.",
+    description="Local court Lab: experiments, Q&A, results browse.",
 )
 if STATIC.is_dir():
     app.mount("/static", StaticFiles(directory=str(STATIC)), name="static")

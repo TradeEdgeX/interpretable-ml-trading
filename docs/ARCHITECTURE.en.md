@@ -61,7 +61,7 @@ Checked on this machine: the four `mlbot` groups and `event_backtest --help` sta
 | `mlbot research index` / `harness` / `init` / `close` / `scorecard` / `stale` / `standardize` | Runs | Court paperwork. `--trusted` only sees declared rows |
 | `mlbot research review` | Runs | Needs an id or `--all`; bare invoke is a usage error |
 | `mlbot research run` / `python -m scripts.event_backtest` | Entry runs | Only if asked to measure; three windows, kill switch off, `feature_store_strict` |
-| `mlbot lab` | Entry runs | Local court portal: `/rd`, `/rd/qa`, `/browse`. No auxiliary trading / CMS |
+| `mlbot lab` | Entry runs | Local court portal: `/rd`, `/rd/qa`, `/browse` |
 | `--margin-mode coin_m` | **Refused on purpose** | Public court is USD-M |
 
 Day to day, talk to the AI. If you type by hand, use the table above. There is no `mlbot train` / `console` / `pipeline`.

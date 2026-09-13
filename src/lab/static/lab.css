@@ -27,7 +27,12 @@ code, pre, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; 
   align-items: baseline;
   margin-bottom: 1rem;
 }
-.top-nav .brand { color: var(--muted); font-size: 0.8rem; }
+.top-nav .brand {
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
 .top-nav a.active { font-weight: 600; }
 h1 { margin: 0 0 0.35rem; font-size: 1.35rem; }
 .subhead { margin: 0 0 0.75rem; color: var(--muted); font-size: 0.85rem; }

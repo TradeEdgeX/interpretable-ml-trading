@@ -61,7 +61,7 @@ flowchart TD
 | `mlbot research index` / `harness` / `init` / `close` / `scorecard` / `stale` / `standardize` | 能跑 | 法庭纸面。`--trusted` 只找已经宣判的 |
 | `mlbot research review` | 能跑 | 必须带实验 id 或 `--all`，光敲子命令会用法退出 |
 | `mlbot research run` / `python -m scripts.event_backtest` | 入口能跑 | 人说了测才许用；要三段、熔断关、`feature_store_strict` |
-| `mlbot lab` | 入口能跑 | 本机法庭门户：`/rd` 实验、`/rd/qa` 问答、`/browse` results。不含辅助盘 / CMS |
+| `mlbot lab` | 入口能跑 | 本机法庭门户：`/rd` 实验、`/rd/qa` 问答、`/browse` results |
 | `--margin-mode coin_m` | **故意拒绝** | 公开法庭只走 U 本位 |
 
 人平时跟 AI 说话即可。要自己敲，走上面这张表。没有 `mlbot train` / `console` / `pipeline`。

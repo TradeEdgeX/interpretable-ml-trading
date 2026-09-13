@@ -11,8 +11,8 @@ _lang: Lang = "zh"
 
 _MESSAGES: dict[Lang, dict[str, str]] = {
     "zh": {
-        "cli.lab.help": "本地法庭 Lab：实验管理 + 问答 + results 浏览。不含辅助盘。",
-        "cli.lab.banner": "🧪 MLBot Lab — 本地法庭门户（实验 / 问答 / results）",
+        "cli.lab.help": "本地法庭 Lab：实验管理、研发问答、浏览 results。",
+        "cli.lab.banner": "🧪 MLBot Lab — 本机实验 / 问答 / results",
         "cli.lab.rd": "   实验管理: http://{host}:{port}/rd",
         "cli.lab.qa": "   问答:     http://{host}:{port}/rd/qa",
         "cli.lab.browse": "   浏览:     http://{host}:{port}/browse",
@@ -20,8 +20,8 @@ _MESSAGES: dict[Lang, dict[str, str]] = {
         "cli.bind": "   bind:     http://{bind}:{port}/",
     },
     "en": {
-        "cli.lab.help": "Local court Lab: experiments, Q&A, results browse. No auxiliary trading.",
-        "cli.lab.banner": "🧪 MLBot Lab — local court portal (experiments / Q&A / results)",
+        "cli.lab.help": "Local court Lab: experiments, Q&A, results browse.",
+        "cli.lab.banner": "🧪 MLBot Lab — local experiments / Q&A / results",
         "cli.lab.rd": "   Experiments: http://{host}:{port}/rd",
         "cli.lab.qa": "   Q&A:         http://{host}:{port}/rd/qa",
         "cli.lab.browse": "   Browse:      http://{host}:{port}/browse",

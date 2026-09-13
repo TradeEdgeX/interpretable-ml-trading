@@ -94,7 +94,7 @@ mlbot lab
 # http://127.0.0.1:8008/rd
 ```
 
-不含 A股 / 港股 / 币圈辅助，也不含 CMS。
+三页：`/rd` 实验卡片、`/rd/qa` 问答、`/browse` 只读 `results/`。
 
 ---
 

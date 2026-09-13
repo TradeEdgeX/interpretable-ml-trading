@@ -1,4 +1,4 @@
-"""Court Lab: experiment cards + browse. No auxiliary / CMS routes."""
+"""Court Lab: experiment cards + browse. Court pages only."""
 
 from __future__ import annotations
 
@@ -18,6 +18,28 @@ def _route_paths() -> set[str]:
         if path:
             out.add(str(path))
     return out
+
+
+def test_lab_html_has_no_retired_aux_copy() -> None:
+    static = REPO / "src" / "lab" / "static"
+    banned = (
+        "港股",
+        "币圈辅助",
+        "A股",
+        "CMS",
+        "/hk",
+        "/ashare",
+        "/macro",
+        "/crypto-xsection",
+    )
+    for name in ("rd.html", "qa.html", "browse.html"):
+        text = (static / name).read_text(encoding="utf-8")
+        for needle in banned:
+            assert needle not in text, f"{name} still mentions {needle!r}"
+        assert "MLBot Lab" in text
+        assert 'href="/rd"' in text
+        assert 'href="/rd/qa"' in text
+        assert 'href="/browse"' in text
 
 
 def test_lab_pages_are_court_only() -> None:

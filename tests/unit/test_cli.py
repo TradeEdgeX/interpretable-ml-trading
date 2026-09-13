@@ -86,8 +86,10 @@ class TestLabCommand:
         result = CliRunner().invoke(cli, ["lab", "--help"])
         assert result.exit_code == 0
         assert "experiments" in result.output.lower() or "实验" in result.output
-        assert "auxiliary" in result.output.lower() or "辅助" in result.output
         assert "ashare" not in result.output.lower()
+        assert "港股" not in result.output
+        assert "hk" not in result.output.lower()
+        assert "crypto" not in result.output.lower()
         assert "console" not in result.output.lower()
 
 

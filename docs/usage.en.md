@@ -86,7 +86,7 @@ mlbot lab
 # http://127.0.0.1:8008/rd
 ```
 
-No A-share / HK / crypto auxiliary panels, and no CMS.
+Three pages: `/rd` experiment cards, `/rd/qa` Q&A, `/browse` read-only `results/`.
 
 ---
 

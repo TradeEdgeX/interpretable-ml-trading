@@ -548,7 +548,7 @@ def research_init(topic, strategy, layers, segment, force):
 @click.option("--bind", default="127.0.0.1", show_default=True)
 @click.option("--reload", is_flag=True, help="Reload on code changes (dev)")
 def lab_cmd(port: int, bind: str, reload: bool) -> None:
-    """Local court Lab: experiments, Q&A, results browse. No auxiliary trading."""
+    """Local court Lab: experiments, Q&A, results browse."""
     from cli.i18n import t
 
     host_label = bind if bind not in ("0.0.0.0", "::") else "localhost"
