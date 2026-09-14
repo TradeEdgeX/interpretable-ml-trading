@@ -27,7 +27,7 @@
 | [BTC 大涨后 AI 山寨跟涨](examples/20260911_btc_lead_ai_alts_CN.md) · [EN](examples/20260911_btc_lead_ai_alts.en.md) | `event_backtest` · 山寨 · 2h | beta | 熊段无样本；近窗 −1.52%；判决留给人 |
 | [P99 大单 + 布林上轨追涨](examples/20260911_p99_bb_break_chase_CN.md) · [EN](examples/20260911_p99_bb_break_chase.en.md) | `event_backtest` · BTC · tick→2h | 肥尾右尾 | 牛段 −0.25%；判决留给人 |
 | [十倍股 / 小市值长持](examples/20260911_tenbagger_smallcap_CN.md) · [EN](examples/20260911_tenbagger_smallcap.en.md) | `cohort_hold` | 肥尾极薄 / 小市值 beta | 十倍率 0.11% vs 0.11%；已 reject |
-| [每天给全市场打分，买最热的一档](cs_panel_CN.md) · [EN](cs_panel.en.md) | 每天排名，不是一根进出 | 框架说明 | 已量的两句都不成立，不是推荐策略 |
+| [买最热的股票，能跑赢「每人买一点」吗](cs_panel_CN.md) · [EN](cs_panel.en.md) | 每天买最热的，对照每人买一点 | 想法 → 报告 → 读表 | 两句都不成立，不是推荐策略 |
 | [A 股动量+成交额](examples/20260911_ashare_cs_mom_amount_CN.md) · [EN](examples/20260911_ashare_cs_mom_amount.en.md) | `cs_panel` | beta 续涨 → 符号是反转 | 三段输等权；已 reject |
 | [A 股热板块相对等权](examples/20260911_ashare_cs_sector_cost_CN.md) · [EN](examples/20260911_ashare_cs_sector_cost.en.md) | `cs_sector` | 板块轮动 / beta | 牛 / 震荡相对等权为负；已 reject |
 | [买 ETF 会错过美股牛市吗](examples/20260914_eq_us_spy_qqq_beta_CN.md) · [EN](examples/20260914_eq_us_spy_qqq_beta.en.md) | `eq_us_daily` | beta | 超跌时钟年化低于同窗买入持有；已 reject |

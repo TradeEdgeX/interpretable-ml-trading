@@ -102,7 +102,7 @@ AI 缺列时要先补特征库，不许在回测里现场编一列。
 - 买 ETF 会错过美股牛市吗（SPY/QQQ beta，已 reject）：[docs/examples/20260914_eq_us_spy_qqq_beta_CN.md](docs/examples/20260914_eq_us_spy_qqq_beta_CN.md) · [EN](docs/examples/20260914_eq_us_spy_qqq_beta.en.md)
 - AI 算力开支过多时 BTC 是不是熊（芯片销售环比 vs 闭棒 MA200，已 reject）：[docs/examples/20260914_ai_chip_spend_btc_regime_CN.md](docs/examples/20260914_ai_chip_spend_btc_regime_CN.md) · [EN](docs/examples/20260914_ai_chip_spend_btc_regime.en.md)
 - AI 融资公告后做多 BTC：[docs/examples/20260914_ai_financing_btc_CN.md](docs/examples/20260914_ai_financing_btc_CN.md) · [EN](docs/examples/20260914_ai_financing_btc.en.md)
-- 每天给全市场打分，买最热的一档：[docs/cs_panel_CN.md](docs/cs_panel_CN.md) · [EN](docs/cs_panel.en.md)
+- 买最热的股票，能跑赢「每人买一点」吗：[docs/cs_panel_CN.md](docs/cs_panel_CN.md) · [EN](docs/cs_panel.en.md)
 
 上面金叉是第一幕：网上的 AI 讲故事，本仓库走模板、本机数据和同一把尺子。其余例子都是**同一条故事换一句台词**——先讲「这一句在本仓库里怎么走完」，再按 **设计 / 数据 / 特征 / IC / 验证 / 结论 / 报告解读** 七段展开。目录：[docs/README.md](docs/README.md) · 展厅：[website/docs/zh/gallery/index.md](website/docs/zh/gallery/index.md)。
 

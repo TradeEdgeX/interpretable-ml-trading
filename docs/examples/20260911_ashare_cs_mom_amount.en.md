@@ -7,7 +7,7 @@ Class first as **beta**: this buys the “rose a lot and traded hot” sleeve, n
 
 This sentence scores the whole market every day on two locked columns: how much it rose, and how hot its own amount is. It is not index timing, and it is not an overnight hunt for a better factor. How score lines up with later return is a flashlight only; it cannot change the sentence.
 
-How daily whole-market scoring is measured: [cs_panel.en.md](../cs_panel.en.md). Sector ranking is a different sentence: [hot sectors vs equal-weight](20260911_ashare_cs_sector_cost.en.md).
+Idea, report, and how to read it: [cs_panel.en.md](../cs_panel.en.md). Sector ranking is a different sentence: [hot sectors vs equal-weight](20260911_ashare_cs_sector_cost.en.md).
 
 中文：[20260911_ashare_cs_mom_amount_CN.md](20260911_ashare_cs_mom_amount_CN.md)
 

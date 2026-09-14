@@ -130,9 +130,9 @@ Walkthrough: [docs/examples/20260911_tenbagger_smallcap.en.md](https://github.co
 | `bear_2021` | +9.09% | −0.03% | 0.09% vs 0.12% |
 | `bull_924` / `chop_recent` | no sample | no sample | — |
 
-## Score the whole market every day
+## Do the hottest stocks beat “buy a little of everyone”?
 
-How it is measured: [docs/cs_panel.en.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/cs_panel.en.md)
+Idea, report, then how to read it: [docs/cs_panel.en.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/cs_panel.en.md)
 
 ### CS momentum + amount
 

@@ -7,7 +7,7 @@
 
 这句是「每天给全市场打分」的两列：涨得多、成交也热。不是择时大盘，也不是过夜换因子再测。两列事先锁死；打分和未来涨跌的关系只用来照亮，不能改题。
 
-每天给全市场打分怎么测，见 [cs_panel_CN.md](../cs_panel_CN.md)。板块排序是另一句：[热板块相对等权](20260911_ashare_cs_sector_cost_CN.md)。
+想法、报告和读表见 [cs_panel_CN.md](../cs_panel_CN.md)。板块排序是另一句：[热板块相对等权](20260911_ashare_cs_sector_cost_CN.md)。
 
 English: [20260911_ashare_cs_mom_amount.en.md](20260911_ashare_cs_mom_amount.en.md)
 

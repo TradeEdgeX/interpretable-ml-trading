@@ -130,9 +130,9 @@
 | `bear_2021` | +9.09% | −0.03% | 0.09% vs 0.12% |
 | `bull_924` / `chop_recent` | 无样本 | 无样本 | — |
 
-## 每天给全市场打分
+## 买最热的股票，能跑赢「每人买一点」吗
 
-怎么测：[docs/cs_panel_CN.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/cs_panel_CN.md)
+人话说明（想法 → 报告 → 读表）：[docs/cs_panel_CN.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/cs_panel_CN.md)
 
 ### CS 动量 + 成交额
 
