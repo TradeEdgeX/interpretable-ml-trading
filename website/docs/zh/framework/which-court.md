@@ -1,25 +1,26 @@
-# 三种评测机
+# 三种回测
 
-**一句话：** 评测机是锁死的回测脚本，只负责印五项 KPI 分窗表。仓库里有三种：事件回测、横截面回测、组合回测。
+回测脚本是事先定好的尺子，只负责印出三段、五项数字。这个仓库里常见三种比法：一根品种进出场、每天给全市场打分、多句话放在一起看。
 
-## 三种评测机
+## 三种比法
 
-| 评测机 | 量什么 | 什么时候用 |
+| 比法 | 量什么 | 什么时候用 |
 |---|---|---|
-| 事件回测 | 单品种、事件轴（一根棒一根棒走） | 均线交叉、费率反转、大单追涨 |
-| 横截面回测 | 一篮子、每天打分排序 | 动量排名、成交额排名 |
-| 组合回测 | 多策略、多品种组合 | 看几个策略放在一起的效果 |
+| 一根品种进出场 | 一个名字，一根棒一根棒走 | 均线交叉、费率反手、特别大的单追涨 |
+| 每天给全市场打分 | 一篮子名字，每天排名 | 买最热的股票、买最热的板块 |
+| 多句话放在一起 | 几个策略、几个品种合在一起 | 看它们放在一起长什么样 |
 
-## 锁死意味着什么
+## 「事先定好」是什么意思
 
-评测机的撮合逻辑（手续费、滑点、闭棒）是锁死的，不随策略变。这样所有策略用同一把尺子，表才能对齐。你不能为了让某句话好看，去改评测机的撮合参数。
+手续费怎么扣、会不会滑点、开盘能不能偷看当根已经走完的数字，这些规则不随策略变。这样所有策略用同一把尺子，表才能对齐。你不能为了让某句话好看，去改这些撮合规则。
 
-## 本仓库怎么用
+## 在这个仓库里怎么用
 
-- 事件回测：`scripts/event_backtest.py`
-- 横截面回测：`scripts/cross_section_backtest.py`
-- 组合回测：`scripts/portfolio_backtest.py`
+- 一根品种进出场：`scripts/event_backtest.py`
+- 每天给全市场打分：`scripts/research/cs_panel.py`
+- 先给板块打分：`scripts/research/cs_sector.py`
 
 ## 还想看细则
 
-- [docs/framework.md §4 评测机](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.md)
+- [docs/framework.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.md)
+- [买最热的股票，能跑赢「每人买一点」吗](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/cs_panel_CN.md)

@@ -61,7 +61,7 @@ mlbot feature-store build \
 
 ## 3. 研究闭环
 
-人说「测一下」之后，AI 才许跑这些。命令和指令怎么接上，见 [ARCHITECTURE.md](ARCHITECTURE.md)。
+你可以对本仓库里的 AI 说「测试一下这个策略」，它才许跑这些。命令和指令怎么接上，见 [ARCHITECTURE.md](ARCHITECTURE.md)。
 
 ```bash
 mlbot research run <id>

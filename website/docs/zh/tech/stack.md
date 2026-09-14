@@ -1,6 +1,6 @@
 # 数据流与目录
 
-**一句话：** 从原始成交到一张 KPI 表，数据流过四个目录：`data/agg_data/` → `data/parquet_data/` → `feature_store/` → `results/`。
+从原始成交到一张有五项数字的表，数据会流过四个目录：`data/agg_data/` → `data/parquet_data/` → `feature_store/` → `results/`。
 
 ## 四个目录
 

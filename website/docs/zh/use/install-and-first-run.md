@@ -1,6 +1,6 @@
 # 安装与第一次
 
-**一句话：** 装一次，跑通均线金叉的例子，就知道这个仓库怎么用了。
+装一次，跑通均线金叉这个例子，你就知道这个仓库怎么用了。
 
 ## 安装
 
@@ -19,7 +19,7 @@ mlbot data pipeline --symbols BTCUSDT \
   --start-year 2022 --start-month 1 --end-year 2026 --end-month 8
 ```
 
-2. 建特征库：
+2. 建立特征库：
 
 ```bash
 PYTHONPATH=src python scripts/build_feature_store_from_config.py \
@@ -40,7 +40,7 @@ PYTHONPATH=src python scripts/event_backtest.py \
   --timeframe 120T
 ```
 
-4. 看结果：`results/ma_cross/<timestamp>/kpi_table.csv`。
+4. 看结果：打开 `results/ma_cross/<timestamp>/kpi_table.csv`。
 
 ## 还想看细则
 

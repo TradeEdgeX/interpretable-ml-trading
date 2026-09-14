@@ -3,8 +3,8 @@
 **English:** [features.en.md](features.en.md)  
 **入口:** [../README_CN.md](../README_CN.md)
 
-特征是**事先算好、按月落盘**的测量。回测和规则只读 FeatureStore，不在热路径现场 `compute_*`。  
-闭棒：[lessons.md#closed-bar](lessons.md#closed-bar) · [math.md](math.md) §1。
+特征是**事先算好、按月存成文件**的测量。回测和规则只读这份特征库，不在回测时现场另算一列。  
+开盘做决定只读上一根已经收完的数字：[lessons.md#closed-bar](lessons.md#closed-bar) · [math.md](math.md) §1。
 
 ---
 
