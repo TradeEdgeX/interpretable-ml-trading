@@ -64,14 +64,17 @@ def test_ma_cross_harness_is_event_backtest() -> None:
 
 def test_example_families_are_not_ma_cross() -> None:
     assert required_harness("funding_fade") == "event_backtest"
+    assert required_harness("ai_financing_btc") == "event_backtest"
     assert required_harness("tenbagger_smallcap") == "cohort_hold"
     assert required_harness("ashare_cs_mom_amount") == "cs_panel"
     assert required_harness("ashare_cs_reversal") == "cs_panel"
+    assert required_harness("eq_us_spy_qqq") == "eq_us_daily"
     families = event_backtest_families()
     assert "ma_cross" in families
     assert "funding_fade" in families
     assert "tenbagger_smallcap" not in families
     assert "ashare_cs_mom_amount" not in families
+    assert "eq_us_spy_qqq" not in families
     assert "ashare_cs_reversal" not in families
     assert convention_results_root("funding_fade", "20260910_funding_fade") == (
         "results/funding_fade/experiments/20260910_funding_fade"

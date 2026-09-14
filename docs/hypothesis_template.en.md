@@ -42,6 +42,7 @@ Kill switch off when ranking edge.
 Symbols, timeframe, calendar. Public court default:
 `bear_2022` / `bull_2023_2024` / `recent_range_to_bear`
 (`config/market_segment.yaml`).
+A-shares: `market_segment_ashare.yaml`. US equity: `market_segment_us.yaml`.
 `recent_6m_oos` cannot close alone.
 
 ## Five boxes

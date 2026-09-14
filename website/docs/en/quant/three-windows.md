@@ -14,6 +14,7 @@ Averaging three years into one CAGR washes out the bad years. Don’t copy the c
 
 - Crypto default: `bear_2022` / `bull_2023_2024` / `recent_range_to_bear`
 - A-shares: `bear_2021` / `bull_924` / `chop_recent` (a separate calendar file)
+- US equity: `us_covid_2020` / `us_bear_2022` / `us_bull_2023_2024` / `us_recent` (`market_segment_us.yaml`)
 
 The golden cross’s recent-window CAGR is about −3.1%. Against the falsification line you wrote in advance, please read this table and the strategy, then write your own conclusion.
 

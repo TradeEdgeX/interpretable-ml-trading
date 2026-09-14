@@ -59,6 +59,14 @@
 - **Sentence**: buy the tenbagger cohort.
 - **Conclusion**: needs a measurable rewrite; reject.
 
+## Beta
+
+### US SPY / QQQ buy-and-hold
+
+- **Sentence**: buying the ETF misses the US bull; you must pick stocks or wait for a washout.
+- **Local five KPIs**: SPY CAGR 13.7% / MaxDD −34.1%; QQQ CAGR 20.4% / MaxDD −35.6%. Washout timing CAGR below same-window buy-and-hold.
+- **Conclusion**: class is beta. The popular sentence is hit. Declared reject.
+
 ## Fine print
 
 - [docs/framework.md §4](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.md)

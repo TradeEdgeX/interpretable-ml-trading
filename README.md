@@ -99,6 +99,7 @@ Download and backtest after you say “measure this”.
 - Tenbagger / small-cap hold (cohort, measured): [docs/examples/20260911_tenbagger_smallcap.en.md](docs/examples/20260911_tenbagger_smallcap.en.md) · [中文](docs/examples/20260911_tenbagger_smallcap_CN.md)
 - A-share hot names vs equal-weight (CS panel, reject): [docs/examples/20260911_ashare_cs_mom_amount_CN.md](docs/examples/20260911_ashare_cs_mom_amount_CN.md)
 - A-share hot sectors vs equal-weight (reject): [docs/examples/20260911_ashare_cs_sector_cost_CN.md](docs/examples/20260911_ashare_cs_sector_cost_CN.md)
+- Does buying SPY / QQQ miss the US bull? (beta, reject): [docs/examples/20260914_eq_us_spy_qqq_beta.en.md](docs/examples/20260914_eq_us_spy_qqq_beta.en.md) · [中文](docs/examples/20260914_eq_us_spy_qqq_beta_CN.md)
 - Cross-section multi-factor court (capability; measured sentences reject): [docs/cs_panel.en.md](docs/cs_panel.en.md) · [中文](docs/cs_panel_CN.md)
 
 ---

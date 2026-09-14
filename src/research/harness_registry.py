@@ -21,6 +21,8 @@ KNOWN_HARNESSES: Tuple[str, ...] = (
     "cohort_hold",
     # Daily cross-section book (locked factors → rank → long top).
     "cs_panel",
+    # US ETF daily buy-and-hold vs index timing.
+    "eq_us_daily",
 )
 
 
@@ -124,6 +126,20 @@ _SPECS: Tuple[HarnessSpec, ...] = (
         "python -m scripts.event_backtest --variant-grid "
         "config/experiments/20260911_p99_bb_break_chase/p99_bb_chase_grid.yaml",
         notes="P99 notional + Bollinger chase; own pack, not ma_cross",
+    ),
+    HarnessSpec(
+        "ai_financing_btc",
+        "event_backtest",
+        "python -m scripts.event_backtest --variant-grid "
+        "config/experiments/20260914_ai_financing_btc/ai_financing_btc_grid.yaml",
+        notes="AI mega-round calendar then long BTC; own pack, not ma_cross",
+    ),
+    HarnessSpec(
+        "eq_us_spy_qqq",
+        "eq_us_daily",
+        "python scripts/research/eq_us_spy_qqq.py",
+        forbid_event_backtest=True,
+        notes="US SPY/QQQ daily B&H vs index timing; not the 2h event clock",
     ),
 )
 

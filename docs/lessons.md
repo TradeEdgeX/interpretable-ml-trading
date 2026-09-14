@@ -53,7 +53,8 @@ Promote 看 `config/market_segment.yaml` 的 **熊 / 牛 / 近窗** 三段同时
 
 粗到能讲清的合同，跨行情同号已经够用，不必再切一块「显得科学」的神秘 holdout。开始在同一段上反复调参救曲线，才升级外推。
 
-公开 dummy 用 B 层日历，不要和日频横截面那套日期混用。
+公开 dummy 用 B 层日历，不要和日频横截面那套日期混用。  
+美股用 `config/market_segment_us.yaml`，不要套币圈或 A 股日期。
 
 ---
 

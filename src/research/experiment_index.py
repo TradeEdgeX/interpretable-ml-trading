@@ -53,6 +53,7 @@ _SEGMENT_FILES: Tuple[str, ...] = (
     "market_segment_crypto.yaml",
     "market_segment_ashare.yaml",
     "market_segment_hk.yaml",
+    "market_segment_us.yaml",
 )
 
 _FRONT_MATTER_RE = re.compile(r"\A---[ \t]*\r?\n(.*?)\r?\n---[ \t]*(?:\r?\n|\Z)", re.S)

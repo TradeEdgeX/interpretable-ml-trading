@@ -126,7 +126,7 @@ mlbot research close <id>      # 人再 --declare
 | 数学需要 | 下什么 | 命令 / 路径 |
 |---|---|---|
 | 根内大单、足迹、P99 | tick / aggTrades | `mlbot data download` + `convert` → `data/parquet_data` |
-| 收盘关系、日历、日收益 | 日线 OHLCV | `mlbot data download-ashare` 或任意日线适配 → 如 `data/ashare/daily` |
+| 收盘关系、日历、日收益 | 日线 OHLCV | `mlbot data download-ashare` 或任意日线适配 → 如 `data/ashare/daily`。美股 ETF：`mlbot data download-us` → `data/eq/us/daily` |
 | 资金费率拥挤 | 费率自己的节奏（约 8h） | `mlbot data download-funding-rate` |
 | 持仓量 | OI parquet | `mlbot data download-open-interest` |
 
@@ -160,6 +160,7 @@ mlbot research close <id>      # 人再 --declare
 |---|---|---|---|
 | 币圈 U 本位 | `config/market_segment.yaml` | `bear_2022` / `bull_2023_2024` / `recent_range_to_bear` | 只用 `recent_6m_oos` 结案 |
 | A 股 | `config/market_segment_ashare.yaml` | `bear_2021` / `bull_924` / `chop_recent` | 拿币圈 2022 熊套沪深300 |
+| 美股 | `config/market_segment_us.yaml` | `us_covid_2020` / `us_bear_2022` / `us_bull_2023_2024` / `us_recent` | 拿币圈 2022 熊或 A 股 924 套 SPY |
 | 新市场 | 自建 `market_segment_<name>.yaml`，网格里写 `market_segment_path` | 用该市场自己的政权事件切 | 抄别的市场的起止日 |
 
 上市晚于某段起点 → 该段无样本，整句不能只靠后面两段过关。
@@ -213,6 +214,7 @@ mlbot research close <id>      # 人再 --declare
 - [examples/20260911_ashare_monday_rebound_CN.md](examples/20260911_ashare_monday_rebound_CN.md)
 - [examples/20260911_btc_lead_ai_alts_CN.md](examples/20260911_btc_lead_ai_alts_CN.md)
 - [examples/20260911_p99_bb_break_chase_CN.md](examples/20260911_p99_bb_break_chase_CN.md)
+- [examples/20260914_eq_us_spy_qqq_beta_CN.md](examples/20260914_eq_us_spy_qqq_beta_CN.md)（美股 SPY/QQQ **beta**；选股 / 超跌择时对照）
 - [cs_panel_CN.md](cs_panel_CN.md)（横截面多因子能力；已量句 reject）
 
 ---

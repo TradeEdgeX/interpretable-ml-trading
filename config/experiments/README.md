@@ -9,6 +9,7 @@
 | `_examples/` | 夹具。不进索引，不要跑 |
 | `20260910_ma50_ma200_cross/` | README 金叉那一句 |
 | `20260910_funding_fade/` | 第二个例子：资金费率极端拥挤就反手 |
+| `20260914_eq_us_spy_qqq_beta/` | 美股 SPY/QQQ 买入持有 vs 超跌择时；已 reject |
 | `LAYER_PROMOTION_CRITERIA.md` | 三段 + 五项 KPI + 熔断关 |
 
 过程全文：[docs/examples/20260910_funding_fade_CN.md](../../docs/examples/20260910_funding_fade_CN.md)。  

@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-11T11:02:18Z",
+  "generated_at": "2026-09-14T07:04:57Z",
   "experiments_root": "config/experiments",
   "summary": {
-    "count": 14,
+    "count": 15,
     "by_verdict": {
       "None": 5,
-      "reject": 9
+      "reject": 10
     },
     "by_source": {
-      "declared": 9,
-      "missing": 5
+      "missing": 5,
+      "declared": 10
     },
     "by_record_class": {
       "open": 5,
-      "trusted": 9
+      "trusted": 10
     },
     "invalid_count": 0
   },
@@ -423,6 +423,37 @@
         "cohort",
         "ashare",
         "us-equity"
+      ],
+      "issues": [],
+      "record_class": "trusted"
+    },
+    {
+      "id": "20260914_eq_us_spy_qqq_beta",
+      "date": "2026-09-14",
+      "topic": "eq_us_spy_qqq_beta",
+      "dir": "config/experiments/20260914_eq_us_spy_qqq_beta",
+      "decision_path": "config/experiments/20260914_eq_us_spy_qqq_beta/DECISION.md",
+      "verdict": "reject",
+      "verdict_source": "declared",
+      "strategy": "eq_us_spy_qqq",
+      "harness": "eq_us_daily",
+      "segments": [
+        "us_covid_2020",
+        "us_bear_2022",
+        "us_bull_2023_2024",
+        "us_recent"
+      ],
+      "kill_switch": false,
+      "kpi": {},
+      "supersedes": [],
+      "tags": [
+        "us-equity",
+        "spy",
+        "qqq",
+        "spy-qqq",
+        "beta",
+        "timing",
+        "pit"
       ],
       "issues": [],
       "record_class": "trusted"

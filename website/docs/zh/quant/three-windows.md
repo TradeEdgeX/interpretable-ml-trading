@@ -14,6 +14,7 @@
 
 - 币圈默认：`bear_2022` / `bull_2023_2024` / `recent_range_to_bear`
 - A 股：`bear_2021` / `bull_924` / `chop_recent`（另一份日历文件）
+- 美股：`us_covid_2020` / `us_bear_2022` / `us_bull_2023_2024` / `us_recent`（`market_segment_us.yaml`）
 
 金叉近窗年化约 −3.1%，对照事先写的证伪线，请你阅读这张表和策略后，自己写下结论。
 

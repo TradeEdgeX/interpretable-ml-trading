@@ -36,6 +36,10 @@ mlbot data download-ashare --symbols 000300.SH --start-date 2019-01-01
 mlbot data download-ashare --universe listed,delisted --start-date 2016-01-01 --backend sina
 # → data/ashare/daily/ ; calendar: config/market_segment_ashare.yaml
 
+# US ETF daily (SPY/QQQ court)
+mlbot data download-us --symbols SPY,QQQ --start-date 2013-01-01
+# → data/eq/us/daily/ ; calendar: config/market_segment_us.yaml
+
 mlbot feature-store build \
   --config config/strategies/ma_cross \
   --symbols BTCUSDT,ETHUSDT \

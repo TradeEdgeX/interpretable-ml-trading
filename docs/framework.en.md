@@ -148,6 +148,7 @@ Name the subject of the sentence. If a window has no listing or no files, that w
 |---|---|---|---|
 | Crypto USD-M | `config/market_segment.yaml` | `bear_2022` / `bull_2023_2024` / `recent_range_to_bear` | Close on `recent_6m_oos` alone |
 | A-share | `config/market_segment_ashare.yaml` | `bear_2021` / `bull_924` / `chop_recent` | Paste crypto 2022 dates onto CSI 300 |
+| US equity | `config/market_segment_us.yaml` | `us_covid_2020` / `us_bear_2022` / `us_bull_2023_2024` / `us_recent` | Paste crypto 2022 or A-share 924 onto SPY |
 | New market | `market_segment_<name>.yaml` + `market_segment_path` on the grid | Cut on **that** market’s regimes | Copy another market’s start/end |
 
 ### 3.6 Features
@@ -178,4 +179,4 @@ Closed-bar entry; exits named; adds off unless that is the sentence; `kill_switc
 
 Golden cross, funding, P99, and the alt recent window each hit their written falsifier on at least one window. Monday stays positive but almost flat recently. 2022 alts have no sample — that is the range rule working. P99 needs ticks; Monday needs daily; funding needs funding files. Same court, different grain.
 
-Walkthroughs: [README.md](../README.md) · [examples/](examples/).
+Walkthroughs: [README.md](../README.md) · [examples/](examples/) · [US SPY/QQQ beta](examples/20260914_eq_us_spy_qqq_beta.en.md).

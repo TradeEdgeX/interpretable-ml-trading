@@ -292,6 +292,7 @@ def test_known_segments_include_canonical_three() -> None:
     repo_root = Path(__file__).resolve().parents[2]
     segments = load_known_segments(repo_root)
     assert {"bear_2022", "bull_2023_2024", "recent_range_to_bear"} <= segments
+    assert {"us_covid_2020", "us_bear_2022", "us_bull_2023_2024", "us_recent"} <= segments
 
 
 def test_template_decision_front_matter_is_parseable() -> None:

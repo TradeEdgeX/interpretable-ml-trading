@@ -16,6 +16,7 @@
 | [横截面多因子（cs_panel）](cs_panel_CN.md) · [EN](cs_panel.en.md) | 框架能力：日频打分 / 板块书；不是推荐策略 |
 | [A 股动量+成交额横截面](examples/20260911_ashare_cs_mom_amount_CN.md) | 两因子锁死、相对等权失败、已 reject |
 | [A 股热板块相对等权](examples/20260911_ashare_cs_sector_cost_CN.md) | 板块排序 + 10bp；相对等权不是 alpha；已 reject |
+| [买 ETF 会错过美股牛市吗](examples/20260914_eq_us_spy_qqq_beta_CN.md) · [EN](examples/20260914_eq_us_spy_qqq_beta.en.md) | SPY/QQQ 买入持有 vs 超跌择时；先当 beta；已 reject |
 | [假设模板](hypothesis_template.md) · [EN](hypothesis_template.en.md) | 社会 / 数学 / 统计现象、验证标准、数据范围；AI 验模板再编排 |
 | [验证假设](hypothesis.md) · [EN](hypothesis.en.md) | 怎么写成可验证的几条、结论怎么用 |
 | [教训](lessons.md) | 闭棒、熔断、五项 KPI |

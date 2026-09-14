@@ -168,15 +168,20 @@ def validate_template_text(text: str) -> TemplateReport:
             "market_segment.yaml",
             "market_segment_ashare.yaml",
             "market_segment_crypto.yaml",
+            "market_segment_us.yaml",
             "bear_2021",
             "bull_924",
             "chop_recent",
+            "us_bear_2022",
+            "us_bull_2023_2024",
+            "us_recent",
         )
     ):
         issues.append(
             "data range must name canonical segments "
             "(bear_2022 / bull_2023_2024 / recent_range_to_bear) "
-            "or market_segment.yaml / market_segment_ashare.yaml"
+            "or market_segment.yaml / market_segment_ashare.yaml "
+            "/ market_segment_us.yaml"
         )
     if not _has_token(slots.get("stats", "") + slots.get("boxes", ""), CLASS_TOKENS):
         issues.append("statistics must classify the claim (alpha / fat-tail / beta / 无用)")

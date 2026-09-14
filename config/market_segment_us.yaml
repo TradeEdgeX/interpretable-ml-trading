@@ -1,0 +1,38 @@
+# US equity market segments — SPY / QQQ daily court.
+# Do NOT reuse crypto bear_2022 / bull_2023_2024 windows, and do not
+# paste A-share bull_924 onto US large-cap ETFs.
+# Full-sample lock cited by 20260914_eq_us_spy_qqq_beta: 2014-08 → 2026-08.
+
+segments:
+  - id: us_covid_2020
+    label: Crash
+    regime: crash
+    start_date: "2020-02-19"
+    end_date: "2020-03-23"
+    purpose: |
+      2020 流动性急跌。指数急杀后较快收复前高；超跌时钟在这段看起来「有效」。
+
+  - id: us_bear_2022
+    label: Bear
+    regime: bear
+    start_date: "2022-01-03"
+    end_date: "2022-10-14"
+    purpose: |
+      美联储加息杀估值慢熊。QQQ 首次 −20% 在 2022-03，之后继续下探；
+      回到前高大约 639 个交易日。固定 40/60 日时钟会斩在半山腰。
+
+  - id: us_bull_2023_2024
+    label: Bull
+    regime: bull
+    start_date: "2023-01-01"
+    end_date: "2025-01-01"
+    purpose: |
+      加息周期结束后的大盘成长牛（AI / mega-cap）。买入持有的主复利段。
+
+  - id: us_recent
+    label: Recent
+    regime: chop
+    start_date: "2025-01-01"
+    end_date: "2026-08-17"
+    purpose: |
+      2026-08-17 锁定日之前的近窗。不能单独结案。

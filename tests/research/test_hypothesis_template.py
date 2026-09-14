@@ -16,6 +16,14 @@ def test_showcase_template_passes() -> None:
     assert report.slots["stats"]
 
 
+def test_us_spy_qqq_beta_template_passes() -> None:
+    path = REPO / "config/experiments/20260914_eq_us_spy_qqq_beta/DECISION.md"
+    report = validate_decision_path(path)
+    assert report.ok, (report.missing, report.issues)
+    assert "beta" in report.slots["stats"].lower()
+    assert "market_segment_us.yaml" in report.slots["range"]
+
+
 def test_empty_scaffold_fails() -> None:
     path = REPO / "config/experiments/_template/DECISION.md"
     text = path.read_text(encoding="utf-8").replace("{{TOPIC}}", "demo")

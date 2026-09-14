@@ -365,6 +365,39 @@ def data_download_ashare(
             sys.exit(1)
 
 
+@data.command("download-us")
+@click.option(
+    "--symbols",
+    "-s",
+    default="SPY,QQQ",
+    help="Comma-separated US ETF tickers",
+)
+@click.option("--start-date", default="2013-01-01", show_default=True)
+@click.option("--end-date", default=None, help="YYYY-MM-DD (default: today)")
+@click.option("--output-dir", default="data/eq/us/daily", show_default=True)
+@click.option("--no-resume", is_flag=True, help="Re-download even if parquet exists")
+def data_download_us(symbols, start_date, end_date, output_dir, no_resume):
+    """Download US ETF daily bars (Yahoo, Stooq fallback). Court examples only."""
+    from src.data_tools.us_etf_daily import download_us_etf_daily
+
+    syms = [s.strip() for s in str(symbols).split(",") if s.strip()]
+    stats = download_us_etf_daily(
+        syms,
+        output_dir=output_dir,
+        start_date=start_date,
+        end_date=end_date,
+        resume=not no_resume,
+    )
+    click.echo(
+        f"us etf daily: total={stats['total']} success={stats['success']} "
+        f"skipped={stats['skipped']} failed={stats['failed']} "
+        f"elapsed={stats['elapsed_sec']}s → {stats['output_dir']}"
+    )
+    if stats["failed"]:
+        click.echo(f"failed symbols: {stats['failed_symbols'][:20]}")
+        sys.exit(1)
+
+
 @data.command("pipeline")
 @click.pass_context
 @click.option("--symbols", "-s", default="BTCUSDT,ETHUSDT")

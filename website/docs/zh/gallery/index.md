@@ -59,6 +59,14 @@
 - **句子**：买十倍股队列。
 - **结论**：需要改写成可测量的句子，reject。
 
+## Beta
+
+### 美股 SPY / QQQ 买入持有
+
+- **句子**：买 ETF 会错过美股牛市；要跟上得选股或等超跌。
+- **本机五项 KPI**：SPY 年化 13.7% / MaxDD −34.1%；QQQ 年化 20.4% / MaxDD −35.6%。超跌择时年化低于同窗买入持有。
+- **结论**：先当 beta。原句已被打中。已 `--declare reject`。
+
 ## 还想看细则
 
 - [docs/framework.md §4](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.md)
