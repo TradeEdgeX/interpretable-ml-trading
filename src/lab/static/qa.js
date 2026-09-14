@@ -11,11 +11,17 @@ function pick(obj, lang) {
 }
 
 let payload = null;
+let lang = "zh";
+
+function langToggleLabel() {
+  return lang === "zh" ? "切换到英文" : "Switch to 中文";
+}
 
 function render() {
   if (!payload) return;
-  const lang = document.getElementById("langSelect").value;
   const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  document.documentElement.lang = lang === "en" ? "en" : "zh-CN";
+  document.getElementById("langToggle").textContent = langToggleLabel();
   document.getElementById("qaTitle").textContent = pick(payload.title, lang) || "Q&A";
   document.getElementById("qaBlurb").textContent = pick(payload.blurb, lang);
   document.getElementById("qaMeta").innerHTML =
@@ -58,7 +64,10 @@ async function load() {
 }
 
 document.getElementById("searchInput").addEventListener("input", render);
-document.getElementById("langSelect").addEventListener("change", render);
+document.getElementById("langToggle").addEventListener("click", () => {
+  lang = lang === "zh" ? "en" : "zh";
+  render();
+});
 load().catch((e) => {
   document.getElementById("qaList").innerHTML = `<p class="err">${esc(String(e))}</p>`;
 });
