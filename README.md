@@ -5,7 +5,7 @@ English: [https://tradeedgex.github.io/interpretable-ml-trading/en/](https://tra
 
 **中文 README**: [README_CN.md](README_CN.md)
 
-Locally: `cd website && mkdocs serve`. Path: basics → features → framework → this golden-cross table → [gallery](website/docs/en/gallery/index.md).  
+Locally: `cd website && mkdocs serve`. Path: basics → features → framework → [Q & A](website/docs/en/qa/index.md) → this golden-cross table → [gallery](website/docs/en/gallery/index.md).  
 Human-facing path: [`website/`](website/). Fine print and the AI still use [`docs/`](docs/README.md).
 
 You have a trading idea and you are not sure it actually works.  

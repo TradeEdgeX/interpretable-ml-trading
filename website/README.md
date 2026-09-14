@@ -1,6 +1,7 @@
 # Teaching site
 
 Human-facing docs (Chinese default + English). Fine print stays in repo `docs/`.
+Plain-language Lab Q&A: `docs/zh/qa/index.md` / `docs/en/qa/index.md`.
 
 ```bash
 cd website

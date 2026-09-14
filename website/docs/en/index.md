@@ -17,7 +17,7 @@ Same MA golden-cross sentence, two very different answers:
 
 Evidence comes from trades and features on your machine; switch the chat model and the table stays the same. The AI helps fold the template, run the measurement, and retell the five KPIs. You write the conclusion after you understand the report.
 
-## Five doors
+## Doors
 
 <div class="grid cards" markdown>
 
@@ -41,6 +41,10 @@ Evidence comes from trades and features on your machine; switch the chat model a
 
     How to speak and install
 
+-   **[Q & A](qa/index.md)**
+
+    Can a rule cheat, why three windows, why correlation cannot close
+
 -   **[Gallery](gallery/index.md)**
 
     Measured sentences by phenomenon (including rejects)
@@ -55,6 +59,6 @@ Evidence comes from trades and features on your machine; switch the chat model a
 4. [Fill the template](design/write-the-sentence.md) · [Talk to the AI](use/talk-to-the-ai.md)
 5. [Stack and paths](tech/stack.md) · [Commands map](tech/commands-map.md)
 
-Install once: [Install and first run](use/install-and-first-run.md) · Skim: [Glossary](glossary.md)
+Install once: [Install and first run](use/install-and-first-run.md) · Skim: [Q & A](qa/index.md) · [Glossary](glossary.md)
 
 Repo `docs/` is for the AI and for people who want the fine print. This site is the teaching map.

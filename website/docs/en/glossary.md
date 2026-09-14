@@ -17,3 +17,4 @@ For skimming. Detail pages are in the nav.
 | Gate | 门控 | A hard permission to trade or not |
 | Cross-section | 横截面 | Scoring a basket every day, not a single-symbol event axis |
 | Hypothesis validator | 假设验证器 | This repo’s role (the name is still interpretable-ml-trading): write ideas as contracts, print tables with the local ruler; ships a base feature library, you write the conclusion after reading the report |
+| Q & A | Q & A | The Lab questions in plain language: can a rule cheat, why three windows, why correlation cannot close |

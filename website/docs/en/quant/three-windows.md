@@ -19,5 +19,6 @@ The golden cross’s recent-window CAGR is about −3.1%. Against the falsificat
 
 ## Fine print
 
+- [Q & A · Why three windows?](../qa/index.md#three-windows)
 - [Framework · how to choose calendars](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.md)
 - [Lessons · three windows](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/lessons.md#segments)

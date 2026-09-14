@@ -25,6 +25,7 @@
 
 ## Fine print
 
+- [Q & A](../qa/index.md)
 - [Fill the template](../design/write-the-sentence.md)
 - [The AI helps you measure](../design/ai-helps-measure.md)
 - [Who writes what](../tech/who-writes-what.md)

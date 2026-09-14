@@ -17,7 +17,7 @@
 
 证据来自你机器上的成交和特征库，换一个对话模型，表还是这张。AI 帮你整理模板、编排测量，并用五项 KPI 复述数字。结论由你理解报告之后写下。
 
-## 五个入口
+## 入口
 
 <div class="grid cards" markdown>
 
@@ -41,6 +41,10 @@
 
     开口方式与安装
 
+-   **[Q & A](qa/index.md)**
+
+    规则会不会骗人、为什么要分三段、相关为什么不能结案
+
 -   **[已量展厅](gallery/index.md)**
 
     按现象看已量过的句子（含 reject）
@@ -55,6 +59,6 @@
 4. [填模板](design/write-the-sentence.md) · [跟 AI 说话](use/talk-to-the-ai.md)
 5. [数据流与目录](tech/stack.md) · [命令地图](tech/commands-map.md)
 
-装一次：[安装与第一次](use/install-and-first-run.md) · 跳读：[词汇表](glossary.md)
+装一次：[安装与第一次](use/install-and-first-run.md) · 跳读：[Q & A](qa/index.md) · [词汇表](glossary.md)
 
 仓库里的 `docs/` 给 AI 和想自己翻细则的人。本站是教学地图。

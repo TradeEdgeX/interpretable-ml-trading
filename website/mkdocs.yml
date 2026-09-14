@@ -84,6 +84,7 @@ plugins:
             怎么用: How to use
             跟 AI 说话: Talk to the AI
             安装与第一次: Install and first run
+            Q & A: Q & A
             已量展厅: Gallery
             词汇表: Glossary
 
@@ -150,5 +151,6 @@ nav:
   - 怎么用:
       - 跟 AI 说话: use/talk-to-the-ai.md
       - 安装与第一次: use/install-and-first-run.md
+  - Q & A: qa/index.md
   - 已量展厅: gallery/index.md
   - 词汇表: glossary.md

@@ -25,6 +25,7 @@
 
 ## 还想看细则
 
+- [Q & A](../qa/index.md)
 - [填模板](../design/write-the-sentence.md)
 - [AI 帮你量](../design/ai-helps-measure.md)
 - [谁写哪格](../tech/who-writes-what.md)

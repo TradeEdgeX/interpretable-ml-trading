@@ -19,5 +19,6 @@
 
 ## 还想看细则
 
+- [Q & A · 为什么要分三段](../qa/index.md#three-windows)
 - [框架 · 日历怎么选](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.md)
 - [教训 · 三段](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/lessons.md#segments)

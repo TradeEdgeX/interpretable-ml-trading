@@ -27,4 +27,4 @@
 | [框架：栈 / 流程 / 各层怎么选](framework.md) · [EN](framework.en.md) | 技术架构、使用流程、周期日历品种标准；对照已量例子 |
 | [架构](ARCHITECTURE.md) · [EN](ARCHITECTURE.en.md) | 人说话 → 指令 → 命令 → 读报告；YAML 怎么接到回测 |
 
-问答：[agent/rd_qa.yaml](agent/rd_qa.yaml)。结案尺子：[LAYER_PROMOTION_CRITERIA.md](../config/experiments/LAYER_PROMOTION_CRITERIA.md)。
+人话问答在教学站：[website/docs/zh/qa/index.md](../website/docs/zh/qa/index.md) · [EN](../website/docs/en/qa/index.md)。细则仍是 [agent/rd_qa.yaml](agent/rd_qa.yaml)。结案尺子：[LAYER_PROMOTION_CRITERIA.md](../config/experiments/LAYER_PROMOTION_CRITERIA.md)。

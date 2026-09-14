@@ -24,8 +24,13 @@ function render() {
   document.getElementById("langToggle").textContent = langToggleLabel();
   document.getElementById("qaTitle").textContent = pick(payload.title, lang) || "Q&A";
   document.getElementById("qaBlurb").textContent = pick(payload.blurb, lang);
+  const pagesHref =
+    lang === "en"
+      ? "https://tradeedgex.github.io/interpretable-ml-trading/en/qa/"
+      : "https://tradeedgex.github.io/interpretable-ml-trading/qa/";
+  const pagesLabel = lang === "en" ? "plain-language Q & A" : "人话版 Q & A";
   document.getElementById("qaMeta").innerHTML =
-    `源 <code>${esc(payload.source || "docs/agent/rd_qa.yaml")}</code> · <a href="/rd">实验管理</a>`;
+    `源 <code>${esc(payload.source || "docs/agent/rd_qa.yaml")}</code> · <a href="${pagesHref}">${pagesLabel}</a> · <a href="/rd">实验管理</a>`;
 
   const items = (payload.items || []).filter((item) => {
     if (!q) return true;
