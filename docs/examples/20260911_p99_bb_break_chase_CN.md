@@ -1,46 +1,202 @@
 # P99 大单 + 布林上轨突破追涨
 
 实验：[config/experiments/20260911_p99_bb_break_chase/](../../config/experiments/20260911_p99_bb_break_chase/)  
-动量 / 肥尾右尾。去 Top-3 只分类，不单独否。
+分类先当 **动量 / 肥尾右尾**，不是选点 alpha。去 Top-3 只作分类，不单独否这条袖套。  
+评测机是 **event_backtest**（BTCUSDT · 2 小时）。纸面已出表；判决留给人 `--declare`，不要手写 `verdict:`。
 
----
+> 一根 2 小时棒里出现过 P99 级别的大单，同时收盘又破了布林上轨，就追涨；回到带内或满 12 根就走。
 
-## 规则
-
-| 格 | 内容 |
-|---|---|
-| 机制 | `bar_max_notional_ge_p99 ≥ 1` 且 `bb_position ≥ 1` 做多。 |
-| 合同 | 回到带内（`bb_position < 1`）或 12 根 2h 时间出场；熔断关；闭棒。 |
-| 证伪 | 任一段年化 < 0，或近窗回撤深于趋势段。 |
-| 品种 | `BTCUSDT` · 2h · 币圈三段。 |
-
-缺 tick 的月份写 NaN，不编数字。
-
----
-
-## 命令摘要
-
-```bash
-PYTHONPATH=src python -m cli.main research validate 20260911_p99_bb_break_chase
-PYTHONPATH=src python scripts/build_feature_store_from_config.py \
-  --config config/experiments/20260911_p99_bb_break_chase/strategies/p99_bb_chase \
-  --symbols BTCUSDT --timeframe 120T --root feature_store \
-  --layer features_p99_bb_chase_120T --data-path data/parquet_data \
-  --start-date 2022-01-01 --end-date 2026-05-31 --no-reuse
-PYTHONPATH=src python -m scripts.event_backtest --variant-grid \
-  config/experiments/20260911_p99_bb_break_chase/p99_bb_chase_grid.yaml
-```
-
----
-
-## 本机数字（BTC · 2h · 熔断关）
-
-| 段 | 年化 | Calmar | 胜率 | 最大回撤 | Sharpe(R) | 笔数 |
-|---|---|---|---|---|---|---|
-| bear_2022 | +0.24% | 0.32 | 45.5% | −0.74% | 0.09 | 22 |
-| bull_2023_2024 | −0.25% | −0.26 | 36.4% | −0.95% | −0.10 | 22 |
-| recent_range_to_bear | +0.28% | 0.92 | 57.1% | −0.30% | 0.16 | 21 |
-
-出场几乎全是回到带内。牛段年化为负，证伪线打中。判决用 `--declare`。
+这句话量的是「主动吃货 + 拥挤动量」能不能在三段上都活下来。赢了原句还活着；任一段年化为负，或近窗回撤深于趋势段，原句死。缺 tick 的月份必须写 NaN，不能编一个「看起来像 P99」的日线替代。
 
 English: [20260911_p99_bb_break_chase.en.md](20260911_p99_bb_break_chase.en.md)
+
+---
+
+## 这一句在本仓库里怎么走完
+
+你对网上的 AI 说：「出现特别大的单、又破了布林上轨，追不追？」
+
+它通常会说动量延续、大单是主力。用的往往是日线最高最低，或者对话里随手算一根布林。没有「根内那一笔到底有多大」，也没有「牛段该付钱的年份年化是不是负的」。
+
+你对本仓库说同一句。先分类：**动量 / 肥尾右尾**。去 Top-3 只分类，不能单独用来否这条袖套——但得先真的量到右尾。粒度锁死：P99 必须从 tick 算根内最大成交额；缺月写 NaN，不许用日线冒充。模板过了、你说测了，才下载成交、建层、跑 2 小时法院。出场合同写死：回到带内或 12 根。
+
+表印出来：牛段年化 −0.25%，恰恰是右尾该亮的年份。近窗小正、胜率 57%，那是回到带内的小波动，不是肥尾。哲学上：不要为提高胜率去砍右尾，也不要用胜率高证明这句话成立；本句连「先有右尾」都没量到。少一列（只要 P99，或只要破上轨）是另一张纸。
+
+下面七段把 tick、闭棒和「笔数少是现象不是借口」写完。
+
+---
+
+## 实验怎么设计的
+
+```text
+人出句（P99 大单又破上轨就追）
+  → 模板：社会 / 数学 / 统计 / 尺子 / 币圈三段 / 五格
+  → validate + 谱系
+  → 人说「测一下」才下载 tick、转 parquet、建 FeatureStore
+  → 2 小时法院：两列同时许可做多，回到带内或 12 根出场
+  → 人 --declare
+```
+
+走 `mlbot research run` / `event_backtest`。P99 必须从 tick / aggTrades 算根内最大成交额，再和滚动分位数比。日线最高最低代替不了「根内有没有一笔特别大的单」。
+
+| 格 | 这一句 |
+|---|---|
+| 机制 | `bar_max_notional_ge_p99 ≥ 1` 且 `bb_position ≥ 1` 才许开多。 |
+| 预期市况 | 拥挤动量该延续，右尾该付钱；三段都不该把账户做穿。去最大几笔只分类，不单独否。 |
+| 合同 | 回到带内（`bb_position < 1`）或 12 根 2 小时时间出场；不加仓；熔断关；闭棒。 |
+| 证伪 | 任一段年化 < 0，或近窗 MaxDD 深于趋势段。 |
+| 落地 | 机器：本目录 `strategies/p99_bb_chase`。人手同一句。 |
+
+| 模板格 | 这一句怎么写 |
+|---|---|
+| 社会学 | 大单是主动吃货；破上轨是拥挤动量。后到的人付钱给已经在场的人。 |
+| 数学 | 根内成交额最大值 vs 滚动 P99；布林位置 ≥ 1。作废是回到带内或时间到。 |
+| 统计学 | 动量 / 肥尾右尾。不要用胜率高单独当声称。 |
+| 验证标准 | 任一段年化 < 0，或近窗回撤深于趋势段。 |
+| 数据范围 | `BTCUSDT` · 2h · 币圈三段 · 层 `features_p99_bb_chase_120T`。 |
+
+对照时钟（信号在收盘 t 可知，仓位从 **t+1** 起）：
+
+| 时刻 | 发生什么 |
+|---|---|
+| 许可 | 上一根同时满足 P99 大单旗标和 `bb_position ≥ 1` |
+| 方向 | 固定做多 |
+| 出场 | 上一根 `bb_position < 1`（回到带内），或已经持有 12 根 |
+| 本机实际 | 出场几乎全是回到带内，不是时间到 |
+
+只报五项 KPI：年化 / Calmar / 胜率 / MaxDD / Sharpe。不要合计 R。
+
+---
+
+## 数据
+
+```bash
+mlbot research validate 20260911_p99_bb_break_chase
+mlbot data download --symbols BTCUSDT \
+  --start-year 2022 --start-month 1 --end-year 2026 --end-month 5
+mlbot data convert --symbols BTCUSDT
+```
+
+| 项 | 本机事实 |
+|---|---|
+| 品种 | `BTCUSDT` |
+| 周期 | 2 小时棒（`120T`） |
+| 粒度 | **tick / aggTrades** → parquet。P99 这一列日线算不出来 |
+| 落盘 | `data/parquet_data` |
+| 特征层 | `features_p99_bb_chase_120T` |
+| 缺月 | 缺 tick 的月份该列写 **NaN**，当月不进许可，不编数字 |
+| 日历 | [`config/market_segment.yaml`](../../config/market_segment.yaml) |
+| 熔断 | 关 |
+
+分窗：
+
+| 段 | 起止 | 用途 |
+|---|---|---|
+| `bear_2022` | 2022-01-01 → 2023-11-01 | 熊市里追涨不该把账户做穿。 |
+| `bull_2023_2024` | 2023-06-01 → 2025-01-01 | 右尾该付钱的主段。 |
+| `recent_range_to_bear` | 2025-01-01 → 2026-05-31 | 近窗。不能单独 promote。 |
+
+「根内大单」四个字已经把粒度锁死。用日线成交额代替 P99，是另一句，要另开目录。
+
+---
+
+## 特征
+
+| 列 | 怎么来 | 闭棒用法 |
+|---|---|---|
+| `bar_max_notional_ge_p99` | 该 2h 棒内单笔成交额最大值，是否 ≥ 滚动 P99 | 旗标在收盘才可知；下一根才许开 |
+| `bb_position` | （收盘 − 中轨）/ 带宽一类的位置；≥ 1 表示在上轨外 | 进场要 ≥ 1；出场看上一根是否 < 1 |
+| `atr_f` | 仓位用的波动 | 开盘只读上一根 |
+
+缺 tick 的月：`bar_max_notional_ge_p99` 为 NaN，prefilter 不通过。不要用成交额均值或「看起来很大」的日线替代。
+
+```bash
+PYTHONPATH=src python scripts/build_feature_store_from_config.py \
+  --config config/experiments/20260911_p99_bb_break_chase/strategies/p99_bb_chase \
+  --symbols BTCUSDT \
+  --timeframe 120T \
+  --root feature_store \
+  --layer features_p99_bb_chase_120T \
+  --data-path data/parquet_data \
+  --start-date 2022-01-01 \
+  --end-date 2026-05-31 \
+  --no-reuse
+```
+
+实验包：`config/experiments/20260911_p99_bb_break_chase/strategies/p99_bb_chase/`。网格：`p99_bb_chase_grid.yaml`。
+
+---
+
+## IC
+
+**这条没有横截面 IC 表，也不该有。**
+
+本句是两列同时为真的 0/1 追涨时钟，没有宇宙、没有连续分数。若有人把 `bb_position` 当连续分数去挖 overnight IC，那是另一句。
+
+肥尾声称也不能用 IC 结案。IC 平均的是「分数和未来收益同号的日子」，会把少数右尾摊薄。结案只看三段五项 KPI；去 Top-3 只分类。
+
+---
+
+## 验证
+
+```bash
+PYTHONPATH=src python -m scripts.event_backtest --variant-grid \
+  config/experiments/20260911_p99_bb_break_chase/p99_bb_chase_grid.yaml
+mlbot research close 20260911_p99_bb_break_chase
+```
+
+尺子事先写在纸上：任一段年化 **< 0**，或近窗 MaxDD 深于趋势段，原句就死。
+
+### 三段结果（BTCUSDT · 2 小时 · 熔断关）
+
+| 段 | 年化 | Calmar | 胜率 | 最大回撤 | Sharpe(R) | 笔数 |
+|---|---:|---:|---:|---:|---:|---:|
+| `bear_2022` | +0.24% | 0.32 | 45.5% | −0.74% | 0.09 | 22 |
+| `bull_2023_2024` | **−0.25%** | −0.26 | 36.4% | −0.95% | −0.10 | 22 |
+| `recent_range_to_bear` | +0.28% | 0.92 | 57.1% | −0.30% | 0.16 | 21 |
+
+| 事先写的证伪线 | 数字有没有打中 |
+|---|---|
+| 任一段年化 < 0 | 打中。牛段 −0.25%。 |
+| 近窗回撤深于趋势段 | 没打中这一条。近窗 MaxDD −0.30%，浅于熊 / 牛。但第一条已经够死。 |
+
+出场几乎全是 `structural_exit_bb_position_lt1`（回到带内）。牛段是右尾该付钱的年份，年化却为负：拥挤动量没有延续，后到的人没有把货接走，或者接完立刻回到带内把利润吐掉。
+
+三段笔数都只有二十出头。这是覆盖说明，不是「样本太少所以不算」。尺子没有写「笔数不够就改阈值」。
+
+---
+
+## 结论
+
+分类：**动量 / 肥尾右尾声称，量出来接近无用。**
+
+- 牛段年化为负，证伪线打中。右尾该亮的年份没有亮。
+- 熊段、近窗年化都在零附近，不是能当账户的追涨逻辑。
+- 去 Top-3 只分类：肥尾袖套不能因为去掉最大几笔就宣判死亡，但本句连「先有右尾」都没量到，分类也救不活。
+- 不要改成「只要 P99」或「只要破上轨」。少一列就是另一句。
+
+判决用 `--declare`。不要手写 `verdict:`。不要回测否了再手做「这根大单不一样」。
+
+产物：
+
+| 路径 | 是什么 |
+|---|---|
+| `results/p99_bb_chase/experiments/20260911_p99_bb_break_chase/p99_bb/bear_2022` | 熊段报告 |
+| `results/p99_bb_chase/experiments/20260911_p99_bb_break_chase/p99_bb/bull_2023_2024` | 牛段报告 |
+| `results/p99_bb_chase/experiments/20260911_p99_bb_break_chase/p99_bb/recent_range_to_bear` | 近窗报告 |
+| [DECISION.md](../../config/experiments/20260911_p99_bb_break_chase/DECISION.md) | 纸面原文 |
+
+---
+
+## 报告解读
+
+1. **先看牛段。** 肥尾 / 动量声称最该在牛段付钱。牛段年化为负，原句已经死，近窗小正不能翻案。
+2. **标题是年化，不是胜率。** 近窗胜率 57.1% 看起来「准」，年化只有 +0.28%。赢的是回到带内的小波动，不是右尾。
+3. **笔数少是现象，不是借口。** P99 且破上轨本来就稀。二十多笔是这句话的真实密度。为了加笔去降 P99，是换题。
+4. **出场几乎全是回到带内。** 说明追进去之后，价格很快回到均线附近。这是拥挤动量**没有**延续，不是「止盈很纪律」。
+5. **不要头条合计 R。** 右尾声称尤其容易被一两笔大 R 骗。本表牛段连年化都是负的，没有这种幻觉。
+6. **缺 tick 的月必须是 NaN。** 若某段笔数突然变多，先查是不是用日线冒充了 P99。
+7. **去 Top-3 只分类。** 即使某段去掉最大盈利之后变负，也不能单独用来否肥尾袖套；本句没走到那一步。
+8. **和费率 fade 不要并表。** 费率是拥挤回吐；这句是拥挤追涨。同一份拥挤，方向相反，是两张纸。
+
+纸面原文在 [DECISION.md](../../config/experiments/20260911_p99_bb_break_chase/DECISION.md)。

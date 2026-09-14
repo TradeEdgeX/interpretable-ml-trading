@@ -1,49 +1,211 @@
 # BTC 大涨后 AI 山寨跟涨
 
 实验：[config/experiments/20260911_btc_lead_ai_alts/](../../config/experiments/20260911_btc_lead_ai_alts/)  
-先当 **beta**（山寨对 BTC），不是选点 alpha。
+分类先当 **beta**（山寨对 BTC 的风险偏好传导），不是选点 alpha。  
+评测机是 **event_backtest**（NEAR / FET / RENDER · 2 小时）。纸面已出表；判决留给人 `--declare`，不要手写 `verdict:`。
+
+> BTC 大涨之后，AI 叙事山寨会跟涨。前一根已收盘的 BTC 2 小时收益 ≥ +3% 时做多山寨，持有 6 根 2 小时棒。
+
+这句话量的是「BTC 先定价、主题盘后买」能不能在三段上都活下来。赢了原句还活着；任一段年化为负，或近窗回撤深于趋势段，原句死。缺上市样本的熊段不能靠近窗单独 promote。
+
+不是 [AI 融资公告后做多 BTC](20260914_ai_financing_btc_CN.md)，也不是 [资金费率极端拥挤就反手](20260910_funding_fade_CN.md)。
+
+English: [20260911_btc_lead_ai_alts.en.md](20260911_btc_lead_ai_alts.en.md)
 
 ---
 
-## 规则
+## 这一句在本仓库里怎么走完
 
-| 格 | 内容 |
+你对网上的 AI 说：「BTC 大涨之后，AI 山寨会跟涨，是不是该追？」
+
+它通常会讲叙事、讲哪只币弹性大。没有「2022 年这些山寨上市了没有」，也没有「近窗亏了能不能只用牛段过关」。换一个模型，推荐的币会变。
+
+你对本仓库说同一句。先分类：**beta**，山寨对 BTC 的风险偏好传导，不是选点 alpha。模板锁死：领涨必须是山寨棒上对齐的 FeatureStore 列 `btc_prior_bar_return`（前一根已收盘），不许拿当根 BTC、不许注入 `btc_roc90`。熊段若没有上市带子，写「无样本」，不能用别的币凑。你说测了，才下载、建层、跑 2 小时法院。
+
+本机 tick 大约从 2023-01 起，所以 `bear_2022` 是空的——这是范围标准在工作，不是技术故障。牛段 +2.81%，近窗 −1.52%，回撤也更深。缺年的段不能靠近窗单独 promote。哲学上：换日线、从 2023 起看，是**另一句范围**，要改模板再量；不要回测否了再手做「这回是别的 AI 币」。
+
+不是融资公告后做多 BTC，也不是费率反手。三句都带「AI」或「拥挤」，付钱的人和测量对象不同。下面七段把跨品种对齐和「无样本」怎么读写完。
+
+---
+
+## 实验怎么设计的
+
+```text
+人出句（BTC 大涨后 AI 山寨跟涨）
+  → 模板：社会 / 数学 / 统计 / 尺子 / 币圈三段 / 五格
+  → validate + 谱系（公开库此前无已结案同一句）
+  → 人说「测一下」才下载成交、建 FeatureStore
+  → 2 小时法院：BTC 前一根闭棒收益 ≥ +3% 做多山寨，持有 6 根
+  → 人 --declare
+```
+
+走 `mlbot research run` / `event_backtest`。领涨列必须是山寨棒上对齐的 FeatureStore 列 `btc_prior_bar_return`，不要拿 `btc_roc90` 当山寨入场特征，也不要在回测里现场算 BTC 收益。
+
+| 格 | 这一句 |
 |---|---|
-| 机制 | BTC 前一根闭棒 2h 收益 ≥ +3%（FS 列 `btc_prior_bar_return`）做多 AI 山寨。 |
-| 预期 | 风险偏好传导；三段不该做穿。 |
-| 合同 | 持有 6 根 2h；不加仓；熔断关；闭棒。 |
-| 证伪 | 任一段年化 < 0，或近窗回撤深于趋势段。 |
-| 品种 | `NEARUSDT` / `FETUSDT` / `RENDERUSDT`（+ BTC 建领涨列）。`TAOUSDT` 若缺熊段不作主证。 |
+| 机制 | BTC 前一根已收盘的 2 小时收益 ≥ +3%，做多 AI 叙事山寨。 |
+| 预期市况 | 风险偏好从 BTC 传到主题盘；三段都不该把账户做穿。熊段若山寨还没上市，该段写「无样本」，不能偷偷用别的币凑。 |
+| 合同 | 持有 6 根 2 小时棒时间出场；不加仓；熔断关；闭棒。 |
+| 证伪 | 任一段年化 < 0，或近窗 MaxDD 深于趋势段。近窗不能单独 promote。 |
+| 落地 | 机器：本目录 `strategies/btc_lead_alts`。人手同一句。 |
 
-领涨列用 BTC **前一根已收盘**的收益，不要拿 `btc_roc90` 当山寨入场特征。
+| 模板格 | 这一句怎么写 |
+|---|---|
+| 社会学 | BTC 先定价风险偏好。散户和主题盘后买叙事币，付钱给已在场的人。 |
+| 数学 | 测量对象是山寨棒上对齐的 BTC **前一根**闭棒收益，阈值 +3%/2h，持有 6 根。 |
+| 统计学 | 山寨对 BTC 的 beta，不是「哪一根山寨该追」的选点 alpha。三段分列。 |
+| 验证标准 | 任一段年化 < 0，或近窗回撤深于趋势段。 |
+| 数据范围 | `NEARUSDT` / `FETUSDT` / `RENDERUSDT` · 2h · 币圈三段。`TAOUSDT` 若缺熊段上市则不作主证。 |
+
+对照时钟（信号在收盘 t 可知，仓位从 **t+1** 起）：
+
+| 时刻 | 发生什么 |
+|---|---|
+| 许可 | 上一根山寨棒上的 `btc_prior_bar_return` ≥ +0.03 |
+| 方向 | 固定做多（`fixed_direction: long`） |
+| 出场 | 6 根 2 小时时间止盈/止损（12 小时） |
+| 现金棒 | 不在市，收益记 0 |
+
+只报五项 KPI：年化 / Calmar / 胜率 / MaxDD / Sharpe。不要合计 R。
 
 ---
 
-## 命令摘要
+## 数据
 
 ```bash
-PYTHONPATH=src python -m cli.main research validate 20260911_btc_lead_ai_alts
-# 数据：mlbot data download/convert（本机可复用已有 parquet）
+mlbot research validate 20260911_btc_lead_ai_alts
+mlbot research index --trusted --query btc-lead
+mlbot data download --symbols BTCUSDT,NEARUSDT,FETUSDT,RENDERUSDT \
+  --start-year 2022 --start-month 1 --end-year 2026 --end-month 6
+mlbot data convert --symbols BTCUSDT,NEARUSDT,FETUSDT,RENDERUSDT
+```
+
+| 项 | 本机事实 |
+|---|---|
+| 被测品种 | `NEARUSDT` / `FETUSDT` / `RENDERUSDT` |
+| 领涨品种 | `BTCUSDT`（只用来建 `btc_prior_bar_return`，不进山寨书） |
+| 周期 | 2 小时棒（`120T`） |
+| 成交 | `data/parquet_data`；本机可复用已有 parquet |
+| 本机上市覆盖 | 这几只山寨的 tick 大约从 **2023-01** 起，所以 `bear_2022` **无样本** |
+| 特征层 | `features_btc_lead_alts_120T` |
+| 日历 | [`config/market_segment.yaml`](../../config/market_segment.yaml) |
+| 熔断 | 关 |
+
+分窗：
+
+| 段 | 起止 | 本机覆盖 |
+|---|---|---|
+| `bear_2022` | 2022-01-01 → 2023-11-01 | **无样本**（山寨带子从 2023-01 才开始；缺年不能用别的币凑） |
+| `bull_2023_2024` | 2023-06-01 → 2025-01-01 | 有样本。风险偏好传导该亮的主段。 |
+| `recent_range_to_bear` | 2025-01-01 → 2026-05-31 | 近窗。不能单独 promote。 |
+
+`TAOUSDT` 若缺熊段上市，纸面规定它不作主证。本句主表是 NEAR / FET / RENDER 三只合在同一网格里的书。
+
+---
+
+## 特征
+
+领涨必须是**宿主棒上已经对齐好的 FeatureStore 列**。禁止用另一条脚本把 BTC 收益「注入」进回测。
+
+| 列 | 怎么来 | 闭棒用法 |
+|---|---|---|
+| `btc_prior_bar_return` | 把 BTC 上一根已收盘 2h 收益对齐到每一根山寨棒 | `ret[t] ≥ +3%` 最早下一根山寨棒才开多 |
+| `atr_f` | 仓位用的波动 | 开盘只读上一根 |
+| 山寨 `close` | 被测品种自己的 2h 收盘 | 收益用已实现棒收益；许可不看当根最高最低 |
+
+不要用的列：
+
+| 列 | 为什么不用 |
+|---|---|
+| `btc_roc90` | 那是更长窗口的 BTC 动量，不是「前一根大涨」。拿它当入场就换题了。 |
+| 当根 BTC 收益 | 当根还没收盘，山寨开盘看不见。 |
+
+```bash
 PYTHONPATH=src python scripts/build_feature_store_from_config.py \
   --config config/experiments/20260911_btc_lead_ai_alts/strategies/btc_lead_alts \
   --symbols NEARUSDT,FETUSDT,RENDERUSDT \
-  --timeframe 120T --root feature_store --layer features_btc_lead_alts_120T \
-  --data-path data/parquet_data --start-date 2022-01-01 --end-date 2026-06-01 \
-  --allow-partial --no-reuse
-PYTHONPATH=src python -m scripts.event_backtest --variant-grid \
-  config/experiments/20260911_btc_lead_ai_alts/btc_lead_alts_grid.yaml
+  --timeframe 120T \
+  --root feature_store \
+  --layer features_btc_lead_alts_120T \
+  --data-path data/parquet_data \
+  --start-date 2022-01-01 \
+  --end-date 2026-06-01 \
+  --allow-partial \
+  --no-reuse
 ```
+
+`--allow-partial` 是因为熊段缺上市月。缺月写「无样本」，不要编数字填进熊段。
 
 ---
 
-## 本机数字（2h · 熔断关）
+## IC
+
+**这条没有横截面 IC 表，也不该有。**
+
+本句是「BTC 前一根是否大涨」的 0/1 许可，不是每天对一篮子山寨打连续分数。若有人把 `btc_prior_bar_return` 当连续分数，去挖「涨得越多、山寨第二天该越跟」，那是另一句，要另开目录。
+
+探照灯不能改题、不能当判决。结案只看三段五项 KPI。熊段无样本，不能用牛段 IC 或近窗 IC 补。
+
+---
+
+## 验证
+
+```bash
+PYTHONPATH=src python -m scripts.event_backtest --variant-grid \
+  config/experiments/20260911_btc_lead_ai_alts/btc_lead_alts_grid.yaml
+mlbot research close 20260911_btc_lead_ai_alts
+```
+
+尺子事先写在纸上：任一段年化 **< 0**，或近窗 MaxDD **深于**趋势段，原句就死。熔断关。只报五项 KPI。
+
+### 三段结果（NEAR / FET / RENDER · 2 小时 · 熔断关）
 
 | 段 | 年化 | Calmar | 胜率 | 最大回撤 | Sharpe(R) | 笔数 |
-|---|---|---|---|---|---|---|
-| bear_2022 | 无样本 | — | — | — | — | 0 |
-| bull_2023_2024 | +2.81% | 2.29 | 50.0% | −1.22% | 0.26 | 46 |
-| recent_range_to_bear | −1.52% | −0.54 | 30.8% | −2.82% | −0.24 | 26 |
+|---|---:|---:|---:|---:|---:|---:|
+| `bear_2022` | 无样本 | — | — | — | — | 0 |
+| `bull_2023_2024` | +2.81% | 2.29 | 50.0% | −1.22% | 0.26 | 46 |
+| `recent_range_to_bear` | **−1.52%** | −0.54 | 30.8% | **−2.82%** | −0.24 | 26 |
 
-熊段无上市样本，不能靠近窗单独 promote。近窗年化为负且回撤深于牛段。判决用 `--declare`。
+| 事先写的证伪线 | 数字有没有打中 |
+|---|---|
+| 任一段年化 < 0 | 打中。近窗 −1.52%。 |
+| 近窗回撤深于趋势段 | 打中。−2.82% 深于牛段 −1.22%。 |
+| 熊段无样本能不能 promote | 不能。缺年的段写「无样本」，整句不能只靠后面两段过关。 |
 
-English: [20260911_btc_lead_ai_alts.en.md](20260911_btc_lead_ai_alts.en.md)
+牛段年化是小正、Calmar 看起来漂亮，那是因为回撤浅、笔数也不多。它不能给近窗翻案，更不能补上 2022 年没有上市带子这件事。
+
+---
+
+## 结论
+
+分类：**beta**。山寨在 BTC 大涨后跟涨，是风险偏好传导，不是「AI 叙事有独立 alpha」。
+
+- 熊段无样本：范围标准在工作，不是技术故障。没有 2022 的 tick / 未上市，就不能声称这句话在熊市也成立。
+- 牛段 +2.81% 只说明传导在风险偏好向上的年份里偶尔付一点钱，Sharpe 0.26，不是可上线的选点逻辑。
+- 近窗年化为负、胜率掉到 30.8%、回撤更深：后到的主题盘不再按纸上的方向付钱。
+- 去 Top-3 单笔只作分类，不能单独用来否这条袖套。
+
+判决用 `mlbot research close 20260911_btc_lead_ai_alts --declare …`。不要手写 `verdict:`。不要回测否了再手做「这回是别的 AI 币」。
+
+产物：
+
+| 路径 | 是什么 |
+|---|---|
+| `results/btc_lead_alts/experiments/20260911_btc_lead_ai_alts/btc_lead_3pct/bull_2023_2024` | 牛段报告 |
+| `results/btc_lead_alts/experiments/20260911_btc_lead_ai_alts/btc_lead_3pct/recent_range_to_bear` | 近窗报告 |
+| [DECISION.md](../../config/experiments/20260911_btc_lead_ai_alts/DECISION.md) | 纸面原文 |
+
+---
+
+## 报告解读
+
+1. **先看有没有样本，再看年化。** `bear_2022` 的「无样本」是第一行结论，不是空单元格。不能把牛段和近窗平均成「还行」。
+2. **标题是年化，不是 ΣR。** 46 笔牛段小正，不等于「AI 山寨能赚」。Calmar 2.29 来自浅回撤，不是高年化。
+3. **胜率腰斩要当机制读。** 近窗胜率从 50.0% 掉到 30.8%：BTC 大涨之后，山寨更常不跟，或者跟完立刻吐。这正是 beta 传导失效的付费方式。
+4. **笔数 26 不能用来要求再降阈值。** 把 +3% 改成 +1% 是另一句。同一张纸上继续拧阈值，是在救曲线。
+5. **6 根时间出场是合同。** 如果实际出场大多是别的止损，表就不能按「持有 12 小时」来读。
+6. **`btc_prior_bar_return` 必须是前一根。** 若报告里的许可用了当根 BTC 收益，年化会假好看，那张表作废。
+7. **换日线、从 2023 起看，是另一句范围。** 要改模板再量，不能把本表近窗单独 promote。
+8. **和融资公告句不要并表。** 那句的 X 是日历事件，这句的 X 是 BTC 前一根收益。数字不能互相解释。
+
+纸面原文在 [DECISION.md](../../config/experiments/20260911_btc_lead_ai_alts/DECISION.md)。

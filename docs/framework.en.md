@@ -163,20 +163,43 @@ Closed-bar entry; exits named; adds off unless that is the sentence; `kill_switc
 
 ## 4. Measured examples on those layers
 
-`verdict` stays empty. This table shows **how layers were chosen**.
+`verdict` stays empty unless a human `--declare`d. These tables show **how layers were chosen**. Every walkthrough in `docs/examples/` uses the same seven sections: Design / Data / Features / IC / Validation / Conclusion / How to read the report.
+
+### 4.1 One name, one clock (`event_backtest`)
 
 | Layer | Golden cross | Funding fade | Monday rebound | BTC→AI alts | P99+BB chase |
 |---|---|---|---|---|---|
 | Class | beta / trend | crowded fade | calendar alpha | **beta** | momentum / **fat-tail** |
 | Market | crypto | crypto | **A-share** | crypto | crypto |
-| Grain | trades→2h | trades + **funding** | **daily** | trades→2h (daily would suffice) | **tick** |
-| TF | `120T` | `120T` (z on funding obs) | `1D` | `120T` | `120T` |
+| Grain | trades→2h | trades + **funding** | **daily** | trades→2h | **tick** |
+| TF | `120T` | `120T` (z on funding prints) | `1D` | `120T` | `120T` |
 | Symbols | BTCUSDT | BTCUSDT | 000300.SH | NEAR/FET/RENDER | BTCUSDT |
 | Calendar | crypto 3 | crypto 3 | **A-share 3** | crypto 3; **2022 no sample** | crypto 3 |
 | Feature | `ema_50_200_cross_*` | `funding_rate_zscore_50` | `monday_down` | `btc_prior_bar_return` | P99 + `bb_position` |
+| IC | none | none | none | none | none |
 | Contract | lose EMA50 | z back to 0 | hold 4 daily bars | hold 6×2h | back inside band or 12 bars |
 | Local CAGR | +3.7 / +3.0 / **−3.1** | +2.7 / +3.0 / **−3.4** | +0.61 / +0.46 / +0.06 | n/a / +2.81 / **−1.52** | +0.24 / **−0.25** / +0.28 |
 
-Golden cross, funding, P99, and the alt recent window each hit their written falsifier on at least one window. Monday stays positive but almost flat recently. 2022 alts have no sample — that is the range rule working. P99 needs ticks; Monday needs daily; funding needs funding files. Same court, different grain.
+### 4.2 Other courts
 
-Walkthroughs: [README.md](../README.md) · [examples/](examples/) · [US SPY/QQQ beta](examples/20260914_eq_us_spy_qqq_beta.en.md) · [AI chip spend vs BTC regime](examples/20260914_ai_chip_spend_btc_regime.en.md).
+| Layer | Tenbagger cohort | CS mom+amount | Hot sectors + 10bp | SPY/QQQ washout | Chip spend vs MA200 | Financing → long BTC |
+|---|---|---|---|---|---|---|
+| Harness | `cohort_hold` | `cs_panel` | `cs_sector` | `eq_us_daily` | `phase1_scan_only` | Phase 1; 2h not run |
+| Class | thin fat tail / small-cap beta | beta continuation → reversal | sector rotation / beta | equity **beta** | coexistence / beta | risk-on spillover / beta |
+| Market | A-share | A-share | A-share | **US** | crypto Y + Epoch X | crypto |
+| Grain | daily + PIT cap | daily universe | daily + 20-bucket map | ETF daily | quarterly CSV + daily | locked calendar + daily / 2h |
+| IC | none (density) | **yes**: minus in all 3 | not re-printed; name IC already minus | none | none (share table) | **yes**: −0.021, p=0.40 |
+| Control | same-date large cap | same-universe EW | same-universe same-10bp EW | same-window buy-and-hold | low-QoQ non-bull share | any-5-day baseline |
+| Local result | 3y 10× rate 0.11% vs 0.11% | vs EW minus in all 3 | bull −40pp / chop −25pp | timing CAGR all slower | diff −37pp (wrong sign) | bull loses to holding BTC |
+| Close | reject | reject | reject | reject | reject | **do not declare** |
+
+How to read the tables:
+
+1. Golden cross, funding, P99, and the alt recent window each hit their written falsifier on at least one window. Verdicts stay empty until a human `--declare`s.
+2. Monday stays positive but almost flat recently. Weak calendar alpha is not an account.
+3. 2022 alts have no sample — that is the range rule working. Switching to daily bars from 2023 is a **new range**.
+4. P99 needs ticks; Monday needs daily; funding needs funding files; tenbaggers need entry-date cap; cross-section needs an equal-weight control. Same repo, different grain.
+5. IC is a flashlight. Negative CS IC agrees with the book and still cannot close. Financing IC ≈ 0 with an empty 2h book cannot declare.
+6. Changing the control changes the sentence. Hot sectors can be green versus cash and dead versus same-cost EW. SPY timing can be a shallower hole and still lose to same-window buy-and-hold — insurance, not alpha.
+
+Walkthroughs: [README.md](../README.md) · [examples/](examples/) · [cs_panel.en.md](cs_panel.en.md).

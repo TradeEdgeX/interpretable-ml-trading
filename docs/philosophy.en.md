@@ -103,6 +103,8 @@ Do not ship a combined “MA + level + structure-arrow” indicator.
 | Falsify a hypothesis | [hypothesis.en.md](hypothesis.en.md) |
 | Lessons | [lessons.md](lessons.md) |
 | Human claim vs auto-mine | [design/2026-08-23_human_hypothesis_vs_auto_mine_CN.md](design/2026-08-23_human_hypothesis_vs_auto_mine_CN.md) |
+| Golden cross: web AI vs this repo (act one) | [../README.md](../README.md) |
+| Measured examples (same story, different line) | [examples/](examples/) · [README.md](README.md) |
 
 ---
 

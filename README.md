@@ -97,11 +97,14 @@ Download and backtest after you say “measure this”.
 - BTC surge → AI alts follow: [docs/examples/20260911_btc_lead_ai_alts.en.md](docs/examples/20260911_btc_lead_ai_alts.en.md) · [中文](docs/examples/20260911_btc_lead_ai_alts_CN.md)
 - P99 large trade + Bollinger chase: [docs/examples/20260911_p99_bb_break_chase.en.md](docs/examples/20260911_p99_bb_break_chase.en.md) · [中文](docs/examples/20260911_p99_bb_break_chase_CN.md)
 - Tenbagger / small-cap hold (cohort, measured): [docs/examples/20260911_tenbagger_smallcap.en.md](docs/examples/20260911_tenbagger_smallcap.en.md) · [中文](docs/examples/20260911_tenbagger_smallcap_CN.md)
-- A-share hot names vs equal-weight (CS panel, reject): [docs/examples/20260911_ashare_cs_mom_amount_CN.md](docs/examples/20260911_ashare_cs_mom_amount_CN.md)
-- A-share hot sectors vs equal-weight (reject): [docs/examples/20260911_ashare_cs_sector_cost_CN.md](docs/examples/20260911_ashare_cs_sector_cost_CN.md)
+- A-share hot names vs equal-weight (CS panel, reject): [docs/examples/20260911_ashare_cs_mom_amount.en.md](docs/examples/20260911_ashare_cs_mom_amount.en.md) · [中文](docs/examples/20260911_ashare_cs_mom_amount_CN.md)
+- A-share hot sectors vs equal-weight (reject): [docs/examples/20260911_ashare_cs_sector_cost.en.md](docs/examples/20260911_ashare_cs_sector_cost.en.md) · [中文](docs/examples/20260911_ashare_cs_sector_cost_CN.md)
 - Does buying SPY / QQQ miss the US bull? (beta, reject): [docs/examples/20260914_eq_us_spy_qqq_beta.en.md](docs/examples/20260914_eq_us_spy_qqq_beta.en.md) · [中文](docs/examples/20260914_eq_us_spy_qqq_beta_CN.md)
-- When AI chip spend accelerates, is BTC in a bear? (QoQ vs closed-bar MA200, Phase 1): [docs/examples/20260914_ai_chip_spend_btc_regime.en.md](docs/examples/20260914_ai_chip_spend_btc_regime.en.md) · [中文](docs/examples/20260914_ai_chip_spend_btc_regime_CN.md)
+- When AI chip spend accelerates, is BTC in a bear? (QoQ vs closed-bar MA200, reject): [docs/examples/20260914_ai_chip_spend_btc_regime.en.md](docs/examples/20260914_ai_chip_spend_btc_regime.en.md) · [中文](docs/examples/20260914_ai_chip_spend_btc_regime_CN.md)
+- Long BTC after an AI financing print (Phase 1; 2h not run): [docs/examples/20260914_ai_financing_btc.en.md](docs/examples/20260914_ai_financing_btc.en.md) · [中文](docs/examples/20260914_ai_financing_btc_CN.md)
 - Cross-section multi-factor court (capability; measured sentences reject): [docs/cs_panel.en.md](docs/cs_panel.en.md) · [中文](docs/cs_panel_CN.md)
+
+The golden cross above is act one: a web AI tells a story; this repo walks a template, local data, and one ruler. The other examples are the **same story with a different line** — first “How this sentence walks the repo,” then seven sections: **Design / Data / Features / IC / Validation / Conclusion / How to read the report**. Index: [docs/README.md](docs/README.md) · Gallery: [website/docs/en/gallery/index.md](website/docs/en/gallery/index.md).
 
 ---
 

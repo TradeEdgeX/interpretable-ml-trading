@@ -186,26 +186,44 @@ mlbot research close <id>      # 人再 --declare
 
 ## 4. 用已量过的例子对照
 
-数字来自本机法庭，`verdict` 仍由人写。这里只示范**各层怎么选**。
+数字来自本机法庭，`verdict` 仍由人写。这里只示范**各层怎么选**。过程全文都在 `docs/examples/`，每篇七段：设计 / 数据 / 特征 / IC / 验证 / 结论 / 报告解读。
+
+### 4.1 一根品种、一条时间轴（`event_backtest`）
 
 | 层 | 金叉 | 资金费率 fade | 周一反弹 | BTC→AI 山寨 | P99+布林追涨 |
 |---|---|---|---|---|---|
-| 分类 | beta / 趋势暴露 | 拥挤回吐（偏均值修复） | 日历 alpha | **beta**（山寨对 BTC） | 动量 / **肥尾右尾** |
+| 分类 | beta / 趋势暴露 | 拥挤回吐 | 日历 alpha | **beta**（山寨对 BTC） | 动量 / **肥尾右尾** |
 | 市场 | 币圈 | 币圈 | **A 股** | 币圈 | 币圈 |
-| 粒度 | 成交→2h | 成交 + **费率序列** | **日线** | 成交→2h（日线也够，未改合同） | **tick**（根内最大成交额） |
+| 粒度 | 成交→2h | 成交 + **费率序列** | **日线** | 成交→2h | **tick** |
 | 周期 | `120T` | `120T`（z 在费率自己的 50 次观察上） | `1D` | `120T` | `120T` |
 | 品种 | BTCUSDT | BTCUSDT | 000300.SH | NEAR/FET/RENDER | BTCUSDT |
 | 日历 | 币圈三段 | 币圈三段 | **A 股三段** | 币圈三段；**2022 熊无样本** | 币圈三段 |
 | 特征 | `ema_50_200_cross_*` | `funding_rate_zscore_50` | `monday_down` / `weekday` | `btc_prior_bar_return` | `bar_max_notional_ge_p99` + `bb_position` |
+| IC | 无 | 无 | 无 | 无 | 无 |
 | 合同 | 跌破 EMA50 走 | z 回 0 走 | 持有 4 根日线 | 持有 6 根 2h | 回到带内或 12 根 |
-| 本机结果（年化） | 熊 +3.7 / 牛 +3.0 / 近 −3.1 | +2.7 / +3.0 / **−3.4** | +0.61 / +0.46 / +0.06 | 无样本 / +2.81 / **−1.52** | +0.24 / **−0.25** / +0.28 |
+| 本机年化 | +3.7 / +3.0 / **−3.1** | +2.7 / +3.0 / **−3.4** | +0.61 / +0.46 / +0.06 | 无样本 / +2.81 / **−1.52** | +0.24 / **−0.25** / +0.28 |
+
+### 4.2 换评测机的句子
+
+| 层 | 十倍股队列 | 动量+成交额 | 热板块+10bp | SPY/QQQ 超跌 | 芯片开支 vs MA200 | 融资公告做多 BTC |
+|---|---|---|---|---|---|---|
+| 评测机 | `cohort_hold` | `cs_panel` | `cs_sector` | `eq_us_daily` | `phase1_scan_only` | Phase 1；2h 未跑 |
+| 分类 | 肥尾极薄 / 小市值 beta | beta 续涨 → 反转 | 板块轮动 / beta | 股权 **beta** | 市况共存 / beta | 风险偏好外溢 / beta |
+| 市场 | A 股 | A 股 | A 股 | **美股** | 币圈 Y + Epoch X | 币圈 |
+| 粒度 | 日线 + 时点市值 | 日线全市场 | 日线 + 20 档行业快照 | ETF 日线 | 季频 CSV + 日线 | 锁定日历 + 日线 / 2h |
+| IC | 无（问密度） | **有**：三段负号 | 未另出；个股 IC 已负 | 无 | 无（比例表） | **有**：−0.021，p=0.40 |
+| 对照 | 同时点大市值 | 同宇宙等权 | 同宇宙同 10bp 等权 | 同窗买入持有 | 低强度日非牛比例 | 任意 5 日基线 |
+| 本机结果 | 3 年十倍率 0.11% vs 0.11% | 相对等权三段都负 | 牛 −40pp / 震荡 −25pp | 择时年化全部更低 | 差 −37pp（反向） | 牛段跑输随便拿 BTC |
+| 判决 | 已 reject | 已 reject | 已 reject | 已 reject | 已 reject | **不能 declare** |
 
 读表的方法：
 
-1. **金叉、费率、P99、山寨近窗** 都有「至少一段年化 < 0」或近窗更差——按各自证伪线已经被数字打中。判决仍空着。
+1. **金叉、费率、P99、山寨近窗** 都有「至少一段年化 < 0」或近窗更差——按各自证伪线已经被数字打中。判决仍空着，等人 `--declare`。
 2. **周一** 三段年化为正，但近窗几乎走平；日历 alpha 很弱，不是「日线就能当账户」。
 3. **山寨 2022 无样本** 是范围标准在工作：没有 tick / 未上市，就写无样本，不拿近窗单独 promote。若改日线、从 2023 起看，那是**另一句范围**，要改模板再量。
-4. **P99 必须 tick**；**周一必须日线**；**费率必须费率文件**。同一套法庭，粒度可以完全不同。
+4. **P99 必须 tick**；**周一必须日线**；**费率必须费率文件**；**十倍股必须入场日市值**；**横截面必须对等权**。同一套仓库，粒度可以完全不同。
+5. **IC 只探照灯。** 动量句 IC 为负，和书一致，但仍要等相对年化结案。融资句 IC ≈ 0，2h 书还空着，不能宣判。
+6. **换对照就是换题。** 热板块对现金可以绿，对同成本等权可以死。SPY 择时对现金可以浅回撤，对同窗买入持有年化更低就是保险，不是 alpha。
 
 过程全文：
 
@@ -214,9 +232,13 @@ mlbot research close <id>      # 人再 --declare
 - [examples/20260911_ashare_monday_rebound_CN.md](examples/20260911_ashare_monday_rebound_CN.md)
 - [examples/20260911_btc_lead_ai_alts_CN.md](examples/20260911_btc_lead_ai_alts_CN.md)
 - [examples/20260911_p99_bb_break_chase_CN.md](examples/20260911_p99_bb_break_chase_CN.md)
-- [examples/20260914_eq_us_spy_qqq_beta_CN.md](examples/20260914_eq_us_spy_qqq_beta_CN.md)（美股 SPY/QQQ **beta**；选股 / 超跌择时对照）
-- [examples/20260914_ai_chip_spend_btc_regime_CN.md](examples/20260914_ai_chip_spend_btc_regime_CN.md)（芯片销售环比 vs 闭棒 MA200）
-- [cs_panel_CN.md](cs_panel_CN.md)（横截面多因子能力；已量句 reject）
+- [examples/20260911_tenbagger_smallcap_CN.md](examples/20260911_tenbagger_smallcap_CN.md)
+- [examples/20260911_ashare_cs_mom_amount_CN.md](examples/20260911_ashare_cs_mom_amount_CN.md)
+- [examples/20260911_ashare_cs_sector_cost_CN.md](examples/20260911_ashare_cs_sector_cost_CN.md)
+- [examples/20260914_eq_us_spy_qqq_beta_CN.md](examples/20260914_eq_us_spy_qqq_beta_CN.md)
+- [examples/20260914_ai_chip_spend_btc_regime_CN.md](examples/20260914_ai_chip_spend_btc_regime_CN.md)
+- [examples/20260914_ai_financing_btc_CN.md](examples/20260914_ai_financing_btc_CN.md)
+- [cs_panel_CN.md](cs_panel_CN.md)
 
 ---
 

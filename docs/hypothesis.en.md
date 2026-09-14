@@ -167,4 +167,22 @@ The framework can guide discretionary work because it **removes invention at the
 
 ---
 
+---
+
+## 9. How to read a measured example
+
+Every page in `docs/examples/` starts as a **story** (what a web AI would say, which steps this repo must walk after you say the same sentence), then seven sections, with tables wherever a table can carry the sentence. When the AI retells numbers and the human declares, walk this order. Do not jump to “CAGR is green.”
+
+| Section | Job |
+|---|---|
+| Design | Court, five boxes, falsifier written first |
+| Data | Symbols, bar, windows; missing years are “no sample” |
+| Features | Where the column comes from; closed-bar use |
+| IC | Flashlight if present; if absent, say why it should not exist |
+| Validation | Control + five KPIs (or that court’s own ruler) |
+| Conclusion | Class first; human `--declare` |
+| How to read | CAGR is not ΣR; do not swap the control; recent cannot promote alone |
+
+Template walkthrough: [Does buying an ETF miss the US bull?](examples/20260914_eq_us_spy_qqq_beta.en.md). Index: [docs/README.md](README.md). Gallery: [website/docs/en/gallery/index.md](../website/docs/en/gallery/index.md).
+
 Home: [README.md](../README.md) · next [Philosophy](philosophy.en.md) · [Lessons](lessons.md)

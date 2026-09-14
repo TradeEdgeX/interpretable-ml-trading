@@ -166,4 +166,22 @@ mlbot research close 20260910_<slug> --declare reject   # 人写 verdict
 
 ---
 
+---
+
+## 9. 已量例子怎么读
+
+`docs/examples/` 里每一篇都先讲**故事**（网上的 AI 会说什么、你对本仓库说同一句之后必须走哪几步），再按七段写完，能用表格的地方都用表格。AI 复述数字、人宣判时，按这个顺序，不要跳到「年化绿了」。
+
+| 段 | 作用 |
+|---|---|
+| 实验怎么设计的 | 评测机、五格、证伪线事先写死 |
+| 数据 | 品种、周期、分窗、缺年写无样本 |
+| 特征 | 列从哪来、闭棒怎么用 |
+| IC | 有则探照灯；无则写清为什么不该有 |
+| 验证 | 对照 + 五项 KPI（或该评测机自己的尺子） |
+| 结论 | 先分类；人 `--declare` |
+| 报告解读 | 年化不是 ΣR；对照不能换；近窗不能单独 promote |
+
+样板：[买 ETF 会错过美股牛市吗](examples/20260914_eq_us_spy_qqq_beta_CN.md)。目录：[README.md](README.md)。展厅：[website/docs/zh/gallery/index.md](../website/docs/zh/gallery/index.md)。
+
 主入口：[README_CN.md](../README_CN.md) · [假设模板](hypothesis_template.md) · 下一篇 [哲学](philosophy.md) · [教训](lessons.md)

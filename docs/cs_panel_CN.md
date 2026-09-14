@@ -8,6 +8,13 @@
 
 能力 ≠ 有 edge。下面的已量句都已 `--declare reject`。框架能考，不保证考得过。
 
+已量句的过程全文（设计 / 数据 / 特征 / IC / 验证 / 结论 / 报告解读）：
+
+| 句子 | 评测机入口 | 对照 | 结论 |
+|---|---|---|---|
+| [热票相对等权](examples/20260911_ashare_cs_mom_amount_CN.md) | `python scripts/research/cs_panel.py` | 同宇宙等权 | 三段相对年化都 ≤ 0；IC 三段负号；reject |
+| [热板块相对等权](examples/20260911_ashare_cs_sector_cost_CN.md) | `python scripts/research/cs_sector.py` | 同宇宙同 10bp 等权 | 牛 −40pp、震荡 −25pp；reject |
+
 ---
 
 ## 能验什么
@@ -88,3 +95,18 @@ PYTHONPATH=src python scripts/research/cs_sector.py --mode weekly \
 周频热板块对**现金**三段年化为正，但对等权在牛、震荡更差。人已全部 `--declare reject`。
 
 等权自己在这三段年化是绿的：那是小票市场 beta，不是选股逻辑。细则见两张例子。
+
+---
+
+## 报告怎么读（横截面）
+
+读 `cs_panel` / `cs_sector` 的表时，按这几条，不要另立尺子。
+
+| 先看 | 再看 | 不要 |
+|---|---|---|
+| 同一段、同一宇宙的对照年化 | 高分组绝对年化 | 拿高分 +24% 对现金，宣布「能赚钱」 |
+| 相对差（高分 − 等权） | IC 的符号 | 用 IC 结案，或 IC 负了就把纸翻成反转 |
+| 换手和单边成本 | 毛收益 | 「要是不计费用就过了」——费用是合同 |
+| 天数 / 名字数 | 胜率 | 胜率接近 50% 就当方向对 |
+
+IC 是当日分数对未来 20 日开盘收益的 Spearman，按日再平均。标签可以看未来；进场列不可以。IC 涨了或跌了都不能改题。

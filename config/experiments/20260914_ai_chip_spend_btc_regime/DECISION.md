@@ -1,13 +1,20 @@
 ---
-topic: "20260914_ai_chip_spend_btc_regime"
-strategy: "ai_chip_spend_btc"
+topic: 20260914_ai_chip_spend_btc_regime
+strategy: ai_chip_spend_btc
 harness: phase1_scan_only
-segments: [bear_2022, bull_2023_2024, recent_range_to_bear]
+segments:
+- bear_2022
+- bull_2023_2024
+- recent_range_to_bear
 kill_switch: false
-verdict:
+verdict: reject
 kpi: {}
 supersedes: []
-tags: [ai-chip-spend, regime, beta, epoch]
+tags:
+- ai-chip-spend
+- regime
+- beta
+- epoch
 ---
 
 # DECISION — 20260914_ai_chip_spend_btc_regime
@@ -65,4 +72,13 @@ Y = BTC 日线收盘 &lt; SMA200。X = 芯片销售环比高于扩窗中位数�
 | bull_2023_2024 | 14.9% | 39.7% | −24.8pp | 396 / 184 |
 | recent_range_to_bear | 15.6% | 55.1% | −39.5pp | 90 / 425 |
 
-方向和纸上声称相反：开支环比高的日子，闭棒更常在 MA200 上。2023 年芯片账单翻倍发生在 BTC 慢牛里。判决仍空着。
+方向和纸上声称相反：开支环比高的日子，闭棒更常在 MA200 上。2023 年芯片账单翻倍发生在 BTC 慢牛里。人已 `--declare reject`。
+
+过程说明：[docs/examples/20260914_ai_chip_spend_btc_regime_CN.md](../../../docs/examples/20260914_ai_chip_spend_btc_regime_CN.md)
+
+## Promote
+
+- [x] `mlbot research validate 20260914_ai_chip_spend_btc_regime` 通过
+- [x] Phase 1 扫描（`quick_scan/chip_spend_regime.json`）
+- [x] kill switch OFF
+- [x] `PYTHONPATH=src python scripts/research/close.py 20260914_ai_chip_spend_btc_regime --declare reject`

@@ -105,6 +105,8 @@ IC 为正不能上线。单窗漂亮不能上线。熔断截断后的曲线不�
 | 验证假设 | [hypothesis.md](hypothesis.md) |
 | 教训 | [lessons.md](lessons.md) |
 | 人出假设 vs 自动挖 | [design/2026-08-23_human_hypothesis_vs_auto_mine_CN.md](design/2026-08-23_human_hypothesis_vs_auto_mine_CN.md) |
+| 金叉：网上的 AI vs 本仓库（第一幕） | [../README_CN.md](../README_CN.md) |
+| 已量例子（同一条故事换一句台词） | [examples/](examples/) · [README.md](README.md) |
 
 ---
 
