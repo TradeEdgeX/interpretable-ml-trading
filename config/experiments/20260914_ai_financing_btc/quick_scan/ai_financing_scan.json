@@ -1,0 +1,242 @@
+{
+  "experiment_id": "20260914_ai_financing_btc",
+  "note": "phase1 flashlight only; does not promote",
+  "clock": "closed calendar D+1; Vision 1d klines + Binance funding",
+  "n_events_calendar": 21,
+  "summary": {
+    "ic": -0.021076601839549097,
+    "ic_pvalue": 0.3978906591701338,
+    "n": 1611,
+    "lift_pp": 0.10201909151531457
+  },
+  "segments": [
+    {
+      "segment": "bear_2022",
+      "n_events": 7,
+      "mean_event_ret": 0.011227142304711604,
+      "median_event_ret": 0.009714315730034562,
+      "hit_rate": 0.7142857142857143,
+      "baseline_5d_mean": 0.00012283043240689424,
+      "funding_pre_mean": 6.261299999999999e-05,
+      "funding_post_mean": 6.781775e-05,
+      "events": [
+        {
+          "date": "2022-04-29",
+          "company": "Anthropic",
+          "usd": 580000000.0,
+          "ret_dplus1_to_hold": 0.055018676308338454,
+          "mean_daily_ret": 0.006103107275036002,
+          "n_days": 5
+        },
+        {
+          "date": "2023-01-23",
+          "company": "OpenAI",
+          "usd": 10000000000.0,
+          "ret_dplus1_to_hold": 0.017169449428568795,
+          "mean_daily_ret": 0.0009491498617665073,
+          "n_days": 5
+        },
+        {
+          "date": "2023-02-01",
+          "company": "Anthropic",
+          "usd": 300000000.0,
+          "ret_dplus1_to_hold": -0.03130280805853625,
+          "mean_daily_ret": -0.00832011776643935,
+          "n_days": 5
+        },
+        {
+          "date": "2023-04-28",
+          "company": "OpenAI",
+          "usd": 300000000.0,
+          "ret_dplus1_to_hold": -0.006651216765310997,
+          "mean_daily_ret": -0.0017050427998515749,
+          "n_days": 5
+        },
+        {
+          "date": "2023-05-01",
+          "company": "Anthropic",
+          "usd": 450000000.0,
+          "ret_dplus1_to_hold": 0.00632666236281465,
+          "mean_daily_ret": 0.005676316689317939,
+          "n_days": 5
+        },
+        {
+          "date": "2023-06-29",
+          "company": "Inflection",
+          "usd": 1300000000.0,
+          "ret_dplus1_to_hold": 0.009714315730034562,
+          "mean_daily_ret": 0.0021147931370905093,
+          "n_days": 5
+        },
+        {
+          "date": "2023-09-25",
+          "company": "Anthropic",
+          "usd": 1250000000.0,
+          "ret_dplus1_to_hold": 0.028314917127072015,
+          "mean_daily_ret": 0.005028806293081334,
+          "n_days": 5
+        }
+      ]
+    },
+    {
+      "segment": "bull_2023_2024",
+      "n_events": 9,
+      "mean_event_ret": 0.0003783057230200621,
+      "median_event_ret": -0.0023829373350007232,
+      "hit_rate": 0.4444444444444444,
+      "baseline_5d_mean": 0.012429676063113375,
+      "funding_pre_mean": 9.399200000000002e-05,
+      "funding_post_mean": 0.00011723711111111112,
+      "events": [
+        {
+          "date": "2023-06-29",
+          "company": "Inflection",
+          "usd": 1300000000.0,
+          "ret_dplus1_to_hold": 0.009714315730034562,
+          "mean_daily_ret": 0.0021147931370905093,
+          "n_days": 5
+        },
+        {
+          "date": "2023-09-25",
+          "company": "Anthropic",
+          "usd": 1250000000.0,
+          "ret_dplus1_to_hold": 0.028314917127072015,
+          "mean_daily_ret": 0.005028806293081334,
+          "n_days": 5
+        },
+        {
+          "date": "2023-10-27",
+          "company": "Anthropic",
+          "usd": 500000000.0,
+          "ret_dplus1_to_hold": 0.039628475705995925,
+          "mean_daily_ret": 0.008984388655058729,
+          "n_days": 5
+        },
+        {
+          "date": "2024-02-01",
+          "company": "Anthropic",
+          "usd": 750000000.0,
+          "ret_dplus1_to_hold": -0.0023829373350007232,
+          "mean_daily_ret": 5.1421558951658675e-05,
+          "n_days": 5
+        },
+        {
+          "date": "2024-03-27",
+          "company": "Anthropic",
+          "usd": 2750000000.0,
+          "ret_dplus1_to_hold": -0.016074546822570146,
+          "mean_daily_ret": 0.0006499904644985399,
+          "n_days": 5
+        },
+        {
+          "date": "2024-05-26",
+          "company": "xAI",
+          "usd": 6000000000.0,
+          "ret_dplus1_to_hold": -0.02711858062584238,
+          "mean_daily_ret": -0.002703143245897954,
+          "n_days": 5
+        },
+        {
+          "date": "2024-10-02",
+          "company": "OpenAI",
+          "usd": 6600000000.0,
+          "ret_dplus1_to_hold": 0.024099579759975676,
+          "mean_daily_ret": 0.005179227873974135,
+          "n_days": 5
+        },
+        {
+          "date": "2024-11-22",
+          "company": "Anthropic",
+          "usd": 4000000000.0,
+          "ret_dplus1_to_hold": -0.018626663460406978,
+          "mean_daily_ret": -0.005733366088695435,
+          "n_days": 5
+        },
+        {
+          "date": "2024-12-23",
+          "company": "xAI",
+          "usd": 6000000000.0,
+          "ret_dplus1_to_hold": -0.03414980857207739,
+          "mean_daily_ret": 0.001169105126608594,
+          "n_days": 5
+        }
+      ]
+    },
+    {
+      "segment": "recent_range_to_bear",
+      "n_events": 7,
+      "mean_event_ret": 0.002531316277597221,
+      "median_event_ret": -0.0076039444741767825,
+      "hit_rate": 0.14285714285714285,
+      "baseline_5d_mean": -0.0014763149356508182,
+      "funding_pre_mean": 2.2102000000000003e-05,
+      "funding_post_mean": 2.3855142857142854e-05,
+      "events": [
+        {
+          "date": "2025-03-03",
+          "company": "Anthropic",
+          "usd": 3500000000.0,
+          "ret_dplus1_to_hold": -0.01216332228792405,
+          "mean_daily_ret": 0.0002719200140729683,
+          "n_days": 5
+        },
+        {
+          "date": "2025-03-31",
+          "company": "OpenAI",
+          "usd": 40000000000.0,
+          "ret_dplus1_to_hold": -0.01897066407897463,
+          "mean_daily_ret": 0.0025927930508102604,
+          "n_days": 5
+        },
+        {
+          "date": "2025-09-02",
+          "company": "Anthropic",
+          "usd": 13000000000.0,
+          "ret_dplus1_to_hold": -0.0052283812079191305,
+          "mean_daily_ret": -0.00018283854787399801,
+          "n_days": 5
+        },
+        {
+          "date": "2026-01-06",
+          "company": "xAI",
+          "usd": 20000000000.0,
+          "ret_dplus1_to_hold": -0.003981254379817889,
+          "mean_daily_ret": -0.005870867371295585,
+          "n_days": 5
+        },
+        {
+          "date": "2026-02-12",
+          "company": "Anthropic",
+          "usd": 30000000000.0,
+          "ret_dplus1_to_hold": -0.019552029525657044,
+          "mean_daily_ret": 0.003917210666876292,
+          "n_days": 5
+        },
+        {
+          "date": "2026-02-27",
+          "company": "OpenAI",
+          "usd": 122000000000.0,
+          "ret_dplus1_to_hold": 0.08521880989765007,
+          "mean_daily_ret": 0.020336139658872245,
+          "n_days": 5
+        },
+        {
+          "date": "2026-05-15",
+          "company": "Anthropic",
+          "usd": 8000000000.0,
+          "ret_dplus1_to_hold": -0.0076039444741767825,
+          "mean_daily_ret": -0.0039593970090747495,
+          "n_days": 5
+        }
+      ]
+    }
+  ],
+  "ai_basket_proxy": {
+    "basket_z_vs_btc_next_ret_ic": 0.02236959181468465,
+    "basket_z_vs_btc_next_ret_p": 0.4314571514517056,
+    "basket_z_vs_btc_next_ret_n": 1239,
+    "basket_z_lag1_vs_btc_funding_z_ic": 0.09830914419257668,
+    "basket_z_lag1_vs_btc_funding_z_p": 0.002563082733042152,
+    "basket_z_lag1_vs_btc_funding_z_n": 939
+  }
+}

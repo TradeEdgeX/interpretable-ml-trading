@@ -1,0 +1,8 @@
+name: ai_financing_btc
+description: AI mega-round calendar + BTC funding z-score + ATR.
+feature_pipeline:
+  requested_features:
+    - atr_f
+    - funding_rate_features_f
+    - ai_financing_event_f
+    - ai_basket_funding_zscore_f

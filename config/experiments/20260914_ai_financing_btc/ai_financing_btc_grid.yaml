@@ -1,0 +1,15 @@
+experiment_id: 20260914_ai_financing_btc
+strategy: ai_financing_btc
+strategies_root: config/experiments/20260914_ai_financing_btc/strategies
+symbols: [BTCUSDT]
+data_path: data/parquet_data
+constitution_yaml: config/constitution/constitution.yaml
+extra_argv:
+  - --feature-store-strict
+  - --fast
+  - --no-kill-switch
+segment_matrix:
+  segments: [bear_2022, bull_2023_2024, recent_range_to_bear]
+  variants:
+    - suffix: event_dplus1_5d
+      output_dir: results/ai_financing_btc/experiments/20260914_ai_financing_btc/event_dplus1_5d

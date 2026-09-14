@@ -215,6 +215,7 @@ mlbot research close <id>      # 人再 --declare
 - [examples/20260911_btc_lead_ai_alts_CN.md](examples/20260911_btc_lead_ai_alts_CN.md)
 - [examples/20260911_p99_bb_break_chase_CN.md](examples/20260911_p99_bb_break_chase_CN.md)
 - [examples/20260914_eq_us_spy_qqq_beta_CN.md](examples/20260914_eq_us_spy_qqq_beta_CN.md)（美股 SPY/QQQ **beta**；选股 / 超跌择时对照）
+- [examples/20260914_ai_chip_spend_btc_regime_CN.md](examples/20260914_ai_chip_spend_btc_regime_CN.md)（芯片销售环比 vs 闭棒 MA200）
 - [cs_panel_CN.md](cs_panel_CN.md)（横截面多因子能力；已量句 reject）
 
 ---

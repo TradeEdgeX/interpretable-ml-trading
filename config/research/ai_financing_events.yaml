@@ -1,0 +1,114 @@
+# Locked public mega-round calendar for 20260914_ai_financing_btc.
+# Dates are UTC announcement / press-release days, not close dates when they differ.
+# min_usd filter in the feature defaults to 3e8; keep smaller rows only if marked include: true.
+# Sources are public company blogs / Reuters / Wikipedia. Not a complete VC tape.
+
+version: 1
+description: Public AI-lab mega financing announcements (>= ~$300M)
+
+events:
+  - date: "2022-04-29"
+    company: Anthropic
+    usd: 580000000
+    round: Series B
+    source: https://anthropic-funding-overview.vercel.app/
+  - date: "2023-01-23"
+    company: OpenAI
+    usd: 10000000000
+    round: Microsoft strategic
+    source: https://en.wikipedia.org/wiki/OpenAI
+  - date: "2023-02-01"
+    company: Anthropic
+    usd: 300000000
+    round: Google strategic
+    source: https://anthropic-funding-overview.vercel.app/
+  - date: "2023-04-28"
+    company: OpenAI
+    usd: 300000000
+    round: Series C
+    source: https://tracxn.com/d/companies/openai
+  - date: "2023-05-01"
+    company: Anthropic
+    usd: 450000000
+    round: Series C
+    source: https://anthropic-funding-overview.vercel.app/
+  - date: "2023-06-29"
+    company: Inflection
+    usd: 1300000000
+    round: growth
+    source: https://inflection.ai
+  - date: "2023-09-25"
+    company: Anthropic
+    usd: 1250000000
+    round: Amazon strategic I
+    source: https://anthropic-funding-overview.vercel.app/
+  - date: "2023-10-27"
+    company: Anthropic
+    usd: 500000000
+    round: Google strategic II
+    source: https://anthropic-funding-overview.vercel.app/
+  - date: "2024-02-01"
+    company: Anthropic
+    usd: 750000000
+    round: Series D
+    source: https://anthropic-funding-overview.vercel.app/
+  - date: "2024-03-27"
+    company: Anthropic
+    usd: 2750000000
+    round: Amazon strategic II
+    source: https://anthropic-funding-overview.vercel.app/
+  - date: "2024-05-26"
+    company: xAI
+    usd: 6000000000
+    round: Series B
+    source: https://x.ai/news/series-b
+  - date: "2024-10-02"
+    company: OpenAI
+    usd: 6600000000
+    round: Series D
+    source: https://www.reuters.com/technology/artificial-intelligence/openai-closes-66-billion-funding-haul-valuation-157-billion-with-investment-2024-10-02/
+  - date: "2024-11-22"
+    company: Anthropic
+    usd: 4000000000
+    round: Amazon strategic III
+    source: https://anthropic-funding-overview.vercel.app/
+  - date: "2024-12-23"
+    company: xAI
+    usd: 6000000000
+    round: Series C
+    source: https://x.ai/news/series-c
+  - date: "2025-03-03"
+    company: Anthropic
+    usd: 3500000000
+    round: Series E
+    source: https://anthropic-funding-overview.vercel.app/
+  - date: "2025-03-31"
+    company: OpenAI
+    usd: 40000000000
+    round: Series E
+    source: https://en.wikipedia.org/wiki/OpenAI
+  - date: "2025-09-02"
+    company: Anthropic
+    usd: 13000000000
+    round: Series F
+    source: https://www.anthropic.com/news
+  - date: "2026-01-06"
+    company: xAI
+    usd: 20000000000
+    round: Series E
+    source: https://x.ai/news/series-e
+  - date: "2026-02-12"
+    company: Anthropic
+    usd: 30000000000
+    round: Series G
+    source: https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation
+  - date: "2026-02-27"
+    company: OpenAI
+    usd: 122000000000
+    round: Series F
+    source: https://en.wikipedia.org/wiki/OpenAI
+  - date: "2026-05-15"
+    company: Anthropic
+    usd: 8000000000
+    round: Series H
+    source: https://anthropic-funding-overview.vercel.app/

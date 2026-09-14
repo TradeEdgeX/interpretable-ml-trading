@@ -280,6 +280,10 @@ FEATURE_MODULES = [
     "src.features.time_series.baseline_features",
     # Court-example calendar / BTC-lead / tick P99
     "src.features.time_series.court_example_features",
+    # AI mega-round calendar aligned onto host bars
+    "src.features.time_series.ai_financing_features",
+    # Epoch AI chip-sales quarterly spend
+    "src.features.time_series.ai_chip_spend_features",
     # Market-cap / cross-sectional normalization features
     "src.features.time_series.market_cap_features",
     # Funding rate features

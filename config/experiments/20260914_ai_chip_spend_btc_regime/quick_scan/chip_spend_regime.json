@@ -1,0 +1,43 @@
+{
+  "experiment_id": "20260914_ai_chip_spend_btc_regime",
+  "note": "phase1 flashlight only; does not promote",
+  "x": "ai_chip_spend_qoq_high (Epoch chip cost QoQ > expanding median)",
+  "y": "BTC daily close < SMA200 (closed bar, not market_segment labels)",
+  "source": "config/research/ai_chip_sales_quarterly.csv",
+  "attribution": "Epoch AI chip sales, CC BY",
+  "summary": {
+    "ic": null,
+    "lift_pp": -37.121839908725164,
+    "n_high": 546,
+    "n_low": 610,
+    "bear_share_high": 0.1336996336996337,
+    "bear_share_low": 0.5049180327868853,
+    "delta_pp": -37.121839908725164
+  },
+  "segments": [
+    {
+      "n_high": 213,
+      "n_low": 0,
+      "bear_share_high": 0.27699530516431925,
+      "bear_share_low": NaN,
+      "segment": "bear_2022",
+      "delta_pp": NaN
+    },
+    {
+      "n_high": 396,
+      "n_low": 184,
+      "bear_share_high": 0.14898989898989898,
+      "bear_share_low": 0.3967391304347826,
+      "segment": "bull_2023_2024",
+      "delta_pp": -24.774923144488362
+    },
+    {
+      "n_high": 90,
+      "n_low": 425,
+      "bear_share_high": 0.15555555555555556,
+      "bear_share_low": 0.5505882352941176,
+      "segment": "recent_range_to_bear",
+      "delta_pp": -39.503267973856204
+    }
+  ]
+}

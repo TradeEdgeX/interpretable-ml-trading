@@ -1,0 +1,5 @@
+rules:
+  - feature: ai_financing_event
+    operator: ">="
+    value: 1.0
+    rationale: "first 2h bar of UTC day after a public AI mega-round"

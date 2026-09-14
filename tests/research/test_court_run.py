@@ -120,6 +120,19 @@ def test_refuse_rolling(tmp_path: Path) -> None:
         check_runnable(exp, repo_root=tmp_path)
 
 
+def test_ai_financing_btc_grid_is_its_own_family() -> None:
+    root = Path(__file__).resolve().parents[2]
+    grid = root / "config/experiments/20260914_ai_financing_btc/ai_financing_btc_grid.yaml"
+    data = load_court_grid(grid)
+    validate_court_grid(
+        data, family="ai_financing_btc", experiment_id="20260914_ai_financing_btc"
+    )
+    assert data["strategy"] == "ai_financing_btc"
+    assert data["segment_matrix"]["variants"][0]["output_dir"].startswith(
+        convention_results_root("ai_financing_btc", "20260914_ai_financing_btc")
+    )
+
+
 def test_funding_fade_grid_is_its_own_family() -> None:
     root = Path(__file__).resolve().parents[2]
     grid = root / "config/experiments/20260910_funding_fade/funding_fade_grid.yaml"

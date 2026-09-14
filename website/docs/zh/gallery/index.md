@@ -67,6 +67,12 @@
 - **本机五项 KPI**：SPY 年化 13.7% / MaxDD −34.1%；QQQ 年化 20.4% / MaxDD −35.6%。超跌择时年化低于同窗买入持有。
 - **结论**：先当 beta。原句已被打中。已 `--declare reject`。
 
+### AI 芯片销售环比 vs BTC 市况
+
+- **句子**：算力开支环比过高时，BTC 闭棒更常低于 MA200（不是随后几天涨跌，也不是三段标签）。
+- **Phase 1**：高强度非牛 13.4% / 低强度 50.5%（差 −37pp）。牛段、近窗同号。
+- **结论**：方向和纸上声称相反。未 `--declare`。过程：[docs/examples/20260914_ai_chip_spend_btc_regime_CN.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/examples/20260914_ai_chip_spend_btc_regime_CN.md)。
+
 ## 还想看细则
 
 - [docs/framework.md §4](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.md)

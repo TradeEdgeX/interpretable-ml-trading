@@ -1,0 +1,15 @@
+strategy:
+  name: ai_financing_btc-120T
+  description: >-
+    Long BTC after a public AI mega-round (first 2h bar of UTC D+1).
+    Hold 60 two-hour bars. Kill switch off. Not a live sleeve.
+  owner: public_demo
+  archetype: ai_financing_btc
+  timeframe: 120T
+  live_enabled: false
+  research_retained: true
+  symbol_include:
+    - BTCUSDT
+  feature_store_layer: features_ai_financing_btc_120T
+  evidence:
+    role: public-demo

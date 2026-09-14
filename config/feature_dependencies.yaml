@@ -61,6 +61,63 @@ features:
       timeframe: 120T
       on_missing: nan
       node_cache_version: v1
+  ai_financing_event_f:
+    module: ai_financing
+    compute_func: compute_ai_financing_event_from_df
+    dependencies: []
+    required_columns: []
+    output_columns:
+      - ai_financing_event
+      - ai_financing_in_window
+      - ai_financing_days_since
+      - ai_financing_log_usd
+    category: calendar
+    description:
+      Public mega AI-company financing calendar. Event fires on the first bar
+      of the UTC day after the announcement date (closed calendar). Window is
+      hold_days inclusive starting that day.
+    pass_full_df: true
+    compute_params:
+      calendar_path: config/research/ai_financing_events.yaml
+      hold_days: 5
+      min_usd: 300000000
+      node_cache_version: v1
+  ai_basket_funding_zscore_f:
+    module: ai_financing
+    compute_func: compute_ai_basket_funding_zscore_from_df
+    dependencies: []
+    required_columns: []
+    output_columns:
+      - ai_basket_funding_zscore
+    category: cross_symbol
+    description:
+      Equal-weight mean of AI-narrative perpetual funding z-scores
+      (FET/RENDER/NEAR/TAO) asof-joined onto host bars. Phase-1 proxy only.
+    pass_full_df: true
+    compute_params:
+      funding_rate_dir: data/funding_rate/parquet
+      on_missing: nan
+      z_window: 50
+      z_min_periods: 20
+      node_cache_version: v1
+  ai_chip_spend_f:
+    module: ai_chip_spend
+    compute_func: compute_ai_chip_spend_from_df
+    dependencies: []
+    required_columns: []
+    output_columns:
+      - ai_chip_spend_usd
+      - ai_chip_spend_qoq
+      - ai_chip_spend_qoq_high
+    category: calendar
+    description:
+      Last completed Epoch AI chip-sales quarter asof-joined onto bars.
+      Available only after the quarter end date.
+    pass_full_df: true
+    compute_params:
+      quarterly_path: config/research/ai_chip_sales_quarterly.csv
+      drop_incomplete: false
+      node_cache_version: v1
   bar_max_notional_p99_f:
     module: court_example
     compute_func: compute_bar_max_notional_p99_from_df

@@ -17,6 +17,8 @@
 | [A 股动量+成交额横截面](examples/20260911_ashare_cs_mom_amount_CN.md) | 两因子锁死、相对等权失败、已 reject |
 | [A 股热板块相对等权](examples/20260911_ashare_cs_sector_cost_CN.md) | 板块排序 + 10bp；相对等权不是 alpha；已 reject |
 | [买 ETF 会错过美股牛市吗](examples/20260914_eq_us_spy_qqq_beta_CN.md) · [EN](examples/20260914_eq_us_spy_qqq_beta.en.md) | SPY/QQQ 买入持有 vs 超跌择时；先当 beta；已 reject |
+| [AI 算力开支过多时 BTC 是不是熊](examples/20260914_ai_chip_spend_btc_regime_CN.md) · [EN](examples/20260914_ai_chip_spend_btc_regime.en.md) | Epoch 芯片销售环比 vs 闭棒 MA200；Phase 1 方向相反 |
+| [AI 融资公告后做多 BTC](examples/20260914_ai_financing_btc_CN.md) · [EN](examples/20260914_ai_financing_btc.en.md) | 另一句：日历事件后做多；Phase 1 |
 | [假设模板](hypothesis_template.md) · [EN](hypothesis_template.en.md) | 社会 / 数学 / 统计现象、验证标准、数据范围；AI 验模板再编排 |
 | [验证假设](hypothesis.md) · [EN](hypothesis.en.md) | 怎么写成可验证的几条、结论怎么用 |
 | [教训](lessons.md) | 闭棒、熔断、五项 KPI |

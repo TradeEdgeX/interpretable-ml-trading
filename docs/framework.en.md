@@ -179,4 +179,4 @@ Closed-bar entry; exits named; adds off unless that is the sentence; `kill_switc
 
 Golden cross, funding, P99, and the alt recent window each hit their written falsifier on at least one window. Monday stays positive but almost flat recently. 2022 alts have no sample — that is the range rule working. P99 needs ticks; Monday needs daily; funding needs funding files. Same court, different grain.
 
-Walkthroughs: [README.md](../README.md) · [examples/](examples/) · [US SPY/QQQ beta](examples/20260914_eq_us_spy_qqq_beta.en.md).
+Walkthroughs: [README.md](../README.md) · [examples/](examples/) · [US SPY/QQQ beta](examples/20260914_eq_us_spy_qqq_beta.en.md) · [AI chip spend vs BTC regime](examples/20260914_ai_chip_spend_btc_regime.en.md).

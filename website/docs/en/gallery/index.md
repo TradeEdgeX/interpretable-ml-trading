@@ -67,6 +67,12 @@
 - **Local five KPIs**: SPY CAGR 13.7% / MaxDD −34.1%; QQQ CAGR 20.4% / MaxDD −35.6%. Washout timing CAGR below same-window buy-and-hold.
 - **Conclusion**: class is beta. The popular sentence is hit. Declared reject.
 
+### AI chip-sales QoQ vs BTC regime
+
+- **Sentence**: when AI compute spend QoQ is high, BTC closed bars sit below MA200 more often (not next-few-days return, not the segment labels).
+- **Phase 1**: high-QoQ below MA200 13.4% vs low-QoQ 50.5% (−37pp). Same sign in bull and recent.
+- **Conclusion**: opposite of the paper claim. Not `--declare`d. Walkthrough: [docs/examples/20260914_ai_chip_spend_btc_regime.en.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/examples/20260914_ai_chip_spend_btc_regime.en.md).
+
 ## Fine print
 
 - [docs/framework.md §4](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/framework.md)
