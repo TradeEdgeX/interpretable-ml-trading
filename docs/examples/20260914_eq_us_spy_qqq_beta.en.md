@@ -1,12 +1,11 @@
 # Does buying an ETF miss the US bull market?
 
 Paper: [config/experiments/20260914_eq_us_spy_qqq_beta/](../../config/experiments/20260914_eq_us_spy_qqq_beta/)  
-Class first as **beta** (S&P 500 / Nasdaq-100 equity exposure), not stock-selection alpha.  
-Harness: **eq_us_daily**, not 2h `event_backtest`. Human already `--declare reject`.
+Class first as **beta**: this is S&P 500 / Nasdaq-100 exposure, not “being good at picking stocks.” A human already judged the sentence false.
 
 > Buying SPY or QQQ “misses” the US bull; to catch the burst you must pick stocks, or wait for an index washout.
 
-The court asks whether washout timing (or stock-picking) beats **same-window** unlevered buy-and-hold. If it does, the sentence lives. If it does not, the sentence dies. Buy-and-hold itself is the beta benchmark, not an alpha to promote.
+The question is whether, over the **same dates**, “wait for a washout” or “you must pick stocks” beats **just holding** the unlevered ETF. If it does, the sentence lives. If it does not, the sentence dies. Just holding is the benchmark, not a trick to ship.
 
 中文：[20260914_eq_us_spy_qqq_beta_CN.md](20260914_eq_us_spy_qqq_beta_CN.md)
 
@@ -22,15 +21,15 @@ You say the same sentence here, plus “measure this.” The AI may not answer f
 
 | Step | Who | Does | Does not |
 |---|---|---|---|
-| 1 | Human sentence; AI helps fill the template | Who pays, what is measured, which tape, which KPI kills it | Rewrite it as “add RSI” |
-| 2 | Program | `validate` the template; `index` for a prior close | Download or backtest |
-| 3 | Human says “measure this” | Then download SPY / QQQ daily and run `eq_us_spy_qqq.py` | `mlbot research run` (that path only dispatches 2h event backtests) |
-| 4 | Program prints the table | Same-window buy-and-hold vs four washout / MA clocks; five KPIs only | Type `verdict:` |
-| 5 | Human reads | `--declare` against the written falsifier | Hand-trade a rejected sentence at night |
+| 1 | Human sentence; AI helps fill the template | Who pays, what is measured, which dates, which number means you lose | Rewrite it as “add RSI” |
+| 2 | Program | Check the template is complete; look up whether this sentence was already closed | Download or print a table before you say “measure this” |
+| 3 | Human says “measure this” | Then download SPY / QQQ daily bars and print the daily comparison | Substitute a crypto two-hour in-and-out backtest |
+| 4 | Program prints the table | Same dates: just holding vs four “wait for a washout” rules | Write the conclusion itself |
+| 5 | Human reads | Write whether the sentence holds, against the ruler written first | Hand-trade the same sentence at night after the table lost |
 
-Class first: unlevered ETF buy-and-hold is **equity beta** on this tape, not an alpha to ship. The popular sentence lives only if washout timing or stock-picking beats **same-window** buy-and-hold on CAGR and does not deepen MaxDD. There is no universe here, so stock-picking was not measured. The half that was — four clocks — all compound slower. A human `--declare reject`ed. The robot does not write washout into YAML; a human should not wait for RSI to “catch the bull.”
+Class first: just holding the unlevered ETF on this tape is **equity beta**, not a stock-picking skill. The popular sentence lives only if washout timing or stock-picking compounds faster than **same-dates** buy-and-hold, and does not deepen the hole. There is no “who was buyable that day” list here, so the stock-picking half was not measured. The half that was — four washout rules — all compound slower. A human judged it false. The robot does not write “wait for a washout” into later rules; a human should not wait for RSI to “catch the bull.”
 
-The seven sections below unpack that walk. The golden-cross story is in the root [README.md](../../README.md). The loop is [hypothesis.en.md](../hypothesis.en.md); who writes which field is [rd_playbook.md](../agent/rd_playbook.md).
+The sections below unpack that walk. The golden-cross story is in the root [README.md](../../README.md).
 
 ---
 
@@ -38,13 +37,13 @@ The seven sections below unpack that walk. The golden-cross story is in the root
 
 ```text
 Human sentence (ETF is too slow / must pick or wait)
-  → template: sociology / math / stats / ruler / four US windows / five boxes
-  → validate + lineage (no prior close of this sentence in the public tree)
-  → daily court eq_us_daily: buy-and-hold vs four index clocks
-  → human --declare
+  → write down: who pays, what is measured, which dates, how you lose
+  → check: this sentence was not already closed in the public tree
+  → daily comparison: just holding vs four “wait for a washout” rules
+  → human writes whether it holds
 ```
 
-Do not use `mlbot research run` (that path only dispatches 2h `event_backtest`). There is no FeatureStore layer and no cross-sectional universe.
+This sentence compares two ETFs on their own daily closes. It is not a crypto two-hour in-and-out book, and it is not a daily ranking of every stock in a market. The only series is the close; there is no separate pre-built moving-average warehouse.
 
 | Box | This sentence |
 |---|---|
@@ -94,7 +93,7 @@ Windows:
 | `us_covid_2020` | 2020-02-19 → 2020-03-23 | Crash coverage. **24** bars here — CAGR cannot close the case. |
 | `us_bear_2022` | 2022-01-03 → 2022-10-14 | Slow bear: a fixed clock gets chopped mid-slide. |
 | `us_bull_2023_2024` | 2023-01-01 → 2025-01-01 | Main compounding window for buy-and-hold. |
-| `us_recent` | 2025-01-01 → 2026-08-17 | Recent. Cannot promote alone. |
+| `us_recent` | 2025-01-01 → 2026-08-17 | Recent. Cannot pass on its own. |
 
 S&P 500 PIT stock-picking: **not re-run** (no universe in this extract). `result.json` records `pit_stock_picking: not_run_no_universe`.
 
@@ -102,7 +101,7 @@ S&P 500 PIT stock-picking: **not re-run** (no universe in this extract). `result
 
 ## Features
 
-This court **does not read FeatureStore**. There is no `features.yaml`. Do not add a local `compute_*` fallback in a backtest hot path — the only series is daily close, and the clocks live in [`src/research/eq_us_spy_qqq.py`](../../src/research/eq_us_spy_qqq.py).
+Signals come from the daily close: how oversold, how far from the peak, where the average sits. There is no separate pre-built moving-average warehouse. A signal known at today’s close is first held tomorrow. The clocks live in [`src/research/eq_us_spy_qqq.py`](../../src/research/eq_us_spy_qqq.py).
 
 | Series | Construction | Closed-bar use |
 |---|---|---|
@@ -188,7 +187,7 @@ Class: **beta**. Unlevered SPY / QQQ buy-and-hold is the equity-exposure benchma
 - Stock-picking was not re-run. A missing universe cannot keep “you must pick stocks” alive.
 - Dropping Top-3 names (NVDA and friends) is classification only; it does not kill this sleeve by itself.
 
-Closed with `--declare reject`. The robot does not write washout / stock-picking into YAML as alpha; a human should not hand-trade “wait for RSI to catch the bull.” Do not type `verdict:`.
+A human already judged it false. The robot does not write “wait for a washout / you must pick stocks” into later rules; a human should not hand-trade “wait for RSI to catch the bull.” Do not type the conclusion field by hand.
 
 Artifacts:
 

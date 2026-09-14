@@ -1,14 +1,13 @@
 # Do hot winners keep beating equal-weight?
 
 Paper: [config/experiments/20260911_ashare_cs_mom_amount/](../../config/experiments/20260911_ashare_cs_mom_amount/)  
-Class first as **beta** (momentum + activity exposure), not stock-selection alpha. No industry or size neutrality.  
-Harness: **cs_panel**, not 2h `event_backtest`. Human already `--declare reject`.
+Class first as **beta**: this buys the “rose a lot and traded hot” sleeve, not stock-picking. Industry and size were not stripped out first. A human already judged the sentence false.
 
 > Names that rose the most over 20 days *and* are hot on their own amount keep beating same-universe equal-weight over the next 20 days.
 
-This is a two-factor cross-section, not index timing and not an overnight IC mine. The two columns are locked first. IC is a flashlight; it cannot change the sentence.
+This sentence scores the whole market every day on two locked columns: how much it rose, and how hot its own amount is. It is not index timing, and it is not an overnight hunt for a better factor. How score lines up with later return is a flashlight only; it cannot change the sentence.
 
-Capability note: [cs_panel.en.md](../cs_panel.en.md). Sector ranking is a different sentence: [hot sectors vs equal-weight](20260911_ashare_cs_sector_cost.en.md).
+How daily whole-market scoring is measured: [cs_panel.en.md](../cs_panel.en.md). Sector ranking is a different sentence: [hot sectors vs equal-weight](20260911_ashare_cs_sector_cost.en.md).
 
 中文：[20260911_ashare_cs_mom_amount_CN.md](20260911_ashare_cs_mom_amount_CN.md)
 
@@ -20,11 +19,11 @@ You ask a web AI: “Do hot winners keep beating the market? Sweep whatever has 
 
 Mining factors overnight and promoting when IC rises is a different loop. It optimizes a score. This repo optimizes whether **one sentence is dead**. The two columns lock first: `mom_20` and `amount_z_20`, half and half. IC is a flashlight. It cannot change the sentence and cannot close the case.
 
-After “measure this,” the court is `cs_panel` (`mlbot research run` does not dispatch it). Score at the close, buy the top 20% next open, control is same-day universe equal-weight. In the 924 bull, EW prints +76.57% — that is the small-cap market, not this sentence. The hot book is +24.13%, −52pp relative. IC is minus in all three windows: high score predicts reversal, not continuation.
+After “measure this,” print a table that scores every name each day and buys the hottest sleeve — not a single-name in-and-out book. Score at the close, buy the top 20% next open; the control is the same day’s names, one share each. In the 924 bull, equal-weight prints +76.57% — that is the small-cap market, not this sentence. The hottest sleeve is +24.13%, −52 points relative. Score versus the next 20 days is minus in all three windows: high score predicts a turn, not a continuation.
 
-A human `--declare reject`ed. Do not flip this paper into a reversal (new sentence). Do not score the hot book’s absolute CAGR against cash. Do not buy the hottest quintile at night after the court said no. Class: momentum + activity beta, measured useless.
+A human already judged it false. Do not flip this paper into a reversal (new sentence). Do not score the hot sleeve’s own speed against cash. Do not buy the hottest quintile at night after the table said no. Class: momentum + activity beta, measured useless.
 
-The seven sections below unpack the closed-bar cross-section, the IC table, and how to read the book.
+The seven sections below unpack “score at the close, buy next open” and how to read the numbers.
 
 ---
 
@@ -32,13 +31,14 @@ The seven sections below unpack the closed-bar cross-section, the IC table, and 
 
 ```text
 Human sentence (two columns locked)
-  → template / validate / lineage
-  → Phase 1: daily Spearman IC (flashlight, does not close)
-  → cs_panel: top 20% equal-weight vs universe equal-weight, five KPIs by window
-  → human --declare reject
+  → write down: who pays, what is measured, which dates, how you lose
+  → check: this sentence was not already closed
+  → first see whether score and later return share a sign (flashlight only)
+  → buy the hottest 20% each day; control is one share each
+  → human writes whether it holds
 ```
 
-`mlbot research run` does not dispatch this family. Entry: `scripts/research/cs_panel.py`.
+This is not a single-name in-and-out book. Every day, rank the names that can be scored, buy the hottest 20%, and compare to the same day’s names one share each.
 
 | Box | This sentence |
 |---|---|
@@ -75,7 +75,7 @@ PYTHONPATH=src python scripts/research/cs_panel.py
 | Bar | Daily |
 | Path | `data/ashare/daily/` (not in git) |
 | Listing file | `data/ashare/stock_basic/stock_basic.parquet` |
-| Harness | `cs_panel` |
+| How the table is made | Rank scoreable names each day, buy the hottest 20%, control is one share each |
 | Calendar | [`config/market_segment_ashare.yaml`](../../config/market_segment_ashare.yaml) |
 | Neutrality | **None** (industry or size) |
 | Kill switch | Off |
@@ -84,7 +84,7 @@ PYTHONPATH=src python scripts/research/cs_panel.py
 |---|---|---:|---|
 | `bear_2021` | 2021-07-01 → 2022-10-31 | 323 | Hot names must not lose to EW. |
 | `bull_924` | 2024-09-24 → 2025-05-31 | 163 | Momentum should pay. |
-| `chop_recent` | 2025-06-01 → 2026-09-10 | 312 | Recent. Cannot promote alone. |
+| `chop_recent` | 2025-06-01 → 2026-09-10 | 312 | Recent. Cannot pass on its own. |
 
 EW will print a huge *absolute* CAGR in the 924 bull. That is small-cap market beta, **not** this sentence.
 
@@ -92,7 +92,7 @@ EW will print a huge *absolute* CAGR in the 924 bull. That is small-cap market b
 
 ## Features
 
-Two columns locked. Do not mine overnight. Do not `compute_*` a new factor in the backtest.
+Two columns locked. Do not swap factors overnight. If a column is missing, add it to the pre-built table first; do not compute a new one while printing the book.
 
 | Column | Construction | Closed-bar use |
 |---|---|---|
@@ -175,7 +175,7 @@ Class: **beta continuation claim, measured useless (the sign is reversal).**
 - A reversal needs a new paper. Do not flip this one.
 - Industry / size neutrality is another paper (the sector sentence).
 
-Closed `--declare reject`. The robot does not run it; a human should not buy the hottest quintile versus EW.
+A human already judged it false. The robot does not run it; a human should not buy the hottest quintile versus one-share-each.
 
 Artifact: `results/ashare_cs_mom_amount/experiments/20260911_ashare_cs_mom_amount/`
 

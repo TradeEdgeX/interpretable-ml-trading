@@ -1,8 +1,7 @@
 # Are hot sectors stock-picking alpha versus same-universe equal-weight?
 
 Paper: [config/experiments/20260911_ashare_cs_sector_cost/](../../config/experiments/20260911_ashare_cs_sector_cost/)  
-Class first as **sector rotation / beta**, not stock-selection alpha.  
-Harness: **cs_panel** via `scripts/research/cs_sector.py`, not 2h `event_backtest`. Human already `--declare reject`.
+Class first as **sector rotation**: money moves between sectors, not “being good at picking the name inside a sector.” A human already judged the sentence false.
 
 > Rank sectors first, then charge rebalance cost. Versus the *same* universe and the *same* 10bp, hot sectors should be better.
 
@@ -18,9 +17,9 @@ You ask a web AI: “The name-level book lost to equal-weight. Maybe we should r
 
 Adding industry and cost on the old paper, then declaring a pass, is not allowed here. A new control and a new ranking unit are a **new sentence**: new folder, lock “same universe, same 10bp” first. Industry is a 20-bucket coarse snapshot, not PIT 申万.
 
-After “measure this,” run `cs_sector.py`. The hot-sector book is green in all three windows (+9% / +34% / +6%). A web AI stops there: “sector rotation works.” This repo compares to **same-cost EW**: bull −40pp, chop −25pp. Daily turnover ≈ 0.38 eats about 10 points a year at 10bp — but bull and chop lose even *gross*. Cost did not kill the sentence by itself.
+After “measure this,” print a table that scores sectors first, then buys the names inside the hottest ones. The hot-sector book is green in all three windows (+9% / +34% / +6%). A web AI stops there: “sector rotation works.” This repo compares to **the same names, same fee, one share each**: bull −40 points, chop −25 points. Daily turnover ≈ 0.38 eats about 10 points a year at 10bp — but bull and chop lose even before the fee. Cost did not kill the sentence by itself.
 
-A human `--declare reject`ed. Weekly hot sectors versus cash can be green — different paper, different ruler. Changing the control changes the sentence. Absolute green can still die versus EW. After reject, do not “read the hot sector first” and pretend 10bp was never measured.
+A human already judged it false. Weekly hot sectors versus cash can be green — different sentence, different ruler. Changing the control changes the sentence. Absolute green can still die versus one-share-each. After the judgment, do not “read the hot sector first” and pretend the fee was never measured.
 
 The seven sections below unpack cost and the control.
 
@@ -29,12 +28,12 @@ The seven sections below unpack cost and the control.
 ## Design
 
 ```text
-Human sentence (rank sectors, assume rebalance cost)
-  → template: same-universe, same-cost control; factor becomes a sector score
-  → validate + lineage
-  → cs_sector: member-mean of two columns → z across sectors → buy names in the top 20% sectors
-  → 10bp each side on both books
-  → human --declare reject
+Human sentence (rank sectors, assume a rebalance fee)
+  → write down: same names, same fee; the score is a sector score
+  → check: this sentence was not already closed
+  → average the two columns inside each sector, rank sectors, buy names in the hottest 20%
+  → charge 10bp each side on both books
+  → human writes whether it holds
 ```
 
 The old zero-cost all-A EW control is retired for this close. Industry is a 20-bucket coarse snapshot, not PIT 申万.
@@ -139,7 +138,7 @@ Class: **sector-rotation / beta claim, no stable excess versus equal-weight.** N
 - Gross books also lose in bull / chop: death is “hot sectors keep running,” not “10bp was too harsh.”
 - Long–short residual and weekly-versus-cash are other papers, already closed on their own rulers.
 
-Closed `--declare reject`.
+A human already judged it false. The robot does not run it; a human should not “read the hot sector first” versus one-share-each.
 
 ---
 

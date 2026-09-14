@@ -1,8 +1,7 @@
 # Do tenbaggers need small cap and a 3–4 year hold?
 
 Paper: [config/experiments/20260911_tenbagger_smallcap/](../../config/experiments/20260911_tenbagger_smallcap/)  
-Class first as **fat tail / small-cap beta**, not point-selection alpha. Dropping Top-3 (or the largest tenbaggers) is classification only.  
-Harness: **cohort_hold**, not 2h `event_backtest`. Human already `--declare reject`.
+Class first as **small-cap exposure itself**: if 10× is denser, it is usually a smaller pool with more stories, not “being good at picking stocks.” Dropping the largest 10× names is only to see the type. A human already judged the sentence false.
 
 > A-share names that go 10× are usually under 10 billion yuan at entry and you have to hold three or four years.
 
@@ -18,9 +17,9 @@ You ask a web AI: “Are tenbaggers always small-cap, held three or four years? 
 
 It starts listing names and stories. A story that has not happened has no tape and no closed-bar column. **This repo cannot measure it.** That is research, not a hypothesis. Counting how many later-10× names were small is a future label — the pool is larger, so the headcount is larger.
 
-What you can say here is a rule that **already happened**: “entry-date cap ≤ 10 billion yuan, hold 3 or 4 years; is 10× denser than large caps that day, and is relative CAGR better?” Class: fat tail / small-cap beta. The court changes: `mlbot research run` only dispatches 2h event backtests; this sentence uses `cohort_hold`. Cap is that day’s amount / turnover, not today’s cap filled backward. The 924 bull cannot finish a 3y hold — “no sample,” not “small caps are working lately.”
+What you can say here is a rule that **already happened**: “on the entry date the name was under 10 billion yuan, hold 3 or 4 years; is 10× denser than large caps that day, and is relative annual speed better?” Class: the small-cap pool’s own temperament, not stock-picking. The measurement changes too: not a short in-and-out on one bar, but a roll-call each quarter, hold a fixed number of years, see how many times it finished. Cap is that day’s amount / turnover, not today’s cap filled backward. Names that entered after September 2024 still cannot finish a 3-year hold — “no sample,” not “small caps are working lately.”
 
-The table: 3y 10× rate 0.11% vs 0.11% (88 vs 33 hits, same density). Crash entries: small loses to large on CAGR. A human `--declare reject`ed. Names that are not listed yet have no history; post-hoc counts are survivorship; reject binds hands as well as the robot. US math is the same and was not measured — do not paste this table onto Nasdaq.
+The table: 3y 10× rate 0.11% vs 0.11% (88 vs 33 hits, same density). Crash entries: small loses to large on annual speed. A human already judged it false. Names that are not listed yet have no history; post-hoc counts are survivorship; the judgment binds hands as well as the robot. US math is the same and was not measured — do not paste this table onto Nasdaq.
 
 The seven sections below unpack what can and cannot be measured.
 
@@ -30,14 +29,14 @@ The seven sections below unpack what can and cannot be measured.
 
 ```text
 Human sentence (tenbaggers are small-cap, hold 3–4 years)
-  → template splits: historical rule yes; “who’s next” no
-  → validate + lineage
-  → download listed + delisted daily, quarterly PIT cap — only after “measure this”
-  → cohort_hold: entry-date buckets, small vs large, fixed 3y / 4y
-  → human --declare reject
+  → first split: a rule that already happened, yes; “who’s next,” no
+  → check: this sentence was not already closed
+  → download listed + delisted daily bars and that day’s cap — only after “measure this”
+  → each quarter, small vs large, hold 3 or 4 years
+  → human writes whether it holds
 ```
 
-Do not use `mlbot research run`. The court is `scripts/research/cohort_hold.py`.
+This is not a short in-and-out on one bar. Each entry quarter, every name already on the list that day is bucketed by **that day’s** cap, held 3 or 4 years, and counted for how many times it finished 10×.
 
 | What the human wants | This repo |
 |---|---|
@@ -93,7 +92,7 @@ Windows are the **entry-date** segment, not the hold’s end date:
 
 ## Features
 
-This court does not read a golden-cross `features.yaml` layer. Cap is computed on the entry date inside `cohort_hold`. Do not look back from “became a tenbagger later.”
+The series are daily close, amount, and turnover. Cap is **that day’s** number. Do not look back from “became a tenbagger later” to decide how large it was — that is a future label.
 
 | Series | Construction | Closed-bar use |
 |---|---|---|
@@ -178,7 +177,7 @@ Class: **thin fat tail, mainly small-cap beta.**
 - `bear_2021` small CAGR beats large — that is small-cap beta, not a denser 10× (0.09% vs 0.12%).
 - US not measured. Do not paste this table onto Nasdaq.
 
-Closed `--declare reject`. The robot does not run “buy then-small names and wait for 10×”; a human should not either.
+A human already judged it false. The robot does not run “buy then-small names and wait for 10×”; a human should not either.
 
 Artifact: `results/tenbagger_smallcap/experiments/20260911_tenbagger_smallcap`
 

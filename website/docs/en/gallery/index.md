@@ -130,9 +130,9 @@ Walkthrough: [docs/examples/20260911_tenbagger_smallcap.en.md](https://github.co
 | `bear_2021` | +9.09% | −0.03% | 0.09% vs 0.12% |
 | `bull_924` / `chop_recent` | no sample | no sample | — |
 
-## Cross-section
+## Score the whole market every day
 
-Capability: [docs/cs_panel.en.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/cs_panel.en.md)
+How it is measured: [docs/cs_panel.en.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/cs_panel.en.md)
 
 ### CS momentum + amount
 
@@ -218,10 +218,10 @@ Walkthrough: [docs/examples/20260914_ai_financing_btc.en.md](https://github.com/
 |---|---|
 | Sentence | After a public mega AI financing date D closes, long BTC the next day for five UTC days. |
 | Class | Beta (risk-on spillover) |
-| Harness | Planned `event_backtest`; **Phase 1 only today** |
-| Data | Locked calendar, 21 prints; Phase 1 uses Vision daily |
-| IC | Window dummy vs next-day return **−0.021** (p = 0.40). Does not close. |
-| Close | No daily conditional expectation. Two-hour five KPIs are empty. **Do not `--declare` yet.** |
+| How the table is made | Daily path after the print has been looked at; two-hour in-and-out not run |
+| Data | Locked public mega rounds, 21 prints; daily bars aligned to the print date |
+| Daily number | “Is this day inside a window after a print?” vs next-day return **−0.021** (p = 0.40). Does not close. |
+| Close | No daily “it should rise.” The in-and-out report card is still empty. **Do not close the sentence yet.** |
 
 | Window | Events | 5d mean | Median | Any-5d baseline |
 |---|---:|---:|---:|---:|

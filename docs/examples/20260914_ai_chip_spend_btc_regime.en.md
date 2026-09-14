@@ -1,7 +1,7 @@
 # When AI chip spend accelerates, is BTC in a bear?
 
 Paper: [config/experiments/20260914_ai_chip_spend_btc_regime/](../../config/experiments/20260914_ai_chip_spend_btc_regime/)  
-Class first as **beta / regime coexistence**. Harness is **phase1_scan_only**. Y is closed-bar MA200, not the segment labels. Human already `--declare reject`.
+Class first as **two things happening at once**, not “spend accelerates, therefore BTC falls next.” The question is: on acceleration days, does the close sit below the 200-day more often? Not whether the next few days rise, and not whether the calendar names that stretch a bear. A human already judged the sentence false.
 
 > When AI financing / compute spend is “too high,” BTC is in a bear or a range — not whether the next few days rise.
 
@@ -17,9 +17,9 @@ You ask a web AI: “When AI compute spend is huge, cash is buying chips — sho
 
 It talks macro drainage and the next few days’ return. If Y is “the calendar is named bear,” the 2023 bounce is counted inside the 2022 window. If X is “the bill is already large,” high days lock to calendar year. Change the model, change which lab stars in the story.
 
-You say the same sentence here. The template narrows it: not the next few days — closed-bar regime. X is Epoch chip-sales **QoQ** (expanding median, readable the day after quarter-end). Y is close versus MA200. The three calendar names only slice; they are not Y. The court is a Phase 1 scan: no 2h YAML, no CAGR table — it counts shares.
+You say the same sentence here. The template narrows it: not whether the next few days rise — which side of the average the **same day’s** close sits on. How fast spend is rising is Epoch chip-sales **quarter-over-quarter** (versus its own expanding median, readable the day after quarter-end). Whether the day is “non-bull” is close versus the 200-day. The three calendar names only slice; they are not the answer. This page counts shares, not a two-hour in-and-out book.
 
-Pooled: acceleration days are below MA200 13.4% of the time; slower days 50.5%. Diff −37pp, the wrong sign. 2023’s bill doubled inside a BTC slow bull. A human `--declare reject`ed. Two **coexisting** regimes, not “spend up → press BTC below the average.” Do not flip into a short. Do not merge with “long BTC after a financing print.”
+Pooled: acceleration days sit below the average 13.4% of the time; slower days 50.5%. Diff −37 points, the wrong sign. 2023’s bill doubled inside a BTC slow bull. A human already judged it false. Two **coexisting** regimes, not “spend up → press BTC below the average.” Do not flip into a short. Do not merge with “long BTC after a financing print.”
 
 The seven sections below unpack the two tags and how to read the share table.
 
@@ -29,13 +29,13 @@ The seven sections below unpack the two tags and how to read the share table.
 
 ```text
 Human sentence (too much spend → BTC bear / range, not next-few-days return)
-  → template: X = quarterly chip-bill QoQ; Y = close below MA200
-  → validate + lineage
-  → Phase 1: tag each closed BTC daily bar, count non-bull share on high vs low days
-  → human --declare reject
+  → write down: speed = quarterly bill QoQ; non-bull = close below the 200-day
+  → check: this sentence was not already closed
+  → tag every closed daily bar, count how often acceleration days sit below the average
+  → human writes whether it holds
 ```
 
-No 2h entry/exit YAML and no five-KPI CAGRs. The court tags **every closed BTC daily bar** with two slips, then counts shares. Independent bull/bear is about two windows, so Phase 1 cannot close as a five-KPI court; the written falsifier *is* the share, and the share is hit.
+There is no two-hour in-and-out book and no annual-speed table. Tag **every closed BTC daily bar** with two slips, then count shares. Independent bull/bear is about two windows, so this page should not close on in-and-out CAGRs; the written ruler *is* the share, and the share has the wrong sign.
 
 | Box | This sentence |
 |---|---|
@@ -64,7 +64,7 @@ mlbot research close 20260914_ai_chip_spend_btc_regime --declare reject
 | Y price | BTC daily closed bar |
 | Segment calendar | [`config/market_segment.yaml`](../../config/market_segment.yaml) **slices only — not Y** |
 | 2022Q4 / 2026Q2 | Marked incomplete in the source; still in the main table; the scan will slice |
-| Harness | `phase1_scan_only` |
+| How the table is made | Count shares, not a two-hour in-and-out book |
 
 Do not use the dollar **level**. The bill walks from about $2.5B to $60B+. “Bill is large” locks to calendar year. The table uses **how fast it is rising**.
 
@@ -72,7 +72,7 @@ Do not use the dollar **level**. The bill walks from about $2.5B to $60B+. “Bi
 
 ## Features
 
-This court does not read a FeatureStore layer. X is the locked CSV; Y is daily close versus MA200 inside the scan. There is no 2h backtest to hide a `compute_*` in.
+How fast spend is rising comes from a locked quarterly bill table. Whether that day is “non-bull” is that day’s close versus the 200-day. There is no separate moving-average warehouse, and no two-hour in-and-out book.
 
 ### X: is this day “spend accelerating”?
 
@@ -157,7 +157,7 @@ In 2023 the chip bill went from about $3.2B to about $12.6B while BTC walked a p
 
 From 2025 the level is higher still, QoQ is back below the expanding median, and BTC is *more* often under MA200. That is the same risk-on cycle, not a tradable lead–lag.
 
-Class: **beta / regime coexistence**. The machine does not run “don’t long BTC when spend accelerates”; a human should not either. Declared reject.
+Class: **beta / two things happening at once**. The machine does not run “don’t long BTC when spend accelerates”; a human should not either. A human already judged it false.
 
 Artifact: `config/experiments/20260914_ai_chip_spend_btc_regime/quick_scan/chip_spend_regime.json`
 

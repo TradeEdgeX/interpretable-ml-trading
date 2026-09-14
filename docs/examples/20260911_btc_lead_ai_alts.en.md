@@ -1,12 +1,11 @@
 # BTC surge → AI alts follow
 
 Paper: [config/experiments/20260911_btc_lead_ai_alts/](../../config/experiments/20260911_btc_lead_ai_alts/)  
-Class first as **beta** (risk-on transmission from BTC into narrative alts), not point-selection alpha.  
-Harness: **event_backtest** (NEAR / FET / RENDER · 2h). The table is on the paper; the human still `--declare`. Do not type `verdict:`.
+Class first as **beta**: the alts follow bitcoin’s risk-on, not “being good at picking which alt bar.” The table is on the paper; whether the sentence holds is still for you to write against the ruler.
 
 > After BTC rips, AI narrative alts follow. Long the alts when the previous *closed* BTC 2h return is ≥ +3%; hold six 2h bars.
 
-The court asks whether “BTC prices risk-on first, theme money arrives later” survives all three windows. A missing listing tape in the bear window cannot be promoted from the recent window alone.
+This sentence asks whether “BTC prices risk-on first, theme money arrives later” survives all three windows. A window where the alt was not listed yet cannot pass on the later two windows alone.
 
 Not [long BTC after an AI financing print](20260914_ai_financing_btc.en.md). Not [funding fade](20260910_funding_fade.en.md).
 
@@ -20,9 +19,9 @@ You ask a web AI: “After BTC rips, AI alts follow — should I chase?”
 
 It talks narrative and which coin has more beta. It does not ask whether those alts were listed in 2022, or whether a green bull can promote a red recent window. Change the model, change the ticker.
 
-You say the same sentence here. Class first: **beta**, risk-on transmission, not point-selection alpha. The lead column must be FeatureStore `btc_prior_bar_return` on the alt bar (prior *closed* BTC 2h). No same-bar BTC, no `btc_roc90` inject. A window with no listing tape is “no sample,” not a borrowed coin. After “measure this,” download, build, run the 2h court.
+You say the same sentence here. Class first: **beta**, the alts follow bitcoin’s heat, not “being good at picking which bar.” Entry may only look at the **previous already-closed** bitcoin two-hour return, already lined up on the alt’s own bar. Do not use the still-open same bar, and do not swap in “how much bitcoin rose over the last ninety bars.” A window where the alt was not listed yet is “no sample,” not a borrowed coin. After “measure this,” download trades, pre-align the lead number, and print the two-hour in-and-out table.
 
-Local ticks start around 2023-01, so `bear_2022` is empty — the range rule working, not a bug. Bull +2.81%, recent −1.52% with a deeper hole. A missing year cannot promote from the recent window. Switching to daily bars from 2023 is a **new range**. Do not hand-trade “a different AI coin this time.”
+Local ticks start around 2023-01, so the 2022 bear is empty — the range rule working, not a bug. Bull +2.81%, recent −1.52% with a deeper hole. A missing year cannot pass on the later two windows. Switching to daily bars from 2023 is a **new range**. Do not hand-trade “a different AI coin this time.”
 
 Not “long BTC after a financing print,” not funding fade. Three sentences share “AI” or “crowding”; the paying side and the measured object differ. The seven sections below unpack cross-symbol alignment and “no sample.”
 
@@ -32,13 +31,14 @@ Not “long BTC after a financing print,” not funding fade. Three sentences sh
 
 ```text
 Human sentence (BTC rips, AI alts follow)
-  → template / validate / lineage
-  → download trades, build FeatureStore — only after “measure this”
-  → 2h court: prior closed BTC return ≥ +3%, hold 6 bars
-  → human --declare
+  → write down: who pays, what is measured, which dates, how you lose
+  → check: this sentence was not already closed
+  → download trades, pre-align “how much bitcoin just rose” — only after “measure this”
+  → on the alt’s own two-hour bar: prior bitcoin return ≥ +3%, hold 6 bars
+  → human writes whether it holds
 ```
 
-The lead column must be the FeatureStore series `btc_prior_bar_return` already aligned onto each alt bar. Do not inject `btc_roc90`. Do not compute BTC’s return inside the backtest.
+How much bitcoin just rose must already be lined up on the alt’s bar, from the previous closed print. Do not drop bitcoin’s return in from another table while printing the book.
 
 | Box | This sentence |
 |---|---|
@@ -93,7 +93,7 @@ mlbot data convert --symbols BTCUSDT,NEARUSDT,FETUSDT,RENDERUSDT
 |---|---|---|
 | `bear_2022` | 2022-01-01 → 2023-11-01 | **No sample** |
 | `bull_2023_2024` | 2023-06-01 → 2025-01-01 | Has sample. |
-| `recent_range_to_bear` | 2025-01-01 → 2026-05-31 | Recent. Cannot promote alone. |
+| `recent_range_to_bear` | 2025-01-01 → 2026-05-31 | Recent. Cannot pass on its own. |
 
 ---
 
@@ -163,7 +163,7 @@ Class: **beta**. Alts following a BTC rip is risk-on transmission, not independe
 - Recent CAGR negative, win rate 30.8%, deeper drawdown: late theme money stopped paying.
 - Dropping Top-3 trades is classification only.
 
-Declare with `--declare`. Do not hand-trade “a different AI coin this time.”
+A human writes whether it holds, against the ruler. Do not hand-trade “a different AI coin this time.”
 
 | Path | What it is |
 |---|---|

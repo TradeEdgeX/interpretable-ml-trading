@@ -1,8 +1,7 @@
 # AI financing days vs BTC funding and returns
 
 Paper: [config/experiments/20260914_ai_financing_btc/](../../config/experiments/20260914_ai_financing_btc/)  
-Class first as **beta** (risk-on spillover), not point-selection alpha.  
-Planned harness: **event_backtest** (BTCUSDT · 2h). **Only Phase 1 daily scan has run. The two-hour five KPIs are still empty. Do not `--declare` yet.**
+Class first as **beta**: a mega financing print is a gong that “tech risk-on is still on,” not “being good at picking the day.” Only the daily path after the print has been looked at. The two-hour in-and-out report card is still empty, so the sentence cannot be closed yet.
 
 > After a public mega AI-lab financing announcement (UTC date D closed), long BTCUSDT for five UTC days. None of the three windows should blow the book.
 
@@ -20,9 +19,9 @@ You ask a web AI: “Isn’t there some relationship between AI financings and B
 
 “A relationship” is not a hypothesis. A web AI will talk risk-on spillover, or tell you to sweep Crunchbase. This repo first writes an **executable contract**: locked public mega rounds, after date D closes, long BTC the next day for five UTC days; none of the three windows should blow the book. The relationship itself does not sit the court.
 
-After the template passes and lineage is empty, Phase 1 runs: daily event windows and IC. Window dummy versus next-day return IC = −0.021 (p = 0.40) — no daily conditional expectation. The bull window loses to just holding BTC. The recent mean is one OpenAI print (+8.5%); the median is negative. AI-basket and BTC funding crowd together (IC 0.098) and that does not forecast return.
+After the template is complete and this sentence was not already closed, first look at daily bars after the print. Whether “this day sits in a five-day window after a print” lines up with the next day’s return is −0.021 (p = 0.40) — no daily “it should rise.” The bull window loses to just holding BTC. The recent mean is one OpenAI print (+8.5%); the median is negative. AI-narrative coins and BTC funding crowd together (0.098) and that does not forecast return.
 
-**The story pauses here.** The written falsifier is 2h CAGR and MaxDD. That book is empty. A flashlight, bright or dark, cannot `--declare` and cannot flip the sentence into a short. Until a human asks to finish the 2h book, the AI must not pretend the case is closed. Do not hand-trade “this financing is different.”
+**The story pauses here.** The written ruler is two-hour annual speed and drawdown. That report card is empty. A daily flashlight, bright or dark, cannot close the case and cannot flip the sentence into a short. Until a human asks to finish the two-hour book, the AI must not pretend the case is closed. Do not hand-trade “this financing is different.”
 
 The seven sections below unpack the locked calendar, how to read IC, and what an empty table means.
 
@@ -32,13 +31,14 @@ The seven sections below unpack the locked calendar, how to read IC, and what an
 
 ```text
 Human sentence (financing vs BTC funding and returns)
-  → template: after date D closes, long BTC on D+1, hold 5 UTC days
-  → validate + lineage
-  → Phase 1: locked calendar vs daily return / funding (flashlight, does not close)
-  → 2h court not run yet: build layer → mlbot research run → human --declare
+  → write down: after the print closes, long BTC the next day for five UTC days
+  → check: this sentence was not already closed
+  → first look at daily returns and funding after the print (flashlight only)
+  → the two-hour in-and-out report card has not been run
+  → a human cannot write whether it holds yet
 ```
 
-Phase 1 IC or event-window means **cannot** change the sentence and **cannot** declare. The close waits for the two-hour book.
+Daily correlation, or the lack of it, **cannot** change the sentence and **cannot** close the case. The close waits for two-hour annual speed and drawdown. That table is empty, so this page only explains how to read the daily numbers.
 
 | Box | This sentence |
 |---|---|
@@ -82,7 +82,7 @@ mlbot data download-funding-rate --symbols BTCUSDT \
 |---|---|---:|---|
 | `bear_2022` | 2022-01-01 → 2023-11-01 | 7 | Spillover, if any, must not blow the book. |
 | `bull_2023_2024` | 2023-06-01 → 2025-01-01 | 9 | Risk-on years should light up. |
-| `recent_range_to_bear` | 2025-01-01 → 2026-05-31 | 7 | Recent. Cannot promote alone. |
+| `recent_range_to_bear` | 2025-01-01 → 2026-05-31 | 7 | Recent. Cannot pass on its own. |
 
 Bear ends 2023-11 and bull starts 2023-06, so **2023-06 → 2023-11 overlaps**. Inflection 2023-06-29 and Anthropic 2023-09-25 sit in both windows. 7+9+7 is not 23 distinct prints.
 
@@ -150,7 +150,7 @@ Phase 1 scan is done. Two-hour five KPIs have **not** run.
 
 Post-event 8h funding is only slightly higher than pre-event, order 10⁻⁵ — not a `|z| ≥ 1.5` fade story.
 
-### Two-hour court (empty until `mlbot research run`)
+### Two-hour in-and-out (report card still empty)
 
 | Window | CAGR | Calmar | Win rate | MaxDD | Sharpe |
 |---|---:|---:|---:|---:|---:|
@@ -158,7 +158,7 @@ Post-event 8h funding is only slightly higher than pre-event, order 10⁻⁵ —
 | `bull_2023_2024` | (not run) | — | — | — | — |
 | `recent_range_to_bear` | (not run) | — | — | — | — |
 
-Empty means the human has not asked to finish the 2h book. No `--declare` without five KPIs.
+Empty means the human has not asked to finish the two-hour in-and-out book. Without annual speed and drawdown, the sentence cannot be closed.
 
 ---
 

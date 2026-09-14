@@ -62,9 +62,9 @@ flowchart TB
 | Contract | Entry / side / exit in the **experiment** pack; do not edit default `ma_cross` | Must be an MA family; the public dummy is only a YAML shape |
 | Court | Windows, kill switch off, five KPIs, program does not write `verdict` | Must use crypto `bear_2022`; the calendar follows the **market** |
 
-Default public harness: `event_backtest` (one symbol, one clock).  
-Cross-section multi-factor books use **`cs_panel`**: [cs_panel.en.md](cs_panel.en.md). Entry-date holds use `cohort_hold`.  
-`mlbot research run` only dispatches `event_backtest`. Clock: decide at open using only the **previous closed** row. [lessons.md](lessons.md).
+The default path is one name, in and out on a clock.  
+Scoring the whole market every day and buying the hottest sleeve is a different comparison: [cs_panel.en.md](cs_panel.en.md). A quarter-by-quarter roll-call held for a fixed number of years is another.  
+Decide at the open using only the **previous already-closed** numbers. [lessons.md](lessons.md).
 
 ---
 
@@ -106,7 +106,7 @@ mlbot research close <id>      # then --declare
 
 A story that has not happened (“which name 10×s next”) has no closed-bar column and **cannot** be measured. Only a historical rule can (e.g. small on the entry date, hold a fixed number of years). That exam is a **cohort panel**, not `event_backtest`. Measured: [examples/20260911_tenbagger_smallcap.en.md](examples/20260911_tenbagger_smallcap.en.md).
 
-“Score the whole market each day, buy the top 20%” is a **cross-section**. That exam is **`cs_panel`**, also not `event_backtest`. [cs_panel.en.md](cs_panel.en.md). Measured sentences are reject — that documents the court, not a sleeve.
+“Score the whole market each day, buy the top 20%” is not a single-name in-and-out book. See [cs_panel.en.md](cs_panel.en.md). The two measured sentences are false — being able to measure this is not a recommended sleeve.
 
 ### 3.1 Claim class
 
@@ -184,14 +184,14 @@ Closed-bar entry; exits named; adds off unless that is the sentence; `kill_switc
 
 | Layer | Tenbagger cohort | CS mom+amount | Hot sectors + 10bp | SPY/QQQ washout | Chip spend vs MA200 | Financing → long BTC |
 |---|---|---|---|---|---|---|
-| Harness | `cohort_hold` | `cs_panel` | `cs_sector` | `eq_us_daily` | `phase1_scan_only` | Phase 1; 2h not run |
+| How the table is made | quarter roll-call, hold years | rank names each day | rank sectors first | two ETF daily closes | count shares | daily after the print; 2h in-and-out not run |
 | Class | thin fat tail / small-cap beta | beta continuation → reversal | sector rotation / beta | equity **beta** | coexistence / beta | risk-on spillover / beta |
 | Market | A-share | A-share | A-share | **US** | crypto Y + Epoch X | crypto |
 | Grain | daily + PIT cap | daily universe | daily + 20-bucket map | ETF daily | quarterly CSV + daily | locked calendar + daily / 2h |
 | IC | none (density) | **yes**: minus in all 3 | not re-printed; name IC already minus | none | none (share table) | **yes**: −0.021, p=0.40 |
 | Control | same-date large cap | same-universe EW | same-universe same-10bp EW | same-window buy-and-hold | low-QoQ non-bull share | any-5-day baseline |
 | Local result | 3y 10× rate 0.11% vs 0.11% | vs EW minus in all 3 | bull −40pp / chop −25pp | timing CAGR all slower | diff −37pp (wrong sign) | bull loses to holding BTC |
-| Close | reject | reject | reject | reject | reject | **do not declare** |
+| Human close | false | false | false | false | false | **cannot close yet** |
 
 How to read the tables:
 

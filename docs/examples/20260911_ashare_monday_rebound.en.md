@@ -1,8 +1,7 @@
 # A-share Monday down → next four sessions up
 
 Paper: [config/experiments/20260911_ashare_monday_rebound/](../../config/experiments/20260911_ashare_monday_rebound/)  
-Class first as a **calendar-alpha claim**, not index timing and not stock-picking.  
-Harness: **event_backtest** (CSI 300 · daily). The table is on the paper; the human still `--declare`. Do not type `verdict:`.
+Class first as a **calendar pattern**: “Monday fell, the next four days rise,” not index timing and not stock-picking. The table is on the paper; whether the sentence holds is still for you to write against the ruler.
 
 > After CSI 300 Monday close is down, go long and hold four trading days. Measure on the A-share calendar.
 
@@ -18,11 +17,11 @@ You ask a web AI: “A-shares fall on Monday and rise the next four days — is 
 
 It often talks weekend news and “buy the open, sell Friday.” The calendar may be US; the fill may be Monday open — already a different sentence. There is no CSI 300 bear / 924 bull / recent window, and no ruling for “CAGR near zero.”
 
-You say the same sentence here. The template locks: the paying side is Monday panic; `monday_down` is known at Monday **close**, earliest fill Tuesday open; hold four daily bars, not “must flatten Friday”; the calendar must be [`market_segment_ashare.yaml`](../../config/market_segment_ashare.yaml), not crypto 2022. After “measure this,” download daily bars, build the daily layer, run the event court.
+You say the same sentence here. The template locks: the paying side is Monday panic; Monday **close** is when you know it fell, earliest fill Tuesday open; hold four sessions, not “must flatten Friday”; the calendar must be the A-share three windows (2021 bear, 924 bull, recent digestion), not crypto 2022. After “measure this,” download CSI 300 daily bars and print “Monday close down, hold four sessions.”
 
-The table: tiny positive CAGRs, recent +0.06%, Calmar falling from ~1.5 to 0.14. The hard CAGR / MaxDD gates are not hit, but calendar alpha does not pay for a sentence. A web AI will say “it’s still green.” This repo asks you to `--declare` against the written ruler: a few basis points are not a landing contract. A book that “didn’t lose” is not a license to trade every Monday by hand.
+The table: tiny positive annual speeds, recent +0.06%, pay versus drawdown falling from about 1.5 to 0.14. The hard annual-speed / hole gates are not hit, but a few basis points do not pay for a sentence. A web AI will say “it’s still green.” This repo asks you to write whether it holds against the ruler written first: a few basis points are not a contract you can actually run. A book that “didn’t lose” is not a license to trade every Monday by hand.
 
-Grain follows the object: this is a daily calendar, not 2h ticks. The seven sections below unpack closed-bar and the A-share windows.
+Grain follows the object: this is a daily calendar, not two-hour ticks. The seven sections below unpack “known at the close, tradable the next day” and the A-share windows.
 
 ---
 
@@ -30,11 +29,11 @@ Grain follows the object: this is a daily calendar, not 2h ticks. The seven sect
 
 ```text
 Human sentence (Monday down, next four sessions up)
-  → template: sociology / math / stats / ruler / A-share three windows / five boxes
-  → validate + lineage
-  → download daily bars, build FeatureStore — only after “measure this”
-  → daily court: monday_down=1, hold 4 daily bars
-  → human --declare
+  → write down: who pays, what is measured, which dates, how you lose
+  → check: this sentence was not already closed
+  → download CSI 300 daily bars — only after “measure this”
+  → Monday close down → long, hold four sessions
+  → human writes whether it holds
 ```
 
 The grid sets `market_segment_path: config/market_segment_ashare.yaml`. Do **not** reuse crypto `bear_2022`. The auxiliary tape is retired; daily download is for this court example only — [RETIRED.md](../RETIRED.md).
@@ -90,7 +89,7 @@ mlbot data download-ashare --symbols 000300.SH --start-date 2019-01-01
 |---|---|---|
 | `bear_2021` | 2021-07-01 → 2022-10-31 | CSI 300 bear after the peak. |
 | `bull_924` | 2024-09-24 → 2025-05-31 | Fast bull after the 24 Sep policy package. |
-| `chop_recent` | 2025-06-01 → 2026-09-10 | Recent digestion. Cannot promote alone. |
+| `chop_recent` | 2025-06-01 → 2026-09-10 | Recent digestion. Cannot pass on its own. |
 
 `crash_2015` / `bear_2018` / `covid_2020` live in the same file for the tenbagger cohort. They are **not** this sentence’s three windows.
 
@@ -160,7 +159,7 @@ Ruler, written first: any window CAGR **< 0**, or recent MaxDD **deeper** than b
 | Any window CAGR < 0 | No. All three are tiny positives. |
 | Recent MaxDD deeper than both trends | No. Recent −0.45% is shallower than bear −0.53% and deeper than bull −0.30%, not “deeper than both.” |
 
-CAGR sits near zero. Recent Calmar falls from 1.16 / 1.52 to 0.14: the same shallow drawdown, almost no pay. Calendar alpha is weak. The verdict stays empty for the human `--declare`.
+Annual speed sits near zero. Recent pay versus drawdown falls from 1.16 / 1.52 to 0.14: the same shallow hole, almost no pay. The calendar pattern is weak. The conclusion stays empty for a human to write against the ruler.
 
 ---
 
@@ -173,7 +172,7 @@ Class: **calendar-alpha claim, measured near useless.**
 - 16–34 trades is the density of down Mondays, not a license to include Tuesdays.
 - Do not read this table as “the Monday effect works.” A few basis points are not a landing contract.
 
-Declare with `--declare`. Do not hand-trade every Monday because the book “didn’t lose.”
+A human writes whether it holds, against the ruler. Do not hand-trade every Monday because the book “didn’t lose.”
 
 | Path | What it is |
 |---|---|

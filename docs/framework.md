@@ -62,9 +62,9 @@ flowchart TB
 | 合同 | 进 / 向 / 出写在实验包 YAML，不改默认 `ma_cross` | 必须是均线家族；公开练习只是 YAML 形状 |
 | 法庭 | 分窗、熔断关、五项 KPI、程序不写 `verdict` | 必须用币圈 `bear_2022`；日历跟市场走 |
 
-公开评测机默认是 `event_backtest`（一根品种、一条时间轴）。  
-横截面多因子（每天对一篮子打分）走 **`cs_panel`**：[cs_panel_CN.md](cs_panel_CN.md)。入场日长持走 `cohort_hold`。  
-`mlbot research run` 只派 `event_backtest`。时钟：开盘决策只读**上一根已收盘**行。细则：[lessons.md](lessons.md)。
+默认那条路是一根品种、一根根进出。  
+每天给全市场打分、买最热的一档，是另一句比较：[cs_panel_CN.md](cs_panel_CN.md)。一季一季点名、拿满年数，又是另一句。  
+开盘做决定，只读**上一根已经收完**的数字。细则：[lessons.md](lessons.md)。
 
 ---
 
@@ -108,7 +108,7 @@ mlbot research close <id>      # 人再 --declare
 
 还没发生的故事（「下一家十倍股是谁」）没有闭棒列，**不能**当假设去量。只能量已经发生过的规则（例如入场日小市值、固定拿满年数）。那种句子要 **cohort 面板**，不是 `event_backtest`。已量例子：[examples/20260911_tenbagger_smallcap_CN.md](examples/20260911_tenbagger_smallcap_CN.md)。
 
-「每天对全市场打分、买前 20%」是**横截面**，要 **`cs_panel`**，也不是 `event_backtest`。[cs_panel_CN.md](cs_panel_CN.md)。已量句均 reject，那是能力说明，不是推荐策略。
+「每天对全市场打分、买前 20%」不是一根品种进出，见 [cs_panel_CN.md](cs_panel_CN.md)。已量的两句都不成立——能这样量，不是推荐策略。
 
 ### 3.1 声称分类（先选尺子）
 
@@ -207,14 +207,14 @@ mlbot research close <id>      # 人再 --declare
 
 | 层 | 十倍股队列 | 动量+成交额 | 热板块+10bp | SPY/QQQ 超跌 | 芯片开支 vs MA200 | 融资公告做多 BTC |
 |---|---|---|---|---|---|---|
-| 评测机 | `cohort_hold` | `cs_panel` | `cs_sector` | `eq_us_daily` | `phase1_scan_only` | Phase 1；2h 未跑 |
+| 怎么出的表 | 一季一季点名、拿满年数 | 每天给股票排名 | 先给板块打分 | 两只 ETF 日线收盘 | 数比例 | 日线看过了；进出场还没跑 |
 | 分类 | 肥尾极薄 / 小市值 beta | beta 续涨 → 反转 | 板块轮动 / beta | 股权 **beta** | 市况共存 / beta | 风险偏好外溢 / beta |
 | 市场 | A 股 | A 股 | A 股 | **美股** | 币圈 Y + Epoch X | 币圈 |
 | 粒度 | 日线 + 时点市值 | 日线全市场 | 日线 + 20 档行业快照 | ETF 日线 | 季频 CSV + 日线 | 锁定日历 + 日线 / 2h |
 | IC | 无（问密度） | **有**：三段负号 | 未另出；个股 IC 已负 | 无 | 无（比例表） | **有**：−0.021，p=0.40 |
 | 对照 | 同时点大市值 | 同宇宙等权 | 同宇宙同 10bp 等权 | 同窗买入持有 | 低强度日非牛比例 | 任意 5 日基线 |
 | 本机结果 | 3 年十倍率 0.11% vs 0.11% | 相对等权三段都负 | 牛 −40pp / 震荡 −25pp | 择时年化全部更低 | 差 −37pp（反向） | 牛段跑输随便拿 BTC |
-| 判决 | 已 reject | 已 reject | 已 reject | 已 reject | 已 reject | **不能 declare** |
+| 人写的结论 | 不成立 | 不成立 | 不成立 | 不成立 | 不成立 | **还不能下结论** |
 
 读表的方法：
 

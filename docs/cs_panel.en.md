@@ -1,66 +1,63 @@
-# Cross-section multi-factor (`cs_panel`)
+# Score the whole market every day, buy the hottest sleeve
 
 **中文:** [cs_panel_CN.md](cs_panel_CN.md)
 
-This repo can test **cross-section** claims (score a universe each day, long a quantile), not only single-name event clocks. The court is `cs_panel`, not `event_backtest`. `mlbot research run` does not dispatch it.
+This repo can measure more than a golden-cross on one name, in and out on a clock.
 
-Capability is not edge. The measured A-share sentences are `--declare reject`. The framework can sit the exam; it does not promise a pass.
+Some sentences say something else: every session, score **every name that can be scored**, buy the hottest sleeve, and compare to the same day’s names, one share each. If that wins, the sentence lives. If it loses, the sentence dies.
 
-Walkthroughs (Design / Data / Features / IC / Validation / Conclusion / How to read the report):
+Being able to measure this is not the same as having an edge. Two sentences already walked it. A human judged both false.
 
-| Sentence | Entry | Control | Close |
-|---|---|---|---|
-| [Hot names vs EW](examples/20260911_ashare_cs_mom_amount.en.md) | `python scripts/research/cs_panel.py` | Same-universe EW | Relative CAGR ≤ 0 in all three; IC minus; reject |
-| [Hot sectors vs EW](examples/20260911_ashare_cs_sector_cost.en.md) | `python scripts/research/cs_sector.py` | Same-universe same-10bp EW | Bull −40pp, chop −25pp; reject |
-
----
-
-## What it can test
-
-Lock a few columns first (do not mine overnight). Each session, score every name in the universe, long the high side (or short the low side), and compare to same-universe equal-weight or cash. Report only CAGR / Calmar / win rate / MaxDD / Sharpe by window.
-
-| Sentence type | Court entry | Measured example |
+| Sentence | What it compares | Human close |
 |---|---|---|
-| Name multi-factor vs EW | `python scripts/research/cs_panel.py` | [Hot names vs EW](examples/20260911_ashare_cs_mom_amount.en.md) · reject |
-| Sector first, then names | `python scripts/research/cs_sector.py` | [Hot sectors vs EW](examples/20260911_ashare_cs_sector_cost.en.md) · reject |
-| Sector long–short residual | `python scripts/research/cs_sector.py --mode ls` | `20260911_ashare_cs_sector_alpha` · reject |
-| Weekly sector exposure vs cash | `python scripts/research/cs_sector.py --mode weekly` | `20260911_ashare_cs_sector_beta` · reject |
+| [Do hot winners keep beating equal-weight?](examples/20260911_ashare_cs_mom_amount.en.md) | Buy the hottest 20% each day; control is one share each | Loses in all three windows; high score predicts a turn, not a continuation. False |
+| [Are hot sectors better than the same names, same fee?](examples/20260911_ashare_cs_sector_cost.en.md) | Score sectors first, then buy the names inside; 10bp each side | Bull −40 points, chop −25 points. False |
 
-Look up the harness:
-
-```bash
-PYTHONPATH=src python -m cli.main research harness ashare_cs_mom_amount
-```
-
-Calendar is [`config/market_segment_ashare.yaml`](../config/market_segment_ashare.yaml) `bear_2021` / `bull_924` / `chop_recent`. Do not reuse crypto dates.
+Walkthroughs still use the same seven sections: Design / Data / Features / IC / Validation / Conclusion / How to read the report.
 
 ---
 
-## Clock (closed-bar)
+## What question is this?
 
-The factor is known only at the **T close**. The first fill is the **next open**. One day of book return is next-open → next-next-open.
+Lock the scoring columns first. Do not swap factors overnight and measure again.
 
-Do not decide at the open with the same-index completed FeatureStore row. Labels (next 20-day return) may look ahead; entry columns may not.
+Each close: score every name that can be scored that day. Next open: buy the high side (or short the low side). The control is those same names, one share each — or cash.
 
----
+Report only annual speed / Calmar / win rate / max drawdown / Sharpe by window.
 
-## Algorithm (do not change the sentence after the lock)
-
-The public dummy locks two columns, equal weight:
-
-| Column | Construction |
+| Kind of sentence | Measured example |
 |---|---|
-| `mom_20` | close / close 20 bars ago − 1 |
-| `amount_z_20` | amount z versus itself over the last 20 bars |
+| Rank names each day vs one-share-each | [Hot names](examples/20260911_ashare_cs_mom_amount.en.md) · false |
+| Score sectors first, then buy names | [Hot sectors](examples/20260911_ashare_cs_sector_cost.en.md) · false |
+| Long hot sectors, short cold ones | `20260911_ashare_cs_sector_alpha` · false |
+| Weekly hot sectors vs cash | `20260911_ashare_cs_sector_beta` · false |
 
-Each day, take a **cross-sectional z** of each column, then `score = 0.5 * cs_z(mom) + 0.5 * cs_z(amount_z)`.  
-Book: equal-weight the top 20% of `score`. Control: equal-weight every name that could be scored that day.
+The calendar must be the A-share three windows (2021 bear, 924 bull, recent digestion). Do not reuse crypto 2022.
 
-Phase 1 may compute Spearman IC of that day’s score versus the next-open 20-day return. IC is a flashlight. **It cannot close the case and cannot send you back to swap columns.**
+---
 
-Sector sentences use the same pair: equal-weight mean inside the sector, z across sectors, buy names in hot sectors (or short cold ones). Industry is the 20-bucket coarse snapshot in `config/industry_map_ashare.yaml`, not PIT 申万.
+## When you know, when you can buy
 
-A new sentence needs a new `DECISION.md` with columns and control locked first. Do not `compute_*` a new factor in the backtest; register it in FeatureStore and backfill.
+Today’s score is known only at the **close**. The first fill is the **next open**. One day of the book is next open → the open after that.
+
+Do not decide at today’s open with today’s already-finished numbers. The “next 20 days’ return” used as a label may look ahead; the score used to enter may not.
+
+---
+
+## How the public practice sentence scores
+
+Two locked columns, half and half:
+
+1. How much it rose over 20 days: today’s close / close 20 bars ago − 1
+2. How hot its own amount is versus **itself** over the last 20 bars
+
+Each day, standardize both columns across names that can be scored that day, then take half and half. Buy the top 20%, one share each. Control: every name that could be scored that day, one share each.
+
+Whether today’s score and the next 20 days move together is a flashlight only. **It cannot close the case and cannot send you back to swap columns.**
+
+The sector sentence uses the same pair: average inside the sector first, then rank sectors, buy names in the hottest 20% sectors. Industry is a 20-bucket coarse snapshot in this repo, not PIT 申万.
+
+A new sentence needs a new paper, with columns and control locked first. If a column is missing, add it to the pre-built table first; do not compute a new one while printing the book.
 
 ---
 
@@ -68,11 +65,10 @@ A new sentence needs a new `DECISION.md` with columns and control locked first. 
 
 ```text
 Human sentence (columns locked first)
-  → template: sociology / math / stats / ruler / A-share three windows / five boxes
-  → mlbot research validate <id>
-  → mlbot research index --trusted --query cross-section
-  → run cs_panel / cs_sector only after “measure this”
-  → human --declare
+  → write down: who pays, what is measured, which dates, how you lose
+  → check: this sentence was not already closed
+  → after “measure this,” print “score every day, buy the hottest sleeve”
+  → human writes whether it holds
 ```
 
 ```bash
@@ -89,22 +85,23 @@ Daily default `data/ashare/daily/`. Listing file `data/ashare/stock_basic/stock_
 
 ---
 
-## Measured closes (not recommended strategies)
+## What was already measured (not recommended strategies)
 
-Versus **same-universe equal-weight** (one share each, almost no turnover), the locked hot-name / hot-sector / reversal / sector long–short books have no stable edge.  
-Weekly hot sectors versus **cash** print positive CAGR in all three windows, but still lose to EW in bull and chop. A human `--declare reject`ed all of them.
+Versus **the same day’s names, one share each** (almost no turnover), the locked hot-name / hot-sector / reversal / sector long–short books have no stable edge.
 
-Equal-weight itself is green in these three windows: that is small-cap market beta, not a stock-picking logic. Fine print is in the two walkthroughs.
+Weekly hot sectors versus **cash** can print a positive annual speed in all three windows, but still lose to one-share-each in bull and chop. A human judged all of them false.
+
+One-share-each itself is green in these three windows: that is the small-cap market rising, not stock-picking. Fine print is in the two walkthroughs.
 
 ---
 
-## How to read a cross-section report
+## How to read the table
 
 | Look first | Then | Do not |
 |---|---|---|
-| Same-window, same-universe control CAGR | Absolute CAGR of the high book | Score +24% against cash and call it “it makes money” |
-| Relative gap (high − EW) | Sign of IC | Close on IC, or flip the paper into a reversal because IC is minus |
-| Turnover and one-way cost | Gross return | “We would have passed if fees were zero” — cost is the contract |
+| Same-window, same-names control annual speed | The hottest sleeve’s own speed | Score +24% against cash and call it “it makes money” |
+| Relative gap (hottest − one-share-each) | Whether score and later return share a sign | Close on that sign, or flip the paper into a reversal because it is minus |
+| Turnover and one-way cost | Return before the fee | “We would have passed if fees were zero” — cost was in the contract |
 | Day count / name count | Win rate | Treat a ~50% win rate as “the side is right” |
 
-IC is Spearman of that day’s score versus the next-open 20-day return, then averaged across days. Labels may look ahead; entry columns may not. A rising or falling IC cannot change the sentence.
+Whether today’s score and the next 20 days’ open-to-open return move together is averaged across days. Labels may look ahead; the entry score may not. A rising or falling number cannot change the sentence.

@@ -1,8 +1,7 @@
 # Fade crowded funding
 
 Paper: [config/experiments/20260910_funding_fade/](../../config/experiments/20260910_funding_fade/)  
-Class first as **crowding fade / mean-reversion**, not point-selection alpha and not a trend sleeve.  
-Harness: **event_backtest** (BTCUSDT · 2h). The table is on the paper; the human still `--declare`. Do not type `verdict:`.
+Class first as **crowding fade**: the crowded side should pay you back, not “being good at picking the bar,” and not a trend follow. The table is on the paper; whether the sentence holds is still for you to write against the ruler.
 
 > Short when funding is very high, long when it is very low, exit when it normalizes. Extreme crowding should unwind; none of the three windows should blow the book.
 
@@ -18,9 +17,9 @@ You ask a web AI: “Fade crowded funding, flatten when it normalizes — does t
 
 It usually says this is a classic crowding fade, better with open interest. There are no bear / bull / recent numbers, and no “who loses if the recent window dies.” Change the model, it will suggest another filter.
 
-You say the same sentence here, plus “measure this.” The AI must first put the sentence into the [template](../hypothesis_template.en.md): the paying side is the crowded perpetual book; the object is a z-score on **funding’s own clock** (about every 8 hours, not 50 two-hour bars); class it as crowding fade, not trend alpha; any window with negative CAGR, or recent MaxDD deeper than both trends, kills it. After the template passes and lineage is empty, and only after you ask to measure, it downloads trades and funding, builds FeatureStore, and sits the 2h court.
+You say the same sentence here, plus “measure this.” The AI must first put the sentence into the [template](../hypothesis_template.en.md): the paying side is the crowded perpetual book; the object is crowding on **funding’s own clock** (about every 8 hours, not “the last 50 two-hour bars”); class it as crowding fade, not trend follow; any window with negative annual speed, or a recent hole deeper than both trends, kills it. After the template is complete and this sentence was not already closed, and only after you ask to measure, it downloads trades and funding, then prints a two-hour in-and-out table.
 
-The z-score column already existed. The missing piece was the exit, so the engine gained a contract — missing column → FeatureStore; missing contract → engine. The program prints three windows: small positives in trend years, recent −3.4% with a deeper hole. Both falsifiers hit. You still `--declare`. If it dies, the robot does not run it and a human does not hand-trade “funding is different this time.” Twisting OI onto this paper is a new sentence.
+Crowding was already a pre-built number. The missing piece was “flatten when it normalizes,” so the rule was added — not a new column computed while printing the table. The program prints three windows: small positives in trend years, recent −3.4% with a deeper hole. Both rulers are hit. You still write whether it holds. If it dies, the robot does not run it and a human does not hand-trade “funding is different this time.” Twisting open interest onto this paper is a new sentence.
 
 That is the philosophy: heuristics are priors; the framework falsifies. IC cannot ship. A rejected sentence is also forbidden for hands. The seven sections below are the same walk, unpacked.
 
@@ -29,15 +28,15 @@ That is the philosophy: heuristics are priors; the framework falsifies. IC canno
 ## Design
 
 ```text
-Human sentence (fade extreme funding, exit at z = 0)
-  → template: sociology / math / stats / ruler / crypto three windows / five boxes
-  → validate + lineage (no prior close of this sentence)
-  → download ticks and funding, build FeatureStore — only after “measure this”
-  → 2h court: fade |z| ≥ 1.5, exit when z crosses 0
-  → human --declare
+Human sentence (fade extreme funding, exit when it normalizes)
+  → write down: who pays, what is measured, which dates, how you lose
+  → check: this sentence was not already closed
+  → download trades and funding, pre-build crowding — only after “measure this”
+  → two-hour in-and-out: fade the extreme, flatten when it normalizes
+  → human writes whether it holds
 ```
 
-Use `mlbot research run` (that path dispatches 2h `event_backtest`). The z-score column already lived in the DAG. The missing piece was the exit, so the engine gained `structural_exit: funding_zscore0`. Missing column → FeatureStore. Missing contract → engine. Do not `compute_*` the z-score in the backtest.
+This sentence enters and exits on bitcoin two-hour bars. Crowding is pre-built and stored by month. The missing piece was the exit rule. A missing pre-built number is added to the table first; a missing entry/exit rule is a rule change. Do not compute crowding while printing the book.
 
 | Box | This sentence |
 |---|---|
@@ -96,7 +95,7 @@ mlbot data download-funding-rate --symbols BTCUSDT \
 |---|---|---|
 | `bear_2022` | 2022-01-01 → 2023-11-01 | Bear baseline. |
 | `bull_2023_2024` | 2023-06-01 → 2025-01-01 | Bull. Crowded longs should unwind. |
-| `recent_range_to_bear` | 2025-01-01 → 2026-05-31 | Recent. Cannot promote alone. |
+| `recent_range_to_bear` | 2025-01-01 → 2026-05-31 | Recent. Cannot pass on its own. |
 | `recent_6m_oos` | 2025-12-01 → 2026-05-31 | Shorter reference. This sentence does not close on it. |
 
 Funding files start in 2020 so the 2022 z-score is warm. That is not a fourth verdict window.
@@ -105,7 +104,7 @@ Funding files start in 2020 so the 2022 z-score is warm. That is not a fourth ve
 
 ## Features
 
-Read from FeatureStore (`feature_store_strict=True`). Do not compute the z-score in the backtest.
+Crowding must be pre-built and then read. Do not compute it while printing the book.
 
 | Column | Construction | Closed-bar use |
 |---|---|---|
@@ -183,7 +182,7 @@ Class: **crowding-fade claim**. Funding z measures crowding, not trend.
 - Dropping Top-3 trades is classification only.
 - Do not twist “add OI / add funding level” onto this paper.
 
-Declare with `mlbot research close 20260910_funding_fade --declare …`. If it dies, the robot does not run it and a human does not hand-trade “funding is different this time.”
+A human writes whether it holds, against the ruler. If it dies, the robot does not run it and a human does not hand-trade “funding is different this time.”
 
 | Path | What it is |
 |---|---|

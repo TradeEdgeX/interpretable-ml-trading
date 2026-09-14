@@ -1,8 +1,7 @@
 # P99 large trade + Bollinger upper chase
 
 Paper: [config/experiments/20260911_p99_bb_break_chase/](../../config/experiments/20260911_p99_bb_break_chase/)  
-Class first as **momentum / fat-tail right tail**, not point-selection alpha. Dropping Top-3 is classification only — not a solo kill.  
-Harness: **event_backtest** (BTCUSDT · 2h). The table is on the paper; the human still `--declare`. Do not type `verdict:`.
+Class first as **chase / a rare large move**: if the money comes, it should come from a few violent stretches, not “being good at picking the bar.” Dropping the largest trades is only to see the type — it cannot kill this sleeve by itself. The table is on the paper; whether the sentence holds is still for you to write against the ruler.
 
 > When a 2h bar prints a P99-sized trade *and* the close breaks the Bollinger upper band, chase; flatten when price is back inside the band or after 12 bars.
 
@@ -18,7 +17,7 @@ You ask a web AI: “A huge print and a Bollinger upper-band break — chase it?
 
 It talks momentum and “smart money.” The band is often a daily high/low, or a line computed in the chat. There is no “how large was the single print inside the bar,” and no “did the year that should pay the right tail print a negative CAGR?”
 
-You say the same sentence here. Class first: **momentum / fat-tail right tail**. Dropping Top-3 classifies; it cannot kill this sleeve alone — but only after a right tail is actually measured. Grain is locked: P99 comes from ticks; missing months are NaN; daily bars cannot stand in. After “measure this,” download trades, build the layer, run the 2h court. Exit is written: back inside the band or 12 bars.
+You say the same sentence here. Class first: **momentum / a fat right tail**. Dropping the largest trades classifies; it cannot kill this sleeve alone — but only after a right tail is actually measured. Grain is locked: “unusually large” must come from the largest print *inside* the bar; missing months stay empty; a daily high/low cannot stand in. After “measure this,” download ticks and print “was there one huge print in this bar, and did the close break the upper band?” Exit is written: back inside the band or 12 bars.
 
 The table: bull CAGR −0.25%, exactly the year the right tail should pay. A small recent plus and a 57% win rate are inside-band noise, not a fat tail. Do not cut the right tail to raise win rate, and do not prove the sentence with win rate. Dropping either flag is a new paper.
 
@@ -29,11 +28,12 @@ The seven sections below unpack ticks, closed-bar, and “low trade count is the
 ## Design
 
 ```text
-Human sentence (P99 print and upper-band break → chase)
-  → template / validate / lineage
-  → download ticks, convert, build FeatureStore — only after “measure this”
-  → 2h court: both flags long; exit inside band or at 12 bars
-  → human --declare
+Human sentence (a huge print and an upper-band break → chase)
+  → write down: who pays, what is measured, which dates, how you lose
+  → check: this sentence was not already closed
+  → download ticks, pre-build “largest print inside this bar” — only after “measure this”
+  → both things at once to go long; flatten inside the band or after 12 bars
+  → human writes whether it holds
 ```
 
 P99 must come from tick / aggTrades: max notional inside the bar versus a rolling quantile.
@@ -91,7 +91,7 @@ mlbot data convert --symbols BTCUSDT
 |---|---|---|
 | `bear_2022` | 2022-01-01 → 2023-11-01 | Chase must not blow the book. |
 | `bull_2023_2024` | 2023-06-01 → 2025-01-01 | The right tail should pay. |
-| `recent_range_to_bear` | 2025-01-01 → 2026-05-31 | Recent. Cannot promote alone. |
+| `recent_range_to_bear` | 2025-01-01 → 2026-05-31 | Recent. Cannot pass on its own. |
 
 Using daily amount as a stand-in for P99 is a different sentence.
 
@@ -160,7 +160,7 @@ Class: **momentum / fat-tail claim, measured near useless.**
 - Top-3 classification cannot revive a sleeve that never showed a right tail.
 - Dropping either flag is a new sentence.
 
-Declare with `--declare`. Do not hand-trade “this print is different.”
+A human writes whether it holds, against the ruler. Do not hand-trade “this print is different.”
 
 | Path | What it is |
 |---|---|

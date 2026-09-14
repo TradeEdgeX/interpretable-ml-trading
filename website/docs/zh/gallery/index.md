@@ -130,9 +130,9 @@
 | `bear_2021` | +9.09% | −0.03% | 0.09% vs 0.12% |
 | `bull_924` / `chop_recent` | 无样本 | 无样本 | — |
 
-## 横截面
+## 每天给全市场打分
 
-能力说明：[docs/cs_panel_CN.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/cs_panel_CN.md)
+怎么测：[docs/cs_panel_CN.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/cs_panel_CN.md)
 
 ### CS 动量 + 成交额
 
@@ -218,10 +218,10 @@
 |---|---|
 | 句子 | 公开大额 AI 融资公告日 D 结束后，次日做多 BTC，持有 5 个 UTC 日。 |
 | 分类 | beta（风险偏好外溢） |
-| 评测机 | 计划 `event_backtest`；**现在只有 Phase 1** |
-| 数据 | 锁定日历 21 笔；Phase 1 用 Vision 日线 |
-| IC | 窗口虚拟变量 vs 次日收益 **−0.021**（p = 0.40）。不能结案。 |
-| 结论 | 日频没有条件期望。2h 五项 KPI 还是空的。**不能 `--declare`。** |
+| 怎么出的表 | 日线看过了；按 2 小时进出场还没跑 |
+| 数据 | 锁死的公开大额轮 21 笔；日线对齐公告日 |
+| 日线数字 | 「这天是不是公告后」和次日涨跌 **−0.021**（p = 0.40）。不能下结论。 |
+| 结论 | 日线上没有「该涨」。进出场成绩单还是空的。**还不能下结论。** |
 
 | 段 | 事件 | 窗内均值 | 中位数 | 任意 5 日基线 |
 |---|---:|---:|---:|---:|
