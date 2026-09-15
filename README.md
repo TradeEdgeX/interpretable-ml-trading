@@ -1,7 +1,7 @@
 # interpretable-ml-trading
 
 **Teaching site (GitHub Pages)**: [https://tradeedgex.github.io/interpretable-ml-trading/](https://tradeedgex.github.io/interpretable-ml-trading/)  
-English: [https://tradeedgex.github.io/interpretable-ml-trading/en/](https://tradeedgex.github.io/interpretable-ml-trading/en/)
+中文：[https://tradeedgex.github.io/interpretable-ml-trading/zh/](https://tradeedgex.github.io/interpretable-ml-trading/zh/)
 
 **中文 README**: [README_CN.md](README_CN.md)
 

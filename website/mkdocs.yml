@@ -1,5 +1,5 @@
 site_name: interpretable-ml-trading
-site_description: 你提出一句交易假设，并写清什么时候做、做错了怎么办。这是给 AI 助手用的工具库：帮你验证想法成不成立，写出报告，并保管探索过程和实验结论。
+site_description: "You propose a trading idea and write down when you would trade and what you would do if you are wrong. This is a toolkit an AI assistant can use: it checks whether the idea holds, writes a report, and keeps the trail of what you tried."
 site_url: https://tradeedgex.github.io/interpretable-ml-trading/
 repo_url: https://github.com/TradeEdgeX/interpretable-ml-trading
 repo_name: interpretable-ml-trading
@@ -10,7 +10,9 @@ site_dir: site
 
 theme:
   name: material
-  language: zh
+  language: en
+  icon:
+    alternate: material/web
   font:
     text: Noto Sans SC
     code: IBM Plex Mono
@@ -45,48 +47,51 @@ plugins:
       fallback_to_default: true
       reconfigure_material: true
       languages:
-        - locale: zh
-          default: true
-          name: 中文
-          build: true
         - locale: en
+          default: true
           name: English
           build: true
+        - locale: zh
+          name: 中文
+          build: true
+          site_description: "你提出一句交易假设，并写清什么时候做、做错了怎么办。这是给 AI 助手用的工具库：帮你验证想法成不成立，写出报告，并保管探索过程和实验结论。"
+          theme:
+            language: zh
           nav_translations:
-            首页: Home
-            量化常识: Quant basics
-            策略要事先写清楚: A strategy must be written down
-            开盘只看已经收完的数字: Only use a finished bar
-            三段日子: Three windows
-            五项数字: Five KPIs
-            先分类: Classify first
-            特征与因子: Features and factors
-            什么是特征: What is a feature
-            特征五族: Five families
-            特征库优先: Feature-store-first
-            数学不作门: Math is not a gate
-            features.yaml 怎么读: How to read features.yaml
-            框架: Framework
-            本机四层: Four local layers
-            怎么选: How to choose
-            验证流程: Process
-            三种回测: Which backtest
-            怎么写成假设: Write the hypothesis
-            填模板: Fill the template
-            五格: Five boxes
-            AI 帮你量: The AI helps you measure
-            技术: Tech
-            为何本机测量: Why local
-            数据流与目录: Stack and paths
-            YAML 一页: YAML in one page
-            命令地图: Commands map
-            谁写哪一格: Who writes what
-            怎么用: How to use
-            跟 AI 说话: Talk to the AI
-            安装与第一次: Install and first run
+            Home: 首页
+            Quant basics: 量化常识
+            A strategy must be written down: 策略要事先写清楚
+            Only use a finished bar: 开盘只看已经收完的数字
+            Three windows: 三段日子
+            Five KPIs: 五项数字
+            Classify first: 先分类
+            Features and factors: 特征与因子
+            What is a feature: 什么是特征
+            Five families: 特征五族
+            Feature-store-first: 特征库优先
+            Math is not a gate: 数学不作门
+            How to read features.yaml: features.yaml 怎么读
+            Framework: 框架
+            Four local layers: 本机四层
+            How to choose: 怎么选
+            Process: 验证流程
+            Which backtest: 三种回测
+            Write the hypothesis: 怎么写成假设
+            Fill the template: 填模板
+            Five boxes: 五格
+            The AI helps you measure: AI 帮你量
+            Tech: 技术
+            Why local: 为何本机测量
+            Stack and paths: 数据流与目录
+            YAML in one page: YAML 一页
+            Commands map: 命令地图
+            Who writes what: 谁写哪一格
+            How to use: 怎么用
+            Talk to the AI: 跟 AI 说话
+            Install and first run: 安装与第一次
             Q & A: Q & A
-            已量展厅: Gallery
-            词汇表: Glossary
+            Gallery: 已量展厅
+            Glossary: 词汇表
 
 markdown_extensions:
   - admonition
@@ -110,47 +115,50 @@ markdown_extensions:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/en-prefix-redirect.js
+
 extra:
   alternate:
-    - name: 中文
-      lang: zh
-      link: /interpretable-ml-trading/
     - name: English
       lang: en
-      link: /interpretable-ml-trading/en/
+      link: /interpretable-ml-trading/
+    - name: 中文
+      lang: zh
+      link: /interpretable-ml-trading/zh/
 
 nav:
-  - 首页: index.md
-  - 量化常识:
-      - 策略要事先写清楚: quant/what-is-a-strategy.md
-      - 开盘只看已经收完的数字: quant/closed-bar.md
-      - 三段日子: quant/three-windows.md
-      - 五项数字: quant/five-kpis.md
-      - 先分类: quant/classify.md
-  - 特征与因子:
-      - 什么是特征: features/what-is-a-feature.md
-      - 特征五族: features/families.md
-      - 特征库优先: features/feature-store-first.md
-      - 数学不作门: features/math-is-not-a-gate.md
-      - features.yaml 怎么读: features/features-yaml.md
-  - 框架:
-      - 本机四层: framework/four-layers.md
-      - 怎么选: framework/how-to-choose.md
-      - 验证流程: framework/process.md
-      - 三种回测: framework/which-court.md
-  - 怎么写成假设:
-      - 填模板: design/write-the-sentence.md
-      - 五格: design/five-boxes.md
-      - AI 帮你量: design/ai-helps-measure.md
-  - 技术:
-      - 为何本机测量: tech/why-local.md
-      - 数据流与目录: tech/stack.md
-      - YAML 一页: tech/yaml-one-pager.md
-      - 命令地图: tech/commands-map.md
-      - 谁写哪一格: tech/who-writes-what.md
-  - 怎么用:
-      - 跟 AI 说话: use/talk-to-the-ai.md
-      - 安装与第一次: use/install-and-first-run.md
+  - Home: index.md
+  - Quant basics:
+      - A strategy must be written down: quant/what-is-a-strategy.md
+      - Only use a finished bar: quant/closed-bar.md
+      - Three windows: quant/three-windows.md
+      - Five KPIs: quant/five-kpis.md
+      - Classify first: quant/classify.md
+  - Features and factors:
+      - What is a feature: features/what-is-a-feature.md
+      - Five families: features/families.md
+      - Feature-store-first: features/feature-store-first.md
+      - Math is not a gate: features/math-is-not-a-gate.md
+      - How to read features.yaml: features/features-yaml.md
+  - Framework:
+      - Four local layers: framework/four-layers.md
+      - How to choose: framework/how-to-choose.md
+      - Process: framework/process.md
+      - Which backtest: framework/which-court.md
+  - Write the hypothesis:
+      - Fill the template: design/write-the-sentence.md
+      - Five boxes: design/five-boxes.md
+      - The AI helps you measure: design/ai-helps-measure.md
+  - Tech:
+      - Why local: tech/why-local.md
+      - Stack and paths: tech/stack.md
+      - YAML in one page: tech/yaml-one-pager.md
+      - Commands map: tech/commands-map.md
+      - Who writes what: tech/who-writes-what.md
+  - How to use:
+      - Talk to the AI: use/talk-to-the-ai.md
+      - Install and first run: use/install-and-first-run.md
   - Q & A: qa/index.md
-  - 已量展厅: gallery/index.md
-  - 词汇表: glossary.md
+  - Gallery: gallery/index.md
+  - Glossary: glossary.md

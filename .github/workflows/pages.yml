@@ -31,7 +31,32 @@ jobs:
         run: pip install -r website/requirements.txt
       - name: Build site
         working-directory: website
-        run: mkdocs build --strict
+        run: |
+          mkdocs build --strict
+          python -c "
+          from pathlib import Path
+          html = '''<!doctype html>
+          <html lang=\"en\">
+          <head>
+          <meta charset=\"utf-8\">
+          <meta http-equiv=\"refresh\" content=\"0; url=/interpretable-ml-trading/\">
+          <link rel=\"canonical\" href=\"https://tradeedgex.github.io/interpretable-ml-trading/\">
+          <title>Redirecting</title>
+          <script>
+          (function () {
+            var rest = location.pathname.replace(/^\\/interpretable-ml-trading\\/en\\/?/, \"/\")
+              .replace(/^\\/en\\/?/, \"/\");
+            location.replace(\"/interpretable-ml-trading\" + rest + location.search + location.hash);
+          })();
+          </script>
+          </head>
+          <body><p><a href=\"/interpretable-ml-trading/\">Continue to the English site</a></p></body>
+          </html>
+          '''
+          dest = Path('site/en')
+          dest.mkdir(parents=True, exist_ok=True)
+          (dest / 'index.html').write_text(html, encoding='utf-8')
+          "
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

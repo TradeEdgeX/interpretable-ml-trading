@@ -26,8 +26,8 @@ function render() {
   document.getElementById("qaBlurb").textContent = pick(payload.blurb, lang);
   const pagesHref =
     lang === "en"
-      ? "https://tradeedgex.github.io/interpretable-ml-trading/en/qa/"
-      : "https://tradeedgex.github.io/interpretable-ml-trading/qa/";
+      ? "https://tradeedgex.github.io/interpretable-ml-trading/qa/"
+      : "https://tradeedgex.github.io/interpretable-ml-trading/zh/qa/";
   const pagesLabel = lang === "en" ? "plain-language Q & A" : "人话版 Q & A";
   document.getElementById("qaMeta").innerHTML =
     `源 <code>${esc(payload.source || "docs/agent/rd_qa.yaml")}</code> · <a href="${pagesHref}">${pagesLabel}</a> · <a href="/rd">实验管理</a>`;
