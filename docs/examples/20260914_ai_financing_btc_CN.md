@@ -13,7 +13,7 @@ English: [20260914_ai_financing_btc.en.md](20260914_ai_financing_btc.en.md)
 
 ---
 
-## 这一句在本仓库里怎么走完
+## 这一句在本仓库里怎么测完
 
 你对网上的 AI 说：「AI 的融资和 BTC 的资金、涨跌之间，是不是有某种关系？」
 

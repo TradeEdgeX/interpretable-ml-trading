@@ -11,7 +11,7 @@ English: [20260914_ai_chip_spend_btc_regime.en.md](20260914_ai_chip_spend_btc_re
 
 ---
 
-## 这一句在本仓库里怎么走完
+## 这一句在本仓库里怎么测完
 
 你对网上的 AI 说：「AI 算力开支太多的时候，现金都去买芯片了，BTC 是不是就该走熊？」
 

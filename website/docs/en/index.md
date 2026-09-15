@@ -1,10 +1,10 @@
 <div class="tx-hero" markdown>
 
-<span class="tx-kicker">Hypothesis validator</span>
+<span class="tx-kicker">A toolkit for an AI</span>
 
 # interpretable-ml-trading
 
-You have a trading idea and you are not sure it actually works. This repo helps you write that sentence as a **testable contract**: when trading is allowed, how you exit when wrong, what you risk, and which stretch of market measures it. Then it runs on **trades you downloaded**, a **monthly feature store**, and **one locked ruler**, and hands you a table: bear, bull, and recent windows, each with CAGR, Calmar, win rate, max drawdown, and Sharpe. The repo ships a base feature library (moving averages, crosses, funding, order flow, and more); you are invited to propose more testable ideas on top of those columns. The program prints the numbers; you read the report and the strategy, then write your own conclusion.
+You propose a trading idea and write down when you would trade and how you would get out if you are wrong. This project is a toolkit that an AI assistant on your machine can use. It helps you check whether that idea actually holds, so you do not stay too optimistic. It writes a detailed report to help you shape a strategy. After you rule out a hundred ideas that do not hold, you might find one you can use. How you explored, and what each experiment concluded, are also kept here — that is the knowledge worth keeping.
 
 </div>
 
@@ -15,7 +15,7 @@ Same MA golden-cross sentence, two very different answers:
 | Gives you | “Classic trend; fake signals in ranges” — a story you cannot re-run | Bear / bull / recent tables of five KPIs |
 | Recent-window CAGR (local) | — | **−3.1%** (source [README](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/README.md)) |
 
-Evidence comes from trades and features on your machine; switch the chat model and the table stays the same. The AI helps fold the template, run the measurement, and retell the five KPIs. You write the conclusion after you understand the report.
+Evidence comes from trades and measurements on your machine; switch the chat model and the table stays the same. The AI helps organize the idea, run the measurement, and write the report. You write the conclusion after you read it.
 
 ## Doors
 

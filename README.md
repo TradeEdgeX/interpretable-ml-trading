@@ -8,10 +8,10 @@ English: [https://tradeedgex.github.io/interpretable-ml-trading/en/](https://tra
 Locally: `cd website && mkdocs serve`. Path: basics → features → framework → [Q & A](website/docs/en/qa/index.md) → this golden-cross table → [gallery](website/docs/en/gallery/index.md).  
 Human-facing path: [`website/`](website/). Fine print and the AI still use [`docs/`](docs/README.md).
 
-You have a trading idea and you are not sure it actually works.  
-Open this repo and talk to the AI.
+You propose a trading idea and write down when you would trade and how you would get out if you are wrong.  
+Open this repo and talk to the AI on your machine.
 
-**interpretable-ml-trading** is a **hypothesis validator**: write the idea as a template (what social / mathematical / statistical phenomenon it is, how you will judge it, which data range measures it), then print numbers from your local trades, the feature store, and one locked ruler. The repo ships a base feature library; you are invited to propose more testable ideas on those columns. The AI helps complete the template, orchestrates commands, and retells five KPIs. You read the report and the strategy, then write your own conclusion.
+This project is a toolkit that an AI assistant can use. It helps you check whether that idea actually holds, so you do not stay too optimistic. It writes a detailed report to help you shape a strategy. After you rule out a hundred ideas that do not hold, you might find one you can use. How you explored, and what each experiment concluded, are also kept here — that is the knowledge worth keeping.
 
 Template: [docs/hypothesis_template.en.md](docs/hypothesis_template.en.md).
 

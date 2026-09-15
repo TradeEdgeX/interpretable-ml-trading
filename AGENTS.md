@@ -3,7 +3,7 @@
 This directory is the **open-source extract**, not the private live repo.
 Read these before changing strategy or experiment files:
 
-1. [`README_CN.md`](README_CN.md) / [`README.md`](README.md) — 主入口：这个仓库是假设验证器
+1. [`README_CN.md`](README_CN.md) / [`README.md`](README.md) — 主入口：给 AI 助手用的工具库，帮人验证交易假设成不成立
 2. [`docs/hypothesis_template.md`](docs/hypothesis_template.md) — 先填模板再编排
 3. [`docs/hypothesis.md`](docs/hypothesis.md) — 怎么写成可验证的几条
 4. [`docs/lessons.md`](docs/lessons.md) — 闭棒 / 熔断 / KPI

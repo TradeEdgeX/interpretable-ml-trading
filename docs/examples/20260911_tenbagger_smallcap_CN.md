@@ -11,7 +11,7 @@ English: [20260911_tenbagger_smallcap.en.md](20260911_tenbagger_smallcap.en.md)
 
 ---
 
-## 这一句在本仓库里怎么走完
+## 这一句在本仓库里怎么测完
 
 你对网上的 AI 说：「十倍股是不是都得小市值、拿个三四年？帮我找下一只。」
 

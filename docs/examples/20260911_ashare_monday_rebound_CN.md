@@ -11,7 +11,7 @@ English: [20260911_ashare_monday_rebound.en.md](20260911_ashare_monday_rebound.e
 
 ---
 
-## 这一句在本仓库里怎么走完
+## 这一句在本仓库里怎么测完
 
 你对网上的 AI 说：「A 股周一跌了，后四天会涨，有没有周一效应？」
 

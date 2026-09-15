@@ -2,7 +2,7 @@
 
 这里按现象列出已经量过的句子。每张卡片是同一条故事换一句台词：网上的 AI 会讲什么、本仓库必须走哪几步、表上写了什么、人怎么写下结不成立。包括已经被判定不成立的，以及表已经出来、结论还留给你写的。
 
-细则在仓库的 `docs/examples/`。每篇先讲「这一句在本仓库里怎么走完」，再按 **设计 / 数据 / 特征 / IC / 验证 / 结论 / 报告解读** 七段展开。展厅只放对照表，不代替那篇故事。哲学：[docs/philosophy.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/philosophy.md)。金叉第一幕：[README_CN.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/README_CN.md)。
+细则在仓库的 `docs/examples/`。每篇先讲「这一句在本仓库里怎么测完」，再按 **设计 / 数据 / 特征 / IC / 验证 / 结论 / 报告解读** 七段展开。展厅只放对照表，不代替那篇故事。哲学：[docs/philosophy.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/docs/philosophy.md)。金叉第一幕：[README_CN.md](https://github.com/TradeEdgeX/interpretable-ml-trading/blob/main/README_CN.md)。
 
 ## 趋势
 
@@ -101,7 +101,7 @@
 | 用哪种回测 | `event_backtest` · `BTCUSDT` · 2 小时 |
 | 数据 | **tick**；缺月写 NaN。日线代替不了 P99。 |
 | IC | 没有。两列 0/1 时钟。 |
-| 结论 | 牛市那段折合成一年 −0.25%，事先写好的标准被打中。去掉最大几笔只用来看清类型，不能单独宣判。结论留给你写。 |
+| 结论 | 牛市那段折合成一年 −0.25%，事先写好的标准被打中。去掉最大几笔只用来看清类型，不能单独判定不成立。结论留给你写。 |
 
 | 段 | 年化 | Calmar | 胜率 | MaxDD | Sharpe(R) | 笔数 |
 |---|---:|---:|---:|---:|---:|---:|

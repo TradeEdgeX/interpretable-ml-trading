@@ -13,7 +13,7 @@ English: [20260911_btc_lead_ai_alts.en.md](20260911_btc_lead_ai_alts.en.md)
 
 ---
 
-## 这一句在本仓库里怎么走完
+## 这一句在本仓库里怎么测完
 
 你对网上的 AI 说：「BTC 大涨之后，AI 山寨会跟涨，是不是该追？」
 

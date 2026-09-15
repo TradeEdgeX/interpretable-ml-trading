@@ -24,7 +24,7 @@
 ## 配置文件
 
 - `config/strategies/<archetype>/features.yaml`：特征配方表。
-- `config/strategies/<archetype>/strategy.yaml`：策略合同。
+- `config/strategies/<archetype>/strategy.yaml`：策略的进出场规则。
 - `config/feature_dependencies.yaml`：特征依赖注册表。
 
 ## 还想看细则

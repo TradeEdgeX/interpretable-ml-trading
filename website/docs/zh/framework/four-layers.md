@@ -8,7 +8,7 @@
 |---|---|---|
 | 数据 | 下载、清洗、按月存成文件 | `data/parquet_data/<SYMBOL>/<TF>/<YYYY-MM>.parquet` |
 | 特征库 | 按月算好所有测量列 | `feature_store/features_<arch>_<TF>_<hash>/<SYMBOL>/<YYYY-MM>.parquet` |
-| 策略规则 | 把合同写成机器能读的规则 | `config/strategies/<archetype>/*.yaml` |
+| 策略规则 | 把进出场规则写成机器能读的文件 | `config/strategies/<archetype>/*.yaml` |
 | 回测脚本 | 跑回测，印出三段、五项数字 | `scripts/event_backtest.py` 等 |
 
 ## 为什么要分层
@@ -21,7 +21,7 @@
 
 ## 在这个仓库里怎么用
 
-你大多数时候只碰「策略规则」这一层。数据和特征库是基础设施。回测脚本是事先定好的尺子，不要为了让某句话好看去改它。
+你大多数时候只碰「策略规则」这一层。数据和特征库是基础设施。回测脚本是事先定好的比法，不要为了让某句话好看去改它。
 
 ## 还想看细则
 
